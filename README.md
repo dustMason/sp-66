@@ -283,6 +283,17 @@ to 3.17 dB. The settled Reverb median falls from 3.09 to 3.04 dB.
 The settled Drumbase median is 2.27 dB, and its center-Balance median
 rises from 2.80 to 2.85 dB.
 
+The hi-hat and maracas attack now rises with a 3.5 ms time constant, down
+from 5.3 ms. A higher gate threshold and longer decay keep the calculated
+gate closing time near 49 ms when no cymbal precedes the hit. Across 234 usable
+steps, the median absolute error of 3–8 ms noise energy relative to the
+8–30 ms body falls from 2.31 to 1.46 dB in Drumbase and from 3.87 to
+1.94 dB in Reverb. The 30–43 ms envelope error rises from 1.66 to 2.02 dB
+in Drumbase and from 1.89 to 2.13 dB in Reverb. At the fitted Balance
+after one Arrange cycle, the Drumbase loop median is 2.27 dB and the
+Reverb median improves from 3.04 to 2.99 dB. At center Balance, the
+Drumbase median rises from 2.82 to 2.84 dB.
+
 Both packs shift cymbal energy upward as the hit decays. Across 113 cymbal
 hits, the mean spectrum peaks near 7.8–7.9 kHz at 5–25 ms and 8.1–8.3 kHz
 at 45–95 ms. On cymbal-only triggers, the C engine holds the fast part of

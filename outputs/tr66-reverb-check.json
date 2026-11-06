@@ -25,7 +25,7 @@
   },
   "held_out_median": {
     "before_db": 4.73,
-    "spectral_error_db": 4.43,
+    "spectral_error_db": 4.19,
     "pre_ringdown_db": 5.52,
     "pre_noise_pulse_error_db": 4.7,
     "pre_noise_envelope_error_db": 4.66,
@@ -38,7 +38,7 @@
   },
   "new_validation_median": {
     "before_db": 4.465,
-    "spectral_error_db": 4.12,
+    "spectral_error_db": 4.065,
     "pre_ringdown_db": 5.715,
     "pre_noise_pulse_error_db": 4.335,
     "pre_noise_envelope_error_db": 4.325,
@@ -252,11 +252,11 @@
       "bars_compared": 2,
       "rotation_quarters": 1,
       "tempo": 124.439,
-      "spectral_error_db": 3.82,
+      "spectral_error_db": 3.75,
       "before_db": 4.39,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.95,
-      "fitted_balance_error_db": 3.1,
+      "fitted_balance_error_db": 3.09,
       "pre_noise_pulse_error_db": 4.24,
       "pre_noise_pulse_fitted_balance_error_db": 3.74,
       "pre_noise_envelope_error_db": 4.25,
@@ -284,11 +284,11 @@
       "bars_compared": 2,
       "rotation_quarters": 1,
       "tempo": 124.503,
-      "spectral_error_db": 4.86,
+      "spectral_error_db": 4.59,
       "before_db": 5.31,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.33,
-      "fitted_balance_error_db": 3.84,
+      "fitted_balance_error_db": 3.65,
       "pre_noise_pulse_error_db": 5.31,
       "pre_noise_pulse_fitted_balance_error_db": 4.13,
       "pre_noise_envelope_error_db": 5.31,
@@ -412,7 +412,7 @@
       "bars_compared": 2,
       "rotation_quarters": 6,
       "tempo": 124.426,
-      "spectral_error_db": 4.38,
+      "spectral_error_db": 4.28,
       "before_db": 4.62,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.31,
@@ -540,11 +540,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.468,
-      "spectral_error_db": 4.53,
+      "spectral_error_db": 4.4,
       "before_db": 5.55,
       "fit_role": "held out",
       "pre_ringdown_db": 5.52,
-      "fitted_balance_error_db": 2.78,
+      "fitted_balance_error_db": 2.77,
       "pre_noise_pulse_error_db": 5.55,
       "pre_noise_pulse_fitted_balance_error_db": 3.48,
       "pre_noise_envelope_error_db": 5.53,
@@ -574,11 +574,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.492,
-      "spectral_error_db": 3.69,
+      "spectral_error_db": 3.58,
       "before_db": 4.73,
       "fit_role": "held out",
       "pre_ringdown_db": 5.12,
-      "fitted_balance_error_db": 3.12,
+      "fitted_balance_error_db": 3.06,
       "pre_noise_pulse_error_db": 4.7,
       "pre_noise_pulse_fitted_balance_error_db": 3.94,
       "pre_noise_envelope_error_db": 4.65,
@@ -606,11 +606,11 @@
       "bars_compared": 2,
       "rotation_quarters": 3,
       "tempo": 124.462,
-      "spectral_error_db": 3.72,
+      "spectral_error_db": 3.55,
       "before_db": 4.41,
       "fit_role": "mix fit",
       "pre_ringdown_db": 5.82,
-      "fitted_balance_error_db": 3.16,
+      "fitted_balance_error_db": 3.06,
       "pre_noise_pulse_error_db": 4.33,
       "pre_noise_pulse_fitted_balance_error_db": 3.91,
       "pre_noise_envelope_error_db": 4.32,
@@ -638,11 +638,11 @@
       "bars_compared": 2,
       "rotation_quarters": 2,
       "tempo": 124.461,
-      "spectral_error_db": 4.43,
+      "spectral_error_db": 4.19,
       "before_db": 4.67,
       "fit_role": "held out",
       "pre_ringdown_db": 4.89,
-      "fitted_balance_error_db": 3.23,
+      "fitted_balance_error_db": 3.07,
       "pre_noise_pulse_error_db": 4.67,
       "pre_noise_pulse_fitted_balance_error_db": 3.78,
       "pre_noise_envelope_error_db": 4.66,
@@ -670,11 +670,11 @@
       "bars_compared": 2,
       "rotation_quarters": 4,
       "tempo": 124.691,
-      "spectral_error_db": 5.53,
+      "spectral_error_db": 5.24,
       "before_db": 5.71,
       "fit_role": "held out",
       "pre_ringdown_db": 7.29,
-      "fitted_balance_error_db": 4.11,
+      "fitted_balance_error_db": 3.86,
       "pre_noise_pulse_error_db": 5.67,
       "pre_noise_pulse_fitted_balance_error_db": 4.52,
       "pre_noise_envelope_error_db": 5.67,
@@ -704,11 +704,11 @@
       "bars_compared": 2,
       "rotation_quarters": 4,
       "tempo": 124.613,
-      "spectral_error_db": 4.92,
+      "spectral_error_db": 4.76,
       "before_db": 5.31,
       "fit_role": "mix fit",
       "pre_ringdown_db": 7.36,
-      "fitted_balance_error_db": 4.02,
+      "fitted_balance_error_db": 3.93,
       "pre_noise_pulse_error_db": 5.23,
       "pre_noise_pulse_fitted_balance_error_db": 4.57,
       "pre_noise_envelope_error_db": 5.24,
@@ -738,11 +738,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.44,
-      "spectral_error_db": 4.59,
+      "spectral_error_db": 4.39,
       "before_db": 5.72,
       "fit_role": "mix fit",
       "pre_ringdown_db": 7.57,
-      "fitted_balance_error_db": 4.06,
+      "fitted_balance_error_db": 3.91,
       "pre_noise_pulse_error_db": 5.67,
       "pre_noise_pulse_fitted_balance_error_db": 4.88,
       "pre_noise_envelope_error_db": 5.67,
@@ -770,11 +770,11 @@
       "bars_compared": 2,
       "rotation_quarters": 6,
       "tempo": 124.49,
-      "spectral_error_db": 4.08,
+      "spectral_error_db": 3.87,
       "before_db": 4.66,
       "fit_role": "new validation",
       "pre_ringdown_db": 6.37,
-      "fitted_balance_error_db": 3.57,
+      "fitted_balance_error_db": 3.41,
       "pre_noise_pulse_error_db": 4.55,
       "pre_noise_pulse_fitted_balance_error_db": 4.12,
       "pre_noise_envelope_error_db": 4.55,
@@ -991,7 +991,7 @@
       "all": {
         "count": 25,
         "center_db": 4.16,
-        "fitted_balance_db": 3.12,
+        "fitted_balance_db": 3.06,
         "pre_noise_pulse_fitted_balance_db": 3.74,
         "pre_noise_envelope_fitted_balance_db": 3.74,
         "pre_cymbal_sweep_center_db": 4.41,
@@ -1010,7 +1010,7 @@
       "mix fit": {
         "count": 6,
         "center_db": 4.135,
-        "fitted_balance_db": 3.215,
+        "fitted_balance_db": 3.165,
         "pre_noise_pulse_fitted_balance_db": 3.905,
         "pre_noise_envelope_fitted_balance_db": 3.905,
         "pre_cymbal_sweep_center_db": 4.475,
@@ -1028,8 +1028,8 @@
       },
       "held out": {
         "count": 5,
-        "center_db": 4.43,
-        "fitted_balance_db": 3.12,
+        "center_db": 4.19,
+        "fitted_balance_db": 3.06,
         "pre_noise_pulse_fitted_balance_db": 3.78,
         "pre_noise_envelope_fitted_balance_db": 3.76,
         "pre_cymbal_sweep_center_db": 4.65,
@@ -1047,8 +1047,8 @@
       },
       "new validation": {
         "count": 14,
-        "center_db": 4.12,
-        "fitted_balance_db": 3.075,
+        "center_db": 4.065,
+        "fitted_balance_db": 3.07,
         "pre_noise_pulse_fitted_balance_db": 3.63,
         "pre_noise_envelope_fitted_balance_db": 3.61,
         "pre_cymbal_sweep_center_db": 4.3,
@@ -3722,6 +3722,177 @@
       "median_mean_render_us_per_block": [
         1.090725,
         1.094605
+      ]
+    }
+  },
+  "hat_attack_refinement": {
+    "method": "Use unclipped hat or maracas steps without a simultaneous snare or cymbal. Band-pass each aligned recording and render, then divide each window's noise energy by the mean energy from 8 to 30 ms. Both packs were used to evaluate the candidate settings.",
+    "columns": [
+      "hardware",
+      "previous_c",
+      "revised_c"
+    ],
+    "window_bounds_ms": [
+      [
+        3,
+        8
+      ],
+      [
+        8,
+        19
+      ],
+      [
+        19,
+        30
+      ],
+      [
+        30,
+        43
+      ],
+      [
+        43,
+        58
+      ]
+    ],
+    "normalization_ms": [
+      8,
+      30
+    ],
+    "passband_hz": [
+      6200,
+      11800
+    ],
+    "envelopes": {
+      "all": {
+        "hits": 130,
+        "median_normalized_db": [
+          [
+            0.27,
+            0.72,
+            -0.86,
+            -5.43,
+            -23.48
+          ],
+          [
+            -3.46,
+            0.9,
+            -1.14,
+            -7.0,
+            -22.76
+          ],
+          [
+            -0.68,
+            1.16,
+            -1.58,
+            -7.65,
+            -23.04
+          ]
+        ],
+        "median_absolute_error_db": [
+          [
+            3.87,
+            0.47,
+            0.76,
+            1.89,
+            2.41
+          ],
+          [
+            1.94,
+            0.5,
+            0.95,
+            2.13,
+            2.28
+          ]
+        ]
+      },
+      "no_recent_cymbal": {
+        "hits": 85,
+        "median_normalized_db": [
+          [
+            0.01,
+            0.76,
+            -0.92,
+            -6.59,
+            -27.06
+          ],
+          [
+            -3.67,
+            0.93,
+            -1.19,
+            -7.81,
+            -23.76
+          ],
+          [
+            -0.49,
+            1.25,
+            -1.76,
+            -8.47,
+            -23.95
+          ]
+        ],
+        "median_absolute_error_db": [
+          [
+            4.31,
+            0.48,
+            0.88,
+            1.91,
+            3.17
+          ],
+          [
+            1.99,
+            0.58,
+            1.14,
+            2.29,
+            2.93
+          ]
+        ]
+      }
+    },
+    "model": {
+      "parameter_columns": [
+        "previous_c",
+        "revised_c"
+      ],
+      "rise_time_constant_ms": [
+        5.3,
+        3.5
+      ],
+      "decay_time_constant_ms": [
+        56.0,
+        62.0
+      ],
+      "gate_threshold": [
+        0.416,
+        0.451
+      ],
+      "noise_filter_gain_change_db": -0.65
+    },
+    "fitted_balance": 0.3198,
+    "loop_error_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "median_loop_error_db": {
+      "center": [
+        4.16,
+        4.16
+      ],
+      "balanced": [
+        3.12,
+        3.06
+      ],
+      "settled": [
+        3.04,
+        2.99
+      ]
+    },
+    "host_benchmark": {
+      "selection": "Mambo, Arrange A, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": [
+        0.7814,
+        0.777465
       ]
     }
   }
