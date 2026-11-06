@@ -31,10 +31,15 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 | Volume buttons | Master output level |
 | LEDs | Bank and variation toggle on the top row, phrase position on the side |
 
-Each A or B phrase is two bars. Auto plays A then B and repeats.
+The original score uses two bars per A or B phrase. Auto plays A then B.
+Some rhythms add a pickup on the first downbeat of the full Arrange cycle.
+Jazz Waltz adds a snare every two bars in B and every four bars in Auto.
 The Function fill is an SP-1 addition and plays the last bar of B once.
 Rhythm, variation and Arrange changes take effect on the next downbeat.
-Slow Rock has six pulses per bar, with the quarter-note tempo on the fader.
+Slow Rock is in 6/8. The tempo fader still sets the quarter-note rate.
+Waltz, Jazz Waltz and Slow Rock put the shared pattern counter in triple
+time. Any active variation follows that counter, as in Roland's Slow Rock
+plus Rock 6 setting.
 
 ## Build and reproduce
 
@@ -111,7 +116,7 @@ Treat replacing the factory firmware as one-way. See the
 
 The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
-ends. The loudest sample was 0.731 of digital full scale, with zero clipped samples.
+ends. The loudest sample was 0.735 of digital full scale, with zero clipped samples.
 
 ## Hardware status and diagnostics
 
@@ -214,7 +219,27 @@ voice. On cymbal-only steps in Reverb Slow Rock B, the 130–220 Hz band
 measures −40.4 dB relative to 6–10.5 kHz. The C render moves from −70.3 to
 −40.6 dB at the same Balance setting.
 
-The snare's noise envelope closes as the decay crosses a threshold.
+The snare uses a 1.7 ms noise rise time constant and a 29 ms hold, then
+closes as the decay crosses a threshold. In 36 snare-only hits across
+both loop packs, the 3–6 ms noise measures about +0.6 dB relative to the
+6–40 ms body. The C model moves from about −8.3 dB to −1.2 dB on those hits.
+The model also uses less upper treble. Reverb's snare has about 8 dB more
+noise relative to its tonal ring than Drumbase's, so the firmware uses a
+shared setting between those recordings. The
+[Drum Abuse one-shots](https://github.com/smpldsnds/drum-abuse-vol1/tree/58a9b6246d232d862fad15e06c97a4a030655017/samples/roland-tr-66)
+show a similarly quick rise. Two snare noise waveforms match hits in
+[Vintage Synth Explorer's demo](https://www.vintagesynth.com/roland/tr-66)
+at 0.92 and 0.97 normalized correlation, so those matches count as one source.
+
+The rim shot now uses a short deterministic pulse to drive a 1.525 kHz
+resonator with a 2.10 ms decay. Figure 10 shows a passive resonator and
+trigger pulse. The two loop packs give rim decays of about 2.09–2.17 ms.
+Claves decay in about 4.7–4.8 ms and the model uses 4.75 ms at Roland's
+nominal 2.35 kHz. Reverb's claves ring around 2.50 kHz. In isolated
+Drumbase hits, rim waveform correlation rises from 0.975 to 0.988 and
+claves from 0.979 to 0.983. The full-pack settled medians remain 2.27 dB
+for Drumbase and 3.09 dB for Reverb with these two voice changes.
+
 The hi-hat and maracas now use the same gate across all rhythms. Its
 threshold is lower following a cymbal hit and recovers with a fitted
 554 ms time constant. In the recordings, the hat falls 18 dB below its
@@ -225,19 +250,21 @@ trigger circuitry from the audio.
 
 Both packs shift cymbal energy upward as the hit decays. Across 113 cymbal
 hits, the mean spectrum peaks near 7.8–7.9 kHz at 5–25 ms and 8.1–8.3 kHz
-at 45–95 ms. The current C engine holds the fast part of the envelope for
-22 ms, then moves the first noise filter from 7.84 to 8.17 kHz as the fast
-part decays. At 70–100 ms the model has 2.7 dB more cymbal energy than the
-Reverb recording and 0.6 dB less than Drumbase, relative to the early
-part of the hit.
+at 45–95 ms. On cymbal-only triggers, the C engine holds the fast part of
+the envelope for 22 ms, then moves the first noise filter from 7.84 to
+8.17 kHz as the fast part decays. At 70–100 ms the model has 2.7 dB more
+cymbal energy than the Reverb recording and 0.6 dB less than Drumbase,
+relative to the early part of the hit.
 
 Figure 10 of the service notes shows the hi-hat and cymbal trigger circuits
 feeding one resonator. In six Bossa Nova, Samba, and Beguine captures, the
 median combined attack was 0.32 dB quieter than hi-hat alone in the
-6.2–11.8 kHz band. The previous C mix made it 3.91 dB louder. The current
-C engine plays one cymbal hit with a 44 ms hold when both inputs fire on
-the same tick. With the current hi-hat envelope, the combined attack
-is 1.36 dB quieter than hi-hat alone.
+6.2–11.8 kHz band. When both inputs fire on the same tick, the C engine
+uses one cymbal hit with a 44 ms fast hold. The latest fit starts nearer
+the resting resonance and puts more drive into the slow decay. The
+median combined attack moves from −1.36 to −0.90 dB relative to a single
+hat attack. At 40–65 ms the model moves from −4.12 to −3.39 dB, compared
+with −2.14 dB in the recordings.
 
 Reverb's Bossa Nova recording confirms Roland's rim timing. The Drumbase
 recording places some rim hits at different steps. Both recording sets
@@ -247,26 +274,33 @@ Both Habanera A captures support the score's simultaneous kick and snare.
 
 | Level-matched spectral error | Before ring-down pass | After ring-down pass | Current |
 | --- | ---: | ---: | ---: |
-| Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.75 dB |
-| Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.78 dB |
-| Reverb, all 25 loops | 5.70 dB | 4.62 dB | 4.26 dB |
+| Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.80 dB |
+| Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.84 dB |
+| Reverb, all 25 loops | 5.70 dB | 4.62 dB | 4.16 dB |
 | Reverb Slow Rock B | 5.70 dB | 5.17 dB | 4.16 dB |
 | Reverb Mambo A | 5.82 dB | 4.41 dB | 4.09 dB |
 | Reverb Mambo B | 6.37 dB | 4.66 dB | 4.40 dB |
-| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.80 dB |
-| Reverb Rhumba B | 7.36 dB | 5.31 dB | 5.12 dB |
+| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.78 dB |
+| Reverb Rhumba B | 7.36 dB | 5.31 dB | 5.11 dB |
 
 The original Drumbase held-out score was 6.69 dB with clipped windows
 excluded. Its Slow Rock score rose from 3.19 to 3.68 dB after the quieter
 fill kick and other voice changes, then fell to 3.44 dB after the cymbal
 pulse and noise envelope refinements. The latest cymbal fit brings it to
-2.72 dB. The two packs cover 24 of the 27 factory rhythms between them.
-Bass & Snare in each beat bank and Foxtrot 2
-use the published charts and await a matching recording. The
-recordings also cover a subset of the available A, Auto and B phrases.
+2.71 dB with the current snare coefficients. The two packs cover 24 of
+the 27 factory rhythms between them and a subset of their A, Auto and B
+phrases. Bass & Snare in each beat bank and Foxtrot 2 still await a matching
+recording.
+
+All 36 A, B and Auto traces across the 2 Beat and 4 Beat banks match a
+transcription of the service pulse charts after correcting their cycle
+pickups and two B fills. The Foxtrot pickups follow the service charts
+where they differ from the printed player scores. The Drumbase Jazz Waltz
+Auto recording confirms a snare pickup on the first downbeat of the four-bar
+cycle.
 
 In eight matched first-bar excerpts, the two recordings differ by a median
-4.23 dB. The current C model is 2.87 dB from the CD and 3.36 dB from Reverb
+4.23 dB. The current C model is 2.83 dB from the CD and 3.33 dB from Reverb
 on those excerpts. In the matched Slow Rock excerpt, the recordings differ
 by 3.12 dB, and the model is 4.11 dB from the CD and 2.94 dB from Reverb.
 
@@ -288,18 +322,32 @@ rises from 5.67 to 5.72 dB.
 The original knob positions are unknown, and the fitted settings may also
 compensate for differences in the recording chains.
 
-The main tables start the C engine from silence. A separate check compares
-the archived hardware loops after both C builds have played a complete
-Arrange cycle. At the fixed Balance positions, the Reverb median falls
+The main tables start the C engine from silence. The cymbal history check
+compares the archived hardware loops after both C builds have played a
+complete Arrange cycle. At the fixed Balance positions, the Reverb median falls
 from 3.25 to 3.12 dB. Reverb Bossa Nova A moves from 2.71 to 2.42 dB,
 Samba A from 3.26 to 2.94 dB, and Beguine B from 4.69 to 4.45 dB.
 Drumbase Samba falls from 2.99 to 2.84 dB after a cycle and rises from
 2.98 to 4.05 dB from silence. The archived loop starts partway through
 the recovery from a cymbal. Two-cycle results are in both reports.
 
-Trigger dynamics on dense percussion chords, 3/4 plus 4/4 layering, and the
-SP-1's physical output still need a direct hardware comparison. The current
-layering follows the base rhythm's meter and merges coincident hits.
+The coincident-trigger fit lowers the settled Drumbase Bossa Nova
+error from 3.67 to 3.49 dB, Drumbase Samba B from 2.84 to 2.61 dB, and
+Reverb Samba A from 2.94 to 2.82 dB. Drumbase Tango B rises from 3.24 to
+3.41 dB and Reverb Bossa Nova A rises from 2.42 to 2.46 dB. The full-pack
+medians remain 2.37 dB for Drumbase and 3.12 dB for Reverb after one
+Arrange cycle.
+
+With the revised snare, those medians fall to 2.30 dB and 3.09 dB.
+Reverb Habanera A and Waltz A improve by 0.19 dB and 0.16 dB respectively.
+
+Figures 2 and 13 of the service notes show a shared counter and the 3/4
+shunt. It plays counts 0–5 and 8–13 of each 16-count bar in triple time.
+The C sequencer now reads variations from those positions and merges
+coincident hits. A test checks the complete Slow Rock plus Rock 6 Auto
+cycle against the timing charts. Direct hardware comparisons are still
+needed for mixed-meter audio, trigger dynamics on dense percussion chords,
+and the SP-1's physical output.
 
 [^reports]: The [Drumbase report](outputs/tr66-recording-fit.json) covers 23 hardware
     loops, including 12 held out of the gain fit. The

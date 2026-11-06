@@ -31,6 +31,7 @@ typedef struct {
 typedef struct {
     Tr66Bar bars[TR66_SCORE_BARS];
     uint16_t auto_pickup;
+    uint16_t b_pickup;
     uint8_t ticks;
 } Tr66Pattern;
 

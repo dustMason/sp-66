@@ -177,6 +177,7 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         voice_init(&machine->voices[i], &tr66_factory_voices[i], sample_rate);
 
+    machine->cymbal_first_band_sweep = machine->voices[TR66_CYMBAL].first_band_sweep;
     const float extra_hold_ms = coincident_cymbal_hold_ms - tr66_factory_voices[TR66_CYMBAL].noise_fast_hold_ms;
     machine->cymbal_extra_hold_frames = (unsigned)ceilf(0.001f * fmaxf(0.0f, extra_hold_ms) * sample_rate);
 }
@@ -203,8 +204,7 @@ static void trigger_hat(Tr66 *machine)
 
 void tr66_hit(Tr66 *machine, uint16_t voices)
 {
-    /* The hat and cymbal triggers drive one resonator in the TR-66. A
-     * coincident hit holds the cymbal gate open longer. */
+    /* The hat and cymbal triggers feed the same resonator. */
     const bool shared_hit = tr66_coincident_hat_cymbal(voices);
     if (shared_hit)
         voices &= (uint16_t)~(1u << TR66_HAT);
@@ -213,13 +213,22 @@ void tr66_hit(Tr66 *machine, uint16_t voices)
         trigger_hat(machine);
         voices &= (uint16_t)~(1u << TR66_HAT);
     }
-    if (voices & (1u << TR66_CYMBAL))
+    Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
+    if (voices & (1u << TR66_CYMBAL)) {
         machine->cymbal_age = 0;
+        cymbal->first_band_sweep = machine->cymbal_first_band_sweep;
+    }
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         if (voices & (UINT16_C(1) << i))
             voice_trigger(&machine->voices[i], 1.0f);
-    if (shared_hit)
-        machine->voices[TR66_CYMBAL].frames_left += machine->cymbal_extra_hold_frames;
+    if (shared_hit) {
+        /* The coincident hit puts more of the gate drive into the slow
+         * decay and starts nearer the resting resonance. */
+        cymbal->frames_left += machine->cymbal_extra_hold_frames;
+        cymbal->noise = 0.75075f;
+        cymbal->fast_noise = 0.29925f;
+        cymbal->first_band_sweep *= 0.82f * cymbal->fast_mix / cymbal->fast_noise;
+    }
     /* Measured against full hits in the recordings. The louder route wins
      * if layered rhythms trigger the same voice on the same clock pulse. */
     if (!(voices & (1u << TR66_KICK))) {

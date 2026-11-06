@@ -12,14 +12,16 @@
   ],
   "median": {
     "before_db": 4.62,
-    "spectral_error_db": 4.26,
+    "spectral_error_db": 4.16,
     "pre_ringdown_db": 5.7,
     "pre_noise_pulse_error_db": 4.55,
     "pre_noise_envelope_error_db": 4.55,
     "pre_cymbal_sweep_error_db": 4.41,
     "pre_shared_gate_error_db": 4.41,
     "pre_latin_percussion_error_db": 4.4,
-    "pre_cymbal_history_error_db": 4.26
+    "pre_cymbal_history_error_db": 4.26,
+    "pre_coincident_gate_error_db": 4.26,
+    "pre_snare_gate_error_db": 4.16
   },
   "held_out_median": {
     "before_db": 4.73,
@@ -30,18 +32,22 @@
     "pre_cymbal_sweep_error_db": 4.65,
     "pre_shared_gate_error_db": 4.63,
     "pre_latin_percussion_error_db": 4.72,
-    "pre_cymbal_history_error_db": 4.63
+    "pre_cymbal_history_error_db": 4.63,
+    "pre_coincident_gate_error_db": 4.71,
+    "pre_snare_gate_error_db": 4.71
   },
   "new_validation_median": {
     "before_db": 4.465,
-    "spectral_error_db": 4.21,
+    "spectral_error_db": 4.16,
     "pre_ringdown_db": 5.715,
     "pre_noise_pulse_error_db": 4.335,
     "pre_noise_envelope_error_db": 4.325,
     "pre_cymbal_sweep_error_db": 4.3,
     "pre_shared_gate_error_db": 4.38,
     "pre_latin_percussion_error_db": 4.305,
-    "pre_cymbal_history_error_db": 4.21
+    "pre_cymbal_history_error_db": 4.21,
+    "pre_coincident_gate_error_db": 4.21,
+    "pre_snare_gate_error_db": 4.14
   },
   "loops": {
     "Loop1.wav": {
@@ -54,11 +60,11 @@
       "bars_compared": 1,
       "rotation_quarters": 6,
       "tempo": 124.487,
-      "spectral_error_db": 4.26,
+      "spectral_error_db": 4.16,
       "before_db": 4.42,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.73,
-      "fitted_balance_error_db": 2.87,
+      "fitted_balance_error_db": 2.9,
       "pre_noise_pulse_error_db": 4.33,
       "pre_noise_pulse_fitted_balance_error_db": 3.32,
       "pre_noise_envelope_error_db": 4.29,
@@ -70,7 +76,11 @@
       "pre_latin_percussion_error_db": 4.26,
       "pre_latin_percussion_fitted_balance_error_db": 2.87,
       "pre_cymbal_history_error_db": 4.26,
-      "pre_cymbal_history_fitted_balance_error_db": 2.87
+      "pre_cymbal_history_fitted_balance_error_db": 2.87,
+      "pre_coincident_gate_error_db": 4.26,
+      "pre_coincident_gate_fitted_balance_error_db": 2.87,
+      "pre_snare_gate_error_db": 4.12,
+      "pre_snare_gate_fitted_balance_error_db": 2.89
     },
     "Loop2.wav": {
       "selection": [
@@ -82,7 +92,7 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.468,
-      "spectral_error_db": 4.41,
+      "spectral_error_db": 4.29,
       "before_db": 4.63,
       "fit_role": "mix fit",
       "pre_ringdown_db": 5.45,
@@ -98,7 +108,11 @@
       "pre_latin_percussion_error_db": 4.41,
       "pre_latin_percussion_fitted_balance_error_db": 2.57,
       "pre_cymbal_history_error_db": 4.41,
-      "pre_cymbal_history_fitted_balance_error_db": 2.57
+      "pre_cymbal_history_fitted_balance_error_db": 2.57,
+      "pre_coincident_gate_error_db": 4.41,
+      "pre_coincident_gate_fitted_balance_error_db": 2.57,
+      "pre_snare_gate_error_db": 4.25,
+      "pre_snare_gate_fitted_balance_error_db": 2.57
     },
     "Loop3.wav": {
       "selection": [
@@ -110,11 +124,11 @@
       "bars_compared": 1,
       "rotation_quarters": 0,
       "tempo": 124.457,
-      "spectral_error_db": 3.91,
+      "spectral_error_db": 3.78,
       "before_db": 4.0,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.04,
-      "fitted_balance_error_db": 2.8,
+      "fitted_balance_error_db": 2.83,
       "pre_noise_pulse_error_db": 3.95,
       "pre_noise_pulse_fitted_balance_error_db": 3.18,
       "pre_noise_envelope_error_db": 3.92,
@@ -126,7 +140,11 @@
       "pre_latin_percussion_error_db": 3.91,
       "pre_latin_percussion_fitted_balance_error_db": 2.8,
       "pre_cymbal_history_error_db": 3.91,
-      "pre_cymbal_history_fitted_balance_error_db": 2.8
+      "pre_cymbal_history_fitted_balance_error_db": 2.8,
+      "pre_coincident_gate_error_db": 3.91,
+      "pre_coincident_gate_fitted_balance_error_db": 2.8,
+      "pre_snare_gate_error_db": 3.75,
+      "pre_snare_gate_fitted_balance_error_db": 2.82
     },
     "Loop4.wav": {
       "selection": [
@@ -138,11 +156,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.44,
-      "spectral_error_db": 4.22,
+      "spectral_error_db": 4.08,
       "before_db": 4.23,
       "fit_role": "held out",
       "pre_ringdown_db": 5.68,
-      "fitted_balance_error_db": 2.91,
+      "fitted_balance_error_db": 2.9,
       "pre_noise_pulse_error_db": 4.14,
       "pre_noise_pulse_fitted_balance_error_db": 3.24,
       "pre_noise_envelope_error_db": 4.11,
@@ -154,7 +172,11 @@
       "pre_latin_percussion_error_db": 4.22,
       "pre_latin_percussion_fitted_balance_error_db": 2.91,
       "pre_cymbal_history_error_db": 4.22,
-      "pre_cymbal_history_fitted_balance_error_db": 2.91
+      "pre_cymbal_history_fitted_balance_error_db": 2.91,
+      "pre_coincident_gate_error_db": 4.22,
+      "pre_coincident_gate_fitted_balance_error_db": 2.91,
+      "pre_snare_gate_error_db": 4.06,
+      "pre_snare_gate_fitted_balance_error_db": 2.91
     },
     "Loop5.wav": {
       "selection": [
@@ -166,7 +188,7 @@
       "bars_compared": 2,
       "rotation_quarters": 6,
       "tempo": 124.39,
-      "spectral_error_db": 4.64,
+      "spectral_error_db": 4.51,
       "before_db": 4.69,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.66,
@@ -182,7 +204,11 @@
       "pre_latin_percussion_error_db": 4.64,
       "pre_latin_percussion_fitted_balance_error_db": 2.88,
       "pre_cymbal_history_error_db": 4.64,
-      "pre_cymbal_history_fitted_balance_error_db": 2.88
+      "pre_cymbal_history_fitted_balance_error_db": 2.88,
+      "pre_coincident_gate_error_db": 4.64,
+      "pre_coincident_gate_fitted_balance_error_db": 2.88,
+      "pre_snare_gate_error_db": 4.49,
+      "pre_snare_gate_fitted_balance_error_db": 2.89
     },
     "Loop6.wav": {
       "selection": [
@@ -194,11 +220,11 @@
       "bars_compared": 2,
       "rotation_quarters": 1,
       "tempo": 124.441,
-      "spectral_error_db": 4.16,
+      "spectral_error_db": 3.97,
       "before_db": 4.2,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.27,
-      "fitted_balance_error_db": 2.72,
+      "fitted_balance_error_db": 2.7,
       "pre_noise_pulse_error_db": 4.15,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 4.12,
@@ -210,7 +236,11 @@
       "pre_latin_percussion_error_db": 4.16,
       "pre_latin_percussion_fitted_balance_error_db": 2.72,
       "pre_cymbal_history_error_db": 4.16,
-      "pre_cymbal_history_fitted_balance_error_db": 2.72
+      "pre_cymbal_history_fitted_balance_error_db": 2.72,
+      "pre_coincident_gate_error_db": 4.16,
+      "pre_coincident_gate_fitted_balance_error_db": 2.72,
+      "pre_snare_gate_error_db": 3.97,
+      "pre_snare_gate_fitted_balance_error_db": 2.72
     },
     "Loop7.wav": {
       "selection": [
@@ -222,11 +252,11 @@
       "bars_compared": 2,
       "rotation_quarters": 1,
       "tempo": 124.439,
-      "spectral_error_db": 3.93,
+      "spectral_error_db": 3.92,
       "before_db": 4.39,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.95,
-      "fitted_balance_error_db": 3.19,
+      "fitted_balance_error_db": 3.15,
       "pre_noise_pulse_error_db": 4.24,
       "pre_noise_pulse_fitted_balance_error_db": 3.74,
       "pre_noise_envelope_error_db": 4.25,
@@ -238,7 +268,11 @@
       "pre_latin_percussion_error_db": 4.4,
       "pre_latin_percussion_fitted_balance_error_db": 3.47,
       "pre_cymbal_history_error_db": 4.14,
-      "pre_cymbal_history_fitted_balance_error_db": 3.33
+      "pre_cymbal_history_fitted_balance_error_db": 3.33,
+      "pre_coincident_gate_error_db": 3.93,
+      "pre_coincident_gate_fitted_balance_error_db": 3.19,
+      "pre_snare_gate_error_db": 3.93,
+      "pre_snare_gate_fitted_balance_error_db": 3.19
     },
     "Loop8.wav": {
       "selection": [
@@ -266,7 +300,11 @@
       "pre_latin_percussion_error_db": 5.29,
       "pre_latin_percussion_fitted_balance_error_db": 3.81,
       "pre_cymbal_history_error_db": 5.45,
-      "pre_cymbal_history_fitted_balance_error_db": 4.25
+      "pre_cymbal_history_fitted_balance_error_db": 4.25,
+      "pre_coincident_gate_error_db": 5.06,
+      "pre_coincident_gate_fitted_balance_error_db": 3.94,
+      "pre_snare_gate_error_db": 5.06,
+      "pre_snare_gate_fitted_balance_error_db": 3.94
     },
     "Loop9.wav": {
       "selection": [
@@ -278,11 +316,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.432,
-      "spectral_error_db": 3.91,
+      "spectral_error_db": 3.8,
       "before_db": 4.44,
       "fit_role": "new validation",
       "pre_ringdown_db": 6.29,
-      "fitted_balance_error_db": 3.27,
+      "fitted_balance_error_db": 3.18,
       "pre_noise_pulse_error_db": 4.31,
       "pre_noise_pulse_fitted_balance_error_db": 3.86,
       "pre_noise_envelope_error_db": 4.31,
@@ -294,7 +332,11 @@
       "pre_latin_percussion_error_db": 3.91,
       "pre_latin_percussion_fitted_balance_error_db": 3.27,
       "pre_cymbal_history_error_db": 3.91,
-      "pre_cymbal_history_fitted_balance_error_db": 3.27
+      "pre_cymbal_history_fitted_balance_error_db": 3.27,
+      "pre_coincident_gate_error_db": 3.91,
+      "pre_coincident_gate_fitted_balance_error_db": 3.27,
+      "pre_snare_gate_error_db": 3.91,
+      "pre_snare_gate_fitted_balance_error_db": 3.27
     },
     "Loop10.wav": {
       "selection": [
@@ -306,11 +348,11 @@
       "bars_compared": 2,
       "rotation_quarters": 5.5,
       "tempo": 124.431,
-      "spectral_error_db": 4.44,
+      "spectral_error_db": 4.23,
       "before_db": 4.99,
       "fit_role": "new validation",
       "pre_ringdown_db": 7.85,
-      "fitted_balance_error_db": 3.74,
+      "fitted_balance_error_db": 3.54,
       "pre_noise_pulse_error_db": 4.78,
       "pre_noise_pulse_fitted_balance_error_db": 4.11,
       "pre_noise_envelope_error_db": 4.78,
@@ -322,7 +364,11 @@
       "pre_latin_percussion_error_db": 4.44,
       "pre_latin_percussion_fitted_balance_error_db": 3.74,
       "pre_cymbal_history_error_db": 4.44,
-      "pre_cymbal_history_fitted_balance_error_db": 3.74
+      "pre_cymbal_history_fitted_balance_error_db": 3.74,
+      "pre_coincident_gate_error_db": 4.44,
+      "pre_coincident_gate_fitted_balance_error_db": 3.74,
+      "pre_snare_gate_error_db": 4.44,
+      "pre_snare_gate_fitted_balance_error_db": 3.74
     },
     "Loop11.wav": {
       "selection": [
@@ -334,11 +380,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.436,
-      "spectral_error_db": 4.35,
+      "spectral_error_db": 4.3,
       "before_db": 4.49,
       "fit_role": "new validation",
       "pre_ringdown_db": 6.91,
-      "fitted_balance_error_db": 3.42,
+      "fitted_balance_error_db": 3.36,
       "pre_noise_pulse_error_db": 4.34,
       "pre_noise_pulse_fitted_balance_error_db": 3.72,
       "pre_noise_envelope_error_db": 4.34,
@@ -350,7 +396,11 @@
       "pre_latin_percussion_error_db": 4.35,
       "pre_latin_percussion_fitted_balance_error_db": 3.42,
       "pre_cymbal_history_error_db": 4.35,
-      "pre_cymbal_history_fitted_balance_error_db": 3.42
+      "pre_cymbal_history_fitted_balance_error_db": 3.42,
+      "pre_coincident_gate_error_db": 4.35,
+      "pre_coincident_gate_fitted_balance_error_db": 3.42,
+      "pre_snare_gate_error_db": 4.35,
+      "pre_snare_gate_fitted_balance_error_db": 3.42
     },
     "Loop12.wav": {
       "selection": [
@@ -366,7 +416,7 @@
       "before_db": 4.62,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.31,
-      "fitted_balance_error_db": 3.82,
+      "fitted_balance_error_db": 3.81,
       "pre_noise_pulse_error_db": 4.56,
       "pre_noise_pulse_fitted_balance_error_db": 3.91,
       "pre_noise_envelope_error_db": 4.57,
@@ -378,7 +428,11 @@
       "pre_latin_percussion_error_db": 4.52,
       "pre_latin_percussion_fitted_balance_error_db": 3.74,
       "pre_cymbal_history_error_db": 4.42,
-      "pre_cymbal_history_fitted_balance_error_db": 3.89
+      "pre_cymbal_history_fitted_balance_error_db": 3.89,
+      "pre_coincident_gate_error_db": 4.54,
+      "pre_coincident_gate_fitted_balance_error_db": 3.82,
+      "pre_snare_gate_error_db": 4.54,
+      "pre_snare_gate_fitted_balance_error_db": 3.82
     },
     "Loop13.wav": {
       "selection": [
@@ -390,11 +444,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.441,
-      "spectral_error_db": 3.95,
+      "spectral_error_db": 3.78,
       "before_db": 4.44,
       "fit_role": "mix fit",
       "pre_ringdown_db": 6.84,
-      "fitted_balance_error_db": 3.43,
+      "fitted_balance_error_db": 3.27,
       "pre_noise_pulse_error_db": 4.29,
       "pre_noise_pulse_fitted_balance_error_db": 3.9,
       "pre_noise_envelope_error_db": 4.29,
@@ -406,7 +460,11 @@
       "pre_latin_percussion_error_db": 3.95,
       "pre_latin_percussion_fitted_balance_error_db": 3.43,
       "pre_cymbal_history_error_db": 3.95,
-      "pre_cymbal_history_fitted_balance_error_db": 3.43
+      "pre_cymbal_history_fitted_balance_error_db": 3.43,
+      "pre_coincident_gate_error_db": 3.95,
+      "pre_coincident_gate_fitted_balance_error_db": 3.43,
+      "pre_snare_gate_error_db": 3.95,
+      "pre_snare_gate_fitted_balance_error_db": 3.43
     },
     "Loop14.wav": {
       "selection": [
@@ -418,11 +476,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.423,
-      "spectral_error_db": 3.59,
+      "spectral_error_db": 3.58,
       "before_db": 3.86,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.54,
-      "fitted_balance_error_db": 3.08,
+      "fitted_balance_error_db": 3.05,
       "pre_noise_pulse_error_db": 3.74,
       "pre_noise_pulse_fitted_balance_error_db": 3.54,
       "pre_noise_envelope_error_db": 3.7,
@@ -434,7 +492,11 @@
       "pre_latin_percussion_error_db": 3.59,
       "pre_latin_percussion_fitted_balance_error_db": 3.08,
       "pre_cymbal_history_error_db": 3.59,
-      "pre_cymbal_history_fitted_balance_error_db": 3.08
+      "pre_cymbal_history_fitted_balance_error_db": 3.08,
+      "pre_coincident_gate_error_db": 3.59,
+      "pre_coincident_gate_fitted_balance_error_db": 3.08,
+      "pre_snare_gate_error_db": 3.59,
+      "pre_snare_gate_fitted_balance_error_db": 3.08
     },
     "Loop15.wav": {
       "selection": [
@@ -450,7 +512,7 @@
       "before_db": 4.38,
       "fit_role": "mix fit",
       "pre_ringdown_db": 5.03,
-      "fitted_balance_error_db": 2.53,
+      "fitted_balance_error_db": 2.52,
       "pre_noise_pulse_error_db": 4.35,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 4.3,
@@ -462,7 +524,11 @@
       "pre_latin_percussion_error_db": 3.98,
       "pre_latin_percussion_fitted_balance_error_db": 2.53,
       "pre_cymbal_history_error_db": 3.98,
-      "pre_cymbal_history_fitted_balance_error_db": 2.53
+      "pre_cymbal_history_fitted_balance_error_db": 2.53,
+      "pre_coincident_gate_error_db": 3.98,
+      "pre_coincident_gate_fitted_balance_error_db": 2.53,
+      "pre_snare_gate_error_db": 3.98,
+      "pre_snare_gate_fitted_balance_error_db": 2.53
     },
     "Loop16.wav": {
       "selection": [
@@ -474,11 +540,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.468,
-      "spectral_error_db": 5.06,
+      "spectral_error_db": 4.72,
       "before_db": 5.55,
       "fit_role": "held out",
       "pre_ringdown_db": 5.52,
-      "fitted_balance_error_db": 2.87,
+      "fitted_balance_error_db": 2.9,
       "pre_noise_pulse_error_db": 5.55,
       "pre_noise_pulse_fitted_balance_error_db": 3.48,
       "pre_noise_envelope_error_db": 5.53,
@@ -490,7 +556,13 @@
       "pre_latin_percussion_error_db": 5.77,
       "pre_latin_percussion_fitted_balance_error_db": 3.16,
       "pre_cymbal_history_error_db": 5.22,
-      "pre_cymbal_history_fitted_balance_error_db": 2.78
+      "pre_cymbal_history_fitted_balance_error_db": 2.78,
+      "pre_coincident_gate_error_db": 5.06,
+      "pre_coincident_gate_fitted_balance_error_db": 2.87,
+      "pre_snare_gate_error_db": 4.72,
+      "pre_snare_gate_fitted_balance_error_db": 2.91,
+      "pre_wood_resonator_error_db": 4.72,
+      "pre_wood_resonator_fitted_balance_error_db": 2.91
     },
     "Loop17.wav": {
       "selection": [
@@ -502,11 +574,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.492,
-      "spectral_error_db": 4.23,
+      "spectral_error_db": 3.97,
       "before_db": 4.73,
       "fit_role": "held out",
       "pre_ringdown_db": 5.12,
-      "fitted_balance_error_db": 3.39,
+      "fitted_balance_error_db": 3.3,
       "pre_noise_pulse_error_db": 4.7,
       "pre_noise_pulse_fitted_balance_error_db": 3.94,
       "pre_noise_envelope_error_db": 4.65,
@@ -518,7 +590,11 @@
       "pre_latin_percussion_error_db": 4.72,
       "pre_latin_percussion_fitted_balance_error_db": 3.71,
       "pre_cymbal_history_error_db": 4.26,
-      "pre_cymbal_history_fitted_balance_error_db": 3.33
+      "pre_cymbal_history_fitted_balance_error_db": 3.33,
+      "pre_coincident_gate_error_db": 4.23,
+      "pre_coincident_gate_fitted_balance_error_db": 3.39,
+      "pre_snare_gate_error_db": 3.97,
+      "pre_snare_gate_fitted_balance_error_db": 3.3
     },
     "Loop18.wav": {
       "selection": [
@@ -546,7 +622,11 @@
       "pre_latin_percussion_error_db": 4.09,
       "pre_latin_percussion_fitted_balance_error_db": 3.43,
       "pre_cymbal_history_error_db": 3.98,
-      "pre_cymbal_history_fitted_balance_error_db": 3.32
+      "pre_cymbal_history_fitted_balance_error_db": 3.32,
+      "pre_coincident_gate_error_db": 4.09,
+      "pre_coincident_gate_fitted_balance_error_db": 3.4,
+      "pre_snare_gate_error_db": 4.09,
+      "pre_snare_gate_fitted_balance_error_db": 3.4
     },
     "Loop19.wav": {
       "selection": [
@@ -574,7 +654,11 @@
       "pre_latin_percussion_error_db": 4.63,
       "pre_latin_percussion_fitted_balance_error_db": 3.42,
       "pre_cymbal_history_error_db": 4.63,
-      "pre_cymbal_history_fitted_balance_error_db": 3.42
+      "pre_cymbal_history_fitted_balance_error_db": 3.42,
+      "pre_coincident_gate_error_db": 4.71,
+      "pre_coincident_gate_fitted_balance_error_db": 3.46,
+      "pre_snare_gate_error_db": 4.71,
+      "pre_snare_gate_fitted_balance_error_db": 3.46
     },
     "Loop20.wav": {
       "selection": [
@@ -586,7 +670,7 @@
       "bars_compared": 2,
       "rotation_quarters": 4,
       "tempo": 124.691,
-      "spectral_error_db": 5.8,
+      "spectral_error_db": 5.78,
       "before_db": 5.71,
       "fit_role": "held out",
       "pre_ringdown_db": 7.29,
@@ -602,7 +686,13 @@
       "pre_latin_percussion_error_db": 5.67,
       "pre_latin_percussion_fitted_balance_error_db": 4.52,
       "pre_cymbal_history_error_db": 5.72,
-      "pre_cymbal_history_fitted_balance_error_db": 4.32
+      "pre_cymbal_history_fitted_balance_error_db": 4.32,
+      "pre_coincident_gate_error_db": 5.8,
+      "pre_coincident_gate_fitted_balance_error_db": 4.36,
+      "pre_snare_gate_error_db": 5.8,
+      "pre_snare_gate_fitted_balance_error_db": 4.36,
+      "pre_wood_resonator_error_db": 5.8,
+      "pre_wood_resonator_fitted_balance_error_db": 4.36
     },
     "Loop21.wav": {
       "selection": [
@@ -614,7 +704,7 @@
       "bars_compared": 2,
       "rotation_quarters": 4,
       "tempo": 124.613,
-      "spectral_error_db": 5.12,
+      "spectral_error_db": 5.11,
       "before_db": 5.31,
       "fit_role": "mix fit",
       "pre_ringdown_db": 7.36,
@@ -630,7 +720,13 @@
       "pre_latin_percussion_error_db": 5.24,
       "pre_latin_percussion_fitted_balance_error_db": 4.58,
       "pre_cymbal_history_error_db": 5.07,
-      "pre_cymbal_history_fitted_balance_error_db": 4.17
+      "pre_cymbal_history_fitted_balance_error_db": 4.17,
+      "pre_coincident_gate_error_db": 5.12,
+      "pre_coincident_gate_fitted_balance_error_db": 4.17,
+      "pre_snare_gate_error_db": 5.12,
+      "pre_snare_gate_fitted_balance_error_db": 4.17,
+      "pre_wood_resonator_error_db": 5.12,
+      "pre_wood_resonator_fitted_balance_error_db": 4.17
     },
     "Loop22.wav": {
       "selection": [
@@ -642,11 +738,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.44,
-      "spectral_error_db": 5.18,
+      "spectral_error_db": 5.07,
       "before_db": 5.72,
       "fit_role": "mix fit",
       "pre_ringdown_db": 7.57,
-      "fitted_balance_error_db": 4.47,
+      "fitted_balance_error_db": 4.44,
       "pre_noise_pulse_error_db": 5.67,
       "pre_noise_pulse_fitted_balance_error_db": 4.88,
       "pre_noise_envelope_error_db": 5.67,
@@ -658,7 +754,11 @@
       "pre_latin_percussion_error_db": 5.81,
       "pre_latin_percussion_fitted_balance_error_db": 4.92,
       "pre_cymbal_history_error_db": 5.42,
-      "pre_cymbal_history_fitted_balance_error_db": 4.73
+      "pre_cymbal_history_fitted_balance_error_db": 4.73,
+      "pre_coincident_gate_error_db": 5.18,
+      "pre_coincident_gate_fitted_balance_error_db": 4.47,
+      "pre_snare_gate_error_db": 5.07,
+      "pre_snare_gate_fitted_balance_error_db": 4.44
     },
     "Loop23.wav": {
       "selection": [
@@ -686,7 +786,11 @@
       "pre_latin_percussion_error_db": 4.41,
       "pre_latin_percussion_fitted_balance_error_db": 3.8,
       "pre_cymbal_history_error_db": 4.32,
-      "pre_cymbal_history_fitted_balance_error_db": 3.72
+      "pre_cymbal_history_fitted_balance_error_db": 3.72,
+      "pre_coincident_gate_error_db": 4.4,
+      "pre_coincident_gate_fitted_balance_error_db": 3.76,
+      "pre_snare_gate_error_db": 4.4,
+      "pre_snare_gate_fitted_balance_error_db": 3.76
     },
     "Loop24.wav": {
       "selection": [
@@ -714,7 +818,11 @@
       "pre_latin_percussion_error_db": 4.16,
       "pre_latin_percussion_fitted_balance_error_db": 2.59,
       "pre_cymbal_history_error_db": 4.16,
-      "pre_cymbal_history_fitted_balance_error_db": 2.59
+      "pre_cymbal_history_fitted_balance_error_db": 2.59,
+      "pre_coincident_gate_error_db": 4.16,
+      "pre_coincident_gate_fitted_balance_error_db": 2.59,
+      "pre_snare_gate_error_db": 4.16,
+      "pre_snare_gate_fitted_balance_error_db": 2.59
     },
     "Loop25.wav": {
       "selection": [
@@ -726,11 +834,11 @@
       "bars_compared": 2,
       "rotation_quarters": 3,
       "tempo": 124.444,
-      "spectral_error_db": 3.95,
+      "spectral_error_db": 3.96,
       "before_db": 4.13,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.96,
-      "fitted_balance_error_db": 2.91,
+      "fitted_balance_error_db": 2.9,
       "pre_noise_pulse_error_db": 4.05,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 4.03,
@@ -742,7 +850,11 @@
       "pre_latin_percussion_error_db": 3.95,
       "pre_latin_percussion_fitted_balance_error_db": 2.91,
       "pre_cymbal_history_error_db": 3.95,
-      "pre_cymbal_history_fitted_balance_error_db": 2.91
+      "pre_cymbal_history_fitted_balance_error_db": 2.91,
+      "pre_coincident_gate_error_db": 3.95,
+      "pre_coincident_gate_fitted_balance_error_db": 2.91,
+      "pre_snare_gate_error_db": 3.95,
+      "pre_snare_gate_fitted_balance_error_db": 2.91
     }
   },
   "baseline_note": "Before scores use the prior C build with the ring-down refinement and before the snare, high-bongo and Slow Rock changes. Pre-ring-down scores are retained separately.",
@@ -761,13 +873,13 @@
     "matched_rhythms": {
       "rock-2": [
         5.46,
-        3.24,
-        3.02
+        3.29,
+        2.98
       ],
       "rock-4": [
         5.71,
-        3.48,
-        2.97
+        3.36,
+        2.89
       ],
       "slow-rock": [
         3.12,
@@ -776,8 +888,8 @@
       ],
       "samba": [
         2.82,
-        5.12,
-        6.1
+        5.19,
+        6.18
       ],
       "mambo": [
         3.04,
@@ -796,14 +908,14 @@
       ],
       "beguine": [
         4.48,
-        3.89,
-        2.58
+        3.81,
+        2.67
       ]
     },
     "medians": [
       4.23,
-      3.36,
-      2.87
+      3.325,
+      2.83
     ],
     "pre_cymbal_sweep_medians": [
       4.23,
@@ -824,6 +936,16 @@
       4.23,
       3.185,
       2.67
+    ],
+    "pre_coincident_gate_medians": [
+      4.23,
+      3.36,
+      2.87
+    ],
+    "pre_snare_gate_medians": [
+      4.23,
+      3.29,
+      2.895
     ]
   },
   "rhythm_coverage_across_both_packs": {
@@ -868,8 +990,8 @@
     "median_errors_db": {
       "all": {
         "count": 25,
-        "center_db": 4.26,
-        "fitted_balance_db": 3.27,
+        "center_db": 4.16,
+        "fitted_balance_db": 3.18,
         "pre_noise_pulse_fitted_balance_db": 3.74,
         "pre_noise_envelope_fitted_balance_db": 3.74,
         "pre_cymbal_sweep_center_db": 4.41,
@@ -879,12 +1001,16 @@
         "pre_latin_percussion_center_db": 4.4,
         "pre_latin_percussion_fitted_balance_db": 3.42,
         "pre_cymbal_history_center_db": 4.26,
-        "pre_cymbal_history_fitted_balance_db": 3.32
+        "pre_cymbal_history_fitted_balance_db": 3.32,
+        "pre_coincident_gate_center_db": 4.26,
+        "pre_coincident_gate_fitted_balance_db": 3.27,
+        "pre_snare_gate_center_db": 4.16,
+        "pre_snare_gate_fitted_balance_db": 3.27
       },
       "mix fit": {
         "count": 6,
-        "center_db": 4.25,
-        "fitted_balance_db": 3.415,
+        "center_db": 4.19,
+        "fitted_balance_db": 3.335,
         "pre_noise_pulse_fitted_balance_db": 3.905,
         "pre_noise_envelope_fitted_balance_db": 3.905,
         "pre_cymbal_sweep_center_db": 4.475,
@@ -894,12 +1020,16 @@
         "pre_latin_percussion_center_db": 4.25,
         "pre_latin_percussion_fitted_balance_db": 3.43,
         "pre_cymbal_history_center_db": 4.195,
-        "pre_cymbal_history_fitted_balance_db": 3.375
+        "pre_cymbal_history_fitted_balance_db": 3.375,
+        "pre_coincident_gate_center_db": 4.25,
+        "pre_coincident_gate_fitted_balance_db": 3.415,
+        "pre_snare_gate_center_db": 4.17,
+        "pre_snare_gate_fitted_balance_db": 3.415
       },
       "held out": {
         "count": 5,
         "center_db": 4.71,
-        "fitted_balance_db": 3.39,
+        "fitted_balance_db": 3.3,
         "pre_noise_pulse_fitted_balance_db": 3.78,
         "pre_noise_envelope_fitted_balance_db": 3.76,
         "pre_cymbal_sweep_center_db": 4.65,
@@ -909,12 +1039,16 @@
         "pre_latin_percussion_center_db": 4.72,
         "pre_latin_percussion_fitted_balance_db": 3.42,
         "pre_cymbal_history_center_db": 4.63,
-        "pre_cymbal_history_fitted_balance_db": 3.33
+        "pre_cymbal_history_fitted_balance_db": 3.33,
+        "pre_coincident_gate_center_db": 4.71,
+        "pre_coincident_gate_fitted_balance_db": 3.39,
+        "pre_snare_gate_center_db": 4.71,
+        "pre_snare_gate_fitted_balance_db": 3.3
       },
       "new validation": {
         "count": 14,
-        "center_db": 4.21,
-        "fitted_balance_db": 3.135,
+        "center_db": 4.16,
+        "fitted_balance_db": 3.1,
         "pre_noise_pulse_fitted_balance_db": 3.63,
         "pre_noise_envelope_fitted_balance_db": 3.61,
         "pre_cymbal_sweep_center_db": 4.3,
@@ -924,7 +1058,11 @@
         "pre_latin_percussion_center_db": 4.305,
         "pre_latin_percussion_fitted_balance_db": 3.175,
         "pre_cymbal_history_center_db": 4.21,
-        "pre_cymbal_history_fitted_balance_db": 3.175
+        "pre_cymbal_history_fitted_balance_db": 3.175,
+        "pre_coincident_gate_center_db": 4.21,
+        "pre_coincident_gate_fitted_balance_db": 3.135,
+        "pre_snare_gate_center_db": 4.14,
+        "pre_snare_gate_fitted_balance_db": 3.135
       }
     },
     "audition_order": [
@@ -1199,7 +1337,7 @@
       "slow_decay_ms": 225.0,
       "gate_threshold": 0.04
     },
-    "kick_trial": "A third decay reduced the 3\u20131000 Hz waveform error in both separated hits. It increased the first 45 ms waveform error with a 25\u20131000 Hz analysis band, so the production patch retains the earlier kick.",
+    "kick_trial": "A third decay reduced the 3–1000 Hz waveform error in both separated hits. It increased the first 45 ms waveform error with a 25–1000 Hz analysis band, so the production patch retains the earlier kick.",
     "reverb_audition_order": [
       "Loop15.wav",
       "Loop24.wav",
@@ -1208,7 +1346,7 @@
     "build": "Comparison before the fast hold and shared trigger change."
   },
   "cymbal_gate_refinement": {
-    "method": "Compare hi-hat plus cymbal with hi-hat alone in the same clip, using 6.2\u201311.8 kHz power and excluding clipped windows. Compare cymbal-only tails in the previously measured loop windows.",
+    "method": "Compare hi-hat plus cymbal with hi-hat alone in the same clip, using 6.2–11.8 kHz power and excluding clipped windows. Compare cymbal-only tails in the previously measured loop windows.",
     "columns": [
       "capture",
       "previous C",
@@ -1408,7 +1546,7 @@
       }
     },
     "low_bongo_fit": {
-      "method": "Damped sinusoid fitted over 10\u201378 ms of low-bongo bandpass (348\u2013464 Hz) traces.",
+      "method": "Damped sinusoid fitted over 10–78 ms of low-bongo bandpass (348–464 Hz) traces.",
       "drumbase_beguine": {
         "hits": 7,
         "hz": 393.686,
@@ -1446,7 +1584,7 @@
     ]
   },
   "cymbal_history_refinement": {
-    "method": "Estimate the first time the 6.1\u201311.6 kHz envelope falls 18 dB below the 8\u201324 ms attack. Use 10 ms windows and account for residual pre-hit noise. Compare hits with known cymbal history, no competing attacks during the measured span, and measurable cutoff in both renders.",
+    "method": "Estimate the first time the 6.1–11.6 kHz envelope falls 18 dB below the 8–24 ms attack. Use 10 ms windows and account for residual pre-hit noise. Compare hits with known cymbal history, no competing attacks during the measured span, and measurable cutoff in both renders.",
     "columns": [
       "capture",
       "previous C",
@@ -1996,5 +2134,1213 @@
       "Loop17.wav",
       "Loop22.wav"
     ]
+  },
+  "coincident_gate_refinement": {
+    "method": "In each recording, compare 6.2–11.8 kHz power of simultaneous hi-hat and cymbal triggers to the early power of single hi-hat triggers, using usable windows free of clipped samples and subsequent attacks. Compare the medians across the matched recordings. The settled loop check plays one or two complete Arrange cycles before scoring at the fixed per-pack Balance positions.",
+    "columns": [
+      "capture",
+      "previous C",
+      "current C"
+    ],
+    "hits": 26,
+    "median_attack_db_relative_to_hat": [
+      -0.323,
+      -1.363,
+      -0.9
+    ],
+    "median_body_40_to_65_ms_db_relative_to_hat": [
+      -2.135,
+      -4.123,
+      -3.389
+    ],
+    "per_capture": {
+      "BEGUINE": {
+        "pack": "cd",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          -0.481,
+          -1.137,
+          -0.599
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -0.6,
+          -4.82,
+          -3.971
+        ]
+      },
+      "BOSSANOVA": {
+        "pack": "cd",
+        "hits": 8,
+        "paired_to_hat_early_db": [
+          -0.639,
+          -1.588,
+          -1.326
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -1.835,
+          -4.486,
+          -3.869
+        ]
+      },
+      "SAMBA": {
+        "pack": "cd",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          -0.165,
+          -1.836,
+          -1.451
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -1.556,
+          -4.315,
+          -3.638
+        ]
+      },
+      "Loop16": {
+        "pack": "rv",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          -0.584,
+          -0.913,
+          -0.295
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -3.415,
+          -3.823,
+          -2.918
+        ]
+      },
+      "Loop17": {
+        "pack": "rv",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          0.443,
+          -1.077,
+          -0.487
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -2.435,
+          -3.93,
+          -3.026
+        ]
+      },
+      "Loop22": {
+        "pack": "rv",
+        "hits": 2,
+        "paired_to_hat_early_db": [
+          -0.117,
+          -1.788,
+          -1.202
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -3.293,
+          -3.908,
+          -3.141
+        ]
+      }
+    },
+    "fit": {
+      "total_gate_drive": 1.05,
+      "fast_gate_fraction": 0.285,
+      "fast_hold_ms": 44,
+      "initial_frequency_offset_fraction": 0.82
+    },
+    "settled_loop_columns": [
+      "previous C",
+      "current C"
+    ],
+    "settled_drumbase": [
+      {
+        "warmup_arrange_cycles": 1,
+        "all_median_db": [
+          2.37,
+          2.37
+        ],
+        "all_mean_db": [
+          2.553,
+          2.52
+        ],
+        "loops": {
+          "BEGUINE": [
+            2.82,
+            2.76
+          ],
+          "BOSSANOVA": [
+            3.67,
+            3.49
+          ],
+          "CHA-CHA": [
+            2.82,
+            2.82
+          ],
+          "J-WALTZ": [
+            2.37,
+            2.37
+          ],
+          "MAMBO": [
+            2.56,
+            2.56
+          ],
+          "RHUMBA": [
+            2.46,
+            2.46
+          ],
+          "S-ROCK": [
+            2.04,
+            2.04
+          ],
+          "SAMBA": [
+            2.84,
+            2.61
+          ],
+          "WALTZ": [
+            4.75,
+            4.75
+          ],
+          "HABANERA": [
+            3.03,
+            3.03
+          ],
+          "MARCH": [
+            2.76,
+            2.76
+          ],
+          "PARADE": [
+            2.22,
+            2.22
+          ],
+          "ROCK1A": [
+            2.13,
+            2.07
+          ],
+          "ROCK2A": [
+            2.07,
+            2.02
+          ],
+          "ROCK3A": [
+            2.06,
+            2.0
+          ],
+          "ROCK4A": [
+            2.15,
+            2.08
+          ],
+          "ROCK5A": [
+            2.3,
+            2.23
+          ],
+          "ROCK6": [
+            2.13,
+            2.06
+          ],
+          "SHUFFLE": [
+            2.34,
+            2.34
+          ],
+          "SWING1": [
+            2.42,
+            2.42
+          ],
+          "SWING2": [
+            1.82,
+            1.82
+          ],
+          "SWING3": [
+            1.72,
+            1.63
+          ],
+          "TANGO": [
+            3.24,
+            3.41
+          ]
+        }
+      },
+      {
+        "warmup_arrange_cycles": 2,
+        "all_median_db": [
+          2.31,
+          2.31
+        ],
+        "all_mean_db": [
+          2.533,
+          2.499
+        ],
+        "loops": {
+          "BEGUINE": [
+            2.8,
+            2.75
+          ],
+          "BOSSANOVA": [
+            3.66,
+            3.47
+          ],
+          "CHA-CHA": [
+            2.81,
+            2.81
+          ],
+          "J-WALTZ": [
+            2.37,
+            2.37
+          ],
+          "MAMBO": [
+            2.5,
+            2.5
+          ],
+          "RHUMBA": [
+            2.44,
+            2.44
+          ],
+          "S-ROCK": [
+            2.05,
+            2.05
+          ],
+          "SAMBA": [
+            2.83,
+            2.6
+          ],
+          "WALTZ": [
+            4.74,
+            4.74
+          ],
+          "HABANERA": [
+            3.07,
+            3.07
+          ],
+          "MARCH": [
+            2.69,
+            2.69
+          ],
+          "PARADE": [
+            2.23,
+            2.23
+          ],
+          "ROCK1A": [
+            2.12,
+            2.06
+          ],
+          "ROCK2A": [
+            2.09,
+            2.04
+          ],
+          "ROCK3A": [
+            2.07,
+            2.01
+          ],
+          "ROCK4A": [
+            2.15,
+            2.07
+          ],
+          "ROCK5A": [
+            2.27,
+            2.21
+          ],
+          "ROCK6": [
+            2.17,
+            2.09
+          ],
+          "SHUFFLE": [
+            2.31,
+            2.31
+          ],
+          "SWING1": [
+            2.28,
+            2.28
+          ],
+          "SWING2": [
+            1.74,
+            1.74
+          ],
+          "SWING3": [
+            1.69,
+            1.58
+          ],
+          "TANGO": [
+            3.19,
+            3.36
+          ]
+        }
+      }
+    ],
+    "settled_reverb": [
+      {
+        "warmup_arrange_cycles": 1,
+        "all_median_db": [
+          3.12,
+          3.12
+        ],
+        "all_mean_db": [
+          3.218,
+          3.215
+        ],
+        "loops": {
+          "Loop1.wav": [
+            2.86,
+            2.88
+          ],
+          "Loop2.wav": [
+            2.52,
+            2.52
+          ],
+          "Loop3.wav": [
+            2.77,
+            2.78
+          ],
+          "Loop4.wav": [
+            2.86,
+            2.86
+          ],
+          "Loop5.wav": [
+            2.83,
+            2.84
+          ],
+          "Loop6.wav": [
+            2.69,
+            2.68
+          ],
+          "Loop7.wav": [
+            3.12,
+            3.12
+          ],
+          "Loop8.wav": [
+            3.83,
+            3.83
+          ],
+          "Loop9.wav": [
+            3.23,
+            3.23
+          ],
+          "Loop10.wav": [
+            3.7,
+            3.7
+          ],
+          "Loop11.wav": [
+            3.41,
+            3.41
+          ],
+          "Loop12.wav": [
+            3.48,
+            3.48
+          ],
+          "Loop13.wav": [
+            3.41,
+            3.41
+          ],
+          "Loop14.wav": [
+            2.99,
+            2.99
+          ],
+          "Loop15.wav": [
+            2.5,
+            2.5
+          ],
+          "Loop16.wav": [
+            2.42,
+            2.46
+          ],
+          "Loop17.wav": [
+            2.94,
+            2.82
+          ],
+          "Loop18.wav": [
+            3.35,
+            3.35
+          ],
+          "Loop19.wav": [
+            3.44,
+            3.44
+          ],
+          "Loop20.wav": [
+            4.33,
+            4.33
+          ],
+          "Loop21.wav": [
+            4.16,
+            4.16
+          ],
+          "Loop22.wav": [
+            4.45,
+            4.43
+          ],
+          "Loop23.wav": [
+            3.74,
+            3.74
+          ],
+          "Loop24.wav": [
+            2.57,
+            2.57
+          ],
+          "Loop25.wav": [
+            2.85,
+            2.85
+          ]
+        }
+      },
+      {
+        "warmup_arrange_cycles": 2,
+        "all_median_db": [
+          3.16,
+          3.16
+        ],
+        "all_mean_db": [
+          3.234,
+          3.226
+        ],
+        "loops": {
+          "Loop1.wav": [
+            2.87,
+            2.87
+          ],
+          "Loop2.wav": [
+            2.55,
+            2.53
+          ],
+          "Loop3.wav": [
+            2.81,
+            2.82
+          ],
+          "Loop4.wav": [
+            2.89,
+            2.87
+          ],
+          "Loop5.wav": [
+            2.88,
+            2.88
+          ],
+          "Loop6.wav": [
+            2.71,
+            2.69
+          ],
+          "Loop7.wav": [
+            3.16,
+            3.16
+          ],
+          "Loop8.wav": [
+            3.86,
+            3.86
+          ],
+          "Loop9.wav": [
+            3.26,
+            3.26
+          ],
+          "Loop10.wav": [
+            3.71,
+            3.71
+          ],
+          "Loop11.wav": [
+            3.41,
+            3.41
+          ],
+          "Loop12.wav": [
+            3.5,
+            3.5
+          ],
+          "Loop13.wav": [
+            3.39,
+            3.39
+          ],
+          "Loop14.wav": [
+            2.99,
+            2.99
+          ],
+          "Loop15.wav": [
+            2.49,
+            2.49
+          ],
+          "Loop16.wav": [
+            2.49,
+            2.51
+          ],
+          "Loop17.wav": [
+            2.96,
+            2.82
+          ],
+          "Loop18.wav": [
+            3.34,
+            3.34
+          ],
+          "Loop19.wav": [
+            3.45,
+            3.45
+          ],
+          "Loop20.wav": [
+            4.39,
+            4.39
+          ],
+          "Loop21.wav": [
+            4.19,
+            4.19
+          ],
+          "Loop22.wav": [
+            4.43,
+            4.4
+          ],
+          "Loop23.wav": [
+            3.73,
+            3.73
+          ],
+          "Loop24.wav": [
+            2.56,
+            2.56
+          ],
+          "Loop25.wav": [
+            2.83,
+            2.83
+          ]
+        }
+      }
+    ],
+    "audition_order": [
+      {
+        "rhythm": "Bossa Nova Auto",
+        "pack": "Drumbase"
+      },
+      {
+        "rhythm": "Samba A",
+        "pack": "Reverb"
+      },
+      {
+        "rhythm": "Tango B",
+        "pack": "Drumbase"
+      }
+    ]
+  },
+  "snare_gate_refinement": {
+    "method": "Align snare-only hits from the complete loops with the isolated one-shot from each pack, using the low-band waveform. Exclude windows close to another hit or containing PCM clipping. Measure noise in 1.3–14.5 kHz against its mean power across the 6–12, 12–23 and 23–40 ms windows. Compare this broadband level to the 235–360 Hz ring from 5–25 ms. Settled loop renders play one Arrange cycle before scoring.",
+    "envelope_windows_ms": [
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        12
+      ],
+      [
+        12,
+        23
+      ],
+      [
+        23,
+        40
+      ],
+      [
+        40,
+        60
+      ],
+      [
+        60,
+        78
+      ],
+      [
+        78,
+        98
+      ],
+      [
+        98,
+        120
+      ]
+    ],
+    "noise_bands_hz": [
+      [
+        1300,
+        2450
+      ],
+      [
+        2450,
+        4000
+      ],
+      [
+        4000,
+        5500
+      ],
+      [
+        5500,
+        7000
+      ],
+      [
+        7000,
+        8500
+      ],
+      [
+        8500,
+        10100
+      ],
+      [
+        10100,
+        12300
+      ],
+      [
+        12300,
+        14800
+      ]
+    ],
+    "provenance": {
+      "demo": "https://www.vintagesynth.com/roland/tr-66",
+      "one_shot_archive": "https://github.com/smpldsnds/drum-abuse-vol1/tree/58a9b6246d232d862fad15e06c97a4a030655017/samples/roland-tr-66",
+      "shared_snare_waveforms_demo_time_s_and_normalized_correlation": {
+        "66-sd-01.wav": [
+          2.8242,
+          0.9657
+        ],
+        "66-sd-02.wav": [
+          3.9357,
+          0.9159
+        ]
+      },
+      "correlation_band_hz": [
+        2150,
+        12000
+      ],
+      "note": "The Vintage Synth Explorer demo and the matching archive hits count as one source."
+    },
+    "fit": {
+      "noise_attack_ms": 1.7,
+      "noise_hold_ms": 29.0,
+      "noise_decay_ms": 110.0,
+      "noise_gate_threshold": 0.53,
+      "band_centers_hz": [
+        5625.6526,
+        9784.1089
+      ]
+    },
+    "one_shot_archive_check": {
+      "hits": 8,
+      "valid_hits_per_window": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "envelope_relative_to_6_to_40_ms_db": [
+        -7.702,
+        0.516,
+        0.514,
+        0.223,
+        -0.919,
+        -2.941,
+        -9.126,
+        -25.653,
+        -52.535
+      ],
+      "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+        -21.426,
+        -13.474,
+        -10.587,
+        -10.124,
+        -9.149,
+        -9.596,
+        -8.676,
+        -9.462
+      ],
+      "broadband_noise_to_tone_db": -12.067
+    },
+    "audition_order": [
+      "Drum Abuse isolated snare hits",
+      "Drumbase March",
+      "Reverb Waltz A"
+    ],
+    "drumbase": {
+      "capture": {
+        "hits": 13,
+        "valid_hits_per_window": [
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          8,
+          8
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.475,
+          0.646,
+          0.211,
+          0.056,
+          -0.377,
+          -1.851,
+          -5.488,
+          -15.553,
+          -38.897
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -22.434,
+          -13.936,
+          -10.783,
+          -9.652,
+          -9.738,
+          -8.574,
+          -7.625,
+          -7.783
+        ],
+        "broadband_noise_to_tone_db": -14.307
+      },
+      "previous_c": {
+        "hits": 13,
+        "valid_hits_per_window": [
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          8,
+          8
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -7.492,
+          -8.426,
+          -1.69,
+          1.023,
+          0.23,
+          -3.311,
+          -8.685,
+          -17.713,
+          -66.352
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -21.084,
+          -14.551,
+          -11.96,
+          -8.833,
+          -10.53,
+          -8.806,
+          -7.272,
+          -6.936
+        ],
+        "broadband_noise_to_tone_db": -11.457
+      },
+      "current_c": {
+        "hits": 13,
+        "valid_hits_per_window": [
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          8,
+          8
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.377,
+          -1.234,
+          -0.063,
+          0.142,
+          -0.187,
+          -3.368,
+          -8.253,
+          -16.176,
+          -58.124
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -22.063,
+          -14.563,
+          -10.706,
+          -10.346,
+          -10.131,
+          -8.829,
+          -7.641,
+          -8.759
+        ],
+        "broadband_noise_to_tone_db": -11.696
+      },
+      "settled_loop_spectral_error_db": {
+        "columns": [
+          "previous C",
+          "current C"
+        ],
+        "medians": [
+          2.37,
+          2.3
+        ],
+        "means": [
+          2.52,
+          2.494
+        ],
+        "loops": {
+          "BEGUINE": [
+            2.76,
+            2.76
+          ],
+          "BOSSANOVA": [
+            3.49,
+            3.49
+          ],
+          "CHA-CHA": [
+            2.82,
+            2.82
+          ],
+          "J-WALTZ": [
+            2.37,
+            2.3
+          ],
+          "MAMBO": [
+            2.56,
+            2.56
+          ],
+          "RHUMBA": [
+            2.46,
+            2.46
+          ],
+          "S-ROCK": [
+            2.04,
+            2.01
+          ],
+          "SAMBA": [
+            2.61,
+            2.61
+          ],
+          "WALTZ": [
+            4.75,
+            4.73
+          ],
+          "HABANERA": [
+            3.03,
+            3.0
+          ],
+          "MARCH": [
+            2.76,
+            2.74
+          ],
+          "PARADE": [
+            2.22,
+            2.18
+          ],
+          "ROCK1A": [
+            2.07,
+            2.0
+          ],
+          "ROCK2A": [
+            2.02,
+            1.97
+          ],
+          "ROCK3A": [
+            2.0,
+            1.96
+          ],
+          "ROCK4A": [
+            2.08,
+            2.03
+          ],
+          "ROCK5A": [
+            2.23,
+            2.21
+          ],
+          "ROCK6": [
+            2.06,
+            2.01
+          ],
+          "SHUFFLE": [
+            2.34,
+            2.27
+          ],
+          "SWING1": [
+            2.42,
+            2.42
+          ],
+          "SWING2": [
+            1.82,
+            1.82
+          ],
+          "SWING3": [
+            1.63,
+            1.63
+          ],
+          "TANGO": [
+            3.41,
+            3.38
+          ]
+        }
+      }
+    },
+    "reverb": {
+      "capture": {
+        "hits": 23,
+        "valid_hits_per_window": [
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          13
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.414,
+          0.549,
+          0.686,
+          0.024,
+          -0.844,
+          -3.12,
+          -8.213,
+          -20.894,
+          -52.525
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -21.638,
+          -13.867,
+          -11.198,
+          -10.02,
+          -9.801,
+          -9.308,
+          -8.515,
+          -9.345
+        ],
+        "broadband_noise_to_tone_db": -5.941
+      },
+      "previous_c": {
+        "hits": 23,
+        "valid_hits_per_window": [
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          13
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -7.791,
+          -8.119,
+          -1.375,
+          0.899,
+          0.172,
+          -3.585,
+          -8.983,
+          -18.381,
+          -66.666
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -21.156,
+          -14.899,
+          -12.213,
+          -9.075,
+          -10.587,
+          -8.946,
+          -7.397,
+          -6.897
+        ],
+        "broadband_noise_to_tone_db": -11.457
+      },
+      "current_c": {
+        "hits": 23,
+        "valid_hits_per_window": [
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          13
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.654,
+          -1.135,
+          0.14,
+          0.067,
+          -0.384,
+          -3.624,
+          -8.415,
+          -16.948,
+          -58.752
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -22.03,
+          -14.991,
+          -11.163,
+          -10.696,
+          -10.341,
+          -8.817,
+          -8.07,
+          -8.957
+        ],
+        "broadband_noise_to_tone_db": -11.402
+      },
+      "settled_loop_spectral_error_db": {
+        "columns": [
+          "previous C",
+          "current C"
+        ],
+        "medians": [
+          3.12,
+          3.09
+        ],
+        "means": [
+          3.215,
+          3.192
+        ],
+        "loops": {
+          "Loop1.wav": [
+            2.88,
+            2.88
+          ],
+          "Loop2.wav": [
+            2.52,
+            2.53
+          ],
+          "Loop3.wav": [
+            2.78,
+            2.79
+          ],
+          "Loop4.wav": [
+            2.86,
+            2.85
+          ],
+          "Loop5.wav": [
+            2.84,
+            2.84
+          ],
+          "Loop6.wav": [
+            2.68,
+            2.67
+          ],
+          "Loop7.wav": [
+            3.12,
+            3.09
+          ],
+          "Loop8.wav": [
+            3.83,
+            3.83
+          ],
+          "Loop9.wav": [
+            3.23,
+            3.14
+          ],
+          "Loop10.wav": [
+            3.7,
+            3.51
+          ],
+          "Loop11.wav": [
+            3.41,
+            3.35
+          ],
+          "Loop12.wav": [
+            3.48,
+            3.47
+          ],
+          "Loop13.wav": [
+            3.41,
+            3.25
+          ],
+          "Loop14.wav": [
+            2.99,
+            2.97
+          ],
+          "Loop15.wav": [
+            2.5,
+            2.49
+          ],
+          "Loop16.wav": [
+            2.46,
+            2.46
+          ],
+          "Loop17.wav": [
+            2.82,
+            2.82
+          ],
+          "Loop18.wav": [
+            3.35,
+            3.35
+          ],
+          "Loop19.wav": [
+            3.44,
+            3.44
+          ],
+          "Loop20.wav": [
+            4.33,
+            4.33
+          ],
+          "Loop21.wav": [
+            4.16,
+            4.16
+          ],
+          "Loop22.wav": [
+            4.43,
+            4.43
+          ],
+          "Loop23.wav": [
+            3.74,
+            3.74
+          ],
+          "Loop24.wav": [
+            2.57,
+            2.57
+          ],
+          "Loop25.wav": [
+            2.85,
+            2.84
+          ]
+        }
+      }
+    }
+  },
+  "wood_resonator_refinement": {
+    "source": "Roland TR-66 Service Notes, figures 10 and 19",
+    "method": "Fit a damped sinusoid to separated hits after the attack. Compare C renders before and after at fixed Balance after one Arrange cycle.",
+    "fit_columns": [
+      "frequency_hz",
+      "decay_time_constant_ms"
+    ],
+    "synthesis": {
+      "rim": [
+        1525,
+        2.1
+      ],
+      "claves": [
+        2350,
+        4.75
+      ]
+    },
+    "capture": {
+      "rim": [
+        1513,
+        2.09
+      ],
+      "claves": [
+        2501,
+        4.7
+      ],
+      "hit_counts": [
+        4,
+        12
+      ]
+    },
+    "settled_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "settled_pack_median_db": [
+      3.09,
+      3.09
+    ],
+    "settled_loop_changes_db": {
+      "Loop16.wav": [
+        2.46,
+        2.45
+      ],
+      "Loop22.wav": [
+        4.43,
+        4.42
+      ]
+    }
   }
 }

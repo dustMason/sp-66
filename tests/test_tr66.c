@@ -43,7 +43,7 @@ static void test_all_voices(void)
     }
 }
 
-static void test_snare_noise_cutoff(void)
+static void test_snare_noise_envelope(void)
 {
     Tr66Patch noise = tr66_factory_voices[TR66_SNARE];
     memset(noise.tone, 0, sizeof(noise.tone));
@@ -51,6 +51,14 @@ static void test_snare_noise_cutoff(void)
     const unsigned frames = sizeof(samples) / sizeof(samples[0]);
     const unsigned late = RATE / 10;
     tr66_render_hit(&noise, RATE, 179, samples, frames);
+    /* The noise has reached most of its body level within 6 ms. */
+    const unsigned per_ms = RATE / 1000;
+    float attack_power = 0.0f, body_power = 0.0f;
+    for (unsigned i = 3 * per_ms; i < 6 * per_ms; ++i)
+        attack_power += samples[i] * samples[i];
+    for (unsigned i = 12 * per_ms; i < 23 * per_ms; ++i)
+        body_power += samples[i] * samples[i];
+    assert(attack_power / 3 > 0.5f * body_power / 11);
     float peak = 0.0f;
     for (unsigned i = 0; i < late; ++i)
         peak = fmaxf(peak, fabsf(samples[i]));
@@ -100,20 +108,23 @@ static void test_shared_and_reduced_triggers(void)
     second = first;
     tr66_hit(&first, MASK(CYMBAL) | MASK(HAT));
     tr66_hit(&second, MASK(CYMBAL));
-    tr66_render(&first, a, BLOCK);
-    tr66_render(&second, b, BLOCK);
-    assert(memcmp(a, b, sizeof(a)) == 0);
+    assert(first.voices[TR66_HAT].frames_left == 0);
     float combined_power = 0.0f, cymbal_power = 0.0f;
-    for (unsigned frame = BLOCK; frame < RATE * 4 / 100; frame += BLOCK) {
+    for (unsigned frame = 0; frame < RATE; frame += BLOCK) {
         tr66_render(&first, a, BLOCK);
         tr66_render(&second, b, BLOCK);
-        if (frame >= RATE * 3 / 100)
+        if (frame >= RATE * 3 / 100 && frame < RATE * 4 / 100)
             for (unsigned i = 0; i < BLOCK; ++i) {
                 combined_power += a[i] * a[i];
                 cymbal_power += b[i] * b[i];
             }
     }
     assert(combined_power > 1.25f * cymbal_power);
+    tr66_hit(&first, MASK(CYMBAL));
+    tr66_hit(&second, MASK(CYMBAL));
+    tr66_render(&first, a, BLOCK);
+    tr66_render(&second, b, BLOCK);
+    assert(memcmp(a, b, sizeof(a)) == 0);
 }
 
 static void test_cymbal_extends_hat(void)
@@ -194,6 +205,91 @@ static void test_arrange_and_downbeat(void)
     tr66_seq_render(&seq, buffer, 1);
     assert(seq.selection.rhythm == TR66_OFF && seq.fill && seq.bar_ticks == 96);
     assert(trace.frame[7] == 144000);
+}
+
+static void test_arrange_pickups(void)
+{
+    const uint16_t kick_snare = MASK(KICK) | MASK(SNARE);
+    const uint16_t kick_hat = MASK(KICK) | MASK(HAT);
+    const uint16_t snare_cymbal = MASK(SNARE) | MASK(CYMBAL);
+    const struct {
+        enum Tr66PatternId rhythm, variation;
+        unsigned beats;
+        uint16_t downbeat, auto_pickup, b_pickup;
+    } cases[] = {
+        {TR66_JAZZ_WALTZ, TR66_OFF, 3, MASK(KICK) | MASK(CYMBAL), MASK(SNARE), MASK(SNARE)},
+        {TR66_OFF, TR66_BASS_SNARE_2, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
+        {TR66_OFF, TR66_FOXTROT_1, 4, kick_hat, snare_cymbal, snare_cymbal},
+        {TR66_OFF, TR66_HABANERA, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
+        {TR66_OFF, TR66_BASS_SNARE_4, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
+        {TR66_OFF, TR66_FOXTROT_2, 4, kick_hat, 0, snare_cymbal},
+        {TR66_OFF, TR66_TANGO, 4, kick_hat, snare_cymbal, snare_cymbal},
+    };
+    for (unsigned i = 0; i < sizeof(cases) / sizeof(cases[0]); ++i) {
+        const unsigned bar_frames = cases[i].beats * RATE / 2;
+        for (enum Tr66Arrange mode = TR66_ARRANGE_A; mode <= TR66_ARRANGE_B; ++mode) {
+            Tr66Sequencer seq;
+            Trace trace = {0};
+            tr66_seq_init(&seq, RATE, 11);
+            seq.listener = record;
+            seq.listener_context = &trace;
+            assert(tr66_seq_select(&seq, (Tr66Selection){cases[i].rhythm, cases[i].variation, mode}));
+            tr66_seq_start(&seq);
+            float buffer[BLOCK];
+            for (unsigned frame = 0; frame < 4 * bar_frames; frame += BLOCK)
+                tr66_seq_render(&seq, buffer, BLOCK);
+            tr66_seq_render(&seq, buffer, 1);
+
+            unsigned downbeats = 0;
+            for (unsigned j = 0; j < trace.count; ++j) {
+                if (trace.frame[j] % bar_frames != 0)
+                    continue;
+                const unsigned bar = (unsigned)(trace.frame[j] / bar_frames);
+                uint16_t expected = cases[i].downbeat;
+                if (mode == TR66_ARRANGE_AUTO && bar % 4 == 0)
+                    expected |= cases[i].auto_pickup;
+                if (mode == TR66_ARRANGE_B && bar % 2 == 0)
+                    expected |= cases[i].b_pickup;
+                assert(bar == downbeats && trace.mask[j] == expected);
+                ++downbeats;
+            }
+            assert(downbeats == 5);
+        }
+    }
+}
+
+static void test_slow_rock_rock6_layer(void)
+{
+    const uint16_t y = MASK(CYMBAL), ky = MASK(KICK) | y;
+    const uint16_t sy = MASK(SNARE) | y, khy = ky | MASK(HAT);
+    /* Service Notes figures 13 and 15–17. Each 12-pulse bar reads
+     * matrix counts 0–5 and 8–13. Pulse numbers below run across bars. */
+    const struct {
+        unsigned pulse;
+        uint16_t voices;
+    } expected[] = {
+        {0, ky}, {2, y}, {4, khy}, {6, sy}, {8, y}, {10, khy},
+        {12, ky}, {14, sy}, {16, khy}, {18, sy}, {20, y}, {22, khy},
+        {24, ky}, {26, y}, {28, khy}, {30, sy}, {32, y}, {34, khy},
+        {36, ky}, {38, sy}, {39, y}, {40, khy}, {42, sy},
+        {44, TR66_QUIET_KICK | y}, {46, khy},
+    };
+
+    Tr66Sequencer seq;
+    Trace trace = {0};
+    tr66_seq_init(&seq, RATE, 5);
+    seq.listener = record;
+    seq.listener_context = &trace;
+    assert(tr66_seq_select(&seq, (Tr66Selection){TR66_SLOW_ROCK, TR66_ROCK_6, TR66_ARRANGE_AUTO}));
+    tr66_seq_start(&seq);
+    float buffer[BLOCK];
+    for (unsigned frame = 0; frame < 4 * 72000; frame += BLOCK)
+        tr66_seq_render(&seq, buffer, BLOCK);
+    assert(trace.count == sizeof(expected) / sizeof(expected[0]));
+    for (unsigned i = 0; i < trace.count; ++i) {
+        assert(trace.frame[i] == expected[i].pulse * (RATE / 8));
+        assert(trace.mask[i] == expected[i].voices);
+    }
 }
 
 static void test_split_blocks(void)
@@ -323,11 +419,13 @@ static void test_controls(void)
 int main(void)
 {
     test_all_voices();
-    test_snare_noise_cutoff();
+    test_snare_noise_envelope();
     test_shared_and_reduced_triggers();
     test_cymbal_extends_hat();
     test_callbacks();
     test_arrange_and_downbeat();
+    test_arrange_pickups();
+    test_slow_rock_rock6_layer();
     test_split_blocks();
     test_layered_headroom();
     test_score_table();

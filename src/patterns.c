@@ -37,9 +37,6 @@ static const Tr66Event waltz_fill[] = {
 static const Tr66Event jazz_waltz_a1[] = {
     {0, K | Y}, {24, S | Y}, {42, Y}, {48, S | Y},
 };
-static const Tr66Event jazz_waltz_b1[] = {
-    {0, K | S | Y}, {24, S | Y}, {42, Y}, {48, S | Y},
-};
 static const Tr66Event jazz_waltz_b2[] = {
     {0, K | Y}, {24, S | Y}, {42, S | Y}, {48, S | Y},
 };
@@ -191,13 +188,11 @@ static const Tr66Event rock6_b2[] = {
 };
 
 static const Tr66Event bass_snare_2_a[] = {{0, K | S}, {48, K | S}};
-static const Tr66Event bass_snare_2_b1[] = {{0, K | S | Y}, {48, K | S}};
 static const Tr66Event bass_snare_2_b2[] = {
-    {0, K | S}, {36, Y}, {48, K | S | Y}, {60, Y}, {84, Y},
+    {0, K | S}, {42, Y}, {48, K | S | Y}, {60, Y}, {84, Y},
 };
 
 static const Tr66Event foxtrot_1_a[] = {{0, K | H}, {24, S | Y}, {48, K | H}, {72, S | Y}};
-static const Tr66Event foxtrot_1_b1[] = {{0, K | H | S}, {24, S | Y}, {48, K | H}, {72, S | Y}};
 static const Tr66Event foxtrot_1_b2[] = {
     {0, K | H}, {24, S | Y}, {42, S | Y}, {48, K | H | S | Y},
     {60, S | Y}, {72, S | Y}, {84, S | Y},
@@ -224,13 +219,11 @@ static const Tr66Event parade_b2[] = {
 };
 
 static const Tr66Event habanera_a[] = {{0, K | S}, {36, S}, {48, K | S}, {72, S}};
-static const Tr66Event habanera_b1[] = {{0, K | S | Y}, {36, S}, {48, K | S}, {72, S}};
 static const Tr66Event habanera_b2[] = {
     {0, K | S}, {12, S}, {36, S}, {42, Y}, {48, K | S | Y}, {60, Y}, {72, S}, {84, S | Y},
 };
 
 static const Tr66Event bass_snare_4_a[] = {{0, K | S}, {24, K | S}, {48, K | S}, {72, K | S}};
-static const Tr66Event bass_snare_4_b1[] = {{0, K | S | Y}, {24, K | S}, {48, K | S}, {72, K | S}};
 static const Tr66Event bass_snare_4_b2[] = {
     {0, K | S}, {24, K | S}, {42, Y}, {48, K | S | Y}, {60, Y}, {72, K | S}, {84, Y},
 };
@@ -247,7 +240,7 @@ static const Tr66Event swing_2_a[] = {
     {0, K | Y}, {24, K | H}, {42, H}, {48, K | Y}, {72, K | H}, {90, H},
 };
 static const Tr66Event swing_2_b2[] = {
-    {0, K | Y}, {24, K | H}, {42, H}, {48, K | Y}, {60, Y}, {72, K | H}, {84, Y}, {90, H},
+    {0, K | Y}, {24, K | H}, {42, H | Y}, {48, K | Y}, {60, Y}, {72, K | H}, {84, Y}, {90, H},
 };
 
 static const Tr66Event swing_3_a[] = {
@@ -269,9 +262,6 @@ static const Tr66Event shuffle_b2[] = {
 static const Tr66Event tango_a[] = {
     {0, K | H}, {24, K | H}, {48, K | H}, {72, K | H}, {84, S | Y},
 };
-static const Tr66Event tango_b1[] = {
-    {0, K | H | S | Y}, {24, K | H}, {48, K | H}, {72, K | H}, {84, S | Y},
-};
 static const Tr66Event tango_b2[] = {
     {0, K | H}, {24, K | H}, {42, S | Y}, {48, K | H | S | Y},
     {60, S | Y}, {72, K | H}, {84, S | Y},
@@ -283,8 +273,8 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
         .ticks = 72,
     },
     [TR66_JAZZ_WALTZ] = {
-        .bars = {BAR(jazz_waltz_a1), BAR(jazz_waltz_a1), BAR(jazz_waltz_b1), BAR(jazz_waltz_b2)},
-        .auto_pickup = S, .ticks = 72,
+        .bars = {BAR(jazz_waltz_a1), BAR(jazz_waltz_a1), BAR(jazz_waltz_a1), BAR(jazz_waltz_b2)},
+        .auto_pickup = S, .b_pickup = S, .ticks = 72,
     },
     [TR66_SLOW_ROCK] = {
         .bars = {BAR(slow_rock_a), BAR(slow_rock_a), BAR(slow_rock_a), BAR(slow_rock_b2)},
@@ -339,12 +329,12 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
         .ticks = 96,
     },
     [TR66_BASS_SNARE_2] = {
-        .bars = {BAR(bass_snare_2_a), BAR(bass_snare_2_a), BAR(bass_snare_2_b1), BAR(bass_snare_2_b2)},
-        .auto_pickup = Y, .ticks = 96,
+        .bars = {BAR(bass_snare_2_a), BAR(bass_snare_2_a), BAR(bass_snare_2_a), BAR(bass_snare_2_b2)},
+        .auto_pickup = Y, .b_pickup = Y, .ticks = 96,
     },
     [TR66_FOXTROT_1] = {
-        .bars = {BAR(foxtrot_1_a), BAR(foxtrot_1_a), BAR(foxtrot_1_b1), BAR(foxtrot_1_b2)},
-        .auto_pickup = S, .ticks = 96,
+        .bars = {BAR(foxtrot_1_a), BAR(foxtrot_1_a), BAR(foxtrot_1_a), BAR(foxtrot_1_b2)},
+        .auto_pickup = S | Y, .b_pickup = S | Y, .ticks = 96,
     },
     [TR66_SWING_1] = {
         .bars = {BAR(swing_1_a), BAR(swing_1_a), BAR(swing_1_a), BAR(swing_1_b2)},
@@ -359,16 +349,16 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
         .ticks = 96,
     },
     [TR66_HABANERA] = {
-        .bars = {BAR(habanera_a), BAR(habanera_a), BAR(habanera_b1), BAR(habanera_b2)},
-        .auto_pickup = Y, .ticks = 96,
+        .bars = {BAR(habanera_a), BAR(habanera_a), BAR(habanera_a), BAR(habanera_b2)},
+        .auto_pickup = Y, .b_pickup = Y, .ticks = 96,
     },
     [TR66_BASS_SNARE_4] = {
-        .bars = {BAR(bass_snare_4_a), BAR(bass_snare_4_a), BAR(bass_snare_4_b1), BAR(bass_snare_4_b2)},
-        .auto_pickup = Y, .ticks = 96,
+        .bars = {BAR(bass_snare_4_a), BAR(bass_snare_4_a), BAR(bass_snare_4_a), BAR(bass_snare_4_b2)},
+        .auto_pickup = Y, .b_pickup = Y, .ticks = 96,
     },
     [TR66_FOXTROT_2] = {
         .bars = {BAR(foxtrot_2_a), BAR(foxtrot_2_a), BAR(foxtrot_2_a), BAR(foxtrot_2_b2)},
-        .ticks = 96,
+        .b_pickup = S | Y, .ticks = 96,
     },
     [TR66_SWING_2] = {
         .bars = {BAR(swing_2_a), BAR(swing_2_a), BAR(swing_2_a), BAR(swing_2_b2)},
@@ -383,7 +373,7 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
         .ticks = 96,
     },
     [TR66_TANGO] = {
-        .bars = {BAR(tango_a), BAR(tango_a), BAR(tango_b1), BAR(tango_b2)},
-        .auto_pickup = S | Y, .ticks = 96,
+        .bars = {BAR(tango_a), BAR(tango_a), BAR(tango_a), BAR(tango_b2)},
+        .auto_pickup = S | Y, .b_pickup = S | Y, .ticks = 96,
     },
 };

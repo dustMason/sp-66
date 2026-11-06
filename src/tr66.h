@@ -78,6 +78,7 @@ typedef struct {
 
 typedef struct {
     Tr66VoiceState voices[TR66_VOICE_COUNT];
+    float cymbal_first_band_sweep;
     unsigned cymbal_extra_hold_frames;
     uint32_t cymbal_age;
     uint32_t random;

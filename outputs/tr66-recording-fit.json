@@ -23,13 +23,13 @@
       "capture_samples_at_pcm_limit": 137,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 546,
-      "spectral_error_db": 3.32,
-      "unclipped_error_db": 2.88,
+      "spectral_error_db": 3.37,
+      "unclipped_error_db": 2.95,
       "before_db": 9.78,
       "before_unclipped_db": 10.52,
       "pre_ringdown_unclipped_db": 3.19,
       "pre_transient_pass_unclipped_db": 3.2,
-      "fitted_balance_error_db": 2.81,
+      "fitted_balance_error_db": 2.78,
       "pre_noise_pulse_error_db": 3.21,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 3.21,
@@ -41,7 +41,13 @@
       "pre_latin_percussion_error_db": 3.14,
       "pre_latin_percussion_fitted_balance_error_db": 3.41,
       "pre_cymbal_history_error_db": 3.04,
-      "pre_cymbal_history_fitted_balance_error_db": 2.99
+      "pre_cymbal_history_fitted_balance_error_db": 2.99,
+      "pre_coincident_gate_error_db": 2.88,
+      "pre_coincident_gate_fitted_balance_error_db": 2.81,
+      "pre_snare_gate_error_db": 2.94,
+      "pre_snare_gate_fitted_balance_error_db": 2.76,
+      "pre_wood_resonator_error_db": 2.94,
+      "pre_wood_resonator_fitted_balance_error_db": 2.76
     },
     "BOSSANOVA": {
       "selection": [
@@ -58,13 +64,13 @@
       "capture_samples_at_pcm_limit": 2857,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 491,
-      "spectral_error_db": 8.6,
-      "unclipped_error_db": 4.22,
+      "spectral_error_db": 8.67,
+      "unclipped_error_db": 4.31,
       "before_db": 9.4,
       "before_unclipped_db": 5.82,
       "pre_ringdown_unclipped_db": 4.18,
       "pre_transient_pass_unclipped_db": 4.14,
-      "fitted_balance_error_db": 4.15,
+      "fitted_balance_error_db": 3.99,
       "pre_noise_pulse_error_db": 4.14,
       "pre_noise_pulse_fitted_balance_error_db": 4.36,
       "pre_noise_envelope_error_db": 4.13,
@@ -76,7 +82,13 @@
       "pre_latin_percussion_error_db": 3.93,
       "pre_latin_percussion_fitted_balance_error_db": 4.4,
       "pre_cymbal_history_error_db": 3.7,
-      "pre_cymbal_history_fitted_balance_error_db": 3.82
+      "pre_cymbal_history_fitted_balance_error_db": 3.82,
+      "pre_coincident_gate_error_db": 4.22,
+      "pre_coincident_gate_fitted_balance_error_db": 4.15,
+      "pre_snare_gate_error_db": 4.32,
+      "pre_snare_gate_fitted_balance_error_db": 3.99,
+      "pre_wood_resonator_error_db": 4.32,
+      "pre_wood_resonator_fitted_balance_error_db": 3.99
     },
     "CHA-CHA": {
       "selection": [
@@ -111,7 +123,11 @@
       "pre_latin_percussion_error_db": 2.81,
       "pre_latin_percussion_fitted_balance_error_db": 2.76,
       "pre_cymbal_history_error_db": 2.81,
-      "pre_cymbal_history_fitted_balance_error_db": 2.76
+      "pre_cymbal_history_fitted_balance_error_db": 2.76,
+      "pre_coincident_gate_error_db": 2.8,
+      "pre_coincident_gate_fitted_balance_error_db": 2.82,
+      "pre_snare_gate_error_db": 2.8,
+      "pre_snare_gate_fitted_balance_error_db": 2.82
     },
     "J-WALTZ": {
       "selection": [
@@ -128,13 +144,13 @@
       "capture_samples_at_pcm_limit": 2769,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 363,
-      "spectral_error_db": 3.09,
-      "unclipped_error_db": 2.28,
+      "spectral_error_db": 2.92,
+      "unclipped_error_db": 2.21,
       "before_db": 6.28,
       "before_unclipped_db": 6.9,
       "pre_ringdown_unclipped_db": 3.71,
       "pre_transient_pass_unclipped_db": 3.3,
-      "fitted_balance_error_db": 2.39,
+      "fitted_balance_error_db": 2.28,
       "pre_noise_pulse_error_db": 3.27,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 3.12,
@@ -146,7 +162,13 @@
       "pre_latin_percussion_error_db": 2.28,
       "pre_latin_percussion_fitted_balance_error_db": 2.39,
       "pre_cymbal_history_error_db": 2.28,
-      "pre_cymbal_history_fitted_balance_error_db": 2.39
+      "pre_cymbal_history_fitted_balance_error_db": 2.39,
+      "pre_coincident_gate_error_db": 2.28,
+      "pre_coincident_gate_fitted_balance_error_db": 2.39,
+      "pre_snare_gate_error_db": 2.28,
+      "pre_snare_gate_fitted_balance_error_db": 2.39,
+      "pre_arrange_timing_error_db": 2.25,
+      "pre_arrange_timing_fitted_balance_error_db": 2.32
     },
     "MAMBO": {
       "selection": [
@@ -181,7 +203,11 @@
       "pre_latin_percussion_error_db": 2.58,
       "pre_latin_percussion_fitted_balance_error_db": 2.44,
       "pre_cymbal_history_error_db": 2.66,
-      "pre_cymbal_history_fitted_balance_error_db": 2.48
+      "pre_cymbal_history_fitted_balance_error_db": 2.48,
+      "pre_coincident_gate_error_db": 2.61,
+      "pre_coincident_gate_fitted_balance_error_db": 2.5,
+      "pre_snare_gate_error_db": 2.61,
+      "pre_snare_gate_fitted_balance_error_db": 2.5
     },
     "RHUMBA": {
       "selection": [
@@ -198,13 +224,13 @@
       "capture_samples_at_pcm_limit": 846,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 513,
-      "spectral_error_db": 3.78,
-      "unclipped_error_db": 2.84,
+      "spectral_error_db": 3.75,
+      "unclipped_error_db": 2.86,
       "before_db": 6.85,
       "before_unclipped_db": 7.77,
       "pre_ringdown_unclipped_db": 3.76,
       "pre_transient_pass_unclipped_db": 3.65,
-      "fitted_balance_error_db": 2.45,
+      "fitted_balance_error_db": 2.46,
       "pre_noise_pulse_error_db": 3.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.02,
       "pre_noise_envelope_error_db": 3.6,
@@ -216,7 +242,13 @@
       "pre_latin_percussion_error_db": 3.6,
       "pre_latin_percussion_fitted_balance_error_db": 3.02,
       "pre_cymbal_history_error_db": 2.9,
-      "pre_cymbal_history_fitted_balance_error_db": 2.44
+      "pre_cymbal_history_fitted_balance_error_db": 2.44,
+      "pre_coincident_gate_error_db": 2.84,
+      "pre_coincident_gate_fitted_balance_error_db": 2.45,
+      "pre_snare_gate_error_db": 2.84,
+      "pre_snare_gate_fitted_balance_error_db": 2.45,
+      "pre_wood_resonator_error_db": 2.84,
+      "pre_wood_resonator_fitted_balance_error_db": 2.45
     },
     "S-ROCK": {
       "selection": [
@@ -233,13 +265,13 @@
       "capture_samples_at_pcm_limit": 4423,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 363,
-      "spectral_error_db": 3.49,
-      "unclipped_error_db": 2.72,
+      "spectral_error_db": 3.48,
+      "unclipped_error_db": 2.71,
       "before_db": 20.34,
       "before_unclipped_db": 17.42,
       "pre_ringdown_unclipped_db": 3.35,
       "pre_transient_pass_unclipped_db": 3.19,
-      "fitted_balance_error_db": 2.01,
+      "fitted_balance_error_db": 1.99,
       "pre_noise_pulse_error_db": 3.68,
       "pre_noise_pulse_fitted_balance_error_db": 3.06,
       "pre_noise_envelope_error_db": 3.48,
@@ -251,7 +283,11 @@
       "pre_latin_percussion_error_db": 2.72,
       "pre_latin_percussion_fitted_balance_error_db": 2.01,
       "pre_cymbal_history_error_db": 2.72,
-      "pre_cymbal_history_fitted_balance_error_db": 2.01
+      "pre_cymbal_history_fitted_balance_error_db": 2.01,
+      "pre_coincident_gate_error_db": 2.72,
+      "pre_coincident_gate_fitted_balance_error_db": 2.01,
+      "pre_snare_gate_error_db": 2.72,
+      "pre_snare_gate_fitted_balance_error_db": 2.01
     },
     "SAMBA": {
       "selection": [
@@ -268,13 +304,13 @@
       "capture_samples_at_pcm_limit": 88,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 257,
-      "spectral_error_db": 3.53,
-      "unclipped_error_db": 3.96,
+      "spectral_error_db": 3.61,
+      "unclipped_error_db": 3.95,
       "before_db": 16.36,
       "before_unclipped_db": 18.06,
       "pre_ringdown_unclipped_db": 3.42,
       "pre_transient_pass_unclipped_db": 3.51,
-      "fitted_balance_error_db": 4.05,
+      "fitted_balance_error_db": 3.91,
       "pre_noise_pulse_error_db": 3.54,
       "pre_noise_pulse_fitted_balance_error_db": 3.81,
       "pre_noise_envelope_error_db": 3.46,
@@ -286,7 +322,11 @@
       "pre_latin_percussion_error_db": 3.19,
       "pre_latin_percussion_fitted_balance_error_db": 3.65,
       "pre_cymbal_history_error_db": 2.72,
-      "pre_cymbal_history_fitted_balance_error_db": 2.98
+      "pre_cymbal_history_fitted_balance_error_db": 2.98,
+      "pre_coincident_gate_error_db": 3.96,
+      "pre_coincident_gate_fitted_balance_error_db": 4.05,
+      "pre_snare_gate_error_db": 3.95,
+      "pre_snare_gate_fitted_balance_error_db": 3.91
     },
     "WALTZ": {
       "selection": [
@@ -303,13 +343,13 @@
       "capture_samples_at_pcm_limit": 2799,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 368,
-      "spectral_error_db": 3.8,
-      "unclipped_error_db": 3.81,
+      "spectral_error_db": 3.78,
+      "unclipped_error_db": 3.79,
       "before_db": 6.09,
       "before_unclipped_db": 7.07,
       "pre_ringdown_unclipped_db": 5.06,
       "pre_transient_pass_unclipped_db": 4.38,
-      "fitted_balance_error_db": 4.7,
+      "fitted_balance_error_db": 4.69,
       "pre_noise_pulse_error_db": 4.36,
       "pre_noise_pulse_fitted_balance_error_db": 5.11,
       "pre_noise_envelope_error_db": 4.36,
@@ -321,7 +361,11 @@
       "pre_latin_percussion_error_db": 3.81,
       "pre_latin_percussion_fitted_balance_error_db": 4.7,
       "pre_cymbal_history_error_db": 3.81,
-      "pre_cymbal_history_fitted_balance_error_db": 4.7
+      "pre_cymbal_history_fitted_balance_error_db": 4.7,
+      "pre_coincident_gate_error_db": 3.81,
+      "pre_coincident_gate_fitted_balance_error_db": 4.7,
+      "pre_snare_gate_error_db": 3.81,
+      "pre_snare_gate_fitted_balance_error_db": 4.7
     },
     "HABANERA": {
       "selection": [
@@ -338,13 +382,13 @@
       "capture_samples_at_pcm_limit": 4,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 148,
-      "spectral_error_db": 2.67,
-      "unclipped_error_db": 2.94,
+      "spectral_error_db": 2.65,
+      "unclipped_error_db": 2.92,
       "before_db": 13.2,
       "before_unclipped_db": 17.49,
       "pre_ringdown_unclipped_db": 4.62,
       "pre_transient_pass_unclipped_db": 4.37,
-      "fitted_balance_error_db": 3.03,
+      "fitted_balance_error_db": 3.0,
       "pre_noise_pulse_error_db": 3.55,
       "pre_noise_pulse_fitted_balance_error_db": 3.6,
       "pre_noise_envelope_error_db": 3.55,
@@ -356,7 +400,11 @@
       "pre_latin_percussion_error_db": 2.94,
       "pre_latin_percussion_fitted_balance_error_db": 3.03,
       "pre_cymbal_history_error_db": 2.94,
-      "pre_cymbal_history_fitted_balance_error_db": 3.03
+      "pre_cymbal_history_fitted_balance_error_db": 3.03,
+      "pre_coincident_gate_error_db": 2.94,
+      "pre_coincident_gate_fitted_balance_error_db": 3.03,
+      "pre_snare_gate_error_db": 2.94,
+      "pre_snare_gate_fitted_balance_error_db": 3.03
     },
     "MARCH": {
       "selection": [
@@ -373,13 +421,13 @@
       "capture_samples_at_pcm_limit": 0,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 154,
-      "spectral_error_db": 3.41,
-      "unclipped_error_db": 3.41,
+      "spectral_error_db": 3.4,
+      "unclipped_error_db": 3.4,
       "before_db": 5.08,
       "before_unclipped_db": 5.08,
       "pre_ringdown_unclipped_db": 4.25,
       "pre_transient_pass_unclipped_db": 4.07,
-      "fitted_balance_error_db": 2.69,
+      "fitted_balance_error_db": 2.65,
       "pre_noise_pulse_error_db": 3.66,
       "pre_noise_pulse_fitted_balance_error_db": 2.95,
       "pre_noise_envelope_error_db": 3.67,
@@ -391,7 +439,11 @@
       "pre_latin_percussion_error_db": 3.41,
       "pre_latin_percussion_fitted_balance_error_db": 2.69,
       "pre_cymbal_history_error_db": 3.41,
-      "pre_cymbal_history_fitted_balance_error_db": 2.69
+      "pre_cymbal_history_fitted_balance_error_db": 2.69,
+      "pre_coincident_gate_error_db": 3.41,
+      "pre_coincident_gate_fitted_balance_error_db": 2.69,
+      "pre_snare_gate_error_db": 3.41,
+      "pre_snare_gate_fitted_balance_error_db": 2.69
     },
     "PARADE": {
       "selection": [
@@ -408,13 +460,13 @@
       "capture_samples_at_pcm_limit": 4,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 318,
-      "spectral_error_db": 2.89,
-      "unclipped_error_db": 2.89,
+      "spectral_error_db": 2.87,
+      "unclipped_error_db": 2.87,
       "before_db": 8.33,
       "before_unclipped_db": 8.33,
       "pre_ringdown_unclipped_db": 3.79,
       "pre_transient_pass_unclipped_db": 3.59,
-      "fitted_balance_error_db": 2.19,
+      "fitted_balance_error_db": 2.15,
       "pre_noise_pulse_error_db": 3.2,
       "pre_noise_pulse_fitted_balance_error_db": 2.55,
       "pre_noise_envelope_error_db": 3.18,
@@ -426,7 +478,11 @@
       "pre_latin_percussion_error_db": 2.89,
       "pre_latin_percussion_fitted_balance_error_db": 2.19,
       "pre_cymbal_history_error_db": 2.89,
-      "pre_cymbal_history_fitted_balance_error_db": 2.19
+      "pre_cymbal_history_fitted_balance_error_db": 2.19,
+      "pre_coincident_gate_error_db": 2.89,
+      "pre_coincident_gate_fitted_balance_error_db": 2.19,
+      "pre_snare_gate_error_db": 2.89,
+      "pre_snare_gate_fitted_balance_error_db": 2.19
     },
     "ROCK1A": {
       "selection": [
@@ -443,13 +499,13 @@
       "capture_samples_at_pcm_limit": 51,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 145,
-      "spectral_error_db": 2.42,
-      "unclipped_error_db": 2.22,
+      "spectral_error_db": 2.48,
+      "unclipped_error_db": 2.24,
       "before_db": 5.32,
       "before_unclipped_db": 6.14,
       "pre_ringdown_unclipped_db": 3.45,
       "pre_transient_pass_unclipped_db": 3.42,
-      "fitted_balance_error_db": 2.14,
+      "fitted_balance_error_db": 2.02,
       "pre_noise_pulse_error_db": 3.06,
       "pre_noise_pulse_fitted_balance_error_db": 2.83,
       "pre_noise_envelope_error_db": 2.98,
@@ -461,7 +517,11 @@
       "pre_latin_percussion_error_db": 2.22,
       "pre_latin_percussion_fitted_balance_error_db": 2.14,
       "pre_cymbal_history_error_db": 2.22,
-      "pre_cymbal_history_fitted_balance_error_db": 2.14
+      "pre_cymbal_history_fitted_balance_error_db": 2.14,
+      "pre_coincident_gate_error_db": 2.22,
+      "pre_coincident_gate_fitted_balance_error_db": 2.14,
+      "pre_snare_gate_error_db": 2.3,
+      "pre_snare_gate_fitted_balance_error_db": 2.08
     },
     "ROCK2A": {
       "selection": [
@@ -478,13 +538,13 @@
       "capture_samples_at_pcm_limit": 5,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 150,
-      "spectral_error_db": 2.43,
-      "unclipped_error_db": 2.41,
+      "spectral_error_db": 2.51,
+      "unclipped_error_db": 2.48,
       "before_db": 5.48,
       "before_unclipped_db": 6.46,
       "pre_ringdown_unclipped_db": 3.51,
       "pre_transient_pass_unclipped_db": 3.46,
-      "fitted_balance_error_db": 2.06,
+      "fitted_balance_error_db": 1.98,
       "pre_noise_pulse_error_db": 3.15,
       "pre_noise_pulse_fitted_balance_error_db": 2.74,
       "pre_noise_envelope_error_db": 3.14,
@@ -496,7 +556,11 @@
       "pre_latin_percussion_error_db": 2.41,
       "pre_latin_percussion_fitted_balance_error_db": 2.06,
       "pre_cymbal_history_error_db": 2.41,
-      "pre_cymbal_history_fitted_balance_error_db": 2.06
+      "pre_cymbal_history_fitted_balance_error_db": 2.06,
+      "pre_coincident_gate_error_db": 2.41,
+      "pre_coincident_gate_fitted_balance_error_db": 2.06,
+      "pre_snare_gate_error_db": 2.52,
+      "pre_snare_gate_fitted_balance_error_db": 2.02
     },
     "ROCK3A": {
       "selection": [
@@ -513,13 +577,13 @@
       "capture_samples_at_pcm_limit": 150,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 149,
-      "spectral_error_db": 2.51,
-      "unclipped_error_db": 2.47,
+      "spectral_error_db": 2.59,
+      "unclipped_error_db": 2.54,
       "before_db": 5.48,
       "before_unclipped_db": 6.38,
       "pre_ringdown_unclipped_db": 3.59,
       "pre_transient_pass_unclipped_db": 3.57,
-      "fitted_balance_error_db": 2.04,
+      "fitted_balance_error_db": 1.94,
       "pre_noise_pulse_error_db": 3.27,
       "pre_noise_pulse_fitted_balance_error_db": 2.77,
       "pre_noise_envelope_error_db": 3.23,
@@ -531,7 +595,11 @@
       "pre_latin_percussion_error_db": 2.47,
       "pre_latin_percussion_fitted_balance_error_db": 2.04,
       "pre_cymbal_history_error_db": 2.47,
-      "pre_cymbal_history_fitted_balance_error_db": 2.04
+      "pre_cymbal_history_fitted_balance_error_db": 2.04,
+      "pre_coincident_gate_error_db": 2.47,
+      "pre_coincident_gate_fitted_balance_error_db": 2.04,
+      "pre_snare_gate_error_db": 2.57,
+      "pre_snare_gate_fitted_balance_error_db": 1.99
     },
     "ROCK4A": {
       "selection": [
@@ -548,13 +616,13 @@
       "capture_samples_at_pcm_limit": 110,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 302,
-      "spectral_error_db": 2.66,
-      "unclipped_error_db": 2.47,
+      "spectral_error_db": 2.7,
+      "unclipped_error_db": 2.5,
       "before_db": 5.46,
       "before_unclipped_db": 5.58,
       "pre_ringdown_unclipped_db": 3.54,
       "pre_transient_pass_unclipped_db": 3.47,
-      "fitted_balance_error_db": 2.15,
+      "fitted_balance_error_db": 2.02,
       "pre_noise_pulse_error_db": 3.07,
       "pre_noise_pulse_fitted_balance_error_db": 2.57,
       "pre_noise_envelope_error_db": 3.04,
@@ -566,7 +634,11 @@
       "pre_latin_percussion_error_db": 2.47,
       "pre_latin_percussion_fitted_balance_error_db": 2.15,
       "pre_cymbal_history_error_db": 2.47,
-      "pre_cymbal_history_fitted_balance_error_db": 2.15
+      "pre_cymbal_history_fitted_balance_error_db": 2.15,
+      "pre_coincident_gate_error_db": 2.47,
+      "pre_coincident_gate_fitted_balance_error_db": 2.15,
+      "pre_snare_gate_error_db": 2.55,
+      "pre_snare_gate_fitted_balance_error_db": 2.08
     },
     "ROCK5A": {
       "selection": [
@@ -583,13 +655,13 @@
       "capture_samples_at_pcm_limit": 7,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 150,
-      "spectral_error_db": 2.42,
-      "unclipped_error_db": 2.33,
+      "spectral_error_db": 2.48,
+      "unclipped_error_db": 2.38,
       "before_db": 5.12,
       "before_unclipped_db": 5.19,
       "pre_ringdown_unclipped_db": 3.43,
       "pre_transient_pass_unclipped_db": 3.13,
-      "fitted_balance_error_db": 2.29,
+      "fitted_balance_error_db": 2.2,
       "pre_noise_pulse_error_db": 2.91,
       "pre_noise_pulse_fitted_balance_error_db": 2.69,
       "pre_noise_envelope_error_db": 2.9,
@@ -601,7 +673,11 @@
       "pre_latin_percussion_error_db": 2.33,
       "pre_latin_percussion_fitted_balance_error_db": 2.29,
       "pre_cymbal_history_error_db": 2.33,
-      "pre_cymbal_history_fitted_balance_error_db": 2.29
+      "pre_cymbal_history_fitted_balance_error_db": 2.29,
+      "pre_coincident_gate_error_db": 2.33,
+      "pre_coincident_gate_fitted_balance_error_db": 2.29,
+      "pre_snare_gate_error_db": 2.42,
+      "pre_snare_gate_fitted_balance_error_db": 2.22
     },
     "ROCK6": {
       "selection": [
@@ -618,13 +694,13 @@
       "capture_samples_at_pcm_limit": 221,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 297,
-      "spectral_error_db": 2.73,
-      "unclipped_error_db": 2.38,
+      "spectral_error_db": 2.82,
+      "unclipped_error_db": 2.42,
       "before_db": 5.37,
       "before_unclipped_db": 5.72,
       "pre_ringdown_unclipped_db": 3.52,
       "pre_transient_pass_unclipped_db": 3.57,
-      "fitted_balance_error_db": 2.11,
+      "fitted_balance_error_db": 1.99,
       "pre_noise_pulse_error_db": 3.19,
       "pre_noise_pulse_fitted_balance_error_db": 2.81,
       "pre_noise_envelope_error_db": 3.1,
@@ -636,7 +712,11 @@
       "pre_latin_percussion_error_db": 2.38,
       "pre_latin_percussion_fitted_balance_error_db": 2.11,
       "pre_cymbal_history_error_db": 2.38,
-      "pre_cymbal_history_fitted_balance_error_db": 2.11
+      "pre_cymbal_history_fitted_balance_error_db": 2.11,
+      "pre_coincident_gate_error_db": 2.38,
+      "pre_coincident_gate_fitted_balance_error_db": 2.11,
+      "pre_snare_gate_error_db": 2.45,
+      "pre_snare_gate_fitted_balance_error_db": 2.04
     },
     "SHUFFLE": {
       "selection": [
@@ -653,13 +733,13 @@
       "capture_samples_at_pcm_limit": 140,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 139,
-      "spectral_error_db": 2.6,
-      "unclipped_error_db": 2.58,
+      "spectral_error_db": 2.53,
+      "unclipped_error_db": 2.53,
       "before_db": 5.11,
       "before_unclipped_db": 5.7,
       "pre_ringdown_unclipped_db": 3.74,
       "pre_transient_pass_unclipped_db": 3.74,
-      "fitted_balance_error_db": 2.3,
+      "fitted_balance_error_db": 2.24,
       "pre_noise_pulse_error_db": 3.11,
       "pre_noise_pulse_fitted_balance_error_db": 2.71,
       "pre_noise_envelope_error_db": 3.08,
@@ -671,7 +751,11 @@
       "pre_latin_percussion_error_db": 2.58,
       "pre_latin_percussion_fitted_balance_error_db": 2.3,
       "pre_cymbal_history_error_db": 2.58,
-      "pre_cymbal_history_fitted_balance_error_db": 2.3
+      "pre_cymbal_history_fitted_balance_error_db": 2.3,
+      "pre_coincident_gate_error_db": 2.58,
+      "pre_coincident_gate_fitted_balance_error_db": 2.3,
+      "pre_snare_gate_error_db": 2.58,
+      "pre_snare_gate_fitted_balance_error_db": 2.3
     },
     "SWING1": {
       "selection": [
@@ -706,7 +790,11 @@
       "pre_latin_percussion_error_db": 3.37,
       "pre_latin_percussion_fitted_balance_error_db": 3.47,
       "pre_cymbal_history_error_db": 2.97,
-      "pre_cymbal_history_fitted_balance_error_db": 2.75
+      "pre_cymbal_history_fitted_balance_error_db": 2.75,
+      "pre_coincident_gate_error_db": 2.75,
+      "pre_coincident_gate_fitted_balance_error_db": 2.43,
+      "pre_snare_gate_error_db": 2.75,
+      "pre_snare_gate_fitted_balance_error_db": 2.43
     },
     "SWING2": {
       "selection": [
@@ -741,7 +829,11 @@
       "pre_latin_percussion_error_db": 3.03,
       "pre_latin_percussion_fitted_balance_error_db": 2.53,
       "pre_cymbal_history_error_db": 2.99,
-      "pre_cymbal_history_fitted_balance_error_db": 1.9
+      "pre_cymbal_history_fitted_balance_error_db": 1.9,
+      "pre_coincident_gate_error_db": 2.96,
+      "pre_coincident_gate_fitted_balance_error_db": 1.8,
+      "pre_snare_gate_error_db": 2.96,
+      "pre_snare_gate_fitted_balance_error_db": 1.8
     },
     "SWING3": {
       "selection": [
@@ -758,13 +850,13 @@
       "capture_samples_at_pcm_limit": 175,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 139,
-      "spectral_error_db": 2.8,
-      "unclipped_error_db": 2.55,
+      "spectral_error_db": 3.12,
+      "unclipped_error_db": 2.88,
       "before_db": 5.62,
       "before_unclipped_db": 5.97,
       "pre_ringdown_unclipped_db": 2.93,
       "pre_transient_pass_unclipped_db": 3.11,
-      "fitted_balance_error_db": 1.77,
+      "fitted_balance_error_db": 1.69,
       "pre_noise_pulse_error_db": 3.11,
       "pre_noise_pulse_fitted_balance_error_db": 2.46,
       "pre_noise_envelope_error_db": 3.11,
@@ -776,7 +868,11 @@
       "pre_latin_percussion_error_db": 2.55,
       "pre_latin_percussion_fitted_balance_error_db": 2.07,
       "pre_cymbal_history_error_db": 2.44,
-      "pre_cymbal_history_fitted_balance_error_db": 1.75
+      "pre_cymbal_history_fitted_balance_error_db": 1.75,
+      "pre_coincident_gate_error_db": 2.55,
+      "pre_coincident_gate_fitted_balance_error_db": 1.77,
+      "pre_snare_gate_error_db": 2.88,
+      "pre_snare_gate_fitted_balance_error_db": 1.69
     },
     "TANGO": {
       "selection": [
@@ -793,13 +889,13 @@
       "capture_samples_at_pcm_limit": 296,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 283,
-      "spectral_error_db": 3.95,
-      "unclipped_error_db": 4.19,
+      "spectral_error_db": 4.04,
+      "unclipped_error_db": 4.34,
       "before_db": 5.99,
       "before_unclipped_db": 5.73,
       "pre_ringdown_unclipped_db": 4.8,
       "pre_transient_pass_unclipped_db": 4.94,
-      "fitted_balance_error_db": 3.2,
+      "fitted_balance_error_db": 3.35,
       "pre_noise_pulse_error_db": 4.64,
       "pre_noise_pulse_fitted_balance_error_db": 3.78,
       "pre_noise_envelope_error_db": 4.64,
@@ -811,7 +907,11 @@
       "pre_latin_percussion_error_db": 4.11,
       "pre_latin_percussion_fitted_balance_error_db": 3.28,
       "pre_cymbal_history_error_db": 4.22,
-      "pre_cymbal_history_fitted_balance_error_db": 3.26
+      "pre_cymbal_history_fitted_balance_error_db": 3.26,
+      "pre_coincident_gate_error_db": 4.19,
+      "pre_coincident_gate_fitted_balance_error_db": 3.2,
+      "pre_snare_gate_error_db": 4.36,
+      "pre_snare_gate_fitted_balance_error_db": 3.37
     }
   },
   "voice_gains_from_full_mix": {
@@ -869,9 +969,9 @@
     "held out": {
       "count": 12,
       "before_db": 6.145,
-      "spectral_error_db": 3.245,
+      "spectral_error_db": 3.26,
       "before_unclipped_db": 6.69,
-      "unclipped_error_db": 2.775,
+      "unclipped_error_db": 2.84,
       "pre_ringdown_unclipped_db": 3.53,
       "pre_transient_pass_unclipped_db": 3.49,
       "pre_noise_pulse_error_db": 3.545,
@@ -879,12 +979,14 @@
       "pre_cymbal_sweep_error_db": 3.275,
       "pre_shared_gate_error_db": 2.875,
       "pre_latin_percussion_error_db": 2.875,
-      "pre_cymbal_history_error_db": 2.765
+      "pre_cymbal_history_error_db": 2.765,
+      "pre_coincident_gate_error_db": 2.775,
+      "pre_snare_gate_error_db": 2.84
     },
     "mix fit": {
       "count": 11,
       "before_db": 5.48,
-      "spectral_error_db": 2.89,
+      "spectral_error_db": 2.87,
       "before_unclipped_db": 6.14,
       "unclipped_error_db": 2.61,
       "pre_ringdown_unclipped_db": 3.59,
@@ -894,7 +996,9 @@
       "pre_cymbal_sweep_error_db": 3.06,
       "pre_shared_gate_error_db": 2.69,
       "pre_latin_percussion_error_db": 2.58,
-      "pre_cymbal_history_error_db": 2.66
+      "pre_cymbal_history_error_db": 2.66,
+      "pre_coincident_gate_error_db": 2.61,
+      "pre_snare_gate_error_db": 2.61
     }
   },
   "ringdown_refinement": {
@@ -981,7 +1085,7 @@
     "slow_rock_b_fill": {
       "bar_in_b": 2,
       "tick_in_bar_at_24_ppqn": 48,
-      "measure": "40\u2013135 Hz RMS measured 40\u2013110 ms after the extra kick, as a ratio to nearby full kicks.",
+      "measure": "40–135 Hz RMS measured 40–110 ms after the extra kick, as a ratio to nearby full kicks.",
       "drumbase_extra_to_full_ratio": 0.414,
       "reverb_extra_to_full_ratio": 0.487,
       "model_trigger_strength": 0.43,
@@ -1045,7 +1149,7 @@
         -0.22
       ],
       "isolated_waveform_check": {
-        "measure": "Waveform correlation in the 35\u2013540 Hz band after independent gain, polarity and short lag matching.",
+        "measure": "Waveform correlation in the 35–540 Hz band after independent gain, polarity and short lag matching.",
         "columns": [
           "previous_model",
           "current_model"
@@ -1075,8 +1179,8 @@
     "median_errors_db": {
       "all": {
         "count": 23,
-        "center_db": 2.75,
-        "fitted_balance_db": 2.39,
+        "center_db": 2.8,
+        "fitted_balance_db": 2.28,
         "pre_noise_pulse_fitted_balance_db": 3.02,
         "pre_noise_envelope_fitted_balance_db": 2.96,
         "pre_cymbal_sweep_center_db": 3.11,
@@ -1086,12 +1190,16 @@
         "pre_latin_percussion_center_db": 2.81,
         "pre_latin_percussion_fitted_balance_db": 2.44,
         "pre_cymbal_history_center_db": 2.72,
-        "pre_cymbal_history_fitted_balance_db": 2.39
+        "pre_cymbal_history_fitted_balance_db": 2.39,
+        "pre_coincident_gate_center_db": 2.75,
+        "pre_coincident_gate_fitted_balance_db": 2.39,
+        "pre_snare_gate_center_db": 2.8,
+        "pre_snare_gate_fitted_balance_db": 2.39
       },
       "mix fit": {
         "count": 11,
         "center_db": 2.61,
-        "fitted_balance_db": 2.29,
+        "fitted_balance_db": 2.2,
         "pre_noise_pulse_fitted_balance_db": 2.81,
         "pre_noise_envelope_fitted_balance_db": 2.73,
         "pre_cymbal_sweep_center_db": 3.06,
@@ -1101,11 +1209,15 @@
         "pre_latin_percussion_center_db": 2.58,
         "pre_latin_percussion_fitted_balance_db": 2.3,
         "pre_cymbal_history_center_db": 2.66,
-        "pre_cymbal_history_fitted_balance_db": 2.29
+        "pre_cymbal_history_fitted_balance_db": 2.29,
+        "pre_coincident_gate_center_db": 2.61,
+        "pre_coincident_gate_fitted_balance_db": 2.29,
+        "pre_snare_gate_center_db": 2.61,
+        "pre_snare_gate_fitted_balance_db": 2.22
       },
       "held out": {
         "count": 12,
-        "center_db": 2.775,
+        "center_db": 2.84,
         "fitted_balance_db": 2.625,
         "pre_noise_pulse_fitted_balance_db": 3.315,
         "pre_noise_envelope_fitted_balance_db": 3.305,
@@ -1116,7 +1228,11 @@
         "pre_latin_percussion_center_db": 2.875,
         "pre_latin_percussion_fitted_balance_db": 2.895,
         "pre_cymbal_history_center_db": 2.765,
-        "pre_cymbal_history_fitted_balance_db": 2.755
+        "pre_cymbal_history_fitted_balance_db": 2.755,
+        "pre_coincident_gate_center_db": 2.775,
+        "pre_coincident_gate_fitted_balance_db": 2.625,
+        "pre_snare_gate_center_db": 2.84,
+        "pre_snare_gate_fitted_balance_db": 2.625
       }
     }
   },
@@ -1386,7 +1502,7 @@
       "slow_decay_ms": 225.0,
       "gate_threshold": 0.04
     },
-    "kick_trial": "A third decay reduced the 3\u20131000 Hz waveform error in both separated hits. It increased the first 45 ms waveform error with a 25\u20131000 Hz analysis band, so the production patch retains the earlier kick.",
+    "kick_trial": "A third decay reduced the 3–1000 Hz waveform error in both separated hits. It increased the first 45 ms waveform error with a 25–1000 Hz analysis band, so the production patch retains the earlier kick.",
     "reverb_audition_order": [
       "Loop15.wav",
       "Loop24.wav",
@@ -1395,7 +1511,7 @@
     "build": "Comparison before the fast hold and shared trigger change."
   },
   "cymbal_gate_refinement": {
-    "method": "Compare hi-hat plus cymbal with hi-hat alone in the same clip, using 6.2\u201311.8 kHz power and excluding clipped windows. Compare cymbal-only tails in the previously measured loop windows.",
+    "method": "Compare hi-hat plus cymbal with hi-hat alone in the same clip, using 6.2–11.8 kHz power and excluding clipped windows. Compare cymbal-only tails in the previously measured loop windows.",
     "columns": [
       "capture",
       "previous C",
@@ -1595,7 +1711,7 @@
       }
     },
     "low_bongo_fit": {
-      "method": "Damped sinusoid fitted over 10\u201378 ms of low-bongo bandpass (348\u2013464 Hz) traces.",
+      "method": "Damped sinusoid fitted over 10–78 ms of low-bongo bandpass (348–464 Hz) traces.",
       "drumbase_beguine": {
         "hits": 7,
         "hz": 393.686,
@@ -1633,7 +1749,7 @@
     ]
   },
   "cymbal_history_refinement": {
-    "method": "Estimate the first time the 6.1\u201311.6 kHz envelope falls 18 dB below the 8\u201324 ms attack. Use 10 ms windows and account for residual pre-hit noise. Compare hits with known cymbal history, no competing attacks during the measured span, and measurable cutoff in both renders.",
+    "method": "Estimate the first time the 6.1–11.6 kHz envelope falls 18 dB below the 8–24 ms attack. Use 10 ms windows and account for residual pre-hit noise. Compare hits with known cymbal history, no competing attacks during the measured span, and measurable cutoff in both renders.",
     "columns": [
       "capture",
       "previous C",
@@ -2183,5 +2299,1391 @@
       "Loop17.wav",
       "Loop22.wav"
     ]
+  },
+  "coincident_gate_refinement": {
+    "method": "In each recording, compare 6.2–11.8 kHz power of simultaneous hi-hat and cymbal triggers to the early power of single hi-hat triggers, using usable windows free of clipped samples and subsequent attacks. Compare the medians across the matched recordings. The settled loop check plays one or two complete Arrange cycles before scoring at the fixed per-pack Balance positions.",
+    "columns": [
+      "capture",
+      "previous C",
+      "current C"
+    ],
+    "hits": 26,
+    "median_attack_db_relative_to_hat": [
+      -0.323,
+      -1.363,
+      -0.9
+    ],
+    "median_body_40_to_65_ms_db_relative_to_hat": [
+      -2.135,
+      -4.123,
+      -3.389
+    ],
+    "per_capture": {
+      "BEGUINE": {
+        "pack": "cd",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          -0.481,
+          -1.137,
+          -0.599
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -0.6,
+          -4.82,
+          -3.971
+        ]
+      },
+      "BOSSANOVA": {
+        "pack": "cd",
+        "hits": 8,
+        "paired_to_hat_early_db": [
+          -0.639,
+          -1.588,
+          -1.326
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -1.835,
+          -4.486,
+          -3.869
+        ]
+      },
+      "SAMBA": {
+        "pack": "cd",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          -0.165,
+          -1.836,
+          -1.451
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -1.556,
+          -4.315,
+          -3.638
+        ]
+      },
+      "Loop16": {
+        "pack": "rv",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          -0.584,
+          -0.913,
+          -0.295
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -3.415,
+          -3.823,
+          -2.918
+        ]
+      },
+      "Loop17": {
+        "pack": "rv",
+        "hits": 4,
+        "paired_to_hat_early_db": [
+          0.443,
+          -1.077,
+          -0.487
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -2.435,
+          -3.93,
+          -3.026
+        ]
+      },
+      "Loop22": {
+        "pack": "rv",
+        "hits": 2,
+        "paired_to_hat_early_db": [
+          -0.117,
+          -1.788,
+          -1.202
+        ],
+        "paired_to_hat_40_to_65_ms_db": [
+          -3.293,
+          -3.908,
+          -3.141
+        ]
+      }
+    },
+    "fit": {
+      "total_gate_drive": 1.05,
+      "fast_gate_fraction": 0.285,
+      "fast_hold_ms": 44,
+      "initial_frequency_offset_fraction": 0.82
+    },
+    "settled_loop_columns": [
+      "previous C",
+      "current C"
+    ],
+    "settled_drumbase": [
+      {
+        "warmup_arrange_cycles": 1,
+        "all_median_db": [
+          2.37,
+          2.37
+        ],
+        "all_mean_db": [
+          2.553,
+          2.52
+        ],
+        "loops": {
+          "BEGUINE": [
+            2.82,
+            2.76
+          ],
+          "BOSSANOVA": [
+            3.67,
+            3.49
+          ],
+          "CHA-CHA": [
+            2.82,
+            2.82
+          ],
+          "J-WALTZ": [
+            2.37,
+            2.37
+          ],
+          "MAMBO": [
+            2.56,
+            2.56
+          ],
+          "RHUMBA": [
+            2.46,
+            2.46
+          ],
+          "S-ROCK": [
+            2.04,
+            2.04
+          ],
+          "SAMBA": [
+            2.84,
+            2.61
+          ],
+          "WALTZ": [
+            4.75,
+            4.75
+          ],
+          "HABANERA": [
+            3.03,
+            3.03
+          ],
+          "MARCH": [
+            2.76,
+            2.76
+          ],
+          "PARADE": [
+            2.22,
+            2.22
+          ],
+          "ROCK1A": [
+            2.13,
+            2.07
+          ],
+          "ROCK2A": [
+            2.07,
+            2.02
+          ],
+          "ROCK3A": [
+            2.06,
+            2.0
+          ],
+          "ROCK4A": [
+            2.15,
+            2.08
+          ],
+          "ROCK5A": [
+            2.3,
+            2.23
+          ],
+          "ROCK6": [
+            2.13,
+            2.06
+          ],
+          "SHUFFLE": [
+            2.34,
+            2.34
+          ],
+          "SWING1": [
+            2.42,
+            2.42
+          ],
+          "SWING2": [
+            1.82,
+            1.82
+          ],
+          "SWING3": [
+            1.72,
+            1.63
+          ],
+          "TANGO": [
+            3.24,
+            3.41
+          ]
+        }
+      },
+      {
+        "warmup_arrange_cycles": 2,
+        "all_median_db": [
+          2.31,
+          2.31
+        ],
+        "all_mean_db": [
+          2.533,
+          2.499
+        ],
+        "loops": {
+          "BEGUINE": [
+            2.8,
+            2.75
+          ],
+          "BOSSANOVA": [
+            3.66,
+            3.47
+          ],
+          "CHA-CHA": [
+            2.81,
+            2.81
+          ],
+          "J-WALTZ": [
+            2.37,
+            2.37
+          ],
+          "MAMBO": [
+            2.5,
+            2.5
+          ],
+          "RHUMBA": [
+            2.44,
+            2.44
+          ],
+          "S-ROCK": [
+            2.05,
+            2.05
+          ],
+          "SAMBA": [
+            2.83,
+            2.6
+          ],
+          "WALTZ": [
+            4.74,
+            4.74
+          ],
+          "HABANERA": [
+            3.07,
+            3.07
+          ],
+          "MARCH": [
+            2.69,
+            2.69
+          ],
+          "PARADE": [
+            2.23,
+            2.23
+          ],
+          "ROCK1A": [
+            2.12,
+            2.06
+          ],
+          "ROCK2A": [
+            2.09,
+            2.04
+          ],
+          "ROCK3A": [
+            2.07,
+            2.01
+          ],
+          "ROCK4A": [
+            2.15,
+            2.07
+          ],
+          "ROCK5A": [
+            2.27,
+            2.21
+          ],
+          "ROCK6": [
+            2.17,
+            2.09
+          ],
+          "SHUFFLE": [
+            2.31,
+            2.31
+          ],
+          "SWING1": [
+            2.28,
+            2.28
+          ],
+          "SWING2": [
+            1.74,
+            1.74
+          ],
+          "SWING3": [
+            1.69,
+            1.58
+          ],
+          "TANGO": [
+            3.19,
+            3.36
+          ]
+        }
+      }
+    ],
+    "settled_reverb": [
+      {
+        "warmup_arrange_cycles": 1,
+        "all_median_db": [
+          3.12,
+          3.12
+        ],
+        "all_mean_db": [
+          3.218,
+          3.215
+        ],
+        "loops": {
+          "Loop1.wav": [
+            2.86,
+            2.88
+          ],
+          "Loop2.wav": [
+            2.52,
+            2.52
+          ],
+          "Loop3.wav": [
+            2.77,
+            2.78
+          ],
+          "Loop4.wav": [
+            2.86,
+            2.86
+          ],
+          "Loop5.wav": [
+            2.83,
+            2.84
+          ],
+          "Loop6.wav": [
+            2.69,
+            2.68
+          ],
+          "Loop7.wav": [
+            3.12,
+            3.12
+          ],
+          "Loop8.wav": [
+            3.83,
+            3.83
+          ],
+          "Loop9.wav": [
+            3.23,
+            3.23
+          ],
+          "Loop10.wav": [
+            3.7,
+            3.7
+          ],
+          "Loop11.wav": [
+            3.41,
+            3.41
+          ],
+          "Loop12.wav": [
+            3.48,
+            3.48
+          ],
+          "Loop13.wav": [
+            3.41,
+            3.41
+          ],
+          "Loop14.wav": [
+            2.99,
+            2.99
+          ],
+          "Loop15.wav": [
+            2.5,
+            2.5
+          ],
+          "Loop16.wav": [
+            2.42,
+            2.46
+          ],
+          "Loop17.wav": [
+            2.94,
+            2.82
+          ],
+          "Loop18.wav": [
+            3.35,
+            3.35
+          ],
+          "Loop19.wav": [
+            3.44,
+            3.44
+          ],
+          "Loop20.wav": [
+            4.33,
+            4.33
+          ],
+          "Loop21.wav": [
+            4.16,
+            4.16
+          ],
+          "Loop22.wav": [
+            4.45,
+            4.43
+          ],
+          "Loop23.wav": [
+            3.74,
+            3.74
+          ],
+          "Loop24.wav": [
+            2.57,
+            2.57
+          ],
+          "Loop25.wav": [
+            2.85,
+            2.85
+          ]
+        }
+      },
+      {
+        "warmup_arrange_cycles": 2,
+        "all_median_db": [
+          3.16,
+          3.16
+        ],
+        "all_mean_db": [
+          3.234,
+          3.226
+        ],
+        "loops": {
+          "Loop1.wav": [
+            2.87,
+            2.87
+          ],
+          "Loop2.wav": [
+            2.55,
+            2.53
+          ],
+          "Loop3.wav": [
+            2.81,
+            2.82
+          ],
+          "Loop4.wav": [
+            2.89,
+            2.87
+          ],
+          "Loop5.wav": [
+            2.88,
+            2.88
+          ],
+          "Loop6.wav": [
+            2.71,
+            2.69
+          ],
+          "Loop7.wav": [
+            3.16,
+            3.16
+          ],
+          "Loop8.wav": [
+            3.86,
+            3.86
+          ],
+          "Loop9.wav": [
+            3.26,
+            3.26
+          ],
+          "Loop10.wav": [
+            3.71,
+            3.71
+          ],
+          "Loop11.wav": [
+            3.41,
+            3.41
+          ],
+          "Loop12.wav": [
+            3.5,
+            3.5
+          ],
+          "Loop13.wav": [
+            3.39,
+            3.39
+          ],
+          "Loop14.wav": [
+            2.99,
+            2.99
+          ],
+          "Loop15.wav": [
+            2.49,
+            2.49
+          ],
+          "Loop16.wav": [
+            2.49,
+            2.51
+          ],
+          "Loop17.wav": [
+            2.96,
+            2.82
+          ],
+          "Loop18.wav": [
+            3.34,
+            3.34
+          ],
+          "Loop19.wav": [
+            3.45,
+            3.45
+          ],
+          "Loop20.wav": [
+            4.39,
+            4.39
+          ],
+          "Loop21.wav": [
+            4.19,
+            4.19
+          ],
+          "Loop22.wav": [
+            4.43,
+            4.4
+          ],
+          "Loop23.wav": [
+            3.73,
+            3.73
+          ],
+          "Loop24.wav": [
+            2.56,
+            2.56
+          ],
+          "Loop25.wav": [
+            2.83,
+            2.83
+          ]
+        }
+      }
+    ],
+    "audition_order": [
+      {
+        "rhythm": "Bossa Nova Auto",
+        "pack": "Drumbase"
+      },
+      {
+        "rhythm": "Samba A",
+        "pack": "Reverb"
+      },
+      {
+        "rhythm": "Tango B",
+        "pack": "Drumbase"
+      }
+    ]
+  },
+  "snare_gate_refinement": {
+    "method": "Align snare-only hits from the complete loops with the isolated one-shot from each pack, using the low-band waveform. Exclude windows close to another hit or containing PCM clipping. Measure noise in 1.3–14.5 kHz against its mean power across the 6–12, 12–23 and 23–40 ms windows. Compare this broadband level to the 235–360 Hz ring from 5–25 ms. Settled loop renders play one Arrange cycle before scoring.",
+    "envelope_windows_ms": [
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        12
+      ],
+      [
+        12,
+        23
+      ],
+      [
+        23,
+        40
+      ],
+      [
+        40,
+        60
+      ],
+      [
+        60,
+        78
+      ],
+      [
+        78,
+        98
+      ],
+      [
+        98,
+        120
+      ]
+    ],
+    "noise_bands_hz": [
+      [
+        1300,
+        2450
+      ],
+      [
+        2450,
+        4000
+      ],
+      [
+        4000,
+        5500
+      ],
+      [
+        5500,
+        7000
+      ],
+      [
+        7000,
+        8500
+      ],
+      [
+        8500,
+        10100
+      ],
+      [
+        10100,
+        12300
+      ],
+      [
+        12300,
+        14800
+      ]
+    ],
+    "provenance": {
+      "demo": "https://www.vintagesynth.com/roland/tr-66",
+      "one_shot_archive": "https://github.com/smpldsnds/drum-abuse-vol1/tree/58a9b6246d232d862fad15e06c97a4a030655017/samples/roland-tr-66",
+      "shared_snare_waveforms_demo_time_s_and_normalized_correlation": {
+        "66-sd-01.wav": [
+          2.8242,
+          0.9657
+        ],
+        "66-sd-02.wav": [
+          3.9357,
+          0.9159
+        ]
+      },
+      "correlation_band_hz": [
+        2150,
+        12000
+      ],
+      "note": "The Vintage Synth Explorer demo and the matching archive hits count as one source."
+    },
+    "fit": {
+      "noise_attack_ms": 1.7,
+      "noise_hold_ms": 29.0,
+      "noise_decay_ms": 110.0,
+      "noise_gate_threshold": 0.53,
+      "band_centers_hz": [
+        5625.6526,
+        9784.1089
+      ]
+    },
+    "one_shot_archive_check": {
+      "hits": 8,
+      "valid_hits_per_window": [
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8,
+        8
+      ],
+      "envelope_relative_to_6_to_40_ms_db": [
+        -7.702,
+        0.516,
+        0.514,
+        0.223,
+        -0.919,
+        -2.941,
+        -9.126,
+        -25.653,
+        -52.535
+      ],
+      "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+        -21.426,
+        -13.474,
+        -10.587,
+        -10.124,
+        -9.149,
+        -9.596,
+        -8.676,
+        -9.462
+      ],
+      "broadband_noise_to_tone_db": -12.067
+    },
+    "audition_order": [
+      "Drum Abuse isolated snare hits",
+      "Drumbase March",
+      "Reverb Waltz A"
+    ],
+    "drumbase": {
+      "capture": {
+        "hits": 13,
+        "valid_hits_per_window": [
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          8,
+          8
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.475,
+          0.646,
+          0.211,
+          0.056,
+          -0.377,
+          -1.851,
+          -5.488,
+          -15.553,
+          -38.897
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -22.434,
+          -13.936,
+          -10.783,
+          -9.652,
+          -9.738,
+          -8.574,
+          -7.625,
+          -7.783
+        ],
+        "broadband_noise_to_tone_db": -14.307
+      },
+      "previous_c": {
+        "hits": 13,
+        "valid_hits_per_window": [
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          8,
+          8
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -7.492,
+          -8.426,
+          -1.69,
+          1.023,
+          0.23,
+          -3.311,
+          -8.685,
+          -17.713,
+          -66.352
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -21.084,
+          -14.551,
+          -11.96,
+          -8.833,
+          -10.53,
+          -8.806,
+          -7.272,
+          -6.936
+        ],
+        "broadband_noise_to_tone_db": -11.457
+      },
+      "current_c": {
+        "hits": 13,
+        "valid_hits_per_window": [
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          13,
+          8,
+          8
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.377,
+          -1.234,
+          -0.063,
+          0.142,
+          -0.187,
+          -3.368,
+          -8.253,
+          -16.176,
+          -58.124
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -22.063,
+          -14.563,
+          -10.706,
+          -10.346,
+          -10.131,
+          -8.829,
+          -7.641,
+          -8.759
+        ],
+        "broadband_noise_to_tone_db": -11.696
+      },
+      "settled_loop_spectral_error_db": {
+        "columns": [
+          "previous C",
+          "current C"
+        ],
+        "medians": [
+          2.37,
+          2.3
+        ],
+        "means": [
+          2.52,
+          2.494
+        ],
+        "loops": {
+          "BEGUINE": [
+            2.76,
+            2.76
+          ],
+          "BOSSANOVA": [
+            3.49,
+            3.49
+          ],
+          "CHA-CHA": [
+            2.82,
+            2.82
+          ],
+          "J-WALTZ": [
+            2.37,
+            2.3
+          ],
+          "MAMBO": [
+            2.56,
+            2.56
+          ],
+          "RHUMBA": [
+            2.46,
+            2.46
+          ],
+          "S-ROCK": [
+            2.04,
+            2.01
+          ],
+          "SAMBA": [
+            2.61,
+            2.61
+          ],
+          "WALTZ": [
+            4.75,
+            4.73
+          ],
+          "HABANERA": [
+            3.03,
+            3.0
+          ],
+          "MARCH": [
+            2.76,
+            2.74
+          ],
+          "PARADE": [
+            2.22,
+            2.18
+          ],
+          "ROCK1A": [
+            2.07,
+            2.0
+          ],
+          "ROCK2A": [
+            2.02,
+            1.97
+          ],
+          "ROCK3A": [
+            2.0,
+            1.96
+          ],
+          "ROCK4A": [
+            2.08,
+            2.03
+          ],
+          "ROCK5A": [
+            2.23,
+            2.21
+          ],
+          "ROCK6": [
+            2.06,
+            2.01
+          ],
+          "SHUFFLE": [
+            2.34,
+            2.27
+          ],
+          "SWING1": [
+            2.42,
+            2.42
+          ],
+          "SWING2": [
+            1.82,
+            1.82
+          ],
+          "SWING3": [
+            1.63,
+            1.63
+          ],
+          "TANGO": [
+            3.41,
+            3.38
+          ]
+        }
+      }
+    },
+    "reverb": {
+      "capture": {
+        "hits": 23,
+        "valid_hits_per_window": [
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          13
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.414,
+          0.549,
+          0.686,
+          0.024,
+          -0.844,
+          -3.12,
+          -8.213,
+          -20.894,
+          -52.525
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -21.638,
+          -13.867,
+          -11.198,
+          -10.02,
+          -9.801,
+          -9.308,
+          -8.515,
+          -9.345
+        ],
+        "broadband_noise_to_tone_db": -5.941
+      },
+      "previous_c": {
+        "hits": 23,
+        "valid_hits_per_window": [
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          13
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -7.791,
+          -8.119,
+          -1.375,
+          0.899,
+          0.172,
+          -3.585,
+          -8.983,
+          -18.381,
+          -66.666
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -21.156,
+          -14.899,
+          -12.213,
+          -9.075,
+          -10.587,
+          -8.946,
+          -7.397,
+          -6.897
+        ],
+        "broadband_noise_to_tone_db": -11.457
+      },
+      "current_c": {
+        "hits": 23,
+        "valid_hits_per_window": [
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          23,
+          13
+        ],
+        "envelope_relative_to_6_to_40_ms_db": [
+          -5.654,
+          -1.135,
+          0.14,
+          0.067,
+          -0.384,
+          -3.624,
+          -8.415,
+          -16.948,
+          -58.752
+        ],
+        "band_power_12_to_60_ms_relative_to_6_to_40_ms_broadband_db": [
+          -22.03,
+          -14.991,
+          -11.163,
+          -10.696,
+          -10.341,
+          -8.817,
+          -8.07,
+          -8.957
+        ],
+        "broadband_noise_to_tone_db": -11.402
+      },
+      "settled_loop_spectral_error_db": {
+        "columns": [
+          "previous C",
+          "current C"
+        ],
+        "medians": [
+          3.12,
+          3.09
+        ],
+        "means": [
+          3.215,
+          3.192
+        ],
+        "loops": {
+          "Loop1.wav": [
+            2.88,
+            2.88
+          ],
+          "Loop2.wav": [
+            2.52,
+            2.53
+          ],
+          "Loop3.wav": [
+            2.78,
+            2.79
+          ],
+          "Loop4.wav": [
+            2.86,
+            2.85
+          ],
+          "Loop5.wav": [
+            2.84,
+            2.84
+          ],
+          "Loop6.wav": [
+            2.68,
+            2.67
+          ],
+          "Loop7.wav": [
+            3.12,
+            3.09
+          ],
+          "Loop8.wav": [
+            3.83,
+            3.83
+          ],
+          "Loop9.wav": [
+            3.23,
+            3.14
+          ],
+          "Loop10.wav": [
+            3.7,
+            3.51
+          ],
+          "Loop11.wav": [
+            3.41,
+            3.35
+          ],
+          "Loop12.wav": [
+            3.48,
+            3.47
+          ],
+          "Loop13.wav": [
+            3.41,
+            3.25
+          ],
+          "Loop14.wav": [
+            2.99,
+            2.97
+          ],
+          "Loop15.wav": [
+            2.5,
+            2.49
+          ],
+          "Loop16.wav": [
+            2.46,
+            2.46
+          ],
+          "Loop17.wav": [
+            2.82,
+            2.82
+          ],
+          "Loop18.wav": [
+            3.35,
+            3.35
+          ],
+          "Loop19.wav": [
+            3.44,
+            3.44
+          ],
+          "Loop20.wav": [
+            4.33,
+            4.33
+          ],
+          "Loop21.wav": [
+            4.16,
+            4.16
+          ],
+          "Loop22.wav": [
+            4.43,
+            4.43
+          ],
+          "Loop23.wav": [
+            3.74,
+            3.74
+          ],
+          "Loop24.wav": [
+            2.57,
+            2.57
+          ],
+          "Loop25.wav": [
+            2.85,
+            2.84
+          ]
+        }
+      }
+    }
+  },
+  "arrange_timing_refinement": {
+    "source": "https://archive.org/details/roland-tr-66-service-notes",
+    "source_figures": [
+      14,
+      16,
+      18
+    ],
+    "method": "Transcribe both variation banks' pulses from figures 14 and 18, compare all three Arrange modes at 120 BPM against the actual host C event trace. For Jazz Waltz, compare figure 16 to a four-bar Auto capture from Drumbase. The downbeat comparison measures 235–355 Hz relative to 48–100 Hz at 5–34 ms.",
+    "variation_bank_chart_matches": {
+      "total": 36,
+      "previous": 26,
+      "current": 36
+    },
+    "chart_differences_before_fix": {
+      "bass-snare-2": {
+        "b": {
+          "22": [
+            0,
+            8
+          ],
+          "23": [
+            8,
+            0
+          ]
+        },
+        "auto": {
+          "32": [
+            3,
+            11
+          ],
+          "54": [
+            0,
+            8
+          ],
+          "55": [
+            8,
+            0
+          ]
+        }
+      },
+      "foxtrot-1": {
+        "b": {
+          "0": [
+            15,
+            7
+          ]
+        },
+        "auto": {
+          "0": [
+            15,
+            7
+          ],
+          "32": [
+            5,
+            7
+          ]
+        }
+      },
+      "habanera": {
+        "auto": {
+          "32": [
+            3,
+            11
+          ]
+        }
+      },
+      "bass-snare-4": {
+        "auto": {
+          "32": [
+            3,
+            11
+          ]
+        }
+      },
+      "foxtrot-2": {
+        "b": {
+          "0": [
+            15,
+            5
+          ]
+        }
+      },
+      "swing-2": {
+        "b": {
+          "23": [
+            12,
+            4
+          ]
+        },
+        "auto": {
+          "55": [
+            12,
+            4
+          ]
+        }
+      },
+      "tango": {
+        "auto": {
+          "32": [
+            5,
+            15
+          ]
+        }
+      }
+    },
+    "difference_columns": [
+      "charted voice mask",
+      "previous C voice mask"
+    ],
+    "jazz_waltz_auto": {
+      "downbeat_ring_to_kick_db": {
+        "capture": [
+          -11.49,
+          -31.43,
+          -33.05,
+          -33.38
+        ],
+        "previous_c": [
+          -10.14,
+          -38.51,
+          -10.14,
+          -38.51
+        ],
+        "current_c": [
+          -10.14,
+          -38.51,
+          -38.51,
+          -38.51
+        ]
+      },
+      "columns": [
+        "previous C",
+        "current C"
+      ],
+      "center_balance_clean_window_db": [
+        2.25,
+        2.21
+      ],
+      "fitted_balance_clean_window_db": [
+        2.32,
+        2.28
+      ],
+      "after_one_arrange_cycle_at_fitted_balance_db": [
+        2.3,
+        2.26
+      ]
+    }
+  },
+  "wood_resonator_refinement": {
+    "source": "Roland TR-66 Service Notes, figures 10 and 19",
+    "method": "Fit a damped sinusoid to separated hits after the attack. Compare C renders before and after at fixed Balance after one Arrange cycle.",
+    "fit_columns": [
+      "frequency_hz",
+      "decay_time_constant_ms"
+    ],
+    "synthesis": {
+      "rim": [
+        1525,
+        2.1
+      ],
+      "claves": [
+        2350,
+        4.75
+      ]
+    },
+    "capture": {
+      "rim": [
+        1567,
+        2.17
+      ],
+      "claves": [
+        2362,
+        4.76
+      ],
+      "hit_counts": [
+        1,
+        10
+      ]
+    },
+    "settled_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "settled_pack_median_db": [
+      2.27,
+      2.27
+    ],
+    "settled_loop_changes_db": {
+      "BEGUINE": [
+        2.76,
+        2.79
+      ],
+      "BOSSANOVA": [
+        3.49,
+        3.47
+      ],
+      "RHUMBA": [
+        2.46,
+        2.47
+      ]
+    },
+    "drumbase_one_shots": {
+      "rim": {
+        "isolated_hit": "TR66 P9.wav",
+        "waveform_correlation_before_and_after": [
+          0.9751390396375808,
+          0.9882909659975259
+        ],
+        "ring_energy_7_to_14_ms_relative_to_1_to_7_ms_db": {
+          "original": -26.33057565094772,
+          "previous_c": -17.59910896072708,
+          "revised_c": -25.16531461297554
+        }
+      },
+      "claves": {
+        "isolated_hit": "TR66 P4.wav",
+        "waveform_correlation_before_and_after": [
+          0.9792963142071425,
+          0.9831884201172789
+        ],
+        "ring_energy_7_to_14_ms_relative_to_1_to_7_ms_db": {
+          "original": -10.768763120831668,
+          "previous_c": -8.562933008828505,
+          "revised_c": -10.847158063434845
+        }
+      }
+    }
   }
 }

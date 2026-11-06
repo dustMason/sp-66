@@ -13,24 +13,39 @@ static unsigned score_bar(const Tr66Sequencer *seq)
 }
 
 static uint16_t pattern_voices(const Tr66Sequencer *seq, enum Tr66PatternId id,
-                               unsigned *index)
+                               unsigned bar, unsigned *index)
 {
+    enum { TRIPLE_HALF = 3 * TR66_PPQN / 2, COMMON_HALF = 2 * TR66_PPQN };
     const Tr66Pattern *pattern = &tr66_patterns[id];
-    const unsigned bar = score_bar(seq);
     const Tr66Bar *part = &pattern->bars[bar];
+    unsigned tick = seq->tick;
+    /* The 3/4 shunt skips counter positions 6 and 7 of each half-bar.
+     * In triple time the second half of a 4/4 score starts at count 8. */
+    if (seq->bar_ticks == 2 * TRIPLE_HALF && pattern->ticks == 2 * COMMON_HALF &&
+        tick >= TRIPLE_HALF)
+        tick += COMMON_HALF - TRIPLE_HALF;
+
+    while (*index < part->count && part->events[*index].tick < tick)
+        ++*index;
     uint16_t voices = 0;
-    if (*index < part->count && part->events[*index].tick == seq->tick)
+    if (*index < part->count && part->events[*index].tick == tick)
         voices = part->events[(*index)++].voices;
-    if (seq->selection.arrange == TR66_ARRANGE_AUTO && bar == 0 && seq->tick == 0)
-        voices |= pattern->auto_pickup;
+    /* The pickup is on the first pulse of the selected cycle. */
+    if (seq->tick == 0) {
+        if (bar == 0 && seq->selection.arrange == TR66_ARRANGE_AUTO)
+            voices |= pattern->auto_pickup;
+        if (bar == 2 && seq->selection.arrange == TR66_ARRANGE_B)
+            voices |= pattern->b_pickup;
+    }
     return voices;
 }
 
 static void play_tick(Tr66Sequencer *seq)
 {
+    const unsigned bar = score_bar(seq);
     /* A coincident trigger fires each voice circuit once. */
-    uint16_t mask = pattern_voices(seq, seq->selection.rhythm, &seq->event_index[0]);
-    mask |= pattern_voices(seq, seq->selection.variation, &seq->event_index[1]);
+    uint16_t mask = pattern_voices(seq, seq->selection.rhythm, bar, &seq->event_index[0]);
+    mask |= pattern_voices(seq, seq->selection.variation, bar, &seq->event_index[1]);
     if (mask != 0) {
         tr66_hit(&seq->synth, mask);
         if (seq->listener != NULL)
