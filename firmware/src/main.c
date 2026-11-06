@@ -24,8 +24,12 @@ enum {
     BLOCK_BUDGET = 64000000u * FRAMES / RATE,
     FADER_MAX_RAW = 3701,
     LED_PERIOD = 16000,
+    CODEC_START_TIMEOUT_MS = 2500,
+    AUDIO_STALL_TIMEOUT_MS = 500,
     FN_PIN = 27,
     BTN_COM_PIN = 10,
+    CHARGE_ENABLE_PIN = 21,
+    USB_POWER_GOOD_PIN = 24,
 };
 
 K_MEM_SLAB_DEFINE_STATIC(audio_blocks, BLOCK_BYTES, QUEUE + 4, 4);
@@ -57,8 +61,9 @@ static float mono[FRAMES];
 volatile struct {
     uint32_t peak_render_cycles, over_budget, write_errors;
     int status;
-    unsigned stage, scans, blocks, scan_phase;
+    unsigned stage, failed_stage, scans, blocks, scan_phase;
     int adc_status;
+    uint32_t reset_reason;
     unsigned raw[6];
     unsigned adc_timeouts;
     uint32_t adc_enable, adc_end, adc_started, adc_amount;
@@ -113,16 +118,18 @@ static void diagnostic_console(void *a, void *b, void *c)
             unsigned char command;
             if (uart_poll_in(console, &command) == 0 && command == 'r')
                 sys_reboot(SYS_REBOOT_COLD);
-            printk("SP66 t=%u stage=%u status=%d scans=%u adc=%d blocks=%u "
-                   "peak=%u over=%u errors=%u fn=%d fault=%u pc=%x "
+            printk("SP66 t=%u stage=%u failed=%u status=%d scans=%u adc=%d blocks=%u "
+                   "peak=%u over=%u errors=%u fn=%d reset=%x fault=%u pc=%x "
                    "phase=%u raw=%u,%u,%u,%u,%u,%u timeouts=%u "
                    "saadc=%u,%u,%u,%u\n",
                    k_uptime_get_32(), tr66_sp1_diagnostics.stage,
+                   tr66_sp1_diagnostics.failed_stage,
                    tr66_sp1_diagnostics.status, tr66_sp1_diagnostics.scans,
                    tr66_sp1_diagnostics.adc_status, tr66_sp1_diagnostics.blocks,
                    tr66_sp1_diagnostics.peak_render_cycles,
                    tr66_sp1_diagnostics.over_budget, tr66_sp1_diagnostics.write_errors,
                    gpio_pin_get(gpio0, FN_PIN) == 0,
+                   tr66_sp1_diagnostics.reset_reason,
                    fault_key == 0x6631fa17 ? fault_reason : 0,
                    fault_key == 0x6631fa17 ? fault_pc : 0,
                    tr66_sp1_diagnostics.scan_phase,
@@ -220,7 +227,7 @@ static void set_leds(unsigned mask)
 {
     for (unsigned i = 0; i < ARRAY_SIZE(prior_leds); ++i) {
         uint8_t level = (mask >> (2 * i)) & 3u;
-        if (level != prior_leds[i]) {
+        if (level != prior_leds[i] && device_is_ready(leds[i / 4])) {
             tr66_sp1_diagnostics.scan_phase = 30 + i;
             static const unsigned pulse[] = {0, LED_PERIOD / 100, LED_PERIOD / 18, LED_PERIOD / 4};
             unsigned channel = i < 4 ? i : 7 - i;
@@ -347,6 +354,14 @@ static int init_controls(void)
 {
     if (!device_is_ready(gpio0) || !device_is_ready(gpio1))
         return -ENODEV;
+    memset(prior_leds, 0xff, sizeof(prior_leds));
+    for (unsigned i = 0; i < ARRAY_SIZE(leds); ++i) {
+        int rc = device_init(leds[i]);
+        if (rc != 0 && rc != -EALREADY)
+            return rc;
+    }
+    set_leds(3u << 8); /* Light the LED nearest Function while starting. */
+
     int rc = gpio_pin_configure(gpio0, FN_PIN, GPIO_INPUT | GPIO_PULL_UP);
     if (rc == 0)
         rc = gpio_pin_configure(gpio1, BTN_COM_PIN, GPIO_OUTPUT_HIGH);
@@ -359,13 +374,77 @@ static int init_controls(void)
         if (rc != 0)
             return rc;
     }
-    for (unsigned i = 0; i < ARRAY_SIZE(leds); ++i) {
-        rc = device_init(leds[i]);
-        if (rc != 0 && rc != -EALREADY)
+    return 0;
+}
+
+static int run_audio(void)
+{
+    bool codecs_ready = false;
+    const int64_t codec_deadline = k_uptime_get() + CODEC_START_TIMEOUT_MS;
+    int64_t last_write = 0;
+    while (!atomic_get(&power_requested)) {
+        sp1_feed_watchdog();
+        const int64_t now = k_uptime_get();
+        if (!codecs_ready) {
+            int status = atomic_get(&codec_status);
+            if (status == 0) {
+                codecs_ready = true;
+                last_write = now;
+                tr66_sp1_diagnostics.stage = 5;
+                tr66_sp1_diagnostics.status = 0;
+                k_work_schedule(&scan_work, K_NO_WAIT);
+            } else if (status != -EINPROGRESS) {
+                return status;
+            } else if (now >= codec_deadline) {
+                return -ETIMEDOUT;
+            }
+        } else if (now - last_write >= AUDIO_STALL_TIMEOUT_MS) {
+            return -ETIMEDOUT;
+        }
+
+        bool shutdown = false;
+        Tr66Input input;
+        while (k_msgq_get(&input_scans, &input, K_NO_WAIT) == 0)
+            shutdown |= tr66_controls_scan(&controls, &seq, input);
+        if (shutdown)
+            break;
+
+        void *data;
+        if (k_mem_slab_alloc(&audio_blocks, &data, K_MSEC(100)) != 0)
+            continue;
+        uint32_t start = DWT->CYCCNT;
+        fill_audio(data);
+        uint32_t cycles = DWT->CYCCNT - start;
+        tr66_sp1_diagnostics.peak_render_cycles =
+            MAX(tr66_sp1_diagnostics.peak_render_cycles, cycles);
+        tr66_sp1_diagnostics.over_budget += cycles > BLOCK_BUDGET;
+
+        int rc = i2s_write(i2s, data, BLOCK_BYTES);
+        if (rc == 0) {
+            ++tr66_sp1_diagnostics.blocks;
+            last_write = k_uptime_get();
+            if (codecs_ready)
+                publish_leds();
+            continue;
+        }
+        k_mem_slab_free(&audio_blocks, data);
+        /* A full TX queue is expected until the headphone codec supplies
+         * LRCK. Dropping the stream here may leave it waiting for STOPPED. */
+        if (rc != -EAGAIN || codecs_ready)
+            ++tr66_sp1_diagnostics.write_errors;
+        if (rc == -EAGAIN)
+            continue;
+        if (!codecs_ready) {
+            k_msleep(5); /* Let codec work finish before trying to restart TX. */
+            continue;
+        }
+
+        i2s_trigger(i2s, I2S_DIR_TX, I2S_TRIGGER_DROP);
+        k_msleep(5);
+        rc = begin_stream();
+        if (rc != 0)
             return rc;
     }
-    memset(prior_leds, 0xff, sizeof(prior_leds));
-    set_leds(0);
     return 0;
 }
 
@@ -380,10 +459,9 @@ static void idle_until_wake(void)
     }
     k_msleep(60);
     gpio_pin_set(gpio1, BTN_COM_PIN, 0);
-    gpio_pin_configure(gpio0, 21, GPIO_OUTPUT_LOW);  /* charger nCE */
-    gpio_pin_configure(gpio0, 24, GPIO_INPUT | GPIO_PULL_UP);
+    gpio_pin_configure(gpio0, USB_POWER_GOOD_PIN, GPIO_INPUT | GPIO_PULL_UP);
     while ((NRF_POWER->USBREGSTATUS & POWER_USBREGSTATUS_VBUSDETECT_Msk) ||
-           gpio_pin_get(gpio0, 24) == 0) {
+           gpio_pin_get(gpio0, USB_POWER_GOOD_PIN) == 0) {
         if (gpio_pin_get(gpio0, FN_PIN) == 0)
             sys_reboot(SYS_REBOOT_COLD);
         sp1_feed_watchdog();
@@ -397,6 +475,7 @@ static void idle_until_wake(void)
 
 int main(void)
 {
+    tr66_sp1_diagnostics.reset_reason = NRF_POWER->RESETREAS;
     NRF_POWER->RESETREAS = 0xffffffff;
     sp1_feed_watchdog();
     const struct device *watchdog = DEVICE_DT_GET(DT_ALIAS(watchdog0));
@@ -416,73 +495,36 @@ int main(void)
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
 
     tr66_sp1_diagnostics.stage = 2;
-    int rc = init_controls();
-    tr66_sp1_diagnostics.stage = 3;
+    int rc = gpio_pin_configure(gpio0, CHARGE_ENABLE_PIN, GPIO_OUTPUT_LOW);
     if (rc == 0)
-        rc = gpio_pin_configure(gpio0, 21, GPIO_OUTPUT_HIGH); /* disable charge while playing */
+        rc = init_controls();
+    if (rc == 0) {
+        tr66_sp1_diagnostics.stage = 3;
+        rc = gpio_pin_set(gpio0, CHARGE_ENABLE_PIN, 1); /* disable charging while playing */
+    }
     if (rc == 0 && device_is_ready(i2s))
         rc = sp1_codecs_power_on();
     else if (rc == 0)
         rc = -ENODEV;
     if (rc == 0)
         rc = begin_stream();
-    tr66_sp1_diagnostics.stage = 4;
+
+    bool codec_work_started = false;
     if (rc == 0) {
+        tr66_sp1_diagnostics.stage = 4;
         /* The codec starts the frame clock before its setup finishes.
          * Keep supplying silence while setup runs on the work queue. */
-        int submitted = k_work_submit(&codec_start_work);
-        rc = submitted < 0 ? submitted : 0;
-    }
-    tr66_sp1_diagnostics.status = rc == 0 ? -EINPROGRESS : rc;
-
-    if (rc == 0) {
-        bool codecs_ready = false;
-        bool shutdown = false;
-        while (!shutdown && !atomic_get(&power_requested)) {
-            sp1_feed_watchdog();
-            if (!codecs_ready) {
-                int status = atomic_get(&codec_status);
-                if (status != -EINPROGRESS) {
-                    rc = status;
-                    tr66_sp1_diagnostics.status = rc;
-                    if (rc != 0)
-                        break;
-                    codecs_ready = true;
-                    tr66_sp1_diagnostics.stage = 5;
-                    k_work_schedule(&scan_work, K_NO_WAIT);
-                }
-            }
-            Tr66Input input;
-            while (k_msgq_get(&input_scans, &input, K_NO_WAIT) == 0)
-                shutdown |= tr66_controls_scan(&controls, &seq, input);
-            if (shutdown)
-                break;
-            void *data;
-            if (k_mem_slab_alloc(&audio_blocks, &data, K_MSEC(100)) != 0)
-                continue;
-            uint32_t start = DWT->CYCCNT;
-            fill_audio(data);
-            ++tr66_sp1_diagnostics.blocks;
-            uint32_t cycles = DWT->CYCCNT - start;
-            tr66_sp1_diagnostics.peak_render_cycles =
-                MAX(tr66_sp1_diagnostics.peak_render_cycles, cycles);
-            tr66_sp1_diagnostics.over_budget += cycles > BLOCK_BUDGET;
-            int write_status = i2s_write(i2s, data, BLOCK_BYTES);
-            if (write_status != 0) {
-                k_mem_slab_free(&audio_blocks, data);
-                if (!codecs_ready && write_status == -EAGAIN)
-                    continue;
-                ++tr66_sp1_diagnostics.write_errors;
-                i2s_trigger(i2s, I2S_DIR_TX, I2S_TRIGGER_DROP);
-                k_msleep(5);
-                rc = begin_stream();
-                if (codecs_ready || rc != 0)
-                    tr66_sp1_diagnostics.status = rc;
-                if (rc != 0)
-                    break;
-            }
-            publish_leds();
+        rc = k_work_submit(&codec_start_work);
+        if (rc >= 0) {
+            codec_work_started = true;
+            tr66_sp1_diagnostics.status = -EINPROGRESS;
+            rc = run_audio();
         }
+    }
+    tr66_sp1_diagnostics.status = rc;
+    if (rc != 0)
+        tr66_sp1_diagnostics.failed_stage = tr66_sp1_diagnostics.stage;
+    if (codec_work_started) {
         tr66_sp1_diagnostics.stage = 6;
         struct k_work_sync sync;
         k_work_cancel_sync(&codec_start_work, &sync);
@@ -492,9 +534,23 @@ int main(void)
     if (device_is_ready(i2s))
         i2s_trigger(i2s, I2S_DIR_TX, I2S_TRIGGER_DROP);
     k_msleep(5);
+    /* An I2S slave may never see STOPPED if the frame clock disappeared.
+     * Disable the peripheral before parking the codec and its clocks. */
+    NRF_I2S->ENABLE = I2S_ENABLE_ENABLE_Disabled;
+    gpio_pin_configure(gpio0, 12, GPIO_DISCONNECTED); /* BCLK */
+    gpio_pin_configure(gpio0, 11, GPIO_DISCONNECTED); /* LRCK */
+    gpio_pin_configure(gpio1, 9, GPIO_DISCONNECTED);  /* SDOUT */
     sp1_codecs_power_off();
-    if (device_is_ready(leds[0]) && device_is_ready(leds[1]))
-        set_leds(0);
+    gpio_pin_configure(gpio0, CHARGE_ENABLE_PIN, GPIO_OUTPUT_LOW);
+    if (rc != 0) {
+        tr66_sp1_diagnostics.stage = 8;
+        while (!atomic_get(&power_requested)) {
+            set_leds(k_uptime_get_32() % 500 < 250 ? 0xff00u : 0);
+            sp1_feed_watchdog();
+            k_msleep(50);
+        }
+    }
+    set_leds(0);
     idle_until_wake();
     return rc;
 }

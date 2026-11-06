@@ -144,29 +144,40 @@ connected. This is a short functional test, not an extended stability run.
 
 The firmware now enumerates as **SP-66 diagnostics**. Open its serial port at
 115200 baud with DTR asserted to receive one status line per second. It
-never waits for a computer to connect. Each line reports the startup stage,
-status code, control-scan attempts, last ADC result, rendered audio blocks,
-peak render cycles, over-budget blocks, I2S write errors, Function state,
-scan phase, six raw ADC values, and cumulative ADC timeouts. `saadc` holds
+starts independently of the host connection. Each line reports the startup
+stage, stage at failure (`failed`), status code, control-scan attempts, last
+ADC result, audio blocks queued for I2S, peak render cycles, over-budget
+blocks, I2S write errors, Function state, the nRF reset flags observed on
+app entry, scan phase, six raw ADC values, and cumulative ADC timeouts. `saadc` holds
 ENABLE, END, STARTED and RESULT.AMOUNT captured at the most recent timeout.
 Observed stalls had `saadc=1,0,0,0`. Sending lowercase `r` on the diagnostic
-console restarts the device. A fatal error records
-its reason and program counter in uninitialized RAM before resetting;
-retention of that record across the bootloader is not yet verified.
+console restarts the device. A fatal error records its reason and program
+counter in uninitialized RAM before resetting. Retention of that record
+across the bootloader still needs verification.
 
 | Stage | Last startup milestone |
 | --- | --- |
 | 1 | Initializing the synthesis engine |
 | 2 | Initializing controls and LEDs |
 | 3 | Attempting codec power-on and I2S startup |
-| 4 | I2S startup attempt finished; codec configuration may be pending |
+| 4 | I2S primed and waiting for codec configuration |
 | 5 | Codecs ready; control scanning scheduled |
 | 6 | Stopping background work |
+| 8 | Startup or audio error; awaiting Function shutdown |
 | 9 | Shutdown idle loop |
 
 Scan phases 10–15 identify the ADC input being read (track buttons, side
 buttons, then faders 1–4). Phase 20 is input decoding, 30–37 an LED update,
 40 LEDs updated, 50 jack detection, and 60–61 scheduling the next scan.
+
+The side LED nearest Function lights during app startup, so it is
+distinguishable from the bootloader's solid Track 1 LED. The audio loop
+stops waiting after 2.5 seconds for codec setup or 500 ms without a
+successful I2S write after setup. Either timeout reports `-110`. On
+failure the side row flashes, the codecs are powered down, charging
+resumes, and the serial console and Function shutdown remain available.
+The shutdown sequence disables the I2S peripheral before cutting its
+external clocks, following [Wakes](https://github.com/Worldwave/Wakes).
 
 A separate thread reads Function directly from its GPIO, independently of
 ADC scans and audio startup. After the button has been released once since
