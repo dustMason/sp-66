@@ -259,6 +259,15 @@ cymbal is under 300 ms old. Across 90 hats after a cymbal, median timing
 error falls from 18.2 to 5.5 ms. The fit estimates the effect of shared
 trigger circuitry from the audio.
 
+The hi-hat and maracas noise filter now has a broader resonance at
+8.06 kHz. Across 130 usable hits, the RMS error of the relative spectrum
+over 12 bands falls from 1.82 to 1.42 dB in Drumbase and from 4.13 to
+2.33 dB in Reverb. After one Arrange cycle at the fitted Balance,
+Beguine B in Reverb improves from 4.42 to 4.27 dB, and Mambo A from 3.35
+to 3.17 dB. The settled Reverb median falls from 3.09 to 3.04 dB.
+The settled Drumbase median is 2.27 dB, and its center-Balance median
+rises from 2.80 to 2.85 dB.
+
 Both packs shift cymbal energy upward as the hit decays. Across 113 cymbal
 hits, the mean spectrum peaks near 7.8–7.9 kHz at 5–25 ms and 8.1–8.3 kHz
 at 45–95 ms. On cymbal-only triggers, the C engine holds the fast part of
@@ -285,14 +294,14 @@ Both Habanera A captures support the score's simultaneous kick and snare.
 
 | Level-matched spectral error | Before ring-down pass | After ring-down pass | Current |
 | --- | ---: | ---: | ---: |
-| Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.80 dB |
-| Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.84 dB |
+| Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.85 dB |
+| Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.89 dB |
 | Reverb, all 25 loops | 5.70 dB | 4.62 dB | 4.16 dB |
 | Reverb Slow Rock B | 5.70 dB | 5.17 dB | 4.16 dB |
-| Reverb Mambo A | 5.82 dB | 4.41 dB | 4.09 dB |
-| Reverb Mambo B | 6.37 dB | 4.66 dB | 4.40 dB |
-| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.78 dB |
-| Reverb Rhumba B | 7.36 dB | 5.31 dB | 5.11 dB |
+| Reverb Mambo A | 5.82 dB | 4.41 dB | 3.86 dB |
+| Reverb Mambo B | 6.37 dB | 4.66 dB | 4.20 dB |
+| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.61 dB |
+| Reverb Rhumba B | 7.36 dB | 5.31 dB | 4.98 dB |
 
 The original Drumbase held-out score was 6.69 dB with clipped windows
 excluded. Its Slow Rock score rose from 3.19 to 3.68 dB after the quieter

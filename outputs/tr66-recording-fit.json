@@ -23,13 +23,13 @@
       "capture_samples_at_pcm_limit": 137,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 546,
-      "spectral_error_db": 3.37,
-      "unclipped_error_db": 2.95,
+      "spectral_error_db": 3.45,
+      "unclipped_error_db": 3.03,
       "before_db": 9.78,
       "before_unclipped_db": 10.52,
       "pre_ringdown_unclipped_db": 3.19,
       "pre_transient_pass_unclipped_db": 3.2,
-      "fitted_balance_error_db": 2.78,
+      "fitted_balance_error_db": 2.8,
       "pre_noise_pulse_error_db": 3.21,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 3.21,
@@ -64,8 +64,8 @@
       "capture_samples_at_pcm_limit": 2857,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 491,
-      "spectral_error_db": 8.67,
-      "unclipped_error_db": 4.31,
+      "spectral_error_db": 8.69,
+      "unclipped_error_db": 4.37,
       "before_db": 9.4,
       "before_unclipped_db": 5.82,
       "pre_ringdown_unclipped_db": 4.18,
@@ -105,13 +105,13 @@
       "capture_samples_at_pcm_limit": 3122,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 484,
-      "spectral_error_db": 3.4,
-      "unclipped_error_db": 2.8,
+      "spectral_error_db": 3.46,
+      "unclipped_error_db": 2.85,
       "before_db": 6.2,
       "before_unclipped_db": 6.97,
       "pre_ringdown_unclipped_db": 3.2,
       "pre_transient_pass_unclipped_db": 3.47,
-      "fitted_balance_error_db": 2.82,
+      "fitted_balance_error_db": 2.79,
       "pre_noise_pulse_error_db": 3.48,
       "pre_noise_pulse_fitted_balance_error_db": 3.17,
       "pre_noise_envelope_error_db": 3.47,
@@ -185,13 +185,13 @@
       "capture_samples_at_pcm_limit": 742,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 509,
-      "spectral_error_db": 2.89,
-      "unclipped_error_db": 2.61,
+      "spectral_error_db": 2.99,
+      "unclipped_error_db": 2.72,
       "before_db": 8.71,
       "before_unclipped_db": 9.88,
       "pre_ringdown_unclipped_db": 3.91,
       "pre_transient_pass_unclipped_db": 3.58,
-      "fitted_balance_error_db": 2.5,
+      "fitted_balance_error_db": 2.53,
       "pre_noise_pulse_error_db": 3.61,
       "pre_noise_pulse_fitted_balance_error_db": 3.29,
       "pre_noise_envelope_error_db": 3.59,
@@ -224,13 +224,13 @@
       "capture_samples_at_pcm_limit": 846,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 513,
-      "spectral_error_db": 3.75,
-      "unclipped_error_db": 2.86,
+      "spectral_error_db": 3.82,
+      "unclipped_error_db": 2.97,
       "before_db": 6.85,
       "before_unclipped_db": 7.77,
       "pre_ringdown_unclipped_db": 3.76,
       "pre_transient_pass_unclipped_db": 3.65,
-      "fitted_balance_error_db": 2.46,
+      "fitted_balance_error_db": 2.5,
       "pre_noise_pulse_error_db": 3.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.02,
       "pre_noise_envelope_error_db": 3.6,
@@ -304,8 +304,8 @@
       "capture_samples_at_pcm_limit": 88,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 257,
-      "spectral_error_db": 3.61,
-      "unclipped_error_db": 3.95,
+      "spectral_error_db": 3.68,
+      "unclipped_error_db": 3.99,
       "before_db": 16.36,
       "before_unclipped_db": 18.06,
       "pre_ringdown_unclipped_db": 3.42,
@@ -774,13 +774,13 @@
       "capture_samples_at_pcm_limit": 18,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 149,
-      "spectral_error_db": 2.99,
-      "unclipped_error_db": 2.75,
+      "spectral_error_db": 3.08,
+      "unclipped_error_db": 2.82,
       "before_db": 5.6,
       "before_unclipped_db": 6.48,
       "pre_ringdown_unclipped_db": 3.52,
       "pre_transient_pass_unclipped_db": 3.59,
-      "fitted_balance_error_db": 2.43,
+      "fitted_balance_error_db": 2.36,
       "pre_noise_pulse_error_db": 3.59,
       "pre_noise_pulse_fitted_balance_error_db": 3.46,
       "pre_noise_envelope_error_db": 3.58,
@@ -813,13 +813,13 @@
       "capture_samples_at_pcm_limit": 913,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 139,
-      "spectral_error_db": 3.3,
-      "unclipped_error_db": 2.96,
+      "spectral_error_db": 3.4,
+      "unclipped_error_db": 3.08,
       "before_db": 5.65,
       "before_unclipped_db": 5.5,
       "pre_ringdown_unclipped_db": 3.22,
       "pre_transient_pass_unclipped_db": 3.41,
-      "fitted_balance_error_db": 1.8,
+      "fitted_balance_error_db": 1.83,
       "pre_noise_pulse_error_db": 3.41,
       "pre_noise_pulse_fitted_balance_error_db": 2.61,
       "pre_noise_envelope_error_db": 3.41,
@@ -852,13 +852,13 @@
       "capture_samples_at_pcm_limit": 175,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 139,
-      "spectral_error_db": 3.12,
-      "unclipped_error_db": 2.88,
+      "spectral_error_db": 3.17,
+      "unclipped_error_db": 2.95,
       "before_db": 5.62,
       "before_unclipped_db": 5.97,
       "pre_ringdown_unclipped_db": 2.93,
       "pre_transient_pass_unclipped_db": 3.11,
-      "fitted_balance_error_db": 1.69,
+      "fitted_balance_error_db": 1.72,
       "pre_noise_pulse_error_db": 3.11,
       "pre_noise_pulse_fitted_balance_error_db": 2.46,
       "pre_noise_envelope_error_db": 3.11,
@@ -891,13 +891,13 @@
       "capture_samples_at_pcm_limit": 296,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 283,
-      "spectral_error_db": 4.04,
-      "unclipped_error_db": 4.34,
+      "spectral_error_db": 4.09,
+      "unclipped_error_db": 4.36,
       "before_db": 5.99,
       "before_unclipped_db": 5.73,
       "pre_ringdown_unclipped_db": 4.8,
       "pre_transient_pass_unclipped_db": 4.94,
-      "fitted_balance_error_db": 3.35,
+      "fitted_balance_error_db": 3.36,
       "pre_noise_pulse_error_db": 4.64,
       "pre_noise_pulse_fitted_balance_error_db": 3.78,
       "pre_noise_envelope_error_db": 4.64,
@@ -971,9 +971,9 @@
     "held out": {
       "count": 12,
       "before_db": 6.145,
-      "spectral_error_db": 3.26,
+      "spectral_error_db": 3.31,
       "before_unclipped_db": 6.69,
-      "unclipped_error_db": 2.84,
+      "unclipped_error_db": 2.885,
       "pre_ringdown_unclipped_db": 3.53,
       "pre_transient_pass_unclipped_db": 3.49,
       "pre_noise_pulse_error_db": 3.545,
@@ -990,7 +990,7 @@
       "before_db": 5.48,
       "spectral_error_db": 2.87,
       "before_unclipped_db": 6.14,
-      "unclipped_error_db": 2.61,
+      "unclipped_error_db": 2.72,
       "pre_ringdown_unclipped_db": 3.59,
       "pre_transient_pass_unclipped_db": 3.57,
       "pre_noise_pulse_error_db": 3.21,
@@ -1181,7 +1181,7 @@
     "median_errors_db": {
       "all": {
         "count": 23,
-        "center_db": 2.8,
+        "center_db": 2.85,
         "fitted_balance_db": 2.28,
         "pre_noise_pulse_fitted_balance_db": 3.02,
         "pre_noise_envelope_fitted_balance_db": 2.96,
@@ -1200,7 +1200,7 @@
       },
       "mix fit": {
         "count": 11,
-        "center_db": 2.61,
+        "center_db": 2.72,
         "fitted_balance_db": 2.2,
         "pre_noise_pulse_fitted_balance_db": 2.81,
         "pre_noise_envelope_fitted_balance_db": 2.73,
@@ -1219,8 +1219,8 @@
       },
       "held out": {
         "count": 12,
-        "center_db": 2.84,
-        "fitted_balance_db": 2.605,
+        "center_db": 2.885,
+        "fitted_balance_db": 2.57,
         "pre_noise_pulse_fitted_balance_db": 3.315,
         "pre_noise_envelope_fitted_balance_db": 3.305,
         "pre_cymbal_sweep_center_db": 3.275,
@@ -3744,5 +3744,150 @@
       ]
     },
     "validation_note": "Reverb Loop13.wav is Waltz A. The Drumbase recording is the only tested source with the fill."
+  },
+  "hat_noise_filter_refinement": {
+    "method": "Compare the median short-time power in 12 bands, normalized to the 7.95–8.4 kHz band. Use the 6–26 ms window of hi-hat or maracas steps without coincident snare, cymbal, clipped samples or a following attack in the window.",
+    "hits": 66,
+    "frequency_bands_hz": [
+      [
+        3000,
+        4000
+      ],
+      [
+        4000,
+        5000
+      ],
+      [
+        5000,
+        6000
+      ],
+      [
+        6000,
+        7000
+      ],
+      [
+        7000,
+        7600
+      ],
+      [
+        7600,
+        7950
+      ],
+      [
+        7950,
+        8400
+      ],
+      [
+        8400,
+        9000
+      ],
+      [
+        9000,
+        10000
+      ],
+      [
+        10000,
+        12000
+      ],
+      [
+        12000,
+        14000
+      ],
+      [
+        14000,
+        17000
+      ]
+    ],
+    "analysis_columns": [
+      "reference",
+      "previous_c",
+      "revised_c"
+    ],
+    "relative_band_power_db": [
+      [
+        -41.591,
+        -32.855,
+        -25.76,
+        -17.767,
+        -10.173,
+        -3.084,
+        0.0,
+        -4.336,
+        -10.317,
+        -13.727,
+        -16.641,
+        -18.358
+      ],
+      [
+        -40.315,
+        -32.5,
+        -26.822,
+        -19.145,
+        -12.822,
+        -5.118,
+        0.0,
+        -4.889,
+        -11.882,
+        -15.729,
+        -19.058,
+        -21.712
+      ],
+      [
+        -38.526,
+        -30.495,
+        -24.488,
+        -16.418,
+        -9.659,
+        -2.101,
+        0.0,
+        -4.708,
+        -10.537,
+        -14.069,
+        -17.472,
+        -20.264
+      ]
+    ],
+    "filter_note": "Broaden and lower the first noise filter resonance. Adjust the existing two filter gains for approximately equal integrated noise power.",
+    "loop_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "rms_relative_spectrum_error_db": [
+      1.821,
+      1.422
+    ],
+    "fitted_balance": -0.1891,
+    "loop_median_error_db": {
+      "center": [
+        2.8,
+        2.85
+      ],
+      "balanced": [
+        2.28,
+        2.28
+      ],
+      "settled": [
+        2.27,
+        2.27
+      ]
+    },
+    "settled_loop_error_db": {
+      "SWING1": [
+        2.42,
+        2.33
+      ],
+      "BEGUINE": [
+        2.79,
+        2.81
+      ],
+      "MAMBO": [
+        2.56,
+        2.59
+      ],
+      "RHUMBA": [
+        2.47,
+        2.51
+      ]
+    }
   }
 }

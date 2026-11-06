@@ -11,7 +11,7 @@
         .noise_threshold = 0.53f },
     /* Two decays form the small pulse under each recorded hi-hat hit. */
     [TR66_HAT] = { .tone = {{0.0f, 0.46f, 0.014f, 0.0f}, {0.0f, 3.5f, -0.014f, 0.0f}},
-        .band = {{8177.87646484f, 14.46788692f, 7.66822713f}, {8330.25390625f, 0.45656088f, 0.204095891f}},
+        .band = {{8061.0f, 11.06f, 6.87649f}, {8330.25390625f, 0.45656088f, 0.18302f}},
         .noise_attack_ms = 5.3f,
         .noise_decay_ms = 56.0f,
         .noise_highpass_hz = 9191.72949219f,
