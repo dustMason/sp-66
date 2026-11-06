@@ -224,6 +224,15 @@ The snare attack and tone changes improved several groove scores. In that
 pass, isolated 35–540 Hz waveform correlation fell from 0.95 to 0.94 on
 Drumbase and from 0.92 to 0.86 on Reverb.
 
+The high conga adds a short 200 Hz decay alongside its longer ring.
+This strengthens the initial cycles and brings the ratio of the first
+trough to the first crest from 0.577 to 0.674. In 14 separated loop hits,
+the corresponding median ratios are 0.680 in Drumbase and 0.662 in
+Reverb. The 58 ms tail remains a compromise between the recordings.
+After one Arrange cycle at the fitted Balance, Drumbase Cha-Cha improves
+from 2.78 to 2.63 dB and Reverb Beguine B from 4.27 to 4.12 dB. At center
+Balance, Drumbase Beguine rises from 3.03 to 3.11 dB.
+
 Both recording sets have a brief low-frequency pulse under cymbal and
 hi-hat hits. The C engine now adds two decays of opposite sign to each
 voice. On cymbal-only steps in Reverb Slow Rock B, the 130–220 Hz band
@@ -294,14 +303,14 @@ Both Habanera A captures support the score's simultaneous kick and snare.
 
 | Level-matched spectral error | Before ring-down pass | After ring-down pass | Current |
 | --- | ---: | ---: | ---: |
-| Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.85 dB |
-| Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.89 dB |
+| Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.82 dB |
+| Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.87 dB |
 | Reverb, all 25 loops | 5.70 dB | 4.62 dB | 4.16 dB |
 | Reverb Slow Rock B | 5.70 dB | 5.17 dB | 4.16 dB |
-| Reverb Mambo A | 5.82 dB | 4.41 dB | 3.86 dB |
-| Reverb Mambo B | 6.37 dB | 4.66 dB | 4.20 dB |
-| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.61 dB |
-| Reverb Rhumba B | 7.36 dB | 5.31 dB | 4.98 dB |
+| Reverb Mambo A | 5.82 dB | 4.41 dB | 3.76 dB |
+| Reverb Mambo B | 6.37 dB | 4.66 dB | 4.11 dB |
+| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.59 dB |
+| Reverb Rhumba B | 7.36 dB | 5.31 dB | 4.97 dB |
 
 The original Drumbase held-out score was 6.69 dB with clipped windows
 excluded. Its Slow Rock score rose from 3.19 to 3.68 dB after the quieter
@@ -329,9 +338,10 @@ from silence and from 4.73 to 2.82 dB after one Arrange cycle. Reverb's
 Waltz clip contains the A phrase, so the fill fit has one recorded reference.
 
 In eight matched first-bar excerpts, the two recordings differ by a median
-4.23 dB. The current C model is 2.83 dB from the CD and 3.33 dB from Reverb
-on those excerpts. In the matched Slow Rock excerpt, the recordings differ
-by 3.12 dB, and the model is 4.11 dB from the CD and 2.94 dB from Reverb.
+4.23 dB. In that comparison, the C model was 2.83 dB from the CD and
+3.33 dB from Reverb. In the matched Slow Rock excerpt, the recordings
+differ by 3.12 dB, and the model scored 4.11 dB from the CD and 2.94 dB
+from Reverb.
 
 A separate comparison fitted one fixed Balance position per pack using
 only the gain-fit loops. The best positions were −0.19 for Drumbase and

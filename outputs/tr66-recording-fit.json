@@ -23,13 +23,13 @@
       "capture_samples_at_pcm_limit": 137,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 546,
-      "spectral_error_db": 3.45,
-      "unclipped_error_db": 3.03,
+      "spectral_error_db": 3.42,
+      "unclipped_error_db": 3.11,
       "before_db": 9.78,
       "before_unclipped_db": 10.52,
       "pre_ringdown_unclipped_db": 3.19,
       "pre_transient_pass_unclipped_db": 3.2,
-      "fitted_balance_error_db": 2.8,
+      "fitted_balance_error_db": 2.81,
       "pre_noise_pulse_error_db": 3.21,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 3.21,
@@ -105,13 +105,13 @@
       "capture_samples_at_pcm_limit": 3122,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 484,
-      "spectral_error_db": 3.46,
-      "unclipped_error_db": 2.85,
+      "spectral_error_db": 3.38,
+      "unclipped_error_db": 2.7,
       "before_db": 6.2,
       "before_unclipped_db": 6.97,
       "pre_ringdown_unclipped_db": 3.2,
       "pre_transient_pass_unclipped_db": 3.47,
-      "fitted_balance_error_db": 2.79,
+      "fitted_balance_error_db": 2.63,
       "pre_noise_pulse_error_db": 3.48,
       "pre_noise_pulse_fitted_balance_error_db": 3.17,
       "pre_noise_envelope_error_db": 3.47,
@@ -185,13 +185,13 @@
       "capture_samples_at_pcm_limit": 742,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 509,
-      "spectral_error_db": 2.99,
-      "unclipped_error_db": 2.72,
+      "spectral_error_db": 3.04,
+      "unclipped_error_db": 2.79,
       "before_db": 8.71,
       "before_unclipped_db": 9.88,
       "pre_ringdown_unclipped_db": 3.91,
       "pre_transient_pass_unclipped_db": 3.58,
-      "fitted_balance_error_db": 2.53,
+      "fitted_balance_error_db": 2.52,
       "pre_noise_pulse_error_db": 3.61,
       "pre_noise_pulse_fitted_balance_error_db": 3.29,
       "pre_noise_envelope_error_db": 3.59,
@@ -224,13 +224,13 @@
       "capture_samples_at_pcm_limit": 846,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 513,
-      "spectral_error_db": 3.82,
-      "unclipped_error_db": 2.97,
+      "spectral_error_db": 3.77,
+      "unclipped_error_db": 3.01,
       "before_db": 6.85,
       "before_unclipped_db": 7.77,
       "pre_ringdown_unclipped_db": 3.76,
       "pre_transient_pass_unclipped_db": 3.65,
-      "fitted_balance_error_db": 2.5,
+      "fitted_balance_error_db": 2.52,
       "pre_noise_pulse_error_db": 3.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.02,
       "pre_noise_envelope_error_db": 3.6,
@@ -304,13 +304,13 @@
       "capture_samples_at_pcm_limit": 88,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 257,
-      "spectral_error_db": 3.68,
-      "unclipped_error_db": 3.99,
+      "spectral_error_db": 3.73,
+      "unclipped_error_db": 4.05,
       "before_db": 16.36,
       "before_unclipped_db": 18.06,
       "pre_ringdown_unclipped_db": 3.42,
       "pre_transient_pass_unclipped_db": 3.51,
-      "fitted_balance_error_db": 3.91,
+      "fitted_balance_error_db": 3.9,
       "pre_noise_pulse_error_db": 3.54,
       "pre_noise_pulse_fitted_balance_error_db": 3.81,
       "pre_noise_envelope_error_db": 3.46,
@@ -971,9 +971,9 @@
     "held out": {
       "count": 12,
       "before_db": 6.145,
-      "spectral_error_db": 3.31,
+      "spectral_error_db": 3.275,
       "before_unclipped_db": 6.69,
-      "unclipped_error_db": 2.885,
+      "unclipped_error_db": 2.87,
       "pre_ringdown_unclipped_db": 3.53,
       "pre_transient_pass_unclipped_db": 3.49,
       "pre_noise_pulse_error_db": 3.545,
@@ -990,7 +990,7 @@
       "before_db": 5.48,
       "spectral_error_db": 2.87,
       "before_unclipped_db": 6.14,
-      "unclipped_error_db": 2.72,
+      "unclipped_error_db": 2.79,
       "pre_ringdown_unclipped_db": 3.59,
       "pre_transient_pass_unclipped_db": 3.57,
       "pre_noise_pulse_error_db": 3.21,
@@ -1181,7 +1181,7 @@
     "median_errors_db": {
       "all": {
         "count": 23,
-        "center_db": 2.85,
+        "center_db": 2.82,
         "fitted_balance_db": 2.28,
         "pre_noise_pulse_fitted_balance_db": 3.02,
         "pre_noise_envelope_fitted_balance_db": 2.96,
@@ -1200,7 +1200,7 @@
       },
       "mix fit": {
         "count": 11,
-        "center_db": 2.72,
+        "center_db": 2.79,
         "fitted_balance_db": 2.2,
         "pre_noise_pulse_fitted_balance_db": 2.81,
         "pre_noise_envelope_fitted_balance_db": 2.73,
@@ -1219,8 +1219,8 @@
       },
       "held out": {
         "count": 12,
-        "center_db": 2.885,
-        "fitted_balance_db": 2.57,
+        "center_db": 2.87,
+        "fitted_balance_db": 2.495,
         "pre_noise_pulse_fitted_balance_db": 3.315,
         "pre_noise_envelope_fitted_balance_db": 3.305,
         "pre_cymbal_sweep_center_db": 3.275,
@@ -3887,6 +3887,79 @@
       "RHUMBA": [
         2.47,
         2.51
+      ]
+    }
+  },
+  "conga_attack_refinement": {
+    "method": "Align unclipped high conga hits by the 5–25 ms tonal ring and filter below 1.25 kHz to reduce maracas. Compare the first trough's magnitude with the first crest. Use fixed alignment and match ring level for both builds.",
+    "hits": 3,
+    "oscillator_hz": 200,
+    "decay_time_constants_ms": [
+      58.0,
+      11.93
+    ],
+    "attack_columns": [
+      "reference",
+      "previous_c",
+      "revised_c"
+    ],
+    "first_trough_to_first_crest_ratio": [
+      0.6804,
+      0.5769,
+      0.6738
+    ],
+    "relative_waveform_error_rms_0_4_to_12_ms": [
+      0.1041,
+      0.0816
+    ],
+    "loop_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "fitted_balance": -0.1891,
+    "loop_median_error_db": {
+      "center": [
+        2.85,
+        2.82
+      ],
+      "balanced": [
+        2.28,
+        2.28
+      ],
+      "settled": [
+        2.27,
+        2.27
+      ]
+    },
+    "settled_loop_error_db": {
+      "CHA-CHA": [
+        2.78,
+        2.63
+      ],
+      "BEGUINE": [
+        2.81,
+        2.82
+      ],
+      "MAMBO": [
+        2.59,
+        2.58
+      ],
+      "SAMBA": [
+        2.63,
+        2.62
+      ],
+      "RHUMBA": [
+        2.51,
+        2.53
+      ]
+    },
+    "host_benchmark": {
+      "selection": "Mambo plus Rock 6, Arrange B, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": [
+        1.06947,
+        1.07407
       ]
     }
   }

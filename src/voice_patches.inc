@@ -33,7 +33,10 @@
     [TR66_RIM] = { .tone = {{1525.0f, 2.10f, -1.00154f, -0.93159f},
                            {0.0f, 0.18f, 0.70f, 0.0f}} },
     [TR66_COWBELL] = { .tone = {{895.0f, 13.4f, -0.53993481f, 0.19342791f}, {0.00000000f, 0.10489128f, 0.56115299f, 0.00000000f}} },
-    [TR66_CONGA] = { .tone = {{200.000000f, 58.000000f, -0.526000f, -0.719000f}, {0.0f, 2.08f, 0.490000f, 0.0f}} },
+    /* A short decay reinforces the first cycles of the high conga. */
+    [TR66_CONGA] = { .tone = {{200.0f, 58.0f, -0.48076f, -0.65717f},
+                              {0.0f, 2.08f, 0.38269f, 0.0f},
+                              {200.0f, 11.93f, -0.04524f, -0.06183f}} },
     /* Both captures have a fast initial decay and a longer ring at the same pitch. */
     [TR66_HIGH_BONGO] = { .tone = {{597.0f, 34.0f, -0.028f, -0.187f},
                                    {597.0f, 5.3f, -0.195f, -0.430f}, {0.0f, 2.4f, 0.089f, 0.0f}} },
