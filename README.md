@@ -106,9 +106,10 @@ west build -b stem_player -d "$tr66_project/work/sp1-build" "$tr66_project/firmw
 
 The development image is `work/sp1-build/zephyr/tr66-sp1.bin`, linked at
 `0x20000` for the SP-1 application slot. Board and codec sources are credited
-in [firmware/NOTICE](firmware/NOTICE). The build emits peak render cycles,
-over-budget block count and I2S write errors to a RAM struct for SWD
-inspection. On-device playback and the audio deadline still need testing.
+in [firmware/NOTICE](firmware/NOTICE). The build exposes startup and runtime
+diagnostics over USB serial and in a RAM struct for SWD inspection. See the
+hardware status below before flashing. On-device playback and the audio
+deadline still need testing.
 The community flashing path uses [Solderless](https://solderless.engineering/utility/).
 With the SP-1 off, hold Track 1 and Track 4 while connecting USB-C in Chrome
 or Edge, then release when the Track 1 light comes on. Connect in the
@@ -119,6 +120,47 @@ Treat replacing the factory firmware as one-way. See the
 The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
 ends. The loudest sample was 0.731 of digital full scale, with zero clipped samples.
+
+## Hardware status and diagnostics
+
+The first hardware test of commit `8c8792a` completed the bootloader's write
+and finalization steps, but left Track 1 lit with no response to Function.
+The cause of the startup failure has not yet been identified. The current
+diagnostic build compiles and the host engine tests pass; it has **not yet
+been flashed or verified on hardware**.
+
+The firmware now enumerates as **SP-66 diagnostics**. Open its serial port at
+115200 baud with DTR asserted to receive one status line per second. It
+never waits for a computer to connect. Each line reports the startup stage,
+status code, control-scan attempts, last ADC result, rendered audio blocks,
+peak render cycles, over-budget blocks, I2S write errors, and Function state.
+The RAM struct also holds the latest raw ADC values. A fatal error records
+its reason and program counter in uninitialized RAM before resetting;
+retention of that record across the bootloader is not yet verified.
+
+| Stage | Last startup milestone |
+| --- | --- |
+| 1 | Initializing the synthesis engine |
+| 2 | Initializing controls and LEDs |
+| 3 | Attempting codec power-on and I2S startup |
+| 4 | I2S startup attempt finished; codec configuration may be pending |
+| 5 | Codecs ready; control scanning scheduled |
+| 6 | Stopping background work |
+| 9 | Shutdown idle loop |
+
+A separate thread reads Function directly from its GPIO, independently of
+ADC scans and audio startup. After the button has been released once since
+boot, a roughly two-second hold requests shutdown; continuing to four
+seconds resets the device if shutdown has stalled. Fatal errors reset
+instead of halting. The build also enables stack protection, assertions,
+and a four-second watchdog where the bootloader has not already started one.
+ADC oversampling is applied after devicetree sequence initialization so it
+is no longer overwritten.
+
+These changes provide diagnostics and recovery paths for the next hardware
+test; they are not a confirmed fix for the original freeze. They cannot
+recover a device still running the old image without first regaining the
+bootloader through a power cycle.
 
 ## Fidelity work
 

@@ -7,10 +7,13 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/i2s.h>
 #include <zephyr/drivers/pwm.h>
+#include <zephyr/drivers/uart.h>
+#include <zephyr/drivers/watchdog.h>
 #include <zephyr/kernel.h>
 #include <zephyr/sys/atomic.h>
 #include <zephyr/sys/poweroff.h>
 #include <zephyr/sys/reboot.h>
+#include <zephyr/sys/printk.h>
 
 enum {
     RATE = 48000,
@@ -43,6 +46,8 @@ static Tr66Sequencer seq;
 static Tr66Controls controls;
 static atomic_t codec_status = ATOMIC_INIT(-EINPROGRESS);
 static atomic_t led_state;
+static atomic_t power_requested;
+static atomic_t power_idle;
 static uint8_t prior_leds[8];
 static float pcm_gain;
 static float mono[FRAMES];
@@ -51,7 +56,72 @@ static float mono[FRAMES];
 volatile struct {
     uint32_t peak_render_cycles, over_budget, write_errors;
     int status;
+    unsigned stage, scans, blocks;
+    int adc_status;
+    unsigned raw[6];
 } tr66_sp1_diagnostics;
+
+static __noinit uint32_t fault_key, fault_reason, fault_pc;
+
+void k_sys_fatal_error_handler(unsigned int reason, const struct arch_esf *esf)
+{
+    fault_reason = reason;
+    fault_pc = esf != NULL ? esf->basic.pc : 0;
+    fault_key = 0x6631fa17;
+    sys_reboot(SYS_REBOOT_COLD);
+    CODE_UNREACHABLE;
+}
+
+/* The direct Function GPIO must remain usable if audio or ADC stops progressing.
+ * A four-second hold is the last-resort reset when orderly shutdown stalls. */
+static void power_monitor(void *a, void *b, void *c)
+{
+    ARG_UNUSED(a); ARG_UNUSED(b); ARG_UNUSED(c);
+    int64_t pressed_since = -1;
+    bool released = false;
+    gpio_pin_configure(gpio0, FN_PIN, GPIO_INPUT | GPIO_PULL_UP);
+    for (;;) {
+        bool pressed = gpio_pin_get(gpio0, FN_PIN) == 0;
+        if (!pressed) {
+            released = true;
+            pressed_since = -1;
+        } else if (released && !atomic_get(&power_idle)) {
+            if (pressed_since < 0)
+                pressed_since = k_uptime_get();
+            int64_t held = k_uptime_get() - pressed_since;
+            if (held >= 1800)
+                atomic_set(&power_requested, 1);
+            if (held >= 4000)
+                sys_reboot(SYS_REBOOT_COLD);
+        }
+        k_msleep(10);
+    }
+}
+K_THREAD_DEFINE(power_thread, 1024, power_monitor, NULL, NULL, NULL, -1, 0, 0);
+
+static void diagnostic_console(void *a, void *b, void *c)
+{
+    ARG_UNUSED(a); ARG_UNUSED(b); ARG_UNUSED(c);
+    const struct device *console = DEVICE_DT_GET(DT_CHOSEN(zephyr_console));
+    for (;;) {
+        uint32_t dtr = 0;
+        if (device_is_ready(console) &&
+            uart_line_ctrl_get(console, UART_LINE_CTRL_DTR, &dtr) == 0 && dtr) {
+            printk("SP66 t=%u stage=%u status=%d scans=%u adc=%d blocks=%u "
+                   "peak=%u over=%u errors=%u fn=%d fault=%u pc=%x\n",
+                   k_uptime_get_32(), tr66_sp1_diagnostics.stage,
+                   tr66_sp1_diagnostics.status, tr66_sp1_diagnostics.scans,
+                   tr66_sp1_diagnostics.adc_status, tr66_sp1_diagnostics.blocks,
+                   tr66_sp1_diagnostics.peak_render_cycles,
+                   tr66_sp1_diagnostics.over_budget, tr66_sp1_diagnostics.write_errors,
+                   gpio_pin_get(gpio0, FN_PIN) == 0,
+                   fault_key == 0x6631fa17 ? fault_reason : 0,
+                   fault_key == 0x6631fa17 ? fault_pc : 0);
+        }
+        k_msleep(1000);
+    }
+}
+K_THREAD_DEFINE(console_thread, 1536, diagnostic_console, NULL, NULL, NULL, 1, 0, 1000);
 
 static const float volume_gains[] = {
     0.0f, 0.00794f, 0.01122f, 0.01585f, 0.02239f, 0.03162f, 0.04467f, 0.06310f,
@@ -75,10 +145,16 @@ static bool read_input(Tr66Input *input)
     unsigned raw[ARRAY_SIZE(inputs)];
     for (unsigned i = 0; i < ARRAY_SIZE(inputs); ++i) {
         int16_t value;
-        struct adc_sequence sample = {.buffer = &value, .buffer_size = sizeof(value), .oversampling = 1};
-        if (adc_sequence_init_dt(&inputs[i], &sample) != 0 || adc_read_dt(&inputs[i], &sample) != 0)
+        struct adc_sequence sample = {.buffer = &value, .buffer_size = sizeof(value)};
+        int rc = adc_sequence_init_dt(&inputs[i], &sample);
+        sample.oversampling = 1;
+        if (rc == 0)
+            rc = adc_read_dt(&inputs[i], &sample);
+        tr66_sp1_diagnostics.adc_status = rc;
+        if (rc != 0)
             return false;
         raw[i] = value > 0 ? value : 0;
+        tr66_sp1_diagnostics.raw[i] = raw[i];
     }
     static const unsigned track[] = {210, 399, 728, 1215, 1813};
     static const unsigned side[] = {403, 1216, 729, 1817};
@@ -137,6 +213,7 @@ static void publish_leds(void)
 
 static void scan_controls(struct k_work *work)
 {
+    ++tr66_sp1_diagnostics.scans;
     static Tr66Input held;
     static unsigned ladder_idle;
     Tr66Input input = {0};
@@ -238,6 +315,8 @@ static int init_controls(void)
 
 static void idle_until_wake(void)
 {
+    atomic_set(&power_idle, 1);
+    tr66_sp1_diagnostics.stage = 9;
     /* Wait for release so GPIO level sensing will see the next press. */
     while (gpio_pin_get(gpio0, FN_PIN) == 0) {
         sp1_feed_watchdog();
@@ -256,18 +335,33 @@ static void idle_until_wake(void)
     }
     NRF_P0->PIN_CNF[FN_PIN] |= GPIO_PIN_CNF_SENSE_Low << GPIO_PIN_CNF_SENSE_Pos;
     sp1_feed_watchdog();
+    NRF_POWER->RESETREAS = 0xffffffff;
     sys_poweroff();
 }
 
 int main(void)
 {
+    NRF_POWER->RESETREAS = 0xffffffff;
     sp1_feed_watchdog();
+    const struct device *watchdog = DEVICE_DT_GET(DT_ALIAS(watchdog0));
+    if (device_is_ready(watchdog)) {
+        const struct wdt_timeout_cfg timeout = {
+            .window.max = 4000, .flags = WDT_FLAG_RESET_SOC,
+        };
+        /* An already-running bootloader watchdog cannot be reconfigured.
+         * The existing feed helper reloads every channel in either case. */
+        if (wdt_install_timeout(watchdog, &timeout) >= 0)
+            wdt_setup(watchdog, 0);
+    }
+    tr66_sp1_diagnostics.stage = 1;
     tr66_seq_init(&seq, RATE, UINT32_C(14293));
     tr66_controls_init(&controls);
     DCB->DEMCR |= DCB_DEMCR_TRCENA_Msk;
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
 
+    tr66_sp1_diagnostics.stage = 2;
     int rc = init_controls();
+    tr66_sp1_diagnostics.stage = 3;
     if (rc == 0)
         rc = gpio_pin_configure(gpio0, 21, GPIO_OUTPUT_HIGH); /* disable charge while playing */
     if (rc == 0 && device_is_ready(i2s))
@@ -276,6 +370,7 @@ int main(void)
         rc = -ENODEV;
     if (rc == 0)
         rc = begin_stream();
+    tr66_sp1_diagnostics.stage = 4;
     if (rc == 0) {
         /* The codec starts the frame clock before its setup finishes.
          * Keep supplying silence while setup runs on the work queue. */
@@ -287,7 +382,7 @@ int main(void)
     if (rc == 0) {
         bool codecs_ready = false;
         bool shutdown = false;
-        while (!shutdown) {
+        while (!shutdown && !atomic_get(&power_requested)) {
             sp1_feed_watchdog();
             if (!codecs_ready) {
                 int status = atomic_get(&codec_status);
@@ -297,6 +392,7 @@ int main(void)
                     if (rc != 0)
                         break;
                     codecs_ready = true;
+                    tr66_sp1_diagnostics.stage = 5;
                     k_work_schedule(&scan_work, K_NO_WAIT);
                 }
             }
@@ -310,6 +406,7 @@ int main(void)
                 continue;
             uint32_t start = DWT->CYCCNT;
             fill_audio(data);
+            ++tr66_sp1_diagnostics.blocks;
             uint32_t cycles = DWT->CYCCNT - start;
             tr66_sp1_diagnostics.peak_render_cycles =
                 MAX(tr66_sp1_diagnostics.peak_render_cycles, cycles);
@@ -330,6 +427,7 @@ int main(void)
             }
             publish_leds();
         }
+        tr66_sp1_diagnostics.stage = 6;
         struct k_work_sync sync;
         k_work_cancel_sync(&codec_start_work, &sync);
         k_work_cancel_delayable_sync(&scan_work, &sync);
