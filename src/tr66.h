@@ -19,6 +19,7 @@ enum {
     TR66_REDUCED_HIGH_BONGO = TR66_REDUCED_CONGA << 1,
     TR66_QUIET_HIGH_BONGO = TR66_REDUCED_HIGH_BONGO << 1,
     TR66_QUIET_KICK = TR66_QUIET_HIGH_BONGO << 1,
+    TR66_GHOST_KICK = TR66_QUIET_KICK << 1,
 };
 
 static inline bool tr66_coincident_hat_cymbal(uint16_t voices)

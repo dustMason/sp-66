@@ -89,6 +89,23 @@ static void test_shared_and_reduced_triggers(void)
 
     tr66_init(&first, RATE, 31);
     second = first;
+    tr66_hit(&first, MASK(KICK) | TR66_GHOST_KICK);
+    tr66_hit(&second, TR66_GHOST_KICK);
+    tr66_render(&first, a, BLOCK);
+    tr66_render(&second, b, BLOCK);
+    for (unsigned i = 0; i < BLOCK; ++i)
+        assert(fabsf(b[i] - 0.19f * a[i]) < 1e-6f);
+
+    tr66_init(&first, RATE, 31);
+    second = first;
+    tr66_hit(&first, TR66_QUIET_KICK | TR66_GHOST_KICK);
+    tr66_hit(&second, TR66_QUIET_KICK);
+    tr66_render(&first, a, BLOCK);
+    tr66_render(&second, b, BLOCK);
+    assert(memcmp(a, b, sizeof(a)) == 0);
+
+    tr66_init(&first, RATE, 31);
+    second = first;
     tr66_hit(&first, MASK(HIGH_BONGO) | TR66_REDUCED_HIGH_BONGO | TR66_QUIET_HIGH_BONGO);
     tr66_hit(&second, TR66_REDUCED_HIGH_BONGO | TR66_QUIET_HIGH_BONGO);
     tr66_render(&first, a, BLOCK);
@@ -377,6 +394,19 @@ static void test_slow_rock_fill(void)
     assert(fill->events[6].voices == (MASK(KICK) | MASK(CYMBAL)));
 }
 
+static void test_waltz_fill(void)
+{
+    const Tr66Bar *fill = &tr66_patterns[TR66_WALTZ].bars[3];
+    assert(fill->count == 4);
+    assert(fill->events[0].voices == (MASK(KICK) | MASK(CYMBAL)));
+    assert(fill->events[1].tick == 24);
+    assert(fill->events[1].voices == (TR66_QUIET_KICK | MASK(SNARE) | MASK(CYMBAL)));
+    assert(fill->events[2].tick == 42);
+    assert(fill->events[2].voices == (TR66_QUIET_KICK | MASK(CYMBAL)));
+    assert(fill->events[3].tick == 48);
+    assert(fill->events[3].voices == (TR66_GHOST_KICK | MASK(SNARE) | MASK(CYMBAL)));
+}
+
 static void test_controls(void)
 {
     Tr66Sequencer seq;
@@ -431,6 +461,7 @@ int main(void)
     test_score_table();
     test_samba_conga();
     test_slow_rock_fill();
+    test_waltz_fill();
     test_controls();
     puts("TR-66 voice, score, timing, Arrange, block and control tests passed.");
 }

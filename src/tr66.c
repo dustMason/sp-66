@@ -236,6 +236,8 @@ void tr66_hit(Tr66 *machine, uint16_t voices)
             voice_trigger(&machine->voices[TR66_KICK], 0.5f);
         else if (voices & TR66_QUIET_KICK)
             voice_trigger(&machine->voices[TR66_KICK], 0.43f);
+        else if (voices & TR66_GHOST_KICK)
+            voice_trigger(&machine->voices[TR66_KICK], 0.19f);
     }
     if ((voices & TR66_REDUCED_CONGA) && !(voices & (1u << TR66_CONGA)))
         voice_trigger(&machine->voices[TR66_CONGA], 0.66f);

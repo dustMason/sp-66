@@ -343,13 +343,13 @@
       "capture_samples_at_pcm_limit": 2799,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 368,
-      "spectral_error_db": 3.78,
-      "unclipped_error_db": 3.79,
+      "spectral_error_db": 3.45,
+      "unclipped_error_db": 3.41,
       "before_db": 6.09,
       "before_unclipped_db": 7.07,
       "pre_ringdown_unclipped_db": 5.06,
       "pre_transient_pass_unclipped_db": 4.38,
-      "fitted_balance_error_db": 4.69,
+      "fitted_balance_error_db": 2.78,
       "pre_noise_pulse_error_db": 4.36,
       "pre_noise_pulse_fitted_balance_error_db": 5.11,
       "pre_noise_envelope_error_db": 4.36,
@@ -365,7 +365,9 @@
       "pre_coincident_gate_error_db": 3.81,
       "pre_coincident_gate_fitted_balance_error_db": 4.7,
       "pre_snare_gate_error_db": 3.81,
-      "pre_snare_gate_fitted_balance_error_db": 4.7
+      "pre_snare_gate_fitted_balance_error_db": 4.7,
+      "pre_waltz_fill_unclipped_db": 3.79,
+      "pre_waltz_fill_fitted_balance_db": 4.69
     },
     "HABANERA": {
       "selection": [
@@ -1218,7 +1220,7 @@
       "held out": {
         "count": 12,
         "center_db": 2.84,
-        "fitted_balance_db": 2.625,
+        "fitted_balance_db": 2.605,
         "pre_noise_pulse_fitted_balance_db": 3.315,
         "pre_noise_envelope_fitted_balance_db": 3.305,
         "pre_cymbal_sweep_center_db": 3.275,
@@ -3685,5 +3687,62 @@
         }
       }
     }
+  },
+  "waltz_fill_refinement": {
+    "source": "Roland TR-66 Service Notes, figure 16, and Drumbase 66 WALTZ.wav",
+    "method": "Jointly fit damped sinusoids to the 43–93 Hz kick ring, 24–105 ms after each hit. Fit relative amplitudes against the median downbeat and exclude PCM-limited samples. Test the trigger levels in the complete C render.",
+    "fill_ticks_at_24_ppqn": [
+      24,
+      42,
+      48
+    ],
+    "recorded_ring_amplitude_relative_to_downbeat": [
+      0.3464,
+      0.3707,
+      0.1918
+    ],
+    "recorded_amplitude_range_across_fit_windows": [
+      [
+        0.333,
+        0.3464
+      ],
+      [
+        0.3536,
+        0.379
+      ],
+      [
+        0.1839,
+        0.2043
+      ]
+    ],
+    "analysis_window_relative_residual": 0.0652,
+    "selected_trigger_strength": [
+      0.43,
+      0.43,
+      0.19
+    ],
+    "comparison_columns": [
+      "previous_full_kicks",
+      "revised",
+      "candidate_36_percent_first_two"
+    ],
+    "clean_window_error_db": {
+      "center": [
+        3.79,
+        3.41,
+        3.59
+      ],
+      "fitted_balance": [
+        4.69,
+        2.78,
+        2.84
+      ],
+      "fitted_balance_after_one_arrange_cycle": [
+        4.73,
+        2.82,
+        2.89
+      ]
+    },
+    "validation_note": "Reverb Loop13.wav is Waltz A. The Drumbase recording is the only tested source with the fill."
   }
 }

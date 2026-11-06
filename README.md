@@ -310,6 +310,15 @@ where they differ from the printed player scores. The Drumbase Jazz Waltz
 Auto recording confirms a snare pickup on the first downbeat of the four-bar
 cycle.
 
+In Waltz Auto, the last bar adds three quieter kicks at ticks 24, 42 and 48
+on the 24-tick beat grid. The Drumbase recording's kick ring measures about
+35%, 37% and 19% of the downbeat at those hits. The revised C score uses the
+existing 43% kick trigger for the first two and a 19% trigger for the third.
+Of the two quieter renders tested, those levels give the closest loop match.
+At the fitted Balance, the clean-window error drops from 4.69 to 2.78 dB
+from silence and from 4.73 to 2.82 dB after one Arrange cycle. Reverb's
+Waltz clip contains the A phrase, so the fill fit has one recorded reference.
+
 In eight matched first-bar excerpts, the two recordings differ by a median
 4.23 dB. The current C model is 2.83 dB from the CD and 3.33 dB from Reverb
 on those excerpts. In the matched Slow Rock excerpt, the recordings differ
