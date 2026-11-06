@@ -78,13 +78,18 @@ typedef struct {
 } Tr66VoiceState;
 
 typedef struct {
+    float kick, treble;
+} Tr66Balance;
+
+typedef struct {
     Tr66VoiceState voices[TR66_VOICE_COUNT];
     float cymbal_first_band_sweep;
     unsigned cymbal_extra_hold_frames;
     uint32_t cymbal_age;
     uint32_t random;
     float sample_rate;
-    float balance, balance_target, balance_coeff;
+    Tr66Balance balance, balance_target;
+    float balance_coeff;
 } Tr66;
 
 extern const char *const tr66_voice_names[TR66_VOICE_COUNT];
@@ -93,6 +98,7 @@ extern const float tr66_line_gain;
 
 void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed);
 void tr66_hit(Tr66 *machine, uint16_t voices);
+Tr66Balance tr66_balance_gains(float position);
 void tr66_balance(Tr66 *machine, float position); /* -1 bass, 0 center, +1 treble */
 void tr66_render(Tr66 *machine, float *output, size_t frames);
 

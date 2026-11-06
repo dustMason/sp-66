@@ -165,6 +165,17 @@ def stem_renderer():
     return function, c.c_float.in_dll(lib, "tr66_line_gain").value
 
 
+class BalanceGains(c.Structure):
+    _fields_ = [("kick", c.c_float), ("treble", c.c_float)]
+
+
+def stem_balance_gains(position):
+    function = c.CDLL(str(LIBRARY)).tr66_balance_gains
+    function.argtypes = [c.c_float]
+    function.restype = BalanceGains
+    return function(position)
+
+
 def match_capture(path, directory, groove, comparison, baseline, fit_gains):
     samples, rate = sf.read(path)
     start, end = sampler_loop(path)
@@ -220,10 +231,10 @@ def match_capture(path, directory, groove, comparison, baseline, fit_gains):
     powers = None
     if fit_gains and groove.file not in HOLDOUT:
         render_stem, line_gain = stem_renderer()
-        balance = np.float32(os.environ.get("TR66_RENDER_BALANCE", "0"))
+        gains = stem_balance_gains(float(os.environ.get("TR66_RENDER_BALANCE", "0")))
         scales = np.ones(len(NAMES), dtype=np.float32)
-        scales[NAMES.index("kick")] -= balance
-        scales[[NAMES.index("hat"), NAMES.index("cymbal")]] += balance
+        scales[NAMES.index("kick")] = gains.kick
+        scales[[NAMES.index("hat"), NAMES.index("cymbal")]] = gains.treble
         scratch = np.empty(skip + len(model), dtype=np.float32)
         mix = np.zeros_like(model)
         stems = []

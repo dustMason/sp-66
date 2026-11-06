@@ -169,8 +169,8 @@ static float voice_sample(Tr66VoiceState *state, float noise)
 void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
 {
     machine->random = seed != 0 ? seed : 1;
-    machine->balance = 0.0f;
-    machine->balance_target = 0.0f;
+    machine->balance = (Tr66Balance){1.0f, 1.0f};
+    machine->balance_target = machine->balance;
     machine->balance_coeff = 1.0f - decay(sample_rate, 8.0f);
     machine->sample_rate = sample_rate;
     machine->cymbal_age = UINT32_MAX;
@@ -249,9 +249,29 @@ void tr66_hit(Tr66 *machine, uint16_t voices)
     }
 }
 
+Tr66Balance tr66_balance_gains(float position)
+{
+    position = fmaxf(-1.0f, fminf(1.0f, position));
+    const float kick_shunt = 1.0f - position;
+    const float treble_shunt = 1.0f + position;
+    /* The grounded wiper on VR602 (50 kΩ) shunts each path to ground.
+     * Estimate the Thevenin impedances near 65 Hz and 8.17 kHz from
+     * Figures 1 and 10, in units of 25 kΩ. Gains are unity at center. */
+    const float kick_resistance = 36.5f / 25.0f;
+    const float treble_resistance = 7.28f / 25.0f;
+    const float treble_reactance = 39.86f / 25.0f;
+    const float center = 1.0f + treble_resistance;
+    const float at_position = treble_shunt + treble_resistance;
+    return (Tr66Balance) {
+        .kick = kick_shunt * (1.0f + kick_resistance) / (kick_shunt + kick_resistance),
+        .treble = treble_shunt * sqrtf((center * center + treble_reactance * treble_reactance) /
+                                      (at_position * at_position + treble_reactance * treble_reactance)),
+    };
+}
+
 void tr66_balance(Tr66 *machine, float position)
 {
-    machine->balance_target = fmaxf(-1.0f, fminf(1.0f, position));
+    machine->balance_target = tr66_balance_gains(position);
 }
 
 void tr66_render(Tr66 *machine, float *output, size_t frames)
@@ -259,13 +279,14 @@ void tr66_render(Tr66 *machine, float *output, size_t frames)
     const uint32_t age_remaining = UINT32_MAX - machine->cymbal_age;
     machine->cymbal_age += frames < age_remaining ? (uint32_t)frames : age_remaining;
     for (size_t frame = 0; frame < frames; ++frame) {
-        machine->balance += machine->balance_coeff * (machine->balance_target - machine->balance);
-        const float bass = 1.0f - machine->balance;
-        const float treble = 1.0f + machine->balance;
+        machine->balance.kick += machine->balance_coeff *
+                                 (machine->balance_target.kick - machine->balance.kick);
+        machine->balance.treble += machine->balance_coeff *
+                                   (machine->balance_target.treble - machine->balance.treble);
         const float noise = white_noise(&machine->random);
-        float sample = bass * voice_sample(&machine->voices[TR66_KICK], noise);
+        float sample = machine->balance.kick * voice_sample(&machine->voices[TR66_KICK], noise);
         sample += voice_sample(&machine->voices[TR66_SNARE], noise);
-        sample += treble * (voice_sample(&machine->voices[TR66_HAT], noise) +
+        sample += machine->balance.treble * (voice_sample(&machine->voices[TR66_HAT], noise) +
                             voice_sample(&machine->voices[TR66_CYMBAL], noise));
         for (unsigned i = TR66_CLAVES; i < TR66_VOICE_COUNT; ++i)
             sample += voice_sample(&machine->voices[i], noise);

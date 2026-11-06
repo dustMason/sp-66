@@ -29,7 +29,7 @@
       "before_unclipped_db": 10.52,
       "pre_ringdown_unclipped_db": 3.19,
       "pre_transient_pass_unclipped_db": 3.2,
-      "fitted_balance_error_db": 2.76,
+      "fitted_balance_error_db": 2.72,
       "pre_noise_pulse_error_db": 3.21,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 3.21,
@@ -70,7 +70,7 @@
       "before_unclipped_db": 5.82,
       "pre_ringdown_unclipped_db": 4.18,
       "pre_transient_pass_unclipped_db": 4.14,
-      "fitted_balance_error_db": 3.94,
+      "fitted_balance_error_db": 3.96,
       "pre_noise_pulse_error_db": 4.14,
       "pre_noise_pulse_fitted_balance_error_db": 4.36,
       "pre_noise_envelope_error_db": 4.13,
@@ -111,7 +111,7 @@
       "before_unclipped_db": 6.97,
       "pre_ringdown_unclipped_db": 3.2,
       "pre_transient_pass_unclipped_db": 3.47,
-      "fitted_balance_error_db": 2.6,
+      "fitted_balance_error_db": 2.64,
       "pre_noise_pulse_error_db": 3.48,
       "pre_noise_pulse_fitted_balance_error_db": 3.17,
       "pre_noise_envelope_error_db": 3.47,
@@ -150,7 +150,7 @@
       "before_unclipped_db": 6.9,
       "pre_ringdown_unclipped_db": 3.71,
       "pre_transient_pass_unclipped_db": 3.3,
-      "fitted_balance_error_db": 2.28,
+      "fitted_balance_error_db": 2.32,
       "pre_noise_pulse_error_db": 3.27,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 3.12,
@@ -191,7 +191,7 @@
       "before_unclipped_db": 9.88,
       "pre_ringdown_unclipped_db": 3.91,
       "pre_transient_pass_unclipped_db": 3.58,
-      "fitted_balance_error_db": 2.51,
+      "fitted_balance_error_db": 2.49,
       "pre_noise_pulse_error_db": 3.61,
       "pre_noise_pulse_fitted_balance_error_db": 3.29,
       "pre_noise_envelope_error_db": 3.59,
@@ -230,7 +230,7 @@
       "before_unclipped_db": 7.77,
       "pre_ringdown_unclipped_db": 3.76,
       "pre_transient_pass_unclipped_db": 3.65,
-      "fitted_balance_error_db": 2.54,
+      "fitted_balance_error_db": 2.53,
       "pre_noise_pulse_error_db": 3.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.02,
       "pre_noise_envelope_error_db": 3.6,
@@ -271,7 +271,7 @@
       "before_unclipped_db": 17.42,
       "pre_ringdown_unclipped_db": 3.35,
       "pre_transient_pass_unclipped_db": 3.19,
-      "fitted_balance_error_db": 1.99,
+      "fitted_balance_error_db": 2.0,
       "pre_noise_pulse_error_db": 3.68,
       "pre_noise_pulse_fitted_balance_error_db": 3.06,
       "pre_noise_envelope_error_db": 3.48,
@@ -310,7 +310,7 @@
       "before_unclipped_db": 18.06,
       "pre_ringdown_unclipped_db": 3.42,
       "pre_transient_pass_unclipped_db": 3.51,
-      "fitted_balance_error_db": 3.87,
+      "fitted_balance_error_db": 3.86,
       "pre_noise_pulse_error_db": 3.54,
       "pre_noise_pulse_fitted_balance_error_db": 3.81,
       "pre_noise_envelope_error_db": 3.46,
@@ -349,7 +349,7 @@
       "before_unclipped_db": 7.07,
       "pre_ringdown_unclipped_db": 5.06,
       "pre_transient_pass_unclipped_db": 4.38,
-      "fitted_balance_error_db": 2.78,
+      "fitted_balance_error_db": 2.76,
       "pre_noise_pulse_error_db": 4.36,
       "pre_noise_pulse_fitted_balance_error_db": 5.11,
       "pre_noise_envelope_error_db": 4.36,
@@ -390,7 +390,7 @@
       "before_unclipped_db": 17.49,
       "pre_ringdown_unclipped_db": 4.62,
       "pre_transient_pass_unclipped_db": 4.37,
-      "fitted_balance_error_db": 3.0,
+      "fitted_balance_error_db": 2.98,
       "pre_noise_pulse_error_db": 3.55,
       "pre_noise_pulse_fitted_balance_error_db": 3.6,
       "pre_noise_envelope_error_db": 3.55,
@@ -429,7 +429,7 @@
       "before_unclipped_db": 5.08,
       "pre_ringdown_unclipped_db": 4.25,
       "pre_transient_pass_unclipped_db": 4.07,
-      "fitted_balance_error_db": 2.65,
+      "fitted_balance_error_db": 2.61,
       "pre_noise_pulse_error_db": 3.66,
       "pre_noise_pulse_fitted_balance_error_db": 2.95,
       "pre_noise_envelope_error_db": 3.67,
@@ -468,7 +468,7 @@
       "before_unclipped_db": 8.33,
       "pre_ringdown_unclipped_db": 3.79,
       "pre_transient_pass_unclipped_db": 3.59,
-      "fitted_balance_error_db": 2.15,
+      "fitted_balance_error_db": 2.13,
       "pre_noise_pulse_error_db": 3.2,
       "pre_noise_pulse_fitted_balance_error_db": 2.55,
       "pre_noise_envelope_error_db": 3.18,
@@ -507,7 +507,7 @@
       "before_unclipped_db": 6.14,
       "pre_ringdown_unclipped_db": 3.45,
       "pre_transient_pass_unclipped_db": 3.42,
-      "fitted_balance_error_db": 2.02,
+      "fitted_balance_error_db": 2.06,
       "pre_noise_pulse_error_db": 3.06,
       "pre_noise_pulse_fitted_balance_error_db": 2.83,
       "pre_noise_envelope_error_db": 2.98,
@@ -546,7 +546,7 @@
       "before_unclipped_db": 6.46,
       "pre_ringdown_unclipped_db": 3.51,
       "pre_transient_pass_unclipped_db": 3.46,
-      "fitted_balance_error_db": 1.98,
+      "fitted_balance_error_db": 2.01,
       "pre_noise_pulse_error_db": 3.15,
       "pre_noise_pulse_fitted_balance_error_db": 2.74,
       "pre_noise_envelope_error_db": 3.14,
@@ -585,7 +585,7 @@
       "before_unclipped_db": 6.38,
       "pre_ringdown_unclipped_db": 3.59,
       "pre_transient_pass_unclipped_db": 3.57,
-      "fitted_balance_error_db": 1.94,
+      "fitted_balance_error_db": 1.97,
       "pre_noise_pulse_error_db": 3.27,
       "pre_noise_pulse_fitted_balance_error_db": 2.77,
       "pre_noise_envelope_error_db": 3.23,
@@ -624,7 +624,7 @@
       "before_unclipped_db": 5.58,
       "pre_ringdown_unclipped_db": 3.54,
       "pre_transient_pass_unclipped_db": 3.47,
-      "fitted_balance_error_db": 2.02,
+      "fitted_balance_error_db": 2.06,
       "pre_noise_pulse_error_db": 3.07,
       "pre_noise_pulse_fitted_balance_error_db": 2.57,
       "pre_noise_envelope_error_db": 3.04,
@@ -663,7 +663,7 @@
       "before_unclipped_db": 5.19,
       "pre_ringdown_unclipped_db": 3.43,
       "pre_transient_pass_unclipped_db": 3.13,
-      "fitted_balance_error_db": 2.2,
+      "fitted_balance_error_db": 2.23,
       "pre_noise_pulse_error_db": 2.91,
       "pre_noise_pulse_fitted_balance_error_db": 2.69,
       "pre_noise_envelope_error_db": 2.9,
@@ -702,7 +702,7 @@
       "before_unclipped_db": 5.72,
       "pre_ringdown_unclipped_db": 3.52,
       "pre_transient_pass_unclipped_db": 3.57,
-      "fitted_balance_error_db": 1.99,
+      "fitted_balance_error_db": 2.02,
       "pre_noise_pulse_error_db": 3.19,
       "pre_noise_pulse_fitted_balance_error_db": 2.81,
       "pre_noise_envelope_error_db": 3.1,
@@ -741,7 +741,7 @@
       "before_unclipped_db": 5.7,
       "pre_ringdown_unclipped_db": 3.74,
       "pre_transient_pass_unclipped_db": 3.74,
-      "fitted_balance_error_db": 2.24,
+      "fitted_balance_error_db": 2.25,
       "pre_noise_pulse_error_db": 3.11,
       "pre_noise_pulse_fitted_balance_error_db": 2.71,
       "pre_noise_envelope_error_db": 3.08,
@@ -780,7 +780,7 @@
       "before_unclipped_db": 6.48,
       "pre_ringdown_unclipped_db": 3.52,
       "pre_transient_pass_unclipped_db": 3.59,
-      "fitted_balance_error_db": 2.28,
+      "fitted_balance_error_db": 2.29,
       "pre_noise_pulse_error_db": 3.59,
       "pre_noise_pulse_fitted_balance_error_db": 3.46,
       "pre_noise_envelope_error_db": 3.58,
@@ -819,7 +819,7 @@
       "before_unclipped_db": 5.5,
       "pre_ringdown_unclipped_db": 3.22,
       "pre_transient_pass_unclipped_db": 3.41,
-      "fitted_balance_error_db": 1.81,
+      "fitted_balance_error_db": 1.79,
       "pre_noise_pulse_error_db": 3.41,
       "pre_noise_pulse_fitted_balance_error_db": 2.61,
       "pre_noise_envelope_error_db": 3.41,
@@ -858,7 +858,7 @@
       "before_unclipped_db": 5.97,
       "pre_ringdown_unclipped_db": 2.93,
       "pre_transient_pass_unclipped_db": 3.11,
-      "fitted_balance_error_db": 1.73,
+      "fitted_balance_error_db": 1.72,
       "pre_noise_pulse_error_db": 3.11,
       "pre_noise_pulse_fitted_balance_error_db": 2.46,
       "pre_noise_envelope_error_db": 3.11,
@@ -897,7 +897,7 @@
       "before_unclipped_db": 5.73,
       "pre_ringdown_unclipped_db": 4.8,
       "pre_transient_pass_unclipped_db": 4.94,
-      "fitted_balance_error_db": 3.4,
+      "fitted_balance_error_db": 3.37,
       "pre_noise_pulse_error_db": 4.64,
       "pre_noise_pulse_fitted_balance_error_db": 3.78,
       "pre_noise_envelope_error_db": 4.64,
@@ -1173,16 +1173,16 @@
     }
   },
   "capture_balance_check": {
-    "method": "Fit one steady-state Balance position using the earlier mix-fit loops. Hold the position fixed for each capture library in the pulse, envelope and cymbal comparisons.",
+    "method": "Fit the shunt model's steady-state Balance using the original mix-fit loops. Earlier refinements used the linear model at its historical fitted position.",
     "scale": "-1 is bass, 0 is center, +1 is treble.",
-    "fitted_balance": -0.1891,
-    "relative_fader_position_percent": 40.5,
+    "fitted_balance": -0.2882,
+    "relative_fader_position_percent": 35.6,
     "recorded_knob_position": "Unknown. The fitted control can also account for capture-chain differences.",
     "median_errors_db": {
       "all": {
         "count": 23,
         "center_db": 2.84,
-        "fitted_balance_db": 2.28,
+        "fitted_balance_db": 2.29,
         "pre_noise_pulse_fitted_balance_db": 3.02,
         "pre_noise_envelope_fitted_balance_db": 2.96,
         "pre_cymbal_sweep_center_db": 3.11,
@@ -1201,7 +1201,7 @@
       "mix fit": {
         "count": 11,
         "center_db": 2.81,
-        "fitted_balance_db": 2.2,
+        "fitted_balance_db": 2.23,
         "pre_noise_pulse_fitted_balance_db": 2.81,
         "pre_noise_envelope_fitted_balance_db": 2.73,
         "pre_cymbal_sweep_center_db": 3.06,
@@ -1220,7 +1220,7 @@
       "held out": {
         "count": 12,
         "center_db": 2.88,
-        "fitted_balance_db": 2.44,
+        "fitted_balance_db": 2.48,
         "pre_noise_pulse_fitted_balance_db": 3.315,
         "pre_noise_envelope_fitted_balance_db": 3.305,
         "pre_cymbal_sweep_center_db": 3.275,
@@ -4277,5 +4277,102 @@
         0.777465
       ]
     }
+  },
+  "balance_shunt_refinement": {
+    "circuit_reference": "Roland TR-66 Service Notes, Figures 1 and 10",
+    "fit_scope": "Independently refit one control position per capture pack on the original mix-fit subset. The objective uses settled C stems. Metrics below come from the PCM renderer.",
+    "potentiometer_ohms": 50000,
+    "impedance_model": {
+      "kick_at_hz": 65,
+      "kick_ohms": 36500,
+      "treble_at_hz": 8172,
+      "treble_ohms": {
+        "real": 7280,
+        "imaginary": -39860
+      },
+      "estimated_mixer_input_ohms": 2800,
+      "treble_series_capacitors_pf": [
+        250,
+        250
+      ]
+    },
+    "center_normalized_gain_grid": [
+      {
+        "position": -1,
+        "kick": 1.42197,
+        "treble": 0.0
+      },
+      {
+        "position": -0.5,
+        "kick": 1.24662,
+        "treble": 0.57634
+      },
+      {
+        "position": 0,
+        "kick": 1.0,
+        "treble": 1.0
+      },
+      {
+        "position": 0.5,
+        "kick": 0.62755,
+        "treble": 1.28335
+      },
+      {
+        "position": 1,
+        "kick": 0.0,
+        "treble": 1.47001
+      }
+    ],
+    "median_loop_errors_db": {
+      "previous_linear_fit": {
+        "position": -0.1891,
+        "balanced": {
+          "all": 2.28,
+          "mix fit": 2.2,
+          "held out": 2.44
+        },
+        "settled": {
+          "all": 2.27,
+          "mix fit": 2.21,
+          "held out": 2.41
+        }
+      },
+      "refitted_linear": {
+        "position": -0.2,
+        "balanced": {
+          "all": 2.29,
+          "mix fit": 2.25,
+          "held out": 2.465
+        },
+        "settled": {
+          "all": 2.28,
+          "mix fit": 2.25,
+          "held out": 2.415
+        }
+      },
+      "shunt": {
+        "position": -0.2882,
+        "balanced": {
+          "all": 2.29,
+          "mix fit": 2.23,
+          "held out": 2.48
+        },
+        "settled": {
+          "all": 2.29,
+          "mix fit": 2.23,
+          "held out": 2.415
+        }
+      }
+    },
+    "host_benchmark": {
+      "selection": "Mambo, Arrange A, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": [
+        0.78324,
+        0.78456
+      ]
+    },
+    "limitation": "The recordings contain no documented knob sweeps. The model represents gain at the dominant frequencies, and it needs a hardware sweep to verify frequency-dependent loading."
   }
 }

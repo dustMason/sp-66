@@ -20,7 +20,7 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 | Control | Action |
 | --- | --- |
 | Fader 1 | Tempo from 50 to 200 BPM |
-| Fader 2 | Balance between bass drum and hi-hat/maracas/cymbal, centered for the normal mix |
+| Fader 2 | Balance between bass drum and hi-hat/maracas/cymbal, with the TR-66's shunt response approximated and unity gain at center |
 | Fader 3 | Off, Waltz, Jazz Waltz, Slow Rock, Bossa Nova, Samba, Mambo, Cha-Cha, Beguine, Rhumba |
 | Fader 4 | Six presets within the current variation bank |
 | T1, T2, T3 | Select Rock, 2 Beat, or 4 Beat |
@@ -360,11 +360,11 @@ In eight matched first-bar excerpts, the two recordings differ by a median
 differ by 3.12 dB, and the model scored 4.11 dB from the CD and 2.94 dB
 from Reverb.
 
-A separate comparison fitted one fixed Balance position per pack using
-only the gain-fit loops. The best positions were −0.19 for Drumbase and
-+0.32 for Reverb, on a scale from −1 for bass to +1 for treble. Holding
-those positions fixed, the noise envelope refinement reduced median errors
-on loops outside the original gain fit from 3.31 to 3.03 dB for Drumbase
+An earlier comparison fitted one fixed position per pack using the
+linear Balance model and only the gain-fit loops. The best positions were
+−0.19 for Drumbase and +0.32 for Reverb, on a scale from −1 for bass to +1
+for treble. Holding those positions fixed, the noise envelope refinement
+reduced median errors on loops outside the original gain fit from 3.31 to 3.03 dB for Drumbase
 and from 3.76 to 3.44 dB for Reverb. The cymbal fit moves these scores to
 2.90 and 3.42 dB, respectively. Slow Rock moves from 2.84 to 2.01 dB in
 Drumbase, and from 3.04 to 2.53 dB for A and 3.20 to 2.59 dB for B in Reverb.
@@ -377,6 +377,17 @@ to 4.17 dB, and Beguine B from 4.92 to 4.73 dB. At center, Rhumba A
 rises from 5.67 to 5.72 dB.
 The original knob positions are unknown, and the fitted settings may also
 compensate for differences in the recording chains.
+
+The current Balance model follows the grounded wiper of the 50 kΩ
+potentiometer in Figures 1 and 10 of the service notes. It estimates each
+shunt's gain around 65 Hz for bass drum and 8.17 kHz for hi-hat, maracas,
+and cymbal. At either end, the retained path gains about 3.1–3.3 dB
+relative to center. All 48 center-Balance renders are sample-identical
+to the previous build. Refitting each law to the recordings gives
+settled medians of 2.28 → 2.29 dB for Drumbase and 3.00 → 3.02 dB for
+Reverb. The fitted positions for the current model are −0.2882 and
++0.4551. A recorded knob sweep would verify the gain estimates and show
+any frequency-response changes through the control's travel.
 
 The main tables start the C engine from silence. The cymbal history check
 compares the archived hardware loops after both C builds have played a

@@ -329,6 +329,45 @@ static void test_split_blocks(void)
     assert(memcmp(whole, sliced, sizeof(whole)) == 0);
 }
 
+static void test_balance(void)
+{
+    const uint16_t masks[] = {MASK(KICK), MASK(HAT), MASK(CYMBAL), MASK(SNARE)};
+    const float expected[][4] = {
+        {1.422f, 0.0f, 0.0f, 1.0f},
+        {1.247f, 0.576f, 0.576f, 1.0f},
+        {1.0f, 1.0f, 1.0f, 1.0f},
+        {0.628f, 1.283f, 1.283f, 1.0f},
+        {0.0f, 1.470f, 1.470f, 1.0f},
+    };
+    float neutral[RATE / 40], adjusted[RATE / 40];
+    for (unsigned step = 0; step < 5; ++step) {
+        const float position = 0.5f * step - 1.0f;
+        for (unsigned voice = 0; voice < 4; ++voice) {
+            Tr66 reference, machine;
+            tr66_init(&reference, RATE, 91);
+            machine = reference;
+            tr66_balance(&machine, position);
+            /* Advance both noise generators while the fader settles. */
+            for (unsigned block = 0; block < 12; ++block) {
+                tr66_render(&reference, neutral, RATE / 40);
+                tr66_render(&machine, adjusted, RATE / 40);
+            }
+            tr66_hit(&reference, masks[voice]);
+            tr66_hit(&machine, masks[voice]);
+            tr66_render(&reference, neutral, RATE / 40);
+            tr66_render(&machine, adjusted, RATE / 40);
+            float neutral_energy = 0.0f, adjusted_energy = 0.0f;
+            for (unsigned frame = 0; frame < RATE / 40; ++frame) {
+                neutral_energy += neutral[frame] * neutral[frame];
+                adjusted_energy += adjusted[frame] * adjusted[frame];
+            }
+            assert(neutral_energy > 0.0f);
+            const float ratio = sqrtf(adjusted_energy / neutral_energy);
+            assert(fabsf(ratio - expected[step][voice]) < 0.001f);
+        }
+    }
+}
+
 static void test_layered_headroom(void)
 {
     Tr66Sequencer seq;
@@ -457,6 +496,7 @@ int main(void)
     test_arrange_pickups();
     test_slow_rock_rock6_layer();
     test_split_blocks();
+    test_balance();
     test_layered_headroom();
     test_score_table();
     test_samba_conga();
