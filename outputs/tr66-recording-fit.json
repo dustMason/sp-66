@@ -23,13 +23,13 @@
       "capture_samples_at_pcm_limit": 137,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 546,
-      "spectral_error_db": 3.42,
-      "unclipped_error_db": 3.11,
+      "spectral_error_db": 3.38,
+      "unclipped_error_db": 3.08,
       "before_db": 9.78,
       "before_unclipped_db": 10.52,
       "pre_ringdown_unclipped_db": 3.19,
       "pre_transient_pass_unclipped_db": 3.2,
-      "fitted_balance_error_db": 2.81,
+      "fitted_balance_error_db": 2.76,
       "pre_noise_pulse_error_db": 3.21,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 3.21,
@@ -185,13 +185,13 @@
       "capture_samples_at_pcm_limit": 742,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 509,
-      "spectral_error_db": 3.04,
-      "unclipped_error_db": 2.79,
+      "spectral_error_db": 3.02,
+      "unclipped_error_db": 2.76,
       "before_db": 8.71,
       "before_unclipped_db": 9.88,
       "pre_ringdown_unclipped_db": 3.91,
       "pre_transient_pass_unclipped_db": 3.58,
-      "fitted_balance_error_db": 2.52,
+      "fitted_balance_error_db": 2.49,
       "pre_noise_pulse_error_db": 3.61,
       "pre_noise_pulse_fitted_balance_error_db": 3.29,
       "pre_noise_envelope_error_db": 3.59,
@@ -224,13 +224,13 @@
       "capture_samples_at_pcm_limit": 846,
       "model_samples_at_pcm_limit": 0,
       "clean_analysis_windows": 513,
-      "spectral_error_db": 3.77,
-      "unclipped_error_db": 3.01,
+      "spectral_error_db": 3.67,
+      "unclipped_error_db": 3.0,
       "before_db": 6.85,
       "before_unclipped_db": 7.77,
       "pre_ringdown_unclipped_db": 3.76,
       "pre_transient_pass_unclipped_db": 3.65,
-      "fitted_balance_error_db": 2.52,
+      "fitted_balance_error_db": 2.5,
       "pre_noise_pulse_error_db": 3.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.02,
       "pre_noise_envelope_error_db": 3.6,
@@ -990,7 +990,7 @@
       "before_db": 5.48,
       "spectral_error_db": 2.87,
       "before_unclipped_db": 6.14,
-      "unclipped_error_db": 2.79,
+      "unclipped_error_db": 2.76,
       "pre_ringdown_unclipped_db": 3.59,
       "pre_transient_pass_unclipped_db": 3.57,
       "pre_noise_pulse_error_db": 3.21,
@@ -1200,7 +1200,7 @@
       },
       "mix fit": {
         "count": 11,
-        "center_db": 2.79,
+        "center_db": 2.76,
         "fitted_balance_db": 2.2,
         "pre_noise_pulse_fitted_balance_db": 2.81,
         "pre_noise_envelope_fitted_balance_db": 2.73,
@@ -3960,6 +3960,150 @@
       "median_mean_render_us_per_block": [
         1.06947,
         1.07407
+      ]
+    }
+  },
+  "low_bongo_decay_refinement": {
+    "isolated_hit_method": "Low-pass the separated Beguine hits and C renders at 1.2 kHz. Normalize the Hilbert amplitude envelope to its mean from 6 to 16 ms.",
+    "isolated_hits": 6,
+    "reference_ring_30_to_95_ms": {
+      "frequency_hz": 394,
+      "approximate_decay_time_constant_ms": 19
+    },
+    "window_bounds_ms": [
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        16
+      ],
+      [
+        16,
+        24
+      ],
+      [
+        24,
+        32
+      ],
+      [
+        34,
+        42
+      ],
+      [
+        44,
+        56
+      ],
+      [
+        58,
+        70
+      ],
+      [
+        74,
+        90
+      ]
+    ],
+    "normalized_envelope": {
+      "Drumbase": [
+        1.7631,
+        1.5708,
+        1.0,
+        0.5473,
+        0.3511,
+        0.205,
+        0.1092,
+        0.0516,
+        0.0205
+      ],
+      "previous": [
+        1.3192,
+        1.2427,
+        1.0,
+        0.7227,
+        0.5436,
+        0.3803,
+        0.2488,
+        0.1509,
+        0.0798
+      ],
+      "revised": [
+        1.6142,
+        1.3945,
+        1.0,
+        0.6655,
+        0.495,
+        0.3532,
+        0.2411,
+        0.1551,
+        0.0887
+      ]
+    },
+    "c_model_frequency_hz": 400,
+    "c_model_decay_time_constants_ms": [
+      7.5,
+      32.0
+    ],
+    "loop_error_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "fitted_balance": -0.1891,
+    "loop_error_db": {
+      "center": {
+        "Beguine": [
+          3.11,
+          3.08
+        ],
+        "Mambo": [
+          2.79,
+          2.76
+        ],
+        "Rhumba": [
+          3.01,
+          3.0
+        ]
+      },
+      "balanced": {
+        "Beguine": [
+          2.81,
+          2.76
+        ],
+        "Mambo": [
+          2.52,
+          2.49
+        ],
+        "Rhumba": [
+          2.52,
+          2.5
+        ]
+      },
+      "settled": {
+        "Beguine": [
+          2.82,
+          2.77
+        ],
+        "Mambo": [
+          2.58,
+          2.55
+        ],
+        "Rhumba": [
+          2.53,
+          2.52
+        ]
+      }
+    },
+    "host_benchmark": {
+      "selection": "Mambo plus Rock 6, Arrange B, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": [
+        1.090725,
+        1.094605
       ]
     }
   }

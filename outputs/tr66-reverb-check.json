@@ -38,7 +38,7 @@
   },
   "new_validation_median": {
     "before_db": 4.465,
-    "spectral_error_db": 4.135,
+    "spectral_error_db": 4.12,
     "pre_ringdown_db": 5.715,
     "pre_noise_pulse_error_db": 4.335,
     "pre_noise_envelope_error_db": 4.325,
@@ -606,11 +606,11 @@
       "bars_compared": 2,
       "rotation_quarters": 3,
       "tempo": 124.462,
-      "spectral_error_db": 3.76,
+      "spectral_error_db": 3.72,
       "before_db": 4.41,
       "fit_role": "mix fit",
       "pre_ringdown_db": 5.82,
-      "fitted_balance_error_db": 3.2,
+      "fitted_balance_error_db": 3.16,
       "pre_noise_pulse_error_db": 4.33,
       "pre_noise_pulse_fitted_balance_error_db": 3.91,
       "pre_noise_envelope_error_db": 4.32,
@@ -670,11 +670,11 @@
       "bars_compared": 2,
       "rotation_quarters": 4,
       "tempo": 124.691,
-      "spectral_error_db": 5.59,
+      "spectral_error_db": 5.53,
       "before_db": 5.71,
       "fit_role": "held out",
       "pre_ringdown_db": 7.29,
-      "fitted_balance_error_db": 4.21,
+      "fitted_balance_error_db": 4.11,
       "pre_noise_pulse_error_db": 5.67,
       "pre_noise_pulse_fitted_balance_error_db": 4.52,
       "pre_noise_envelope_error_db": 5.67,
@@ -704,11 +704,11 @@
       "bars_compared": 2,
       "rotation_quarters": 4,
       "tempo": 124.613,
-      "spectral_error_db": 4.97,
+      "spectral_error_db": 4.92,
       "before_db": 5.31,
       "fit_role": "mix fit",
       "pre_ringdown_db": 7.36,
-      "fitted_balance_error_db": 4.1,
+      "fitted_balance_error_db": 4.02,
       "pre_noise_pulse_error_db": 5.23,
       "pre_noise_pulse_fitted_balance_error_db": 4.57,
       "pre_noise_envelope_error_db": 5.24,
@@ -738,11 +738,11 @@
       "bars_compared": 2,
       "rotation_quarters": 0,
       "tempo": 124.44,
-      "spectral_error_db": 4.67,
+      "spectral_error_db": 4.59,
       "before_db": 5.72,
       "fit_role": "mix fit",
       "pre_ringdown_db": 7.57,
-      "fitted_balance_error_db": 4.14,
+      "fitted_balance_error_db": 4.06,
       "pre_noise_pulse_error_db": 5.67,
       "pre_noise_pulse_fitted_balance_error_db": 4.88,
       "pre_noise_envelope_error_db": 5.67,
@@ -770,11 +770,11 @@
       "bars_compared": 2,
       "rotation_quarters": 6,
       "tempo": 124.49,
-      "spectral_error_db": 4.11,
+      "spectral_error_db": 4.08,
       "before_db": 4.66,
       "fit_role": "new validation",
       "pre_ringdown_db": 6.37,
-      "fitted_balance_error_db": 3.6,
+      "fitted_balance_error_db": 3.57,
       "pre_noise_pulse_error_db": 4.55,
       "pre_noise_pulse_fitted_balance_error_db": 4.12,
       "pre_noise_envelope_error_db": 4.55,
@@ -1010,7 +1010,7 @@
       "mix fit": {
         "count": 6,
         "center_db": 4.135,
-        "fitted_balance_db": 3.235,
+        "fitted_balance_db": 3.215,
         "pre_noise_pulse_fitted_balance_db": 3.905,
         "pre_noise_envelope_fitted_balance_db": 3.905,
         "pre_cymbal_sweep_center_db": 4.475,
@@ -1047,7 +1047,7 @@
       },
       "new validation": {
         "count": 14,
-        "center_db": 4.135,
+        "center_db": 4.12,
         "fitted_balance_db": 3.075,
         "pre_noise_pulse_fitted_balance_db": 3.63,
         "pre_noise_envelope_fitted_balance_db": 3.61,
@@ -3554,6 +3554,174 @@
       "median_mean_render_us_per_block": [
         1.06947,
         1.07407
+      ]
+    }
+  },
+  "low_bongo_decay_refinement": {
+    "isolated_hit_method": "Low-pass the separated Beguine hits and C renders at 1.2 kHz. Normalize the Hilbert amplitude envelope to its mean from 6 to 16 ms.",
+    "isolated_hits": 2,
+    "reference_ring_30_to_95_ms": {
+      "frequency_hz": 405,
+      "approximate_decay_time_constant_ms": 51
+    },
+    "window_bounds_ms": [
+      [
+        0,
+        3
+      ],
+      [
+        3,
+        6
+      ],
+      [
+        6,
+        16
+      ],
+      [
+        16,
+        24
+      ],
+      [
+        24,
+        32
+      ],
+      [
+        34,
+        42
+      ],
+      [
+        44,
+        56
+      ],
+      [
+        58,
+        70
+      ],
+      [
+        74,
+        90
+      ]
+    ],
+    "normalized_envelope": {
+      "Reverb": [
+        1.4868,
+        1.3264,
+        1.0,
+        0.7336,
+        0.6191,
+        0.5038,
+        0.3989,
+        0.3059,
+        0.2134
+      ],
+      "previous": [
+        1.3192,
+        1.2427,
+        1.0,
+        0.7227,
+        0.5436,
+        0.3803,
+        0.2488,
+        0.1509,
+        0.0798
+      ],
+      "revised": [
+        1.6142,
+        1.3945,
+        1.0,
+        0.6655,
+        0.495,
+        0.3532,
+        0.2411,
+        0.1551,
+        0.0887
+      ]
+    },
+    "c_model_frequency_hz": 400,
+    "c_model_decay_time_constants_ms": [
+      7.5,
+      32.0
+    ],
+    "loop_error_columns": [
+      "previous_c",
+      "revised_c"
+    ],
+    "fitted_balance": 0.3198,
+    "loop_error_db": {
+      "center": {
+        "Mambo A": [
+          3.76,
+          3.72
+        ],
+        "Rhumba A": [
+          5.59,
+          5.53
+        ],
+        "Rhumba B": [
+          4.97,
+          4.92
+        ],
+        "Beguine B": [
+          4.67,
+          4.59
+        ],
+        "Mambo B": [
+          4.11,
+          4.08
+        ]
+      },
+      "balanced": {
+        "Mambo A": [
+          3.2,
+          3.16
+        ],
+        "Rhumba A": [
+          4.21,
+          4.11
+        ],
+        "Rhumba B": [
+          4.1,
+          4.02
+        ],
+        "Beguine B": [
+          4.14,
+          4.06
+        ],
+        "Mambo B": [
+          3.6,
+          3.57
+        ]
+      },
+      "settled": {
+        "Mambo A": [
+          3.15,
+          3.11
+        ],
+        "Rhumba A": [
+          4.18,
+          4.09
+        ],
+        "Rhumba B": [
+          4.1,
+          4.02
+        ],
+        "Beguine B": [
+          4.12,
+          4.04
+        ],
+        "Mambo B": [
+          3.58,
+          3.55
+        ]
+      }
+    },
+    "host_benchmark": {
+      "selection": "Mambo plus Rock 6, Arrange B, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": [
+        1.090725,
+        1.094605
       ]
     }
   }

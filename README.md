@@ -209,16 +209,22 @@ kick attacks clip. The service charts also helped correct Slow Rock's
 timing, several Rock B fills, Habanera, Swing 1, Parade and the Mambo B fill.
 
 The CD includes one-shots and 23 captures with sampler loop points.
-Its one-shots supplied most of the voice fits. The ring-down pass compares
-isolated or separated hits from both packs. Across seven Beguine hits in
-each recording, the low bongo measures about 394 Hz with a 15 ms decay
-time constant on the CD and 405 Hz with 47 ms in Reverb. The model uses
-400 Hz and 28 ms. Its low-bongo trigger is 3.2 dB softer than the earlier
-fit, closer to the attack level in both recordings. The snare has a weaker
-low-bongo resonance, as described in Roland's service notes, and its attack
-has a short pulse followed by a slower, opposite-polarity recovery. The
-high bongo uses a fast and a slow decay at 597 Hz, based on separated Mambo
-hits from both packs. Cowbell hits from Mambo and Cha-Cha measure about
+Its one-shots supplied most of the voice fits. On separated Beguine hits,
+the low bongo's 30–95 ms ring measures about 394 Hz and a 19 ms decay
+constant on the CD, and 405 Hz and 51 ms in Reverb. Roland provides a
+separate decay trim for this voice in section 10-3-2-3 of the service notes.
+The C model combines 7.5 ms and 32 ms decays at 400 Hz. Its first 3 ms
+measure 1.61 times the 6–16 ms envelope, up from 1.32 and between the
+two recordings' 1.49 and 1.76. The 32 ms mode gives a tail between the
+two captures. After one Arrange cycle at the fitted Balance, all eight
+loops with low bongo improve by 0.01–0.09 dB, including Reverb Rhumba A
+from 4.18 to 4.09 dB and Drumbase Beguine from 2.82 to 2.77 dB.
+
+The snare has a weaker low-bongo resonance, as described in Roland's
+service notes, and its attack has a short pulse followed by a slower,
+opposite-polarity recovery. The high bongo uses a fast and a slow decay
+at 597 Hz, based on separated Mambo hits from both packs. Cowbell hits
+from Mambo and Cha-Cha measure about
 893 Hz in Reverb and 897 Hz on the CD. The model uses 895 Hz.
 The snare attack and tone changes improved several groove scores. In that
 pass, isolated 35–540 Hz waveform correlation fell from 0.95 to 0.94 on
@@ -307,10 +313,10 @@ Both Habanera A captures support the score's simultaneous kick and snare.
 | Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.87 dB |
 | Reverb, all 25 loops | 5.70 dB | 4.62 dB | 4.16 dB |
 | Reverb Slow Rock B | 5.70 dB | 5.17 dB | 4.16 dB |
-| Reverb Mambo A | 5.82 dB | 4.41 dB | 3.76 dB |
-| Reverb Mambo B | 6.37 dB | 4.66 dB | 4.11 dB |
-| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.59 dB |
-| Reverb Rhumba B | 7.36 dB | 5.31 dB | 4.97 dB |
+| Reverb Mambo A | 5.82 dB | 4.41 dB | 3.72 dB |
+| Reverb Mambo B | 6.37 dB | 4.66 dB | 4.08 dB |
+| Reverb Rhumba A | 7.29 dB | 5.71 dB | 5.53 dB |
+| Reverb Rhumba B | 7.36 dB | 5.31 dB | 4.92 dB |
 
 The original Drumbase held-out score was 6.69 dB with clipped windows
 excluded. Its Slow Rock score rose from 3.19 to 3.68 dB after the quieter

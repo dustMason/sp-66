@@ -40,5 +40,7 @@
     /* Both captures have a fast initial decay and a longer ring at the same pitch. */
     [TR66_HIGH_BONGO] = { .tone = {{597.0f, 34.0f, -0.028f, -0.187f},
                                    {597.0f, 5.3f, -0.195f, -0.430f}, {0.0f, 2.4f, 0.089f, 0.0f}} },
-    [TR66_LOW_BONGO] = { .tone = {{400.0f, 28.0f, 0.14559f, 0.42090f},
-                                  {0.0f, 2.16f, -0.15525f, 0.0f}} },
+    /* Both recordings have a faster initial decay than the free ring. */
+    [TR66_LOW_BONGO] = { .tone = {{400.0f, 32.0f, 0.101331f, 0.292946f},
+                                  {0.0f, 2.16f, -0.180090f, 0.0f},
+                                  {400.0f, 7.5f, 0.067554f, 0.195298f}} },
