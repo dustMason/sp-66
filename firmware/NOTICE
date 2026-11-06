@@ -1,0 +1,14 @@
+The board definition comes from Wakes (Worldwave). The ADC configuration,
+measured button centers, fader range and jack-sense logic follow Wakes.
+https://github.com/Worldwave/Wakes
+
+The SP-1 codec register sequences and bring-up order come from Wakes and
+sp1-tape-looper, including the Cirrus initialization from SP-1-dev and
+the TI TAS2505 application guide (SLAU472C, section 5.1).
+https://github.com/chattock/sp1-tape-looper
+https://github.com/timknapen/SP-1-dev
+
+The underlying SP-1 Zephyr board originated in sp1-midi.
+https://github.com/ericlewis/sp1-midi
+
+The corresponding MIT notices are in licenses/.

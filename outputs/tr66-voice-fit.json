@@ -1,0 +1,179 @@
+{
+  "kick": {
+    "fit_file": "4/Kick.wav",
+    "assignment": "working",
+    "measure": "aligned waveform correlation",
+    "baseline_fit_file": 0.957,
+    "fitted_fit_file": 0.998,
+    "comparison_hits": [
+      {
+        "file": "1/66-bd-03.wav",
+        "reference_correlation": 0.9974,
+        "baseline": 0.963,
+        "fitted": 0.998
+      },
+      {
+        "file": "1/66-bd-05.wav",
+        "reference_correlation": 0.9977,
+        "baseline": 0.957,
+        "fitted": 0.998
+      }
+    ]
+  },
+  "snare": {
+    "fit_file": "4/Snare.wav",
+    "assignment": "working",
+    "measure": "RMS band-energy error in dB",
+    "baseline_fit_file": 2.915,
+    "fitted_fit_file": 0.879,
+    "comparison_hits": [
+      {
+        "file": "1/66-sd-03.wav",
+        "reference_correlation": 0.068,
+        "baseline": 2.929,
+        "fitted": 1.107
+      },
+      {
+        "file": "1/66-sd-06.wav",
+        "reference_correlation": 0.0725,
+        "baseline": 2.673,
+        "fitted": 1.24
+      }
+    ]
+  },
+  "hat": {
+    "fit_file": "4/HH Cl.wav",
+    "assignment": "working",
+    "measure": "RMS band-energy error in dB",
+    "baseline_fit_file": 8.996,
+    "fitted_fit_file": 1.96,
+    "comparison_hits": [
+      {
+        "file": "1/66-hh-02-or.wav",
+        "reference_correlation": 0.163,
+        "baseline": 8.401,
+        "fitted": 1.332
+      },
+      {
+        "file": "1/66-hh-06.wav",
+        "reference_correlation": 0.236,
+        "baseline": 7.938,
+        "fitted": 1.105
+      }
+    ]
+  },
+  "cymbal": {
+    "fit_file": "4/HH Op.wav",
+    "assignment": "provisional",
+    "measure": "RMS band-energy error in dB",
+    "baseline_fit_file": 7.055,
+    "fitted_fit_file": 1.007,
+    "comparison_hits": [
+      {
+        "file": "1/66-hho-02-or.wav",
+        "reference_correlation": 0.1879,
+        "baseline": 7.177,
+        "fitted": 1.462
+      },
+      {
+        "file": "1/66-hho-04.wav",
+        "reference_correlation": 0.1552,
+        "baseline": 6.873,
+        "fitted": 1.526
+      }
+    ]
+  },
+  "maracas": {
+    "status": "uncalibrated, no isolated reference identified"
+  },
+  "claves": {
+    "fit_file": "4/Clave.wav",
+    "assignment": "working",
+    "measure": "aligned waveform correlation",
+    "baseline_fit_file": 0.964,
+    "fitted_fit_file": 0.995,
+    "comparison_hits": [
+      {
+        "file": "1/66-per-11.wav",
+        "reference_correlation": 0.9656,
+        "baseline": 0.96,
+        "fitted": 0.962
+      }
+    ]
+  },
+  "rim": {
+    "fit_file": "4/Rim.wav",
+    "assignment": "working",
+    "measure": "RMS band-energy error in dB",
+    "baseline_fit_file": 13.979,
+    "fitted_fit_file": 4.218,
+    "comparison_hits": [
+      {
+        "file": "1/66-rim-03.wav",
+        "reference_correlation": 0.9952,
+        "baseline": 13.247,
+        "fitted": 3.215
+      }
+    ]
+  },
+  "cowbell": {
+    "fit_file": "4/Conga Hi.wav",
+    "assignment": "provisional",
+    "measure": "aligned waveform correlation",
+    "baseline_fit_file": 0.953,
+    "fitted_fit_file": 0.983,
+    "comparison_hits": [
+      {
+        "file": "1/66-per-25.wav",
+        "reference_correlation": 0.9781,
+        "baseline": 0.908,
+        "fitted": 0.957
+      }
+    ]
+  },
+  "conga": {
+    "fit_file": "4/Tom.wav",
+    "assignment": "working",
+    "measure": "aligned waveform correlation",
+    "baseline_fit_file": 0.667,
+    "fitted_fit_file": 0.996,
+    "comparison_hits": [
+      {
+        "file": "1/66-per-33.wav",
+        "reference_correlation": 0.9968,
+        "baseline": 0.679,
+        "fitted": 0.999
+      }
+    ]
+  },
+  "high-bongo": {
+    "fit_file": "4/Conga Mi.wav",
+    "assignment": "working",
+    "measure": "aligned waveform correlation",
+    "baseline_fit_file": 0.968,
+    "fitted_fit_file": 0.991,
+    "comparison_hits": [
+      {
+        "file": "1/66-per-23.wav",
+        "reference_correlation": 0.9891,
+        "baseline": 0.952,
+        "fitted": 0.979
+      }
+    ]
+  },
+  "low-bongo": {
+    "fit_file": "4/Conga Lo.wav",
+    "assignment": "working",
+    "measure": "aligned waveform correlation",
+    "baseline_fit_file": 0.98,
+    "fitted_fit_file": 0.997,
+    "comparison_hits": [
+      {
+        "file": "1/66-per-09.wav",
+        "reference_correlation": 0.9996,
+        "baseline": 0.978,
+        "fitted": 0.997
+      }
+    ]
+  }
+}
