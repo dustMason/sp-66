@@ -502,6 +502,12 @@ an offbeat kick within 0.8 dB of beat 3. Against the Arrange A render,
 settled spectral error falls from 8.28 to 2.03 dB in Drumbase and from
 7.12 to 2.67 dB in Reverb.
 
+The nine Rhythm selectors match all 27 A, B and Auto traces after checking
+Figures 13 and 16 against the logic matrix in Figure 4 and the recordings.
+The matrix confirms the third-beat trigger in Samba's first bar and the
+third-beat claves in Beguine's second bar. This brings the timing audit to
+81 traces across all 27 factory rhythms.
+
 In Waltz Auto, the last bar adds three quieter kicks at ticks 24, 42 and 48
 on the 24-tick beat grid. The Drumbase recording's kick ring measures about
 35%, 37% and 19% of the downbeat at those hits. The revised C score uses the
@@ -511,11 +517,11 @@ At the fitted Balance, the clean-window error drops from 4.69 to 2.78 dB
 from silence and from 4.73 to 2.82 dB after one Arrange cycle. Reverb's
 Waltz clip contains the A phrase, so the fill fit has one recorded reference.
 
-In eight matched first-bar excerpts, the two recordings differ by a median
-4.23 dB. In that comparison, the C model was 2.83 dB from the CD and
-3.33 dB from Reverb. In the matched Slow Rock excerpt, the recordings
-differ by 3.12 dB, and the model scored 4.11 dB from the CD and 2.94 dB
-from Reverb.
+In eight matched first-bar excerpts, the two recording packs differ by a
+median 4.23 dB. At each recording's native tempo, after one Arrange cycle
+and at the pack's fitted Balance, the C model is 2.19 dB from Drumbase and
+2.33 dB from Reverb. In Slow Rock, the recordings differ by 3.12 dB. The
+model measures 3.53 dB from Drumbase and 2.65 dB from Reverb.
 
 An earlier comparison fitted one fixed position per pack using the
 linear Balance model and only the gain-fit loops. The best positions were

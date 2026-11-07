@@ -946,7 +946,26 @@
       4.23,
       3.29,
       2.895
-    ]
+    ],
+    "settled_native_tempo": {
+      "engine": "7c8aba3",
+      "method": "Compare the same 41 matched first-bar hits. For each pack, render at that capture's measured tempo and Arrange setting, after one full Arrange cycle. Measure level-matched band-power error from 2 to 92 ms after each hit. Balance is fitted per pack on the original gain-fit subset.",
+      "balance": {
+        "reverb": 0.4551,
+        "drumbase": -0.2882
+      },
+      "matched_rhythms": {
+        "rock-2": [5.46, 2.27, 2.03],
+        "rock-4": [5.71, 2.29, 2.13],
+        "slow-rock": [3.12, 2.65, 3.53],
+        "samba": [2.82, 2.2, 2.85],
+        "mambo": [3.04, 2.1, 2.64],
+        "cha-cha": [5.25, 3.22, 2.01],
+        "rhumba": [3.98, 2.51, 2.24],
+        "beguine": [4.48, 2.37, 2.03]
+      },
+      "medians": [4.23, 2.33, 2.185]
+    }
   },
   "rhythm_coverage_across_both_packs": {
     "matched": [
