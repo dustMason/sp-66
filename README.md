@@ -106,7 +106,7 @@ Extract that pack to `work/references/complete/reverb` and run the comparison.
 python3 tools/compare_reverb.py --report work/reverb.json --audition work/reverb-ab.wav
 ```
 
-[Goldbaby's TapeTR66](https://dev.goldbaby.co.nz/freestuff.html)
+[Goldbaby's TapeTR66](https://www.goldbaby.co.nz/freestuff.html)
 provides another set of isolated hits. The pack's notes identify `aOrig`
 files as direct recordings into a Metric Halo ULN-2. Use those takes for
 voice checks alongside the loop packs. The archive contains 113 one-shots,
@@ -322,10 +322,17 @@ The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
 trough to the first crest from 0.577 to 0.674. In 14 separated loop hits,
 the corresponding median ratios are 0.680 in Drumbase and 0.662 in
-Reverb. The 58 ms tail remains a compromise between the recordings.
-After one Arrange cycle at the fitted Balance, Drumbase Cha-Cha improves
-from 2.78 to 2.63 dB and Reverb Beguine B from 4.27 to 4.12 dB. At center
-Balance, Drumbase Beguine rises from 3.03 to 3.11 dB.
+Reverb. After one Arrange cycle at the fitted Balance, Drumbase Cha-Cha
+improves from 2.78 to 2.63 dB and Reverb Beguine B from 4.27 to 4.12 dB.
+At center Balance, Drumbase Beguine rises from 3.03 to 3.11 dB.
+
+Fitting the high conga ring 25–88 ms after the trigger gives about 30 ms
+in Goldbaby's loops, 46 ms in Drumbase and 79 ms in Reverb. Goldbaby's
+direct `CongaLo_aOrig` takes contain the 202 Hz conga. Its
+`CongaHi_aOrig` takes contain the 865 Hz bell. Setting the C decay to
+29 ms lowers the Goldbaby Mambo loop error from 4.01 to 3.02 dB and raises
+the Reverb Mambo B error from 3.14 to 7.75 dB. The factory patch keeps the
+58 ms decay.
 
 Both recording sets have a brief low-frequency pulse under cymbal and
 hi-hat hits. The hi-hat uses two decays of opposite sign. The cymbal uses

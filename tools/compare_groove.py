@@ -10,11 +10,13 @@ import soundfile as sf
 
 from calibrate import FILES, NAMES, RATE, ROOT, read, rms
 
+# Match Tr66TriggerMask in src/tr66.h. The two Rhumba flags change
+# the drive of a low bongo already present in the trace.
+TRIGGER_MASK_LIMIT = 1 << 18
 ALTERNATE_HITS = {
-    "kick": ((1 << 10, 0.50), (1 << 14, 0.43)),
+    "kick": ((1 << 10, 0.50), (1 << 14, 0.43), (1 << 15, 0.21)),
     "conga": ((1 << 11, 0.66),),
     "high-bongo": ((1 << 12, 0.53), (1 << 13, 0.20)),
-    "hat": ((1 << 15, 1.0),),
 }
 
 
@@ -38,7 +40,7 @@ def main():
         for event in csv.DictReader(trace):
             start = int(event["frame"])
             mask = int(event["voices"])
-            if not (0 <= start < len(model) and 0 < mask < (1 << 16)):
+            if not (0 <= start < len(model) and 0 < mask < TRIGGER_MASK_LIMIT):
                 parser.error(f"invalid event {event}")
             for voice, name in enumerate(NAMES):
                 gain = 1.0 if mask & (1 << voice) else next(
