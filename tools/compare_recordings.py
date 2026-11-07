@@ -46,7 +46,8 @@ class Groove:
 
 GROOVES = [
     Groove("BEGUINE", "beguine"),
-    Groove("BOSSANOVA", "bossa-nova"),
+    # The sampler loop starts on the second bar of the repeating A phrase.
+    Groove("BOSSANOVA", "bossa-nova", arrange="a", skip_bars=1),
     Groove("CHA-CHA", "cha-cha"),
     Groove("J-WALTZ", "jazz-waltz", beats=3),
     Groove("MAMBO", "mambo"),

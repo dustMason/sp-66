@@ -441,10 +441,13 @@ In the earlier gate-level fit, the median combined attack moved from
 moved from −4.12 to −3.39 dB, compared with −2.14 dB in the recordings.
 
 Reverb's Bossa Nova A recording has all five rim hits at the steps in
-Roland's chart. Drumbase has rim-like transients at different steps,
-with clipping on many of them. Both recording sets
-play the high conga in Samba where the service chart calls for a low bongo.
-The firmware follows the recorded Samba and the documented Bossa Nova.
+Roland's chart. The Drumbase loop starts on the second bar of Arrange A.
+All ten of its strong rim transients line up with the same score once
+the render starts on that bar. Many of those transients clip. Correcting
+the comparison drops the clean-window error from 3.31 to 2.62 dB with
+the same C build and Balance setting after one Arrange cycle.
+Both recordings play the high conga in Samba where the service chart
+calls for a low bongo. The firmware follows the recorded Samba.
 Both Habanera A captures support the score's simultaneous kick and snare.
 
 | Level-matched spectral error | Before ring-down pass | After ring-down pass | Current |
