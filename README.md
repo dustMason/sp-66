@@ -369,6 +369,13 @@ After one Arrange cycle of warm-up, the loop error moves from 3.15 to
 3.01 dB in Reverb Mambo B and from 2.65 to 2.68 dB in the unclipped
 Drumbase windows.
 
+On Mambo's coincident cowbell and low-bongo hit, the C engine increases
+the low bongo's short ring drive by half and offsets the added onset
+with the pulse mode. Across eight clean hits from Drumbase, Reverb and
+Goldbaby, the median error in the 7–17 ms ring relative to the 24–44 ms
+body falls from 0.66 to 0.28 dB. Full-loop error changes by at most
+0.014 dB across the four Mambo captures.
+
 The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
 trough to the first crest from 0.577 to 0.674. In 14 separated loop hits,
@@ -401,7 +408,10 @@ direct `CongaLo_aOrig` takes contain the 202 Hz conga. Its
 `CongaHi_aOrig` takes contain the 865 Hz bell. Setting the C decay to
 29 ms lowers the Goldbaby Mambo loop error from 4.01 to 3.02 dB and raises
 the Reverb Mambo B error from 3.14 to 7.75 dB. The factory patch keeps the
-58 ms decay.
+58 ms decay. In Mambo, the 200 Hz ring continues through the next
+low-bongo hit. Immediately before that hit the Reverb tail is about
+10 dB above the model and the Drumbase tail about 6.5 dB below it,
+relative to each source's conga drive.
 
 Both recording sets have a brief low-frequency pulse under cymbal and
 hi-hat hits. The hi-hat uses two decays of opposite sign. The cymbal uses

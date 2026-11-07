@@ -500,6 +500,15 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         voice_trigger(bell, samba_pulse ? 0.92f : 1.0f);
         if (samba_pulse)
             bell->frames_left = machine->samba_cowbell_tail_frames;
+        if (voices & (1u << TR66_LOW_BONGO)) {
+            /* Mambo's coincident hit reinforces the bongo attack. Offset
+             * the extra short ring at the onset with the pulse mode. */
+            enum { pulse = 1, short_ring = 2 };
+            Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];
+            const float extra_drive = 0.5f;
+            add_mode_drive(bongo, short_ring, extra_drive);
+            bongo->resonator[pulse].real -= extra_drive * bongo->trigger_real[short_ring];
+        }
         voices &= ~(1u << TR66_COWBELL);
     }
     if (voices & (1u << TR66_KICK)) {
