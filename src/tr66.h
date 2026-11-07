@@ -12,7 +12,7 @@ enum Tr66Voice {
     TR66_MARACAS = TR66_HAT /* The service notes label the same input M and HH. */
 };
 
-enum { TR66_TONES = 5, TR66_NOISE_BANDS = 2 };
+enum { TR66_TONES = 6, TR66_NOISE_BANDS = 2 };
 typedef uint32_t Tr66TriggerMask;
 
 enum {

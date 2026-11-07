@@ -691,9 +691,17 @@ for the change in onset level. In Reverb Habanera and Shuffle, median
 36–105 Hz waveform correlation moves from 0.963 to 0.998 on three bare
 pairs and from 0.956 to 0.998 on seven pairs with cymbal. Reverb Habanera
 A loop error drops from 2.658 to 2.634 dB, and Drumbase Habanera A drops from
-2.753 to 2.739 dB. The C attack still has about 13 dB too much energy
-from 195 to 240 Hz on the bare Reverb Habanera hits after matching the
-snare ring.
+2.753 to 2.739 dB.
+
+In the Reverb recordings, nearby kicks and snares summed after matching
+their main rings have more energy from 195 to 240 Hz than the bare
+pairs. The C engine models the extra cancellation with a 234 Hz ring
+with a 6.5 ms decay time constant. The median excess in that band on
+three bare Reverb Habanera hits drops from 12.7 to 6.6 dB. The seven
+Reverb Shuffle pairs with cymbal move from 2.4 dB above to 0.4 dB below
+the recording, and the one clean Drumbase Rock 5 pair moves from 8.2 dB
+above to 0.3 dB below. Reverb Habanera A loop error drops from 2.634 to
+2.576 dB, while Drumbase Habanera A moves from 2.739 to 2.742 dB.
 
 The reduced kick in Bossa Nova and Rock 2/3 uses a softer attack and shifts
 the ring phase by the equivalent of 0.65 ms at the same sequencer tick.

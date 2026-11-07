@@ -241,7 +241,13 @@ static void assert_paired_kick(const Tr66 *single, const Tr66 *pair, float stren
     const float dot = a[0].real * b[0].real + a[0].imag * b[0].imag;
     const float phase = atan2f(cross, dot);
     assert(phase > 0.28f && phase < 0.29f);
-    assert(fabsf((b[0].real + b[1].real) - strength * (a[0].real + a[1].real)) < 1e-6f);
+    float single_onset = 0.0f, pair_onset = 0.0f;
+    for (unsigned i = 0; i < TR66_TONES; ++i) {
+        single_onset += a[i].real;
+        pair_onset += b[i].real;
+    }
+    assert(fabsf(pair_onset - strength * single_onset) < 1e-6f);
+    assert(a[5].imag == 0.0f && b[5].imag > 0.0f);
 }
 
 static void test_kick_snare_pair(void)

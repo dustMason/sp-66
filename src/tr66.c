@@ -358,8 +358,9 @@ static void trigger_tones(Tr66VoiceState *voice, const Tr66ToneDrive drive[TR66_
     voice->frames_left = voice->gate.tail_frames;
 }
 
-static void trigger_paired_kick(Tr66VoiceState *kick, float strength)
+static void trigger_paired_kick(Tr66VoiceState *kick, bool bare)
 {
+    const float strength = bare ? 0.85f : 1.0f;
     voice_trigger(kick, strength);
     /* On paired hits the 65 Hz ring leads its usual phase by about 0.7 ms.
      * Offset the change in the shortest pulse to preserve the onset level. */
@@ -367,6 +368,14 @@ static void trigger_paired_kick(Tr66VoiceState *kick, float strength)
     kick->resonator[0].real += real_delta;
     kick->resonator[0].imag -= 0.427686f * strength;
     kick->resonator[1].real -= real_delta;
+
+    /* A short opposing ring models the cancellation in recorded pairs.
+     * Pairs with cymbal need less correction than bare pairs. */
+    const float attack = bare ? 0.85f : 0.55f;
+    const float edge = 0.06f * attack;
+    kick->resonator[1].real -= edge;
+    kick->resonator[3].real += edge;
+    kick->resonator[5].imag += 0.23f * attack;
 }
 
 static void trigger_high_bongo(Tr66VoiceState *bongo, float ring, float attack)
@@ -424,7 +433,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     if (bare_kick_snare) {
         /* The two main rings are quieter on bare kick/snare hits in both
          * recording sets. Keep the snare noise gate at its normal drive. */
-        trigger_paired_kick(&machine->voices[TR66_KICK], 0.85f);
+        trigger_paired_kick(&machine->voices[TR66_KICK], true);
         voice_trigger(&machine->voices[TR66_SNARE], 0.85f);
         return;
     }
@@ -475,7 +484,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     if (voices & (1u << TR66_KICK)) {
         Tr66VoiceState *kick = &machine->voices[TR66_KICK];
         if (voices & (1u << TR66_SNARE))
-            trigger_paired_kick(kick, 1.0f);
+            trigger_paired_kick(kick, false);
         else
             voice_trigger(kick, 1.0f);
     }
