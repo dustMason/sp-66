@@ -590,6 +590,13 @@ of a downbeat in Drumbase and 36%, 39% and 26% in Goldbaby's Waltz REX loop.
 The C score uses the existing 43% trigger for the first two and a 21%
 trigger for the third. Reverb's Waltz clip contains the A phrase.
 
+The three extra Waltz cymbal hits share a fill output in Figure 16.
+The C model shifts their gate drive toward the attack and releases the
+fast envelope 5 ms earlier. From 30 to 225 ms after those hits, RMS band
+error over 7.2–13 kHz falls from 3.69 to 1.38 dB in Drumbase and from
+3.03 to 1.56 dB in Goldbaby, excluding clipped windows. The Reverb Waltz A
+render remains bit-identical.
+
 The 42 ms bass drum decay is a compromise across the three sources.
 Goldbaby's direct one-shots measure roughly 48–59 ms. The center-Balance
 error on its Waltz loop drops from 5.02 to 4.86 dB. Across the settled loops

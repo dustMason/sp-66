@@ -276,19 +276,20 @@ static void trigger_hat(Tr66 *machine)
     hat->sweep.bend *= 1.0f + 0.02f * bias;
 }
 
-static void trigger_cymbal(Tr66 *machine, bool shared_hit, bool tango_route)
+static void trigger_cymbal(Tr66 *machine, bool shared_hit, Tr66TriggerMask routes)
 {
     Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
     /* Tango's SD+CY output has a shorter recorded cymbal tail, particularly
      * when the hi-hat input also fires. Keep the ordinary cymbal attack. */
     cymbal->gate.decay_coeff = machine->cymbal_decay;
-    if (tango_route)
+    if (routes == TR66_TANGO_CYMBAL)
         cymbal->gate.decay_coeff = shared_hit
             ? machine->tango_cymbal_hat_decay : machine->tango_cymbal_decay;
     cymbal->gate.fast_release_frame = machine->cymbal_fast_release_frame;
     cymbal->sweep.bend_decay = shared_hit
         ? machine->coincident_cymbal_sweep_decay : machine->cymbal_sweep_decay;
     voice_trigger(cymbal, 1.0f);
+    const float samples_per_ms = 0.001f * machine->sample_rate;
 
     if (shared_hit) {
         /* The coincident hit puts more of the gate drive into the slow
@@ -302,12 +303,18 @@ static void trigger_cymbal(Tr66 *machine, bool shared_hit, bool tango_route)
         /* In the recordings, a cymbal after a longer gap has a stronger
          * attack relative to its body. Shift the gate drive toward the
          * fast envelope and release it earlier as the gap grows. */
-        const float samples_per_ms = 0.001f * machine->sample_rate;
         const float age_ms = (float)machine->cymbal_age / samples_per_ms;
         const float recovered = fminf(1.0f, fmaxf(0.0f, (age_ms - 190.0f) / 480.0f));
         cymbal->noise -= 0.025f * recovered;
         cymbal->fast_noise += 0.08f * recovered;
         cymbal->gate.fast_release_frame += (unsigned)(8.0f * samples_per_ms * recovered);
+    }
+    if (routes == TR66_WALTZ_FILL_CYMBAL) {
+        /* The extra Waltz fill pulses keep the strike but put less energy
+         * into the tail. Both recordings favor an earlier fast release. */
+        cymbal->noise -= 0.15f;
+        cymbal->fast_noise += 0.105f;
+        cymbal->gate.fast_release_frame += (unsigned)(5.0f * samples_per_ms);
     }
     /* Later hats close sooner after CY alone than after both gate inputs. */
     machine->cymbal_hat_recovery_ms = shared_hit ? coincident_cymbal_hat_recovery_ms : 490.0f;
@@ -420,10 +427,10 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         trigger_hat(machine);
         voices &= ~(1u << TR66_HAT);
     }
-    const Tr66TriggerMask cymbal = voices & ((1u << TR66_CYMBAL) | TR66_TANGO_CYMBAL);
+    const Tr66TriggerMask cymbal = voices & TR66_CYMBAL_TRIGGERS;
     if (cymbal != 0) {
-        /* A layered hit on the ordinary input retains its longer tail. */
-        trigger_cymbal(machine, shared_hit, cymbal == TR66_TANGO_CYMBAL);
+        /* Overlapping routes keep the ordinary cymbal envelope. */
+        trigger_cymbal(machine, shared_hit, cymbal);
         voices &= ~cymbal;
     }
     if (voices & (TR66_RHUMBA_BONGO | TR66_RHUMBA_FILL_BONGO)) {

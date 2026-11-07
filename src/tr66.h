@@ -35,12 +35,13 @@ enum {
     TR66_BEGUINE_FILL_LOW_BONGO = TR66_SAMBA_LIGHT_BONGO << 1,
     TR66_BEGUINE_FILL_CONGA = TR66_BEGUINE_FILL_LOW_BONGO << 1,
     TR66_TANGO_CYMBAL = TR66_BEGUINE_FILL_CONGA << 1,
+    TR66_WALTZ_FILL_CYMBAL = TR66_TANGO_CYMBAL << 1,
+    TR66_CYMBAL_TRIGGERS = (1u << TR66_CYMBAL) | TR66_TANGO_CYMBAL | TR66_WALTZ_FILL_CYMBAL,
 };
 
 static inline bool tr66_coincident_hat_cymbal(Tr66TriggerMask voices)
 {
-    return (voices & (1u << TR66_HAT)) &&
-           (voices & ((1u << TR66_CYMBAL) | TR66_TANGO_CYMBAL));
+    return (voices & (1u << TR66_HAT)) && (voices & TR66_CYMBAL_TRIGGERS);
 }
 
 typedef struct {

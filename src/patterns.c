@@ -38,8 +38,8 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 static const Tr66Event waltz_plain[] = {{0, K | Y}, {24, S}, {48, S}};
 /* Drumbase and Goldbaby both have a full downbeat and three quieter fill kicks. */
 static const Tr66Event waltz_fill[] = {
-    {0, K | Y}, {24, QUIET_K | S | Y}, {42, QUIET_K | Y},
-    {48, TR66_GHOST_KICK | S | Y},
+    {0, K | Y}, {24, QUIET_K | S | TR66_WALTZ_FILL_CYMBAL},
+    {42, QUIET_K | TR66_WALTZ_FILL_CYMBAL}, {48, TR66_GHOST_KICK | S | TR66_WALTZ_FILL_CYMBAL},
 };
 
 static const Tr66Event jazz_waltz_a1[] = {

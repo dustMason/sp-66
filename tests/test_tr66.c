@@ -877,11 +877,23 @@ static void test_waltz_fill(void)
     assert(fill->count == 4);
     assert(fill->events[0].voices == (MASK(KICK) | MASK(CYMBAL)));
     assert(fill->events[1].tick == 24);
-    assert(fill->events[1].voices == (TR66_QUIET_KICK | MASK(SNARE) | MASK(CYMBAL)));
+    assert(fill->events[1].voices == (TR66_QUIET_KICK | MASK(SNARE) | TR66_WALTZ_FILL_CYMBAL));
     assert(fill->events[2].tick == 42);
-    assert(fill->events[2].voices == (TR66_QUIET_KICK | MASK(CYMBAL)));
+    assert(fill->events[2].voices == (TR66_QUIET_KICK | TR66_WALTZ_FILL_CYMBAL));
     assert(fill->events[3].tick == 48);
-    assert(fill->events[3].voices == (TR66_GHOST_KICK | MASK(SNARE) | MASK(CYMBAL)));
+    assert(fill->events[3].voices == (TR66_GHOST_KICK | MASK(SNARE) | TR66_WALTZ_FILL_CYMBAL));
+
+    Tr66 ordinary, extra, layered;
+    tr66_init(&ordinary, RATE, 31);
+    extra = layered = ordinary;
+    tr66_hit(&ordinary, MASK(CYMBAL));
+    tr66_hit(&extra, TR66_WALTZ_FILL_CYMBAL);
+    tr66_hit(&layered, MASK(CYMBAL) | TR66_WALTZ_FILL_CYMBAL);
+    assert(extra.voices[TR66_CYMBAL].noise < ordinary.voices[TR66_CYMBAL].noise);
+    float a[BLOCK], b[BLOCK];
+    tr66_render(&ordinary, a, BLOCK);
+    tr66_render(&layered, b, BLOCK);
+    assert(memcmp(a, b, sizeof(a)) == 0);
 }
 
 static void test_controls(void)
