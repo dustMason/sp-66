@@ -521,6 +521,15 @@ In the earlier gate-level fit, the median combined attack moved from
 −1.36 to −0.90 dB relative to a single hat attack. At 40–65 ms that fit
 moved from −4.12 to −3.39 dB, compared with −2.14 dB in the recordings.
 
+Figure 18 puts Tango's snare and cymbal on a shared score output. The C
+model gives its cymbal a 220 ms decay time constant, or 145 ms when the
+hi-hat fires with it. The ordinary cymbal still takes precedence if a
+layered rhythm triggers it on the same tick. With playback warmed up,
+spectral error falls from 3.143 to 2.485 dB on Drumbase Tango B and from
+2.710 to 2.477 dB on Reverb Tango A. The reference clips at the two
+full-ensemble attacks in Tango B, so their fit uses the cleaner sustain
+windows.
+
 Reverb's Bossa Nova A recording has all five rim hits at the steps in
 Roland's chart. The Drumbase loop starts on the second bar of Arrange A.
 All ten of its strong rim transients line up with the same score once

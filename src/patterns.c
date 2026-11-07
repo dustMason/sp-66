@@ -16,6 +16,7 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define S  (1u << TR66_SNARE)
 #define H  (1u << TR66_HAT)
 #define Y  (1u << TR66_CYMBAL)
+#define TANGO_SY  (S | TR66_TANGO_CYMBAL)
 #define R  (1u << TR66_RIM)
 #define C  (1u << TR66_CONGA)
 #define SOFT_C  TR66_REDUCED_CONGA
@@ -270,11 +271,11 @@ static const Tr66Event shuffle_b2[] = {
 };
 
 static const Tr66Event tango_a[] = {
-    {0, K | H}, {24, K | H}, {48, K | H}, {72, K | H}, {84, S | Y},
+    {0, K | H}, {24, K | H}, {48, K | H}, {72, K | H}, {84, TANGO_SY},
 };
 static const Tr66Event tango_b2[] = {
-    {0, K | H}, {24, K | H}, {42, S | Y}, {48, K | H | S | Y},
-    {60, S | Y}, {72, K | H}, {84, S | Y},
+    {0, K | H}, {24, K | H}, {42, TANGO_SY}, {48, K | H | TANGO_SY},
+    {60, TANGO_SY}, {72, K | H}, {84, TANGO_SY},
 };
 
 const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
@@ -384,6 +385,6 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
     },
     [TR66_TANGO] = {
         .bars = {BAR(tango_a), BAR(tango_a), BAR(tango_a), BAR(tango_b2)},
-        .auto_pickup = S | Y, .b_pickup = S | Y, .ticks = 96,
+        .auto_pickup = TANGO_SY, .b_pickup = TANGO_SY, .ticks = 96,
     },
 };

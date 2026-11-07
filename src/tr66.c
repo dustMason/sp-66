@@ -241,6 +241,9 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     machine->cymbal_fast_release_frame = cymbal->gate.fast_release_frame;
     machine->cymbal_sweep_decay = cymbal->sweep.bend_decay;
     machine->coincident_cymbal_sweep_decay = decay(sample_rate, 34.0f);
+    machine->cymbal_decay = cymbal->gate.decay_coeff;
+    machine->tango_cymbal_decay = decay(sample_rate, 220.0f);
+    machine->tango_cymbal_hat_decay = decay(sample_rate, 145.0f);
     const float extra_hold_ms = coincident_cymbal_hold_ms - tr66_factory_voices[TR66_CYMBAL].noise_fast_hold_ms;
     machine->cymbal_extra_hold_frames = (unsigned)ceilf(0.001f * fmaxf(0.0f, extra_hold_ms) * sample_rate);
 }
@@ -273,9 +276,15 @@ static void trigger_hat(Tr66 *machine)
     hat->sweep.bend *= 1.0f + 0.02f * bias;
 }
 
-static void trigger_cymbal(Tr66 *machine, bool shared_hit)
+static void trigger_cymbal(Tr66 *machine, bool shared_hit, bool tango_route)
 {
     Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
+    /* Tango's SD+CY output has a shorter recorded cymbal tail, particularly
+     * when the hi-hat input also fires. Keep the ordinary cymbal attack. */
+    cymbal->gate.decay_coeff = machine->cymbal_decay;
+    if (tango_route)
+        cymbal->gate.decay_coeff = shared_hit
+            ? machine->tango_cymbal_hat_decay : machine->tango_cymbal_decay;
     cymbal->gate.fast_release_frame = machine->cymbal_fast_release_frame;
     cymbal->sweep.bend_decay = shared_hit
         ? machine->coincident_cymbal_sweep_decay : machine->cymbal_sweep_decay;
@@ -411,9 +420,11 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         trigger_hat(machine);
         voices &= ~(1u << TR66_HAT);
     }
-    if (voices & (1u << TR66_CYMBAL)) {
-        trigger_cymbal(machine, shared_hit);
-        voices &= ~(1u << TR66_CYMBAL);
+    const Tr66TriggerMask cymbal = voices & ((1u << TR66_CYMBAL) | TR66_TANGO_CYMBAL);
+    if (cymbal != 0) {
+        /* A layered hit on the ordinary input retains its longer tail. */
+        trigger_cymbal(machine, shared_hit, cymbal == TR66_TANGO_CYMBAL);
+        voices &= ~cymbal;
     }
     if (voices & (TR66_RHUMBA_BONGO | TR66_RHUMBA_FILL_BONGO)) {
         Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];

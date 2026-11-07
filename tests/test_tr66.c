@@ -323,6 +323,24 @@ static void test_cymbal_attack_after_gap(void)
     assert(cymbal->frames_left > cymbal->gate.tail_frames);
 }
 
+static void test_tango_cymbal_route(void)
+{
+    Tr66 machine;
+    tr66_init(&machine, RATE, 31);
+    const Tr66VoiceState *cymbal = &machine.voices[TR66_CYMBAL];
+    const float normal_decay = cymbal->gate.decay_coeff;
+    tr66_hit(&machine, MASK(SNARE) | TR66_TANGO_CYMBAL);
+    const float tango_decay = cymbal->gate.decay_coeff;
+    assert(cymbal->frames_left > 0 && tango_decay < normal_decay);
+
+    tr66_hit(&machine, MASK(SNARE) | MASK(HAT) | TR66_TANGO_CYMBAL);
+    assert(machine.voices[TR66_HAT].frames_left == 0);
+    assert(cymbal->gate.decay_coeff < tango_decay);
+
+    tr66_hit(&machine, MASK(SNARE) | MASK(HAT) | MASK(CYMBAL) | TR66_TANGO_CYMBAL);
+    assert(cymbal->gate.decay_coeff == normal_decay);
+}
+
 static void test_cymbal_extends_hat(void)
 {
     Tr66 rested, recent, earlier, coincident;
@@ -414,10 +432,11 @@ static void test_arrange_pickups(void)
     const uint16_t kick_snare = MASK(KICK) | MASK(SNARE);
     const uint16_t kick_hat = MASK(KICK) | MASK(HAT);
     const uint16_t snare_cymbal = MASK(SNARE) | MASK(CYMBAL);
+    const Tr66TriggerMask tango_snare_cymbal = MASK(SNARE) | TR66_TANGO_CYMBAL;
     const struct {
         enum Tr66PatternId rhythm, variation;
         unsigned beats;
-        uint16_t downbeat, auto_pickup, b_pickup;
+        Tr66TriggerMask downbeat, auto_pickup, b_pickup;
     } cases[] = {
         {TR66_JAZZ_WALTZ, TR66_OFF, 3, MASK(KICK) | MASK(CYMBAL), MASK(SNARE), MASK(SNARE)},
         {TR66_OFF, TR66_BASS_SNARE_2, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
@@ -425,7 +444,7 @@ static void test_arrange_pickups(void)
         {TR66_OFF, TR66_HABANERA, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
         {TR66_OFF, TR66_BASS_SNARE_4, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
         {TR66_OFF, TR66_FOXTROT_2, 4, kick_hat, 0, snare_cymbal},
-        {TR66_OFF, TR66_TANGO, 4, kick_hat, snare_cymbal, snare_cymbal},
+        {TR66_OFF, TR66_TANGO, 4, kick_hat, tango_snare_cymbal, tango_snare_cymbal},
     };
     for (unsigned i = 0; i < sizeof(cases) / sizeof(cases[0]); ++i) {
         const unsigned bar_frames = cases[i].beats * RATE / 2;
@@ -447,7 +466,7 @@ static void test_arrange_pickups(void)
                 if (trace.frame[j] % bar_frames != 0)
                     continue;
                 const unsigned bar = (unsigned)(trace.frame[j] / bar_frames);
-                uint16_t expected = cases[i].downbeat;
+                Tr66TriggerMask expected = cases[i].downbeat;
                 if (mode == TR66_ARRANGE_AUTO && bar % 4 == 0)
                     expected |= cases[i].auto_pickup;
                 if (mode == TR66_ARRANGE_B && bar % 2 == 0)
@@ -1070,6 +1089,7 @@ int main(void)
     test_kick_snare_pair();
     test_snare_drives_low_bongo();
     test_cymbal_attack_after_gap();
+    test_tango_cymbal_route();
     test_cymbal_extends_hat();
     test_callbacks();
     test_arrange_and_downbeat();
