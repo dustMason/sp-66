@@ -18,10 +18,11 @@
     /* Two decays form the small pulse under each recorded hi-hat hit. */
     [TR66_HAT] = { .tone = {{0.0f, 0.46f, 0.014f, 0.0f}, {0.0f, 3.5f, -0.014f, 0.0f}},
         .band = {{8061.0f, 11.06f, 6.38068f}, {8330.25390625f, 0.45656088f, 0.16982f}},
-        .noise_attack_ms = 3.50f,
+        .noise_attack_ms = 3.35f,
         .noise_decay_ms = 62.0f,
         .noise_highpass_hz = 9191.72949219f,
-        .noise_threshold = 0.451f },
+        .noise_threshold = 0.451f,
+        .noise_gate_curve = 6.4f },
     /* The corresponding cymbal pulse has the opposite polarity. */
     [TR66_CYMBAL] = { .tone = {{0.0f, 1.4f, -0.080f, 0.0f}, {0.0f, 3.0f, 0.080f, 0.0f}},
         .band = {{8172.25f, 11.18972f, 2.6670002f}, {13097.84f, 0.68986f, 0.0577989f}},

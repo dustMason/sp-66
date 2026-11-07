@@ -85,7 +85,7 @@ class Patch(c.Structure):
                 ("noise_fast_mix", c.c_float), ("noise_threshold", c.c_float),
                 ("noise_sweep_hz", c.c_float), ("noise_fast_hold_ms", c.c_float),
                 ("noise_sweep_ms", c.c_float), ("noise_start_q", c.c_float),
-                ("noise_damping_ms", c.c_float)]
+                ("noise_damping_ms", c.c_float), ("noise_gate_curve", c.c_float)]
 
 
 def read_baseline(path):

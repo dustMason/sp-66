@@ -104,6 +104,12 @@ Extract that pack to `work/references/complete/reverb` and run the comparison.
 python3 tools/compare_reverb.py --report work/reverb.json --audition work/reverb-ab.wav
 ```
 
+[Goldbaby's TapeTR66](https://dev.goldbaby.co.nz/freestuff.html)
+provides another set of isolated hits. The pack's notes identify `aOrig`
+files as direct recordings into a Metric Halo ULN-2. Use those takes for
+voice checks alongside the loop packs. The archive contains 113 one-shots,
+including the tape variants, and seven REX loops.
+
 Both comparisons accept `--baseline` with an earlier renderer. Add
 `--baseline-slow-rock-scale 1` when that renderer already takes Slow Rock
 tempo in quarter notes per minute.
@@ -356,8 +362,8 @@ to 3.17 dB. The settled Reverb median falls from 3.09 to 3.04 dB.
 The settled Drumbase median is 2.27 dB, and its center-Balance median
 rises from 2.80 to 2.85 dB.
 
-The hi-hat and maracas attack now rises with a 3.5 ms time constant, down
-from 5.3 ms. A higher gate threshold and longer decay keep the calculated
+The earlier hi-hat and maracas fit shortened the attack time constant from
+5.3 to 3.5 ms. A higher gate threshold and longer decay kept the calculated
 gate closing time near 49 ms when no cymbal precedes the hit. Across 234 usable
 steps, the median absolute error of 3–8 ms noise energy relative to the
 8–30 ms body falls from 2.31 to 1.46 dB in Drumbase and from 3.87 to
@@ -366,6 +372,17 @@ in Drumbase and from 1.89 to 2.13 dB in Reverb. At the fitted Balance
 after one Arrange cycle, the Drumbase loop median is 2.27 dB and the
 Reverb median improves from 3.04 to 2.99 dB. At center Balance, the
 Drumbase median rises from 2.82 to 2.84 dB.
+
+The current hi-hat gate uses a 3.35 ms rise and a curved response that
+brings up the body. The curve has less effect when a recent cymbal hit
+holds the gate open. Relative to the 8–20 ms attack in the 6–11.3 kHz
+band, the gap in median 20–35 ms energy falls from 2.01 to 0.97 dB in
+Drumbase and from 1.41 to 0.51 dB in Reverb on 174 hits with no cymbal in the
+preceding 650 ms. On the eight direct Goldbaby hats, the body is roughly
+0.2 dB below the attack. The onset-aligned isolated C render moves from
+5.4 to 4.0 dB below and still closes sooner than those takes.
+At fixed Balance after one Arrange cycle, the Drumbase median moves from
+2.32 to 2.27 dB and the Reverb median from 2.64 to 2.63 dB.
 
 Both packs shift cymbal energy upward as the hit decays. Across 113 cymbal
 hits, the mean spectrum peaks near 7.8–7.9 kHz at 5–25 ms and 8.1–8.3 kHz

@@ -29,6 +29,7 @@ static void voice_init(Tr66VoiceState *state, const Tr66Patch *patch, float rate
     const float noise_ms = fmaxf(patch->noise_decay_ms, patch->noise_fast_ms);
     float tail_ms = 9.0f * noise_ms;
     state->gate.threshold = fminf(1.0f, fmaxf(0.0f, patch->noise_threshold));
+    state->gate.curve = patch->noise_gate_curve;
     if (state->gate.threshold > 0.0f)
         tail_ms = fminf(tail_ms, -noise_ms * logf(state->gate.threshold));
     const float hold_ms = fmaxf(0.0f, patch->noise_fast_hold_ms);
@@ -185,8 +186,13 @@ static float voice_sample(Tr66VoiceState *state, float noise)
             filtered += filter_sample(band, noise, band->a1);
         }
         const float envelope = (state->noise + state->fast_noise) * (1.0f - state->attack);
-        if (envelope > state->gate.threshold)
-            out += filtered * (envelope - state->gate.threshold);
+        if (envelope > state->gate.threshold) {
+            const float level = envelope - state->gate.threshold;
+            /* Round the closed-hat attack and bring up its body. The
+             * correction approaches zero as the gate closes. */
+            const float gain = 1.0f + state->gate.curve * level * (0.333f - level);
+            out += filtered * (level * gain);
+        }
         state->noise *= state->gate.decay_coeff;
         if (state->frames_left < state->gate.fast_release_frame)
             state->fast_noise *= state->fast_coeff;
@@ -238,6 +244,9 @@ static void trigger_hat(Tr66 *machine)
     const float drive = (level_at_14ms - patch->noise_threshold) / (level_at_14ms - threshold);
     const float tail_ms = patch->noise_decay_ms * (bias - logf(patch->noise_threshold));
     hat->gate.threshold = drive * threshold;
+    /* When the cymbal has biased the gate open, the slower tail already
+     * carries more energy. Scale the closed-hat curve with its drive. */
+    hat->gate.curve = patch->noise_gate_curve * drive * drive;
     hat->gate.tail_frames = (unsigned)ceilf(samples_per_ms * tail_ms);
     hat->gate.fast_release_frame = hat->gate.tail_frames;
     voice_trigger(hat, 1.0f);

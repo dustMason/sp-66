@@ -55,6 +55,7 @@ typedef struct {
     float noise_sweep_ms;
     float noise_start_q;
     float noise_damping_ms;
+    float noise_gate_curve;
 } Tr66Patch;
 
 typedef struct {
@@ -68,7 +69,7 @@ typedef struct {
 } Tr66Filter;
 
 typedef struct {
-    float decay_coeff, attack_coeff, threshold;
+    float decay_coeff, attack_coeff, threshold, curve;
     unsigned tail_frames, fast_release_frame;
 } Tr66NoiseGate;
 
