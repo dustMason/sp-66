@@ -17,7 +17,7 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 
 ## SP-1 controls
 
-[![SP-66 control map for the SP-1, with fader and track assignments, Arrange, Play, Function, volume, and USB-C MIDI clock](docs/sp1-controls.svg)](docs/sp1-controls.svg)
+[![Annotated line drawing of the SP-1 showing four faders and track buttons, the Arrange rocker, volume, Play, Function, LEDs, and the USB-C MIDI clock input](docs/sp1-controls.svg)](docs/sp1-controls.svg)
 
 | Control | Action |
 | --- | --- |
@@ -33,6 +33,8 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 | Volume buttons | Master output level |
 | Track LEDs | Selected variation bank. T4 shows whether the variation is on, or whether the current rhythm is pinned while Function is held |
 | Side LEDs | Arrange setting and current bar |
+| USB-C | [MIDI clock and transport input](#usb-midi-clock) |
+| Headphones | Audio output |
 
 The original score uses two bars per A or B phrase. Auto plays A then B.
 Some rhythms add a pickup on the first downbeat of the full Arrange cycle.
