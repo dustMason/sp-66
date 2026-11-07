@@ -34,6 +34,7 @@ typedef struct {
 typedef struct {
     Tr66Bar bars[TR66_SCORE_BARS];
     Tr66TriggerMask auto_pickup;
+    Tr66TriggerMask auto_return_pickup; /* Additional voices on a repeat of the Auto cycle. */
     Tr66TriggerMask b_pickup;
     uint8_t ticks;
 } Tr66Pattern;

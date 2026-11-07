@@ -369,7 +369,7 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
     },
     [TR66_FOXTROT_2] = {
         .bars = {BAR(foxtrot_2_a), BAR(foxtrot_2_a), BAR(foxtrot_2_a), BAR(foxtrot_2_b2)},
-        .b_pickup = S | Y, .ticks = 96,
+        .auto_return_pickup = S | Y, .b_pickup = S | Y, .ticks = 96,
     },
     [TR66_SWING_2] = {
         .bars = {BAR(swing_2_a), BAR(swing_2_a), BAR(swing_2_a), BAR(swing_2_b2)},

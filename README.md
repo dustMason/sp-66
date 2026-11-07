@@ -684,21 +684,27 @@ The original Drumbase held-out score was 6.69 dB with clipped windows
 excluded. Its Slow Rock score rose from 3.19 to 3.68 dB after the quieter
 fill kick and other voice changes, then fell to 3.44 dB after the cymbal
 pulse and noise envelope refinements. A subsequent cymbal fit brought it
-to 2.71 dB. The two packs cover 24 of
-the 27 factory rhythms between them and a subset of their A, Auto and B
-phrases. Bass & Snare in each beat bank and Foxtrot 2 still await a matching
-recording. The original BeatBox Anthology and MOTU BPM list candidate loops
-under “The 66” as `T66-Bass&Sn8`, `T66-Bass&Sn16` and `T66-FoxTrot2`.
-Those audio files still need to be checked against the charts.
-[BeatBox Anthology soundbank manual](https://usermanual.wiki/Uvi/BeatBoxAnthologyManual.1168487385.pdf)
+to 2.71 dB. The two WAV packs cover 24 of the 27 factory rhythms and a
+subset of their A, Auto and B phrases. Two stock-unit demos supply timing
+evidence for the other three.
+
+| Pattern | Observed triggers | Recording |
+| --- | --- | --- |
+| Bass & Snare, 2 Beat | Kick and snare every other beat. The last bar adds cymbal on ticks 42, 48, 60 and 84 on the 24-tick beat grid. | [1:26–1:29](https://www.youtube.com/watch?v=bieZUYUNEts&t=86s) |
+| Bass & Snare, 4 Beat | Kick and snare on every beat, with the same four cymbal fill ticks and a cymbal on the return to A. | [4:32–4:37](https://www.youtube.com/watch?v=a_IEsDTpv4M&t=272s) |
+| Foxtrot 2 | Kick on every beat, the extra snare hits in B, and a snare and cymbal pickup when Auto cycles back to A. | [1:32–1:35](https://www.youtube.com/watch?v=bieZUYUNEts&t=92s) and [4:37–4:41](https://www.youtube.com/watch?v=a_IEsDTpv4M&t=277s) |
+
+The Foxtrot 2 return's peak in the 300–560 Hz snare band is 10–12 dB
+above a nearby kick and hi-hat beat in both recordings. The C score
+adds the pickup on the repeat and follows Figure 18 on the first Auto
+downbeat. The original BeatBox Anthology and MOTU BPM list `T66-Bass&Sn8`,
+`T66-Bass&Sn16` and `T66-FoxTrot2` as candidates for a separate WAV
+comparison. [BeatBox Anthology soundbank manual](https://usermanual.wiki/Uvi/BeatBoxAnthologyManual.1168487385.pdf)
 and [MOTU BPM user guide](https://www.klangfarbe.com/files/Shop/Artikel/36386/A-S36386_1.pdf).
 
-All 36 A, B and Auto traces across the 2 Beat and 4 Beat banks match a
-transcription of the service pulse charts after correcting their cycle
-pickups and two B fills. The Foxtrot pickups follow the service charts
-where they differ from the printed player scores. The Drumbase Jazz Waltz
-Auto recording confirms a snare pickup on the first downbeat of the four-bar
-cycle.
+The 36 A, B and Auto traces across the 2 Beat and 4 Beat banks are based
+on the service pulse charts. The Drumbase Jazz Waltz Auto recording
+confirms a snare pickup on the first downbeat of the four-bar cycle.
 
 All 18 Rock-bank A, B and Auto traces match Figures 15 and 17 of the
 service notes. Rock 1 plays kick, snare and cymbal together on the
