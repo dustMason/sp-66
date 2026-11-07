@@ -1,236 +1,218 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="900" height="672" viewBox="0 0 900 672" role="img"
+     width="920" height="706" viewBox="0 0 920 706" role="img"
      aria-labelledby="title description">
   <title id="title">SP-66 control map for the Teenage Engineering SP-1</title>
-  <desc id="description">An angled line drawing of the SP-1 with separate views of
-    the top and right edges. From left to right, the four faders set tempo from
-    50 to 200 BPM, bass-to-treble balance, base rhythm, and one of six presets in
-    the selected variation bank. Track buttons 1, 2 and 3 select Rock, 2 Beat and
-    4 Beat. Track 4 toggles the variation. Hold Function and tap Track 4 to pin
-    or unpin the current base rhythm. Track LEDs show the selected bank and
-    whether the variation is enabled. The round buttons on the top edge lower
-    and raise volume. The left rocker steps through A, Auto and B. Press up
-    toward B or down toward A. Auto plays A then B. On the right edge, Play starts or stops
-    playback. Four LEDs show the Arrange setting and bar. Tap Function while
-    playing to fill on the next bar or hold it to shut down. On the bottom edge,
-    USB-C receives MIDI clock and transport. The headphone jack is beside it.</desc>
+  <desc id="description">An angled line drawing of the SP-1 with separate top
+    and right edge views. From left to right the faders set tempo from 50 to
+    200 BPM, bass drum and treble balance, base rhythm, and one of six presets
+    in the selected bank. Track buttons 1, 2 and 3 select Rock, 2 Beat and
+    4 Beat. Track 4 toggles the variation. Hold Function and tap Track 4 to
+    pin or unpin the base rhythm. The track LEDs show the bank and variation.
+    The top buttons adjust volume. Press the left rocker up toward B or down
+    toward A to step through A, Auto and B. Auto plays A then B. On the right,
+    Play starts or stops playback and four LEDs show Arrange and bar position.
+    Tap Function during playback for a fill on the next bar or hold it to shut
+    down. USB-C receives MIDI clock and transport. The middle jack outputs audio.</desc>
 
   <style>
-    .outline, .slot, .key, .port {
-      stroke: #303430;
+    .outline, .key, .slot, .port, .pin, .seam, .recess, .lip, .glint, .leader {
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .outline { stroke-width: 1.5; }
-    .slot, .key, .port { stroke-width: 1.15; }
-    .slot { fill: #333834; }
-    .key { fill: #e9eae6; }
-    .key.shadow { fill: #a9b0ad; }
-    .port { fill: #303430; }
-    .ink, .edge, .highlight, .leader {
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    .ink { stroke: #303430; stroke-width: 1.2; }
-    .edge { stroke: #767d76; stroke-width: .9; }
-    .highlight { stroke: #f8f8ee; stroke-width: 1.1; }
-    .leader { stroke: #737b72; stroke-width: 1; }
-    .dark { fill: #303430; }
-    .lit { fill: #fffcf0; stroke: #535b53; stroke-width: .9; }
-    .accent { fill: #ba3528; }
+    .outline { stroke: #343432; stroke-width: 1.55; }
+    .key, .pin { stroke: #44443f; stroke-width: 1.05; }
+    .key { fill: #dbdbd5; }
+    .slot, .port { fill: #292a27; stroke: #41413b; stroke-width: 1.05; }
+    .seam, .recess, .lip, .glint, .leader { fill: none; }
+    .seam { stroke: #6c675b; stroke-width: 1.1; }
+    .recess { stroke: #777970; stroke-width: 1; }
+    .lip { stroke: #5c5e57; stroke-width: .9; }
+    .glint { stroke: #faf8ef; stroke-width: 1; }
+    .leader { stroke: #827d72; stroke-width: 1.1; }
     .label, .hint { font-family: Geist, Arial, sans-serif; }
-    .label { fill: #252b26; font-size: 22px; font-weight: 600; }
-    .hint { fill: #4b544c; font-size: 18px; }
-    .id, .view {
-      font: 600 14px "IBM Plex Mono", "Courier New", monospace;
-    }
-    .id { fill: #9a3329; }
-    .view { fill: #566056; letter-spacing: 1.3px; }
-    .position {
-      fill: #303430;
-      font: 600 16px "IBM Plex Mono", "Courier New", monospace;
-    }
-    .position.auto { fill: #9a3329; }
+    .label { fill: #262625; font-size: 22px; font-weight: 600; }
+    .hint { fill: #4e4b45; font-size: 18px; }
+    .id, .view { font-family: "IBM Plex Mono", "Courier New", monospace; font-weight: 600; }
+    .id { fill: #a03830; font-size: 15px; }
+    .view { fill: #5e594f; font-size: 14px; letter-spacing: 1.4px; }
   </style>
 
   <defs>
-    <path id="face" d="M9 0h246q9 0 9 9v352q0 9-9 9H9q-9 0-9-9V9q0-9 9-9Z"/>
+    <path id="face" d="M9 0h242q9 0 9 9v346q0 9-9 9H9q-9 0-9-9V9q0-9 9-9Z"/>
     <clipPath id="face-clip"><use xlink:href="#face"/></clipPath>
-    <path id="case" d="M9 0h246q9 0 9 9v352l-26 23q0 9-9 9H-17
-                       q-9 0-9-9V32q0-6 4-9L4 2q2-2 5-2Z"/>
-    <clipPath id="case-clip"><use xlink:href="#case"/></clipPath>
+    <path id="bottom-wall" d="M0 355q0 9 9 9h242q9 0 9-9l-20 23q0 9-9 9H-11q-9 0-9-9Z"/>
+    <clipPath id="bottom-clip"><use xlink:href="#bottom-wall"/></clipPath>
 
     <g id="fader">
-      <rect class="slot" x="-5.8" y="148" width="11.6" height="74" rx="5.8"/>
-      <path class="edge" d="M3.3 154v62"/>
-      <path class="highlight" d="M-7 155v60q0 8 7 8"/>
+      <rect class="slot" x="-5.4" y="147" width="10.8" height="75" rx="5.4"/>
+      <path class="recess" d="M3.3 153v63"/>
+      <path class="glint" d="M-5.8 155v62q0 6 5.8 6"/>
     </g>
-    <g id="fader-pin">
-      <path fill="#171a18" opacity=".25" d="M-5 5h11l2 7q-1 4-6 4h-3q-4-1-4-4Z"/>
-      <path class="key shadow" d="M-6 0v7q0 4 6 4t6-4V0Z"/>
-      <ellipse class="key" rx="6" ry="4.3"/>
-      <path class="highlight" d="M-3.4-1.5q3.4-2.1 6.8 0"/>
+    <g id="pin">
+      <path class="pin" fill="#a4a6a1" d="M-6 0v6q0 3.9 6 3.9T6 6V0Z"/>
+      <ellipse class="pin" fill="#e0e0da" rx="6" ry="4.1"/>
+      <path class="glint" d="M-3.4-1.3q3.4-2.2 6.8 0"/>
     </g>
     <g id="track-key">
-      <rect class="key shadow" x="-7.7" y="291" width="15.4" height="36" rx="2"/>
-      <rect class="key" x="-7.7" y="288" width="15.4" height="36" rx="2"/>
-      <path class="highlight" d="M-5.4 321v-28q0-2.6 2.6-2.6H5"/>
+      <rect x="-8.7" y="286" width="17.4" height="36" rx="2" fill="#787a74"/>
+      <rect class="key" x="-8.3" y="283" width="16.6" height="36" rx="2"/>
+      <path class="glint" d="M-5.7 315v-27q0-2.5 2.5-2.5h8.6"/>
     </g>
+    <circle id="led-off" r="2.45" fill="#32322d"/>
+    <circle id="led-on" r="2.85" fill="#fff9e7" stroke="#646156" stroke-width=".9"/>
   </defs>
 
-  <rect x=".5" y=".5" width="899" height="671" rx="7" fill="#f8f7f3" stroke="#dedfd7"/>
+  <rect x=".5" y=".5" width="919" height="705" rx="9" fill="#faf8f2" stroke="#d9d4c8"/>
 
-  <!-- Top edge with the two volume buttons. -->
+  <!-- Top edge -->
   <g>
-    <rect class="outline" x="232" y="29" width="264" height="29" rx="5" fill="#d5d9d2"/>
-    <path d="M452 29h39q5 0 5 5v19q0 5-5 5h-39Z" fill="#e9e3d3"/>
-    <rect class="outline" x="232" y="29" width="264" height="29" rx="5" fill="none"/>
-    <path class="ink" d="M452 29v29"/>
-    <path class="highlight" d="M238 32h209m10 0h32"/>
-    <circle class="key shadow" cx="269.5" cy="44.5" r="7.3"/>
-    <circle class="key shadow" cx="316.5" cy="44.5" r="7.3"/>
-    <circle class="key" cx="269.5" cy="43.5" r="7.3"/>
-    <circle class="key" cx="316.5" cy="43.5" r="7.3"/>
-    <path class="ink" d="M266 43.5h7m40 0h7m-3.5-3.5v7"/>
-    <text class="view" x="510" y="48">TOP EDGE</text>
+    <rect x="248" y="33" width="273" height="31" rx="6" fill="#c8c9c4"/>
+    <path d="M477 33h38q6 0 6 6v19q0 6-6 6h-38Z" fill="#e7ddc8"/>
+    <rect class="outline" x="248" y="33" width="273" height="31" rx="6" fill="none"/>
+    <path class="seam" d="M477 33v31"/>
+    <path class="glint" d="M254 36h219m8 0h34"/>
+    <circle class="key" cx="285" cy="48.5" r="7.1"/>
+    <circle class="key" cx="331" cy="48.5" r="7.1"/>
+    <path class="seam" d="M281.5 48.5h7m39 0h7m-3.5-3.5v7"/>
+    <text class="view" x="538" y="54">TOP EDGE</text>
   </g>
 
   <!-- The front, left and bottom share one projection. -->
-  <g transform="matrix(1 -.23 .43 .91 235 146)">
-    <use xlink:href="#case" fill="#b9c0be"/>
-    <path d="M0 361q0 9 9 9h255v23H-26v-9Z"
-          fill="#cdd2d0" clip-path="url(#case-clip)"/>
-    <path d="M220 370h44v23h-70Z" fill="#dfd7c3" clip-path="url(#case-clip)"/>
-    <path class="ink" d="M220 370l-26 23"/>
-    <path class="edge" d="M-22 116v263q0 10 9 10h203m9 0h27"/>
-    <use xlink:href="#case" class="outline" fill="none"/>
+  <g transform="matrix(1.05 -.23 .37 .96 248 166)">
+    <path class="outline" fill="#a8aaa3"
+          d="M3 2l-20 23q-3 3-3 7v346q0 9 9 9l20-23q-9 0-9-9V9q0-5 3-7Z"/>
+    <path class="lip" d="M-16 33v342q0 7 4 8"/>
 
-    <g transform="matrix(1 -.8846 0 1 0 0)">
-      <rect class="slot" x="-21" y="48" width="16" height="40" rx="4"/>
-      <rect class="outline" x="-28" y="50" width="17" height="36" rx="4" fill="#e8e0cb"/>
-      <path class="highlight" d="M-25 81V55q0-2 2-2h8"/>
-      <path class="edge" d="M-25 68h11"/>
-      <circle class="dark" cx="-12" cy="124" r="1.75"/>
+    <!-- Left rocker and recessed pinhole -->
+    <g transform="matrix(-.869565 1 0 1 0 0)">
+      <rect class="slot" x="2.5" y="47" width="18" height="41" rx="4"/>
+      <rect class="outline" x="5" y="49.5" width="17" height="36" rx="4" fill="#e4dac3"/>
+      <path class="glint" d="M8 81V55q0-2.5 2.5-2.5h8"/>
+      <path class="seam" d="M8 67.5h11"/>
+      <circle cx="11.5" cy="115" r="1.7" fill="#343432"/>
     </g>
 
-    <g transform="matrix(1 0 -1.1304 1 0 370)">
-      <rect class="port" x="47" y="6.5" width="44" height="10" rx="5"/>
-      <path class="edge" d="M54 11.5h30"/>
-      <ellipse class="port" cx="159" cy="11.5" rx="8.5" ry="5.25"/>
-      <ellipse class="port" cx="207" cy="11.5" rx="8.5" ry="5.25"/>
-      <path class="edge" d="M153 13.2q6 3 12 0m36 0q6 3 12 0"/>
+    <use xlink:href="#bottom-wall" fill="#999c95"/>
+    <path d="M217 355h43v32h-63Z" fill="#d5c9ae" clip-path="url(#bottom-clip)"/>
+    <path class="seam" d="M217 364l-20 23"/>
+    <path class="lip" d="M-9 383h204m8 0h27"/>
+    <use xlink:href="#bottom-wall" class="outline" fill="none"/>
+
+    <!-- USB-C, headphone and sync sockets -->
+    <g transform="matrix(1 0 -.869565 1 0 364)">
+      <rect class="port" x="44.5" y="7" width="39" height="9" rx="4.5"/>
+      <path class="recess" d="M50 11.5h28"/>
+      <ellipse class="port" cx="162" cy="11.5" rx="7.8" ry="4.9"/>
+      <ellipse class="port" cx="209" cy="11.5" rx="7.8" ry="4.9"/>
+      <path class="recess" d="M157 13.7q5 2.6 10 0m37 0q5 2.6 10 0"/>
     </g>
 
-    <use xlink:href="#face" fill="#e0e4e2"/>
-    <path d="M220 0h44v370h-44Z" fill="#ede7d7" clip-path="url(#face-clip)"/>
+    <use xlink:href="#face" fill="#d6d7d2"/>
+    <path d="M217 0h43v364h-43Z" fill="#eae0cb" clip-path="url(#face-clip)"/>
     <use xlink:href="#face" class="outline" fill="none"/>
-    <path class="ink" d="M220 0v370"/>
-    <path class="highlight" d="M3.5 359V10q0-6.5 6.5-6.5h206m8 0h30q6.5 0 6.5 6.5v349"/>
-    <path class="edge" d="M10 366h206m8 0h30"/>
+    <path class="seam" d="M217 0v364"/>
+    <path class="glint" d="M3.4 352V10q0-6.5 6.5-6.5h204m7 0h29q6.5 0 6.5 6.5v342"/>
+    <path class="lip" d="M9 360.5h204m7 0h30"/>
 
-    <path class="accent" d="M238 58.6l10.7 6.2-10.7 6.2Z"/>
-    <circle class="dark" cx="243" cy="296" r="2"/>
-    <circle class="dark" cx="243" cy="307" r="2"/>
+    <path fill="#b4372d" d="M238.5 55l6.5 11h-13Z"/>
+    <circle cx="238.5" cy="293" r="2.05" fill="#33332e"/>
+    <circle cx="238.5" cy="302.5" r="2.05" fill="#33332e"/>
 
-    <use xlink:href="#fader" x="32"/>
-    <use xlink:href="#fader" x="84"/>
-    <use xlink:href="#fader" x="137"/>
-    <use xlink:href="#fader" x="189"/>
-    <use xlink:href="#fader-pin" x="32" y="178"/>
-    <use xlink:href="#fader-pin" x="84" y="187"/>
-    <use xlink:href="#fader-pin" x="137" y="164"/>
-    <use xlink:href="#fader-pin" x="189" y="200"/>
+    <use xlink:href="#fader" x="31"/>
+    <use xlink:href="#fader" x="83"/>
+    <use xlink:href="#fader" x="135"/>
+    <use xlink:href="#fader" x="187"/>
+    <use xlink:href="#pin" x="31" y="159"/>
+    <use xlink:href="#pin" x="83" y="179"/>
+    <use xlink:href="#pin" x="135" y="164"/>
+    <use xlink:href="#pin" x="187" y="195"/>
 
-    <circle class="lit" cx="32" cy="254" r="2.65"/>
-    <circle class="dark" cx="84" cy="254" r="2.3"/>
-    <circle class="dark" cx="137" cy="254" r="2.3"/>
-    <circle class="lit" cx="189" cy="254" r="2.65"/>
-    <use xlink:href="#track-key" x="32"/>
-    <use xlink:href="#track-key" x="84"/>
-    <use xlink:href="#track-key" x="137"/>
-    <use xlink:href="#track-key" x="189"/>
+    <use xlink:href="#led-on" x="31" y="251"/>
+    <use xlink:href="#led-off" x="83" y="251"/>
+    <use xlink:href="#led-off" x="135" y="251"/>
+    <use xlink:href="#led-on" x="187" y="251"/>
+    <use xlink:href="#track-key" x="31"/>
+    <use xlink:href="#track-key" x="83"/>
+    <use xlink:href="#track-key" x="135"/>
+    <use xlink:href="#track-key" x="187"/>
 
     <g class="id" text-anchor="middle">
-      <text x="32" y="136">F1</text>
-      <text x="84" y="136">F2</text>
-      <text x="137" y="136">F3</text>
-      <text x="189" y="136">F4</text>
-      <text x="32" y="348">T1</text>
-      <text x="84" y="348">T2</text>
-      <text x="137" y="348">T3</text>
-      <text x="189" y="348">T4</text>
+      <text x="31" y="135">F1</text>
+      <text x="83" y="135">F2</text>
+      <text x="135" y="135">F3</text>
+      <text x="187" y="135">F4</text>
+      <text x="31" y="342">T1</text>
+      <text x="83" y="342">T2</text>
+      <text x="135" y="342">T3</text>
+      <text x="187" y="342">T4</text>
     </g>
   </g>
 
-  <!-- The right edge contains two buttons and four Arrange LEDs. -->
+  <!-- Right edge -->
   <g>
-    <text class="view" x="670" y="132">RIGHT EDGE</text>
-    <rect class="outline" x="670" y="145" width="25" height="299" rx="5" fill="#e9e3d3"/>
-    <path class="highlight" d="M673 437V151q0-3 3-3h13"/>
-    <rect class="key" x="675" y="172" width="15" height="53" rx="2.5"/>
-    <rect class="key" x="675" y="362" width="15" height="53" rx="2.5"/>
-    <path class="highlight" d="M678 221v-45h9m-9 235v-45h9"/>
-    <circle class="dark" cx="682.5" cy="252" r="2.4"/>
-    <circle class="lit" cx="682.5" cy="268" r="2.7"/>
-    <circle class="dark" cx="682.5" cy="284" r="2.4"/>
-    <circle class="dark" cx="682.5" cy="300" r="2.4"/>
+    <text class="view" x="674" y="107">RIGHT EDGE</text>
+    <rect class="outline" x="677" y="119" width="30" height="350" rx="6" fill="#e7ddc8"/>
+    <path class="glint" d="M680.5 462V126q0-3.5 3.5-3.5h16"/>
+    <rect class="key" x="683.5" y="151" width="17" height="60" rx="2.5"/>
+    <rect class="key" x="683.5" y="378" width="17" height="60" rx="2.5"/>
+    <path class="glint" d="M686 207v-51q0-2 2-2h10m-12 280v-51q0-2 2-2h10"/>
+    <use xlink:href="#led-off" x="692" y="252"/>
+    <use xlink:href="#led-on" x="692" y="265"/>
+    <use xlink:href="#led-off" x="692" y="278"/>
+    <use xlink:href="#led-off" x="692" y="291"/>
   </g>
 
-  <path class="leader" d="M179 43.5h43 M197 189h19l24 32
-                         M695 198.5h22 M695 276h22 M695 388.5h22"/>
-  <text class="label" x="32" y="47">Volume − / +</text>
-  <text class="hint" x="32" y="70">Master output</text>
-  <text class="label" x="32" y="193">Arrange rocker</text>
-  <text class="hint" x="32" y="217">↓ toward A · ↑ toward B</text>
-  <text class="position" x="32" y="243">A</text>
-  <path class="leader" d="M49 238h16m57 0h16"/>
-  <text class="position auto" x="74" y="243">AUTO</text>
-  <text class="position" x="147" y="243">B</text>
-  <text class="hint" x="32" y="265">Auto plays A then B</text>
+  <path class="leader" d="M180 48.5h58 M203 167h19l31 85h7
+                         M707 181h20 M707 271.5h20 M707 408h20"/>
+  <text class="label" x="32" y="52">Volume − / +</text>
+  <text class="hint" x="32" y="76">Master output</text>
+  <text class="label" x="32" y="173">Arrange rocker</text>
+  <text class="hint" x="32" y="197">↑ toward B · ↓ toward A</text>
+  <text class="hint" x="32" y="222">A ↔ Auto ↔ B</text>
+  <text class="hint" x="32" y="245">Auto plays A then B</text>
 
   <g>
-    <text class="id" x="32" y="297">F1</text>
-    <text class="label" x="64" y="297">Tempo</text>
-    <text class="hint" x="64" y="319">50–200 BPM</text>
-    <text class="id" x="32" y="352">F2</text>
-    <text class="label" x="64" y="352">Balance</text>
-    <text class="hint" x="64" y="374">Bass drum to treble</text>
-    <text class="id" x="32" y="407">F3</text>
-    <text class="label" x="64" y="407">Base rhythm</text>
-    <text class="hint" x="64" y="429">Off or one of 9 rhythms</text>
-    <text class="id" x="32" y="462">F4</text>
-    <text class="label" x="64" y="462">Variation preset</text>
-    <text class="hint" x="64" y="484">Six per selected bank</text>
+    <text class="id" x="32" y="298">F1</text>
+    <text class="label" x="64" y="298">Tempo</text>
+    <text class="hint" x="64" y="322">50–200 BPM</text>
+    <text class="id" x="32" y="358">F2</text>
+    <text class="label" x="64" y="358">Balance</text>
+    <text class="hint" x="64" y="382">Bass drum ↔ treble</text>
+    <text class="id" x="32" y="418">F3</text>
+    <text class="label" x="64" y="418">Base rhythm</text>
+    <text class="hint" x="64" y="442">Off or one of 9 rhythms</text>
+    <text class="id" x="32" y="478">F4</text>
+    <text class="label" x="64" y="478">Variation preset</text>
+    <text class="hint" x="64" y="502">Six in the selected bank</text>
   </g>
 
-  <text class="label" x="729" y="197">Play</text>
-  <text class="hint" x="729" y="220">Start / stop</text>
-  <text class="label" x="729" y="274">Side LEDs</text>
-  <text class="hint" x="729" y="297">Arrange and bar</text>
-  <text class="label" x="729" y="386">Function</text>
-  <text class="hint" x="729" y="409">Tap for next-bar fill</text>
-  <text class="hint" x="729" y="432">Hold to shut down</text>
+  <text class="label" x="737" y="186">Play</text>
+  <text class="hint" x="737" y="210">Start / stop</text>
+  <text class="label" x="737" y="276">Side LEDs</text>
+  <text class="hint" x="737" y="300">Arrange and bar</text>
+  <text class="label" x="737" y="412">Function</text>
+  <text class="hint" x="737" y="436">Tap for next-bar fill</text>
+  <text class="hint" x="737" y="460">Hold to shut down</text>
 
-  <path class="leader" d="M452 496l-24 11v9 M545 474l28 33v9"/>
+  <path class="leader" d="M440 525l-36 22v8 M543 501l30 46v8"/>
   <g text-anchor="middle">
-    <text class="label" x="428" y="538">USB-C</text>
-    <text class="hint" x="428" y="561">MIDI clock + transport</text>
-    <text class="label" x="573" y="538">Headphones</text>
+    <text class="label" x="404" y="577">USB-C</text>
+    <text class="hint" x="404" y="600">MIDI clock + transport in</text>
+    <text class="label" x="573" y="577">Headphones</text>
   </g>
 
-  <path class="leader" opacity=".55" d="M32 582h836"/>
-  <text class="view" x="32" y="608">TRACK BUTTONS</text>
-  <text class="hint" x="868" y="608" text-anchor="end">Track LEDs show bank and variation state</text>
+  <path d="M32 617h856" fill="none" stroke="#d9d4c8"/>
+  <text class="view" x="32" y="642">TRACK BUTTONS</text>
+  <text class="hint" x="888" y="642" text-anchor="end">Track LEDs show bank and variation</text>
   <g>
-    <text class="id" x="32" y="638">T1</text>
-    <text class="label" x="64" y="638">Rock bank</text>
-    <text class="id" x="210" y="638">T2</text>
-    <text class="label" x="242" y="638">2 Beat bank</text>
-    <text class="id" x="388" y="638">T3</text>
-    <text class="label" x="420" y="638">4 Beat bank</text>
-    <text class="id" x="566" y="638">T4</text>
-    <text class="label" x="598" y="638">Toggle variation</text>
-    <text class="hint" x="598" y="660">Hold Function, tap T4 to pin / unpin</text>
+    <text class="id" x="32" y="666">T1</text>
+    <text class="label" x="64" y="666">Rock</text>
+    <text class="id" x="170" y="666">T2</text>
+    <text class="label" x="202" y="666">2 Beat</text>
+    <text class="id" x="328" y="666">T3</text>
+    <text class="label" x="360" y="666">4 Beat</text>
+    <text class="id" x="487" y="666">T4</text>
+    <text class="label" x="519" y="666">Toggle variation</text>
+    <text class="hint" x="519" y="690">Hold Function, tap T4 to pin / unpin</text>
   </g>
 </svg>
