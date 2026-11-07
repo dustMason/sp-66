@@ -17,6 +17,8 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 
 ## SP-1 controls
 
+![SP-1 front and edge controls annotated with their SP-66 functions](docs/sp1-controls.svg)
+
 | Control | Action |
 | --- | --- |
 | Fader 1 | Tempo from 50 to 200 BPM |
@@ -25,11 +27,12 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 | Fader 4 | Six presets within the current variation bank |
 | T1, T2, T3 | Select Rock, 2 Beat, or 4 Beat |
 | T4 | Toggle the selected variation alongside the base rhythm |
-| Back / forward rocker | Move one position along A, Auto, B |
+| Arrange rocker | Press down toward A or up toward B, one position at a time through A, Auto, and B |
 | Play | Start or stop |
 | Function | Tap for one fill on the next bar while playing, hold for about two seconds for shutdown |
 | Volume buttons | Master output level |
-| LEDs | Bank and variation toggle on the top row, phrase position on the side |
+| Track LEDs | Selected variation bank and whether the variation is on |
+| Side LEDs | Arrange setting and current bar |
 
 The original score uses two bars per A or B phrase. Auto plays A then B.
 Some rhythms add a pickup on the first downbeat of the full Arrange cycle.
