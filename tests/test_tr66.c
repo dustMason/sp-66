@@ -81,11 +81,23 @@ static void test_shared_and_reduced_triggers(void)
     tr66_init(&first, RATE, 31);
     second = first;
     tr66_hit(&first, MASK(KICK) | TR66_REDUCED_KICK);
-    tr66_hit(&second, TR66_REDUCED_KICK);
+    tr66_hit(&second, MASK(KICK));
     tr66_render(&first, a, BLOCK);
     tr66_render(&second, b, BLOCK);
-    for (unsigned i = 0; i < BLOCK; ++i)
-        assert(b[i] == 0.5f * a[i]);
+    assert(memcmp(a, b, sizeof(a)) == 0);
+
+    tr66_init(&first, RATE, 31);
+    second = first;
+    tr66_hit(&first, MASK(KICK));
+    tr66_hit(&second, TR66_REDUCED_KICK);
+    Tr66Resonator full_ring = first.voices[TR66_KICK].resonator[0];
+    Tr66Resonator reduced_ring = second.voices[TR66_KICK].resonator[0];
+    const float full_amplitude = hypotf(full_ring.real, full_ring.imag);
+    const float reduced_amplitude = hypotf(reduced_ring.real, reduced_ring.imag);
+    assert(fabsf(reduced_amplitude / full_amplitude - 0.5f) < 1e-4f);
+    tr66_render(&first, a, BLOCK);
+    tr66_render(&second, b, BLOCK);
+    assert(fabsf(b[BLOCK - 1] - 0.5f * a[BLOCK - 1]) > 0.001f);
 
     tr66_init(&first, RATE, 31);
     second = first;

@@ -562,7 +562,15 @@ decays. The fit uses clean kick hits with cymbal or hi-hat accompaniment.
 At 30 ms into the hit, the 130 Hz harmonic measures about 38 dB below the
 fundamental in Reverb Bossa Nova A and Drumbase Rock 6. The C model moves
 from 67 dB below to 38 dB below, with the harmonic's phase fitted to both
-packs. The reduced kick still has a sharper attack than the recordings.
+packs.
+
+The reduced kick in Bossa Nova and Rock 2/3 uses a softer attack and shifts
+the ring phase by the equivalent of 0.65 ms at the same sequencer tick.
+Across 19 clean hits aligned by the full kicks, median waveform correlation
+in the 36–103 Hz band from 8 to 55 ms rises from 0.953 to 0.996. Median
+absolute 158–245 Hz level error in the first 18 ms drops from 1.06 to
+0.36 dB. At fixed Balance after one Arrange cycle, Reverb Bossa Nova A
+moves from 2.16 to 2.14 dB and Drumbase Bossa Nova A from 2.62 to 2.65 dB.
 
 On 15 kick and snare hits excluded from that fit, median normalized
 waveform agreement over 37–700 Hz improves from 0.943 to 0.947. The

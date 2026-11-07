@@ -257,21 +257,33 @@ static void trigger_hat(Tr66 *machine)
     hat->sweep.bend *= 1.0f + 0.02f * bias;
 }
 
-static void trigger_rhumba_bongo(Tr66VoiceState *bongo)
+typedef struct { float real, imag; } Tr66ToneDrive;
+
+/* Figure 13 scores a combined bass-drum and low-bongo trigger.
+ * Drives follow the long ring, pulse and short ring in the voice patch. */
+static const Tr66ToneDrive rhumba_bongo_drive[TR66_TONES] = {
+    {.real = -0.199725f, .imag = 0.188981f},
+    {.real = 0.165581f},
+    {.real = -0.026078f, .imag = 0.079157f},
+};
+
+/* The reduced kick shifts the phase of the two rings and softens the
+ * attack. The fundamental has half the amplitude of the full drive. */
+static const Tr66ToneDrive reduced_kick_drive[TR66_TONES] = {
+    {.real = -0.71158f, .imag = 0.24133f},
+    {.real = 0.26275f},
+    {.real = 1.14484f},
+    {.real = -0.67813f},
+    {.real = -0.01788f, .imag = 0.00560f},
+};
+
+static void trigger_tones(Tr66VoiceState *voice, const Tr66ToneDrive drive[TR66_TONES])
 {
-    /* Figure 13 scores a combined bass-drum and low-bongo trigger.
-     * The recorded bongo starts in a different phase on this path.
-     * Drives follow the long ring, pulse and short ring in the voice patch. */
-    static const struct { float real, imag; } drive[TR66_TONES] = {
-        {.real = -0.199725f, .imag = 0.188981f},
-        {.real = 0.165581f},
-        {.real = -0.026078f, .imag = 0.079157f},
-    };
-    for (unsigned i = 0; i < bongo->tone_count; ++i) {
-        bongo->resonator[i].real += drive[i].real;
-        bongo->resonator[i].imag += drive[i].imag;
+    for (unsigned i = 0; i < voice->tone_count; ++i) {
+        voice->resonator[i].real += drive[i].real;
+        voice->resonator[i].imag += drive[i].imag;
     }
-    bongo->frames_left = bongo->gate.tail_frames;
+    voice->frames_left = voice->gate.tail_frames;
 }
 
 void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
@@ -318,7 +330,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     if (voices & (TR66_RHUMBA_BONGO | TR66_RHUMBA_FILL_BONGO)) {
         Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];
         if (voices & TR66_RHUMBA_BONGO)
-            trigger_rhumba_bongo(bongo);
+            trigger_tones(bongo, rhumba_bongo_drive);
         else
             voice_trigger(bongo, -1.0f);
         voices &= ~(1u << TR66_LOW_BONGO);
@@ -339,7 +351,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
      * if layered rhythms trigger the same voice on the same clock pulse. */
     if (!(voices & (1u << TR66_KICK))) {
         if (voices & TR66_REDUCED_KICK)
-            voice_trigger(&machine->voices[TR66_KICK], 0.5f);
+            trigger_tones(&machine->voices[TR66_KICK], reduced_kick_drive);
         else if (voices & TR66_QUIET_KICK)
             voice_trigger(&machine->voices[TR66_KICK], 0.43f);
         else if (voices & TR66_GHOST_KICK)
