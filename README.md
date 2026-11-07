@@ -667,6 +667,17 @@ The originals still cancel more energy between 110 and 240 Hz on these
 hits. The isolated Drumbase snare waveform agreement falls slightly,
 and the held-out Drumbase loop median rises by 0.02 dB.
 
+The current 1.94 ms drive and 7.72 ms recovery bring the low snare pulse
+closer to the two loop packs. With the 292.5 Hz ring aligned and level
+matched, median 40–140 Hz waveform correlation over −4 to 28 ms moves
+from −0.08 to 0.30 on two held-out Drumbase Habanera hits and from −0.05
+to 0.33 on nine held-out Reverb Habanera and Parade hits. Habanera A
+loop error falls from 2.786 to 2.753 dB on Drumbase and 2.679 to 2.658 dB
+on Reverb. Across all 48 loops, the Drumbase median moves from 2.267 to
+2.254 dB and the Reverb median rises from 2.366 to 2.373 dB. The three
+direct Goldbaby one-shots have a different pulse shape. Their median
+40–140 Hz correlation falls from 0.75 to 0.47 with the same alignment.
+
 The bass drum combines a 65.15 Hz ring with a fast edge and two opposing
 decays. The fit uses clean kick hits with cymbal or hi-hat accompaniment.
 At 30 ms into the hit, the 130 Hz harmonic measures about 38 dB below the

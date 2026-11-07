@@ -8,8 +8,8 @@
                              {130.29934f, 21.0f, -0.03650f, 0.00850f}} },
     /* The short counter-pulse softens the initial edge. Figure 10 shows two
      * capacitor paths into the snare gate, modeled as held and free decays. */
-    [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.3f, 1.12938f, 0.0f},
-                              {0.0f, 7.0f, -0.66442f, 0.0f}, {1100.0f, 0.33f, 0.24771f, 0.39665f},
+    [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.93792f, 1.13087f, 0.0f},
+                              {0.0f, 7.72467f, -0.69879f, 0.0f}, {1100.0f, 0.33f, 0.24771f, 0.39665f},
                               {0.0f, 0.065f, 0.105f, 0.0f}},
         .band = {{5625.6526f, 2.0f, 0.62936240f}, {9784.1089f, 0.7326f, 1.68227809f}},
         .noise_attack_ms = 0.8117643f,
