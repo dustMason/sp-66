@@ -328,10 +328,15 @@ from 2.78 to 2.63 dB and Reverb Beguine B from 4.27 to 4.12 dB. At center
 Balance, Drumbase Beguine rises from 3.03 to 3.11 dB.
 
 Both recording sets have a brief low-frequency pulse under cymbal and
-hi-hat hits. The C engine now adds two decays of opposite sign to each
-voice. On cymbal-only steps in Reverb Slow Rock B, the 130–220 Hz band
-measures −40.4 dB relative to 6–10.5 kHz. The C render moves from −70.3 to
-−40.6 dB at the same Balance setting.
+hi-hat hits. The hi-hat uses two decays of opposite sign. The cymbal uses
+three to model the slower negative undershoot seen in both packs.
+From 18 to 35 ms after an isolated cymbal hit, the 15–125 Hz level is
+−19.6 dB relative to the treble in Drumbase Slow Rock and −29.9 dB in
+Reverb's held-out Slow Rock B and Jazz Waltz B hits. The C render moves
+from −35.7 to −27.8 dB on Drumbase and from −35.1 to −27.5 dB on those
+Reverb hits. The full settled Slow Rock loop moves from 2.01 to 1.91 dB
+of spectral error in Drumbase, from 2.11 to 2.09 dB in Reverb A, and from
+2.16 to 2.15 dB in Reverb B.
 
 The snare uses a held decay and a free decay to approximate the two
 capacitor paths into the noise gate in Figure 10. The gate rises with a
@@ -519,9 +524,9 @@ Waltz clip contains the A phrase, so the fill fit has one recorded reference.
 
 In eight matched first-bar excerpts, the two recording packs differ by a
 median 4.23 dB. At each recording's native tempo, after one Arrange cycle
-and at the pack's fitted Balance, the C model is 2.19 dB from Drumbase and
-2.33 dB from Reverb. In Slow Rock, the recordings differ by 3.12 dB. The
-model measures 3.53 dB from Drumbase and 2.65 dB from Reverb.
+and at the pack's fitted Balance, the C model is 2.18 dB from Drumbase and
+2.26 dB from Reverb. In Slow Rock, the recordings differ by 3.12 dB. The
+model measures 2.27 dB from each pack.
 
 An earlier comparison fitted one fixed position per pack using the
 linear Balance model and only the gain-fit loops. The best positions were

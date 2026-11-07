@@ -30,8 +30,11 @@
         .noise_sweep_ms = 33.0f,
         .noise_start_q = 9.4f,
         .noise_damping_ms = 25.5f },
-    /* The corresponding cymbal pulse has the opposite polarity. */
-    [TR66_CYMBAL] = { .tone = {{0.0f, 1.4f, -0.080f, 0.0f}, {0.0f, 3.0f, 0.080f, 0.0f}},
+    /* The cymbal's low pulse has a short positive peak and a slower
+     * negative undershoot, as measured on isolated hits in both packs. */
+    [TR66_CYMBAL] = { .tone = {{0.0f, 0.95f, -0.0532f, 0.0f},
+                              {0.0f, 6.6f, 0.1900f, 0.0f},
+                              {0.0f, 13.5f, -0.1368f, 0.0f}},
         .band = {{8172.25f, 11.18972f, 2.514f}, {13097.84f, 0.68986f, 0.047f}},
         .noise_attack_ms = 0.85f,
         .noise_decay_ms = 312.0f,

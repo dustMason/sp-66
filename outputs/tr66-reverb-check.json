@@ -965,6 +965,20 @@
         "beguine": [4.48, 2.37, 2.03]
       },
       "medians": [4.23, 2.33, 2.185]
+    },
+    "settled_with_cymbal_undershoot": {
+      "method": "Same 41 hits and settings as settled_native_tempo. The C cymbal models the low-frequency trigger pulse with three decays.",
+      "matched_rhythms": {
+        "rock-2": [5.46, 2.14, 2.01],
+        "rock-4": [5.71, 2.24, 2.12],
+        "slow-rock": [3.12, 2.27, 2.27],
+        "samba": [2.82, 2.1, 2.69],
+        "mambo": [3.04, 2.1, 2.64],
+        "cha-cha": [5.25, 3.22, 2.01],
+        "rhumba": [3.98, 2.51, 2.24],
+        "beguine": [4.48, 2.35, 2.01]
+      },
+      "medians": [4.23, 2.255, 2.18]
     }
   },
   "rhythm_coverage_across_both_packs": {
