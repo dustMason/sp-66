@@ -23,12 +23,15 @@ CAPTURE_REPEATS = {"Loop1": 2}
 # Repeated kick rings verify the loop-length tempo of Rhumba. The kick
 # and rim transients independently put Bossa Nova on its file boundary.
 # The claves and conga in Beguine confirm its loop-length clock.
+# The conga and cowbell in Mambo confirm both loop-length clocks.
 # These phases are in 48 kHz frames after the rotations below.
 CAPTURE_PHASE = {
     ("Loop16", 185104): 0.0,
+    ("Loop18", 185116): 4.3,
     ("Loop20", 185124): -12.3,
     ("Loop21", 185124): -10.9,
     ("Loop22", 185120): 1.8,
+    ("Loop23", 185124): 7.6,
 }
 # File names in the pack are sequential. The labels come from matching
 # voice onsets and fills on a circular beat grid. A or B describes the

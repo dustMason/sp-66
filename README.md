@@ -628,6 +628,14 @@ tempo. With the same C build and Balance settings, settled spectral error
 falls from 2.73 to 2.51 dB for Drumbase Beguine, from 2.68 to 2.53 dB for
 Drumbase Rhumba, and from 3.40 to 3.38 dB for Reverb Beguine B.
 
+Repeated conga and cowbell hits put the Drumbase Mambo start 1.81 ms
+later than the onset-flux estimate at 164.805 BPM. In Reverb, Mambo A
+starts 1.96 ms later and Mambo B starts 1.30 ms later, at their
+124.462 and 124.457 BPM loop-length tempos. With the same C build and
+Balance settings, settled spectral error falls from 2.51 to 2.41 dB
+in Drumbase, from 2.84 to 2.79 dB for Reverb A, and from 3.08 to 3.06 dB
+for Reverb B.
+
 Both recordings play the high conga in Samba where the service chart
 calls for a low bongo. The firmware follows the recorded Samba.
 Both Habanera A captures support the score's simultaneous kick and snare.
