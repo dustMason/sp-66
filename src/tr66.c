@@ -9,6 +9,7 @@
 const float tr66_line_gain = 0.18f;
 static const float coincident_cymbal_hold_ms = 44.0f;
 static const float coincident_cymbal_hat_recovery_ms = 554.0f;
+static const float samba_cowbell_decay_ms = 16.9f;
 
 const char *const tr66_voice_names[TR66_VOICE_COUNT] = {
     "kick", "snare", "hat", "cymbal", "claves", "rim",
@@ -226,6 +227,16 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         voice_init(&machine->voices[i], &tr66_factory_voices[i], sample_rate);
 
+    const Tr66Resonator *bell = &machine->voices[TR66_COWBELL].resonator[0];
+    const float cowbell_ratio = decay(sample_rate, samba_cowbell_decay_ms) /
+        decay(sample_rate, tr66_factory_voices[TR66_COWBELL].tone[0].decay_ms);
+    machine->cowbell_rotation_real[0] = bell->rotation_real;
+    machine->cowbell_rotation_real[1] = bell->rotation_real * cowbell_ratio;
+    machine->cowbell_rotation_imag[0] = bell->rotation_imag;
+    machine->cowbell_rotation_imag[1] = bell->rotation_imag * cowbell_ratio;
+    machine->samba_cowbell_tail_frames =
+        (unsigned)ceilf(0.009f * samba_cowbell_decay_ms * sample_rate);
+
     const Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
     machine->cymbal_fast_release_frame = cymbal->gate.fast_release_frame;
     machine->cymbal_sweep_decay = cymbal->sweep.bend_decay;
@@ -383,6 +394,18 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         trigger_high_bongo(&machine->voices[TR66_HIGH_BONGO], 1.58f, 0.07f);
         voices &= ~(1u << TR66_HIGH_BONGO);
     }
+    /* Samba's shared bell and bongo pulse has a longer bell ring.
+     * The bell still follows the rim/cowbell shunt. */
+    const bool samba_pulse = (voices & TR66_SAMBA_BELL_BONGO) != 0;
+    if (voices & (1u << TR66_COWBELL)) {
+        Tr66VoiceState *bell = &machine->voices[TR66_COWBELL];
+        bell->resonator[0].rotation_real = machine->cowbell_rotation_real[samba_pulse];
+        bell->resonator[0].rotation_imag = machine->cowbell_rotation_imag[samba_pulse];
+        voice_trigger(bell, samba_pulse ? 0.92f : 1.0f);
+        if (samba_pulse)
+            bell->frames_left = machine->samba_cowbell_tail_frames;
+        voices &= ~(1u << TR66_COWBELL);
+    }
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         if (voices & (1u << i))
             voice_trigger(&machine->voices[i], 1.0f);
@@ -404,7 +427,9 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     }
     if (!(voices & ((1u << TR66_HIGH_BONGO) | TR66_MAMBO_FILL_HIGH_BONGO))) {
         Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
-        if (voices & TR66_ACCENT_HIGH_BONGO)
+        if (samba_pulse)
+            trigger_high_bongo(bongo, 0.72f, 1.0f);
+        else if (voices & TR66_ACCENT_HIGH_BONGO)
             trigger_high_bongo(bongo, 0.66f, 0.25f);
         else if (voices & TR66_REDUCED_HIGH_BONGO)
             voice_trigger(bongo, 0.53f);

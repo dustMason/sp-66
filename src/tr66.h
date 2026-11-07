@@ -28,6 +28,7 @@ enum {
     TR66_ACCENT_HIGH_BONGO = TR66_LIGHT_HIGH_BONGO << 1,
     TR66_MAMBO_FILL_HIGH_BONGO = TR66_ACCENT_HIGH_BONGO << 1,
     TR66_CHA_CHA_CONGA = TR66_MAMBO_FILL_HIGH_BONGO << 1,
+    TR66_SAMBA_BELL_BONGO = TR66_CHA_CHA_CONGA << 1,
 };
 
 static inline bool tr66_coincident_hat_cymbal(Tr66TriggerMask voices)
@@ -101,6 +102,8 @@ typedef struct {
 
 typedef struct {
     Tr66VoiceState voices[TR66_VOICE_COUNT];
+    float cowbell_rotation_real[2], cowbell_rotation_imag[2];
+    unsigned samba_cowbell_tail_frames;
     float cymbal_sweep_decay, coincident_cymbal_sweep_decay;
     float cymbal_hat_recovery_ms;
     unsigned cymbal_extra_hold_frames, cymbal_fast_release_frame;

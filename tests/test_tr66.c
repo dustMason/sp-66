@@ -612,6 +612,44 @@ static void test_rim_cowbell_shunt(void)
     assert(!(trace.mask[8] & MASK(RIM)));
 }
 
+static void test_samba_bell_and_bongo(void)
+{
+    Tr66 regular, samba;
+    tr66_init(&regular, RATE, 5);
+    samba = regular;
+    tr66_hit(&regular, MASK(COWBELL) | MASK(HIGH_BONGO));
+    tr66_hit(&samba, MASK(COWBELL) | TR66_SAMBA_BELL_BONGO);
+
+    const Tr66VoiceState *regular_bell = &regular.voices[TR66_COWBELL];
+    const Tr66VoiceState *samba_bell = &samba.voices[TR66_COWBELL];
+    const Tr66Resonator *ring = &samba_bell->resonator[0];
+    const float rotation = hypotf(ring->rotation_real, ring->rotation_imag);
+    const float decay_ms = -1000.0f / (RATE * logf(rotation));
+    assert(fabsf(decay_ms - 16.9f) < 0.02f);
+    assert(samba_bell->frames_left > regular_bell->frames_left);
+
+    const Tr66Resonator *regular_bongo = regular.voices[TR66_HIGH_BONGO].resonator;
+    const Tr66Resonator *samba_bongo = samba.voices[TR66_HIGH_BONGO].resonator;
+    assert(fabsf(samba_bongo[0].imag - 0.72f * regular_bongo[0].imag) < 1e-6f);
+    assert(fabsf(samba_bongo[1].imag - regular_bongo[1].imag) < 1e-6f);
+
+    tr66_hit(&samba, MASK(COWBELL));
+    assert(ring->rotation_real == regular_bell->resonator[0].rotation_real);
+    assert(ring->rotation_imag == regular_bell->resonator[0].rotation_imag);
+    assert(samba_bell->frames_left == regular_bell->frames_left);
+
+    Tr66Sequencer seq;
+    tr66_seq_init(&seq, RATE, 5);
+    Tr66Selection selection = {TR66_SAMBA, TR66_OFF, TR66_ARRANGE_A};
+    assert(tr66_seq_select_layers(&seq, selection, TR66_RHYTHM_BIT(TR66_BOSSA_NOVA)));
+    tr66_seq_start(&seq);
+    float sample;
+    tr66_seq_render(&seq, &sample, 1);
+    assert(seq.synth.voices[TR66_RIM].frames_left > 0);
+    assert(seq.synth.voices[TR66_COWBELL].frames_left == 0);
+    assert(seq.synth.voices[TR66_HIGH_BONGO].frames_left > 0);
+}
+
 static void test_split_blocks(void)
 {
     static float whole[99000], sliced[99000];
@@ -989,6 +1027,7 @@ int main(void)
     test_score_table();
     test_rock1_offbeat();
     test_samba_conga();
+    test_samba_bell_and_bongo();
     test_mambo_fill();
     test_slow_rock_fill();
     test_waltz_fill();

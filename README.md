@@ -311,6 +311,16 @@ warm-up at the fitted Balance, Reverb Mambo B fell from 3.42 to 3.37 dB.
 Drumbase Samba rose from 2.53 to 2.56 dB. The two loop packs still differ
 in how long the bongos ring.
 
+Figures 13 and 16 put Samba's cowbell and high bongo on the same
+trigger. Across ten Samba hits in Drumbase and Reverb, the fitted bell
+decay is 16.7–17.1 ms. Comparable Mambo hits measure 13.4–13.5 ms.
+The C engine uses a 16.9 ms decay on the shared pulse and reduces the
+long high-bongo mode to 72% drive. Relative to Mambo, the bongo
+ring-level error falls from 3.00 to 0.23 dB RMS across the two sources.
+Settled Samba loop error falls from 2.50 to 2.13 dB in Drumbase B
+and from 2.49 to 2.42 dB in Reverb A. The two strongest recorded bongo
+rings still sit about 1.3 dB above the weakest one within the phrase.
+
 Beguine's quiet high-bongo trigger has its own resistor path in Figure 13.
 The C model drives the short 600 Hz mode more softly relative to the ring.
 In the 530–680 Hz band from 4 to 14 ms, the quiet hit moves from 14.0 to

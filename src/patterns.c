@@ -29,6 +29,7 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define LIGHT_U  TR66_LIGHT_HIGH_BONGO
 #define ACCENT_U  TR66_ACCENT_HIGH_BONGO
 #define MAMBO_U  TR66_MAMBO_FILL_HIGH_BONGO
+#define SAMBA_WU  (W | TR66_SAMBA_BELL_BONGO)
 #define L  (1u << TR66_LOW_BONGO)
 #define RHUMBA_KL  (K | L | TR66_RHUMBA_BONGO)
 #define BAR(events) {events, sizeof(events) / sizeof((events)[0])}
@@ -68,15 +69,15 @@ static const Tr66Event bossa_b2[] = {
 };
 
 static const Tr66Event samba_a1[] = {
-    {0, M | W | U}, {12, M}, {24, M | Y | W | U}, {36, M},
-    {48, M | C}, {60, M}, {72, M | Y}, {84, M | W | U},
+    {0, M | SAMBA_WU}, {12, M}, {24, M | Y | SAMBA_WU}, {36, M},
+    {48, M | C}, {60, M}, {72, M | Y}, {84, M | SAMBA_WU},
 };
 static const Tr66Event samba_a2[] = {
-    {0, M}, {12, M | W | U}, {24, M | Y}, {36, M | W | U},
+    {0, M}, {12, M | SAMBA_WU}, {24, M | Y}, {36, M | SAMBA_WU},
     {48, M | C}, {60, M}, {72, M | Y}, {84, M},
 };
 static const Tr66Event samba_b2[] = {
-    {0, M}, {12, M | W | U}, {24, M | Y}, {36, M | W | U},
+    {0, M}, {12, M | SAMBA_WU}, {24, M | Y}, {36, M | SAMBA_WU},
     {48, M | C}, {60, M | C}, {72, M | Y}, {84, M | C},
 };
 
