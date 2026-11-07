@@ -54,7 +54,11 @@
                               {0.0f, 0.09f, -0.97832f, 0.0f}} },
     [TR66_RIM] = { .tone = {{1525.0f, 2.10f, -1.00154f, -0.93159f},
                            {0.0f, 0.18f, 0.70f, 0.0f}} },
-    [TR66_COWBELL] = { .tone = {{895.0f, 13.4f, -0.53993481f, 0.19342791f}, {0.00000000f, 0.10489128f, 0.56115299f, 0.00000000f}} },
+    /* The pulse offsets the initial voltage. The short mode shapes the
+     * first cycles as the two phases settle into the main ring. */
+    [TR66_COWBELL] = { .tone = {{895.0f, 13.4f, 0.36217f, 0.44472f},
+                                {0.0f, 0.174f, -0.50558f, 0.0f},
+                                {895.0f, 2.32f, 0.14341f, -0.12216f}} },
     /* The short fundamental reinforces the attack. The second harmonic
      * decays at twice the rate of the main ring. The pulse offsets its
      * initial amplitude. */

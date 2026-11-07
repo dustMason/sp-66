@@ -316,6 +316,14 @@ The snare attack and tone changes improved several groove scores. In that
 pass, isolated 35–540 Hz waveform correlation fell from 0.95 to 0.94 on
 Drumbase and from 0.92 to 0.86 on Reverb.
 
+The cowbell uses a 2.32 ms mode at the main ring frequency to shape its
+first cycles. With pitch, late decay and level matched for the comparison,
+median waveform error over the first 18 ms falls from 14.8% to 2.3% on nine
+Drumbase hits and from 19.7% to 8.2% on six held-out Reverb hits. The
+positive first crest also matches the polarity relative to the conga in
+Reverb Mambo. The full Reverb Cha-Cha loop improves from 2.23 to 2.20 dB
+of spectral error, while Reverb Samba increases from 2.44 to 2.51 dB.
+
 A 0.33 ms decay shapes the snare's leading edge. On nine isolated hits held
 out of that fit, with the snare body level matched, the median 1.12–2 kHz
 attack error fell from about 6 dB to within 0.9 dB in both recording sets.
