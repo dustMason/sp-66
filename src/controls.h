@@ -23,8 +23,9 @@ typedef struct {
     Tr66Selection request;
     unsigned rhythm_slot, variation_slot, bank, volume;
     Tr66KeyDebounce track, side;
+    uint16_t pinned_rhythms;
     unsigned fn_scans;
-    bool variation_enabled, initialized, unavailable;
+    bool variation_enabled, initialized, unavailable, fn_used_for_pin;
 } Tr66Controls;
 
 void tr66_controls_init(Tr66Controls *controls);

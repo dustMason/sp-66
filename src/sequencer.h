@@ -17,14 +17,21 @@ typedef struct {
 typedef void (*Tr66EventListener)(void *context, uint64_t frame, uint16_t voices);
 
 typedef struct {
+    enum Tr66PatternId pattern;
+    uint8_t event_index;
+} Tr66Layer;
+
+typedef struct {
     Tr66 synth;
     Tr66Selection selection, next_selection;
     uint64_t phase, period, frame;
     Tr66EventListener listener;
     void *listener_context;
     unsigned increment, tick, bar, bar_ticks;
-    unsigned event_index[2];
-    bool running, fill_pending, fill;
+    Tr66Layer layers[TR66_RHYTHM_COUNT + 1];
+    uint16_t next_rhythms;
+    uint8_t layer_count;
+    bool running, fill_pending, fill, rim_selected;
     uint32_t midi_activity_ms;
     uint16_t midi_position;
     bool midi_follow, midi_armed, midi_seek, midi_clock_seen;
@@ -32,6 +39,8 @@ typedef struct {
 
 void tr66_seq_init(Tr66Sequencer *seq, unsigned rate, uint32_t seed);
 bool tr66_seq_select(Tr66Sequencer *seq, Tr66Selection selection);
+/* Add any set of rhythm buttons to selection.rhythm. Bits use Tr66PatternId. */
+bool tr66_seq_select_layers(Tr66Sequencer *seq, Tr66Selection selection, uint16_t additional_rhythms);
 void tr66_seq_tempo(Tr66Sequencer *seq, unsigned bpm_milli);
 void tr66_seq_start(Tr66Sequencer *seq);
 void tr66_seq_stop(Tr66Sequencer *seq);

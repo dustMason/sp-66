@@ -12,11 +12,10 @@ static unsigned score_bar(const Tr66Sequencer *seq)
     return 0;
 }
 
-static uint16_t pattern_voices(const Tr66Sequencer *seq, enum Tr66PatternId id,
-                               unsigned bar, unsigned *index)
+static uint16_t pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer, unsigned bar)
 {
     enum { TRIPLE_HALF = 3 * TR66_PPQN / 2, COMMON_HALF = 2 * TR66_PPQN };
-    const Tr66Pattern *pattern = &tr66_patterns[id];
+    const Tr66Pattern *pattern = &tr66_patterns[layer->pattern];
     const Tr66Bar *part = &pattern->bars[bar];
     unsigned tick = seq->tick;
     /* The 3/4 shunt skips counter positions 6 and 7 of each half-bar.
@@ -25,11 +24,11 @@ static uint16_t pattern_voices(const Tr66Sequencer *seq, enum Tr66PatternId id,
         tick >= TRIPLE_HALF)
         tick += COMMON_HALF - TRIPLE_HALF;
 
-    while (*index < part->count && part->events[*index].tick < tick)
-        ++*index;
+    while (layer->event_index < part->count && part->events[layer->event_index].tick < tick)
+        ++layer->event_index;
     uint16_t voices = 0;
-    if (*index < part->count && part->events[*index].tick == tick)
-        voices = part->events[(*index)++].voices;
+    if (layer->event_index < part->count && part->events[layer->event_index].tick == tick)
+        voices = part->events[layer->event_index++].voices;
     /* The pickup is on the first pulse of the selected cycle. */
     if (seq->tick == 0) {
         if (bar == 0 && seq->selection.arrange == TR66_ARRANGE_AUTO)
@@ -44,8 +43,13 @@ static void play_tick(Tr66Sequencer *seq)
 {
     const unsigned bar = score_bar(seq);
     /* A coincident trigger fires each voice circuit once. */
-    uint16_t mask = pattern_voices(seq, seq->selection.rhythm, bar, &seq->event_index[0]);
-    mask |= pattern_voices(seq, seq->selection.variation, bar, &seq->event_index[1]);
+    uint16_t mask = 0;
+    for (unsigned i = 0; i < seq->layer_count; ++i)
+        mask |= pattern_voices(seq, &seq->layers[i], bar);
+    /* The RS input excites the same resonator in either shunt position. */
+    const uint16_t shared_rs = (1u << TR66_RIM) | (1u << TR66_COWBELL);
+    if (mask & shared_rs)
+        mask = (mask & ~shared_rs) | (1u << (seq->rim_selected ? TR66_RIM : TR66_COWBELL));
     if (mask != 0) {
         tr66_hit(&seq->synth, mask);
         if (seq->listener != NULL)
@@ -53,19 +57,29 @@ static void play_tick(Tr66Sequencer *seq)
     }
 }
 
+static void add_layer(Tr66Sequencer *seq, enum Tr66PatternId pattern)
+{
+    seq->layers[seq->layer_count++] = (Tr66Layer){.pattern = pattern};
+    /* Any triple-time selector grounds the shared 3/4 shunt. */
+    if (tr66_patterns[pattern].ticks < seq->bar_ticks)
+        seq->bar_ticks = tr66_patterns[pattern].ticks;
+}
+
 static void prepare_bar(Tr66Sequencer *seq)
 {
     seq->tick = 0;
-    seq->event_index[0] = 0;
-    seq->event_index[1] = 0;
     seq->selection = seq->next_selection;
     seq->fill = seq->fill_pending;
     seq->fill_pending = false;
-    unsigned rhythm_ticks = tr66_patterns[seq->selection.rhythm].ticks;
-    unsigned variation_ticks = tr66_patterns[seq->selection.variation].ticks;
-    seq->bar_ticks = rhythm_ticks != 0 ? rhythm_ticks : variation_ticks;
-    if (seq->bar_ticks == 0)
-        seq->bar_ticks = 4 * TR66_PPQN;
+    seq->layer_count = 0;
+    seq->bar_ticks = 4 * TR66_PPQN;
+    /* Cowbell is the default RS tuning. The Bossa Nova button selects rim. */
+    seq->rim_selected = (seq->next_rhythms & TR66_RHYTHM_BIT(TR66_BOSSA_NOVA)) != 0;
+    for (unsigned rhythm = TR66_WALTZ; rhythm <= TR66_RHYTHM_COUNT; ++rhythm)
+        if (seq->next_rhythms & TR66_RHYTHM_BIT(rhythm))
+            add_layer(seq, (enum Tr66PatternId)rhythm);
+    if (seq->selection.variation != TR66_OFF)
+        add_layer(seq, seq->selection.variation);
 }
 
 static void advance_tick(Tr66Sequencer *seq)
@@ -87,15 +101,27 @@ void tr66_seq_init(Tr66Sequencer *seq, unsigned rate, uint32_t seed)
 
 bool tr66_seq_select(Tr66Sequencer *seq, Tr66Selection selection)
 {
+    return tr66_seq_select_layers(seq, selection, 0);
+}
+
+bool tr66_seq_select_layers(Tr66Sequencer *seq, Tr66Selection selection, uint16_t additional_rhythms)
+{
     if ((unsigned)selection.rhythm > TR66_RHYTHM_COUNT ||
         (unsigned)selection.variation > TR66_PATTERN_COUNT ||
         (selection.variation != TR66_OFF && (unsigned)selection.variation <= TR66_RHYTHM_COUNT) ||
-        (unsigned)selection.arrange > TR66_ARRANGE_B)
+        (unsigned)selection.arrange > TR66_ARRANGE_B ||
+        (additional_rhythms & ~TR66_RHYTHM_MASK) != 0)
         return false;
-    if ((selection.rhythm != TR66_OFF && tr66_patterns[selection.rhythm].ticks == 0) ||
-        (selection.variation != TR66_OFF && tr66_patterns[selection.variation].ticks == 0))
+    if (selection.variation != TR66_OFF && tr66_patterns[selection.variation].ticks == 0)
         return false;
+    uint16_t rhythms = additional_rhythms;
+    if (selection.rhythm != TR66_OFF)
+        rhythms |= TR66_RHYTHM_BIT(selection.rhythm);
+    for (unsigned rhythm = TR66_WALTZ; rhythm <= TR66_RHYTHM_COUNT; ++rhythm)
+        if ((rhythms & TR66_RHYTHM_BIT(rhythm)) && tr66_patterns[rhythm].ticks == 0)
+            return false;
     seq->next_selection = selection;
+    seq->next_rhythms = rhythms;
     return true;
 }
 

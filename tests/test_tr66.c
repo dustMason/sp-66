@@ -368,6 +368,69 @@ static void test_slow_rock_rock6_layer(void)
     }
 }
 
+static void test_waltz_mambo_stack(void)
+{
+    const uint16_t m = MASK(MARACAS), mw = m | MASK(COWBELL);
+    /* Player's Manual setting example. In triple time the six Mambo steps
+     * here come from counts 0, 2, 4, 8, 10 and 12 of its score. */
+    const uint16_t expected[] = {
+        MASK(KICK) | MASK(CYMBAL) | MASK(LOW_BONGO) | mw,
+        m, MASK(SNARE) | mw, MASK(HIGH_BONGO) | mw, MASK(SNARE) | m,
+        MASK(CONGA) | mw,
+    };
+    Tr66Sequencer seq;
+    Trace trace = {0};
+    tr66_seq_init(&seq, RATE, 5);
+    seq.listener = record;
+    seq.listener_context = &trace;
+    Tr66Selection selection = {TR66_MAMBO, TR66_OFF, TR66_ARRANGE_A};
+    const uint16_t pins = TR66_RHYTHM_BIT(TR66_WALTZ) | TR66_RHYTHM_BIT(TR66_MAMBO);
+    assert(tr66_seq_select_layers(&seq, selection, pins));
+    assert(!tr66_seq_select_layers(&seq, selection, TR66_RHYTHM_BIT(TR66_OFF)));
+    tr66_seq_start(&seq);
+    assert(seq.bar_ticks == 72 && seq.layer_count == 2);
+    assert(tr66_seq_select(&seq, selection));
+
+    float buffer[BLOCK];
+    for (unsigned frame = 0; frame < 72000; frame += BLOCK)
+        tr66_seq_render(&seq, buffer, BLOCK);
+    assert(trace.count == sizeof(expected) / sizeof(expected[0]));
+    for (unsigned i = 0; i < trace.count; ++i) {
+        assert(trace.frame[i] == i * 12000);
+        assert(trace.mask[i] == expected[i]);
+    }
+    tr66_seq_render(&seq, buffer, 1);
+    assert(seq.bar_ticks == 96 && seq.layer_count == 1);
+    assert(trace.frame[6] == 72000 && trace.mask[6] == (MASK(LOW_BONGO) | mw));
+}
+
+static void test_rim_cowbell_shunt(void)
+{
+    Tr66Sequencer seq;
+    Trace trace = {0};
+    tr66_seq_init(&seq, RATE, 5);
+    seq.listener = record;
+    seq.listener_context = &trace;
+    Tr66Selection selection = {TR66_MAMBO, TR66_OFF, TR66_ARRANGE_A};
+    assert(tr66_seq_select_layers(&seq, selection, TR66_RHYTHM_BIT(TR66_BOSSA_NOVA)));
+    tr66_seq_start(&seq);
+
+    float buffer[BLOCK];
+    for (unsigned frame = 0; frame < 96000; frame += BLOCK)
+        tr66_seq_render(&seq, buffer, BLOCK);
+    assert(trace.count == 8);
+    /* A coincident RS pulse and a Mambo pulse on its own both sound rim. */
+    assert(trace.mask[0] & MASK(RIM));
+    assert(trace.frame[4] == 48000 && (trace.mask[4] & MASK(RIM)));
+    for (unsigned i = 0; i < trace.count; ++i)
+        assert(!(trace.mask[i] & MASK(COWBELL)));
+
+    assert(tr66_seq_select(&seq, selection));
+    tr66_seq_render(&seq, buffer, 1);
+    assert(trace.frame[8] == 96000 && (trace.mask[8] & MASK(COWBELL)));
+    assert(!(trace.mask[8] & MASK(RIM)));
+}
+
 static void test_split_blocks(void)
 {
     static float whole[99000], sliced[99000];
@@ -544,6 +607,63 @@ static void test_controls(void)
     assert(tr66_controls_scan(&controls, &seq, input));
 }
 
+static void scan_key(Tr66Controls *controls, Tr66Sequencer *seq, Tr66Input input)
+{
+    for (unsigned i = 0; i < 3; ++i)
+        assert(!tr66_controls_scan(controls, seq, input));
+}
+
+static void test_pin_rhythms(void)
+{
+    Tr66Sequencer seq;
+    Tr66Controls controls;
+    tr66_seq_init(&seq, RATE, 117);
+    tr66_controls_init(&controls);
+    Tr66Input input = {.fader = {1911, 2048, 614, 0}};
+    scan_key(&controls, &seq, input);
+    tr66_seq_start(&seq);
+
+    const uint16_t waltz = TR66_RHYTHM_BIT(TR66_WALTZ);
+    const uint16_t mambo = TR66_RHYTHM_BIT(TR66_MAMBO);
+    input.fn = true;
+    input.track = TR66_KEY_T4;
+    scan_key(&controls, &seq, input);
+    assert(controls.pinned_rhythms == waltz && !controls.variation_enabled);
+
+    input.fn = false;
+    input.track = TR66_KEY_NONE;
+    input.fader[2] = 2662;
+    scan_key(&controls, &seq, input);
+    assert(!seq.fill_pending && seq.next_rhythms == (waltz | mambo));
+    assert(seq.layer_count == 1);
+
+    input.fn = true;
+    input.track = TR66_KEY_T4;
+    scan_key(&controls, &seq, input);
+    assert(controls.pinned_rhythms == (waltz | mambo));
+    input.track = TR66_KEY_NONE;
+    scan_key(&controls, &seq, input);
+    input.track = TR66_KEY_T4;
+    scan_key(&controls, &seq, input);
+    assert(controls.pinned_rhythms == waltz);
+
+    input.track = TR66_KEY_NONE;
+    input.fader[2] = 0;
+    scan_key(&controls, &seq, input);
+    assert(seq.next_rhythms == waltz);
+    input.track = TR66_KEY_T4;
+    scan_key(&controls, &seq, input);
+    assert(!controls.pinned_rhythms && !seq.next_rhythms);
+
+    input.fn = false;
+    input.track = TR66_KEY_NONE;
+    scan_key(&controls, &seq, input);
+    assert(!seq.fill_pending);
+    input.track = TR66_KEY_T4;
+    scan_key(&controls, &seq, input);
+    assert(controls.variation_enabled && seq.next_selection.variation == TR66_ROCK_1);
+}
+
 static void test_usb_midi_packets(void)
 {
     const uint8_t realtime[] = {
@@ -656,6 +776,8 @@ int main(void)
     test_arrange_and_downbeat();
     test_arrange_pickups();
     test_slow_rock_rock6_layer();
+    test_waltz_mambo_stack();
+    test_rim_cowbell_shunt();
     test_split_blocks();
     test_balance();
     test_layered_headroom();
@@ -664,6 +786,7 @@ int main(void)
     test_slow_rock_fill();
     test_waltz_fill();
     test_controls();
+    test_pin_rhythms();
     test_usb_midi_packets();
     test_midi_pattern_clock();
     test_midi_transport();

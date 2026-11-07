@@ -48,12 +48,22 @@ bool tr66_controls_scan(Tr66Controls *controls, Tr66Sequencer *seq, Tr66Input in
     controls->variation_slot = slot(input.fader[3], TR66_VARIATION_COUNT / 3,
                                     controls->variation_slot, controls->initialized);
     controls->initialized = true;
+    controls->request.rhythm = (enum Tr66PatternId)controls->rhythm_slot;
 
     enum Tr66ControlKey track = press(&controls->track, input.track);
     if (track >= TR66_KEY_T1 && track <= TR66_KEY_T3)
         controls->bank = track - TR66_KEY_T1;
-    if (track == TR66_KEY_T4)
-        controls->variation_enabled = !controls->variation_enabled;
+    if (track == TR66_KEY_T4) {
+        if (input.fn) {
+            if (controls->request.rhythm == TR66_OFF)
+                controls->pinned_rhythms = 0;
+            else if (available(controls->request.rhythm))
+                controls->pinned_rhythms ^= TR66_RHYTHM_BIT(controls->request.rhythm);
+            controls->fn_used_for_pin = true;
+        } else {
+            controls->variation_enabled = !controls->variation_enabled;
+        }
+    }
 
     switch (press(&controls->side, input.side)) {
     case TR66_KEY_A:
@@ -75,7 +85,6 @@ bool tr66_controls_scan(Tr66Controls *controls, Tr66Sequencer *seq, Tr66Input in
     default:
         break;
     }
-    controls->request.rhythm = (enum Tr66PatternId)controls->rhythm_slot;
     controls->request.variation = TR66_OFF;
     if (controls->variation_enabled)
         controls->request.variation = TR66_ROCK_1 + 6 * controls->bank + controls->variation_slot;
@@ -88,14 +97,15 @@ bool tr66_controls_scan(Tr66Controls *controls, Tr66Sequencer *seq, Tr66Input in
         playable.rhythm = TR66_OFF;
     if (!variation_ready)
         playable.variation = TR66_OFF;
-    tr66_seq_select(seq, playable);
+    tr66_seq_select_layers(seq, playable, controls->pinned_rhythms);
     if (track == TR66_KEY_PLAY)
         tr66_seq_toggle_play(seq);
 
     if (input.fn)
         return ++controls->fn_scans >= POWER_SCANS;
-    if (controls->fn_scans >= 3 && controls->fn_scans < POWER_SCANS)
+    if (!controls->fn_used_for_pin && controls->fn_scans >= 3 && controls->fn_scans < POWER_SCANS)
         tr66_seq_fill(seq);
     controls->fn_scans = 0;
+    controls->fn_used_for_pin = false;
     return false;
 }

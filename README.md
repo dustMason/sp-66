@@ -26,12 +26,12 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 | Fader 3 | Off, Waltz, Jazz Waltz, Slow Rock, Bossa Nova, Samba, Mambo, Cha-Cha, Beguine, Rhumba |
 | Fader 4 | Six presets within the current variation bank |
 | T1, T2, T3 | Select Rock, 2 Beat, or 4 Beat |
-| T4 | Toggle the selected variation alongside the base rhythm |
+| T4 | Tap to toggle the selected variation. Hold Function and tap T4 to pin or unpin the rhythm under Fader 3 |
 | Arrange rocker | Press down toward A or up toward B, one position at a time through A, Auto, and B |
 | Play | Start or stop |
 | Function | Tap for one fill on the next bar while playing, hold for about two seconds for shutdown |
 | Volume buttons | Master output level |
-| Track LEDs | Selected variation bank and whether the variation is on |
+| Track LEDs | Selected variation bank. T4 shows whether the variation is on, or whether the current rhythm is pinned while Function is held |
 | Side LEDs | Arrange setting and current bar |
 
 The original score uses two bars per A or B phrase. Auto plays A then B.
@@ -40,9 +40,18 @@ Jazz Waltz adds a snare every two bars in B and every four bars in Auto.
 The Function fill is an SP-1 addition and plays the last bar of B once.
 Rhythm, variation and Arrange changes take effect on the next downbeat.
 Slow Rock is in 6/8. The tempo fader still sets the quarter-note rate.
-Waltz, Jazz Waltz and Slow Rock put the shared pattern counter in triple
-time. Any active variation follows that counter, as in Roland's Slow Rock
-plus Rock 6 setting.
+
+To play Roland's Waltz and Mambo example, set Fader 3 to Waltz, hold
+Function and tap T4, then release both buttons and move Fader 3 to Mambo.
+Pin additional rhythms the same way. To hear only the pinned rhythms, move
+Fader 3 to Off. To clear all pins, hold Function and tap T4 while Fader 3
+is at Off. Waltz, Jazz Waltz and Slow Rock put every active layer on the
+shared triple-time counter. See the
+[Roland player's manual](https://cdn.roland.com/assets/media/pdf/TR-66_OM.pdf#page=10).
+
+```sh
+work/build/tr66-render work/waltz-mambo.wav waltz+mambo off a 120 4
+```
 
 ## Build and reproduce
 
@@ -468,11 +477,19 @@ At center Balance, Drumbase Rock 5 rises from 2.26 to 2.36 dB.
 
 Figures 2 and 13 of the service notes show a shared counter and the 3/4
 shunt. It plays counts 0–5 and 8–13 of each 16-count bar in triple time.
-The C sequencer now reads variations from those positions and merges
-coincident hits. A test checks the complete Slow Rock plus Rock 6 Auto
-cycle against the timing charts. Direct hardware comparisons are still
-needed for mixed-meter audio, trigger dynamics on dense percussion chords,
-and the SP-1's physical output.
+The C sequencer reads every active rhythm and variation from those
+positions and merges coincident hits. Tests check Slow Rock plus Rock 6
+and the manual's Waltz plus Mambo example.
+
+Figure 10 and section 10-3-2-5 show a single trigger for rim shot and
+cowbell, with a shunt that selects the resonator's tuning. Cowbell is
+the default and Bossa Nova selects rim. The firmware uses rim for every
+pulse on that circuit while Bossa Nova is selected. See the
+[Tubbutec trigger installation notes](https://tubbutec.de/blog/roland-tr-66-unipulse-installation/).
+
+Direct hardware comparisons are still needed for that routing when
+layered, mixed-meter audio, dense percussion chords and the SP-1's
+physical output.
 
 [^reports]: The [Drumbase report](outputs/tr66-recording-fit.json) covers 23 hardware
     loops, including 12 held out of the gain fit. The

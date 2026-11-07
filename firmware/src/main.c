@@ -251,7 +251,11 @@ static void set_leds(unsigned mask)
 static void publish_leds(void)
 {
     unsigned state = 3u << (controls.bank * 2);
-    if (controls.variation_enabled)
+    /* Show the pin for the rhythm under Fader 3 while Function is held. */
+    bool t4_lit = controls.fn_scans > 0 ?
+                  (controls.pinned_rhythms & TR66_RHYTHM_BIT(controls.request.rhythm)) != 0 :
+                  controls.variation_enabled;
+    if (t4_lit)
         state |= 3u << 6;
     if (controls.unavailable && (k_uptime_get_32() % 500 < 250))
         state &= ~(3u << (controls.bank * 2));

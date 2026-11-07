@@ -9,12 +9,31 @@
 
 enum { RATE = 48000, BLOCK = 64 };
 
-static enum Tr66PatternId pattern_id(const char *name)
+static enum Tr66PatternId pattern_id(const char *name, size_t length)
 {
     for (unsigned i = 0; i <= TR66_PATTERN_COUNT; ++i)
-        if (strcmp(name, tr66_pattern_names[i]) == 0)
+        if (strlen(tr66_pattern_names[i]) == length &&
+            memcmp(name, tr66_pattern_names[i], length) == 0)
             return (enum Tr66PatternId)i;
     return (enum Tr66PatternId)(TR66_PATTERN_COUNT + 1);
+}
+
+static bool parse_rhythms(const char *text, uint16_t *mask)
+{
+    *mask = 0;
+    if (strcmp(text, "off") == 0)
+        return true;
+    for (;;) {
+        const char *separator = strchr(text, '+');
+        const size_t length = separator != NULL ? (size_t)(separator - text) : strlen(text);
+        const enum Tr66PatternId id = pattern_id(text, length);
+        if (id == TR66_OFF || id > TR66_RHYTHM_COUNT)
+            return false;
+        *mask |= TR66_RHYTHM_BIT(id);
+        if (separator == NULL)
+            return true;
+        text = separator + 1;
+    }
 }
 
 static bool parse_number(const char *input, long min, long max, unsigned *output)
@@ -67,11 +86,16 @@ static void record_hit(void *context, uint64_t frame, uint16_t voices)
 int main(int argc, char **argv)
 {
     if (argc != 7 && argc != 8) {
-        fprintf(stderr, "Usage: %s out.wav rhythm variation a|auto|b bpm bars [events.csv]\n", argv[0]);
+        fprintf(stderr, "Usage: %s out.wav rhythm[+rhythm...] variation a|auto|b bpm bars [events.csv]\n", argv[0]);
         return 2;
     }
 
-    Tr66Selection selection = {.rhythm = pattern_id(argv[2]), .variation = pattern_id(argv[3])};
+    uint16_t rhythms;
+    if (!parse_rhythms(argv[2], &rhythms)) {
+        fprintf(stderr, "Expected off or base rhythm names joined by +, such as waltz+mambo.\n");
+        return 2;
+    }
+    Tr66Selection selection = {.variation = pattern_id(argv[3], strlen(argv[3]))};
     if (strcmp(argv[4], "a") == 0)
         selection.arrange = TR66_ARRANGE_A;
     else if (strcmp(argv[4], "auto") == 0)
@@ -98,7 +122,7 @@ int main(int argc, char **argv)
         tr66_balance(&seq.synth, balance);
         seq.synth.balance = seq.synth.balance_target;
     }
-    if (!tr66_seq_select(&seq, selection)) {
+    if (!tr66_seq_select_layers(&seq, selection, rhythms)) {
         fprintf(stderr, "The requested rhythm/variation is unknown or still awaiting transcription.\n");
         return 2;
     }
