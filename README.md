@@ -362,13 +362,19 @@ Drumbase hits, rim waveform correlation rises from 0.975 to 0.988 and
 claves from 0.979 to 0.983. The full-pack settled medians remain 2.27 dB
 for Drumbase and 3.09 dB for Reverb with these two voice changes.
 
-The hi-hat and maracas now use the same gate across all rhythms. Its
-threshold is lower following a cymbal hit and recovers with a fitted
-554 ms time constant. In the recordings, the hat falls 18 dB below its
-attack at about 46 ms without a preceding cymbal and 97 ms when the last
-cymbal is under 300 ms old. Across 90 hats after a cymbal, median timing
-error falls from 18.2 to 5.5 ms. The fit estimates the effect of shared
-trigger circuitry from the audio.
+The hi-hat and maracas use the same gate across all rhythms. Its threshold
+is lower following a cymbal hit. In the recordings, the hat falls 18 dB
+below its attack at about 46 ms without a preceding cymbal and 97 ms when
+the last cymbal is under 300 ms old. The original shared-gate fit brought
+median timing error down from 18.2 to 5.5 ms across 90 hats after a cymbal.
+
+The gate bias now recovers with fitted time constants of 490 ms after
+cymbal alone and 554 ms after simultaneous hat and cymbal. For 24 hats
+following cymbal alone in the two loop packs, the median error in timing
+the 18 dB drop in the 6.1–11.6 kHz band falls from 8.1 to 4.5 ms. At fitted
+Balance, the Reverb loop errors for Foxtrot 1 A, Swing 1 A and Tango A
+drop by 0.03, 0.07 and 0.07 dB respectively. Drumbase Swing 1 A and
+Swing 2 A rise by 0.04 and 0.02 dB in the clean-window comparison.
 
 An earlier hi-hat and maracas fit used a broader resonance at
 8.06 kHz. Across 130 usable hits, the RMS error of the relative spectrum

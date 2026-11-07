@@ -281,13 +281,17 @@ static void test_cymbal_attack_after_gap(void)
 
 static void test_cymbal_extends_hat(void)
 {
-    Tr66 rested, recent, earlier;
+    Tr66 rested, recent, earlier, coincident;
     tr66_init(&rested, RATE, 31);
     recent = rested;
+    coincident = rested;
     tr66_hit(&recent, MASK(CYMBAL));
+    tr66_hit(&coincident, MASK(HAT) | MASK(CYMBAL));
     float a[BLOCK], b[BLOCK];
-    for (unsigned frame = 0; frame < RATE / 2; frame += BLOCK)
+    for (unsigned frame = 0; frame < RATE / 2; frame += BLOCK) {
         tr66_render(&recent, b, BLOCK);
+        tr66_render(&coincident, b, BLOCK);
+    }
     earlier = recent;
     for (unsigned frame = 0; frame < RATE / 2; frame += BLOCK)
         tr66_render(&earlier, b, BLOCK);
@@ -295,6 +299,8 @@ static void test_cymbal_extends_hat(void)
     tr66_hit(&rested, MASK(HAT));
     tr66_hit(&recent, MASK(HAT));
     tr66_hit(&earlier, MASK(HAT));
+    tr66_hit(&coincident, MASK(HAT));
+    assert(coincident.voices[TR66_HAT].frames_left > recent.voices[TR66_HAT].frames_left);
     assert(recent.voices[TR66_HAT].frames_left > earlier.voices[TR66_HAT].frames_left);
     assert(earlier.voices[TR66_HAT].frames_left > rested.voices[TR66_HAT].frames_left);
 

@@ -8,6 +8,7 @@
 /* Leave room for overlapping voices with Balance at either end. */
 const float tr66_line_gain = 0.18f;
 static const float coincident_cymbal_hold_ms = 44.0f;
+static const float coincident_cymbal_hat_recovery_ms = 554.0f;
 
 const char *const tr66_voice_names[TR66_VOICE_COUNT] = {
     "kick", "snare", "hat", "cymbal", "claves", "rim",
@@ -221,6 +222,7 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     machine->balance_coeff = 1.0f - decay(sample_rate, 8.0f);
     machine->sample_rate = sample_rate;
     machine->cymbal_age = UINT32_MAX;
+    machine->cymbal_hat_recovery_ms = coincident_cymbal_hat_recovery_ms;
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         voice_init(&machine->voices[i], &tr66_factory_voices[i], sample_rate);
 
@@ -239,7 +241,8 @@ static void trigger_hat(Tr66 *machine)
     const float samples_per_ms = 0.001f * machine->sample_rate;
     /* Both trigger circuits feed the same transistor. Cymbal history lowers
      * the effective cutoff of later hats, even after its audible tail. */
-    const float bias = 2.1f * expf(-(float)machine->cymbal_age / (554.0f * samples_per_ms));
+    const float recovery_frames = machine->cymbal_hat_recovery_ms * samples_per_ms;
+    const float bias = 2.1f * expf(-(float)machine->cymbal_age / recovery_frames);
     const float threshold = patch->noise_threshold * expf(-bias);
     const float level_at_14ms = (1.0f - expf(-14.0f / patch->noise_attack_ms)) *
                               expf(-14.0f / patch->noise_decay_ms);
@@ -286,6 +289,8 @@ static void trigger_cymbal(Tr66 *machine, bool shared_hit)
         cymbal->fast_noise += 0.08f * recovered;
         cymbal->gate.fast_release_frame += (unsigned)(8.0f * samples_per_ms * recovered);
     }
+    /* Later hats close sooner after CY alone than after both gate inputs. */
+    machine->cymbal_hat_recovery_ms = shared_hit ? coincident_cymbal_hat_recovery_ms : 490.0f;
     machine->cymbal_age = 0;
 }
 
