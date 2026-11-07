@@ -315,6 +315,14 @@ static const Tr66ToneDrive rhumba_bongo_drive[TR66_TONES] = {
     {.real = -0.026078f, .imag = 0.079157f},
 };
 
+/* The extra Beguine B hits drive the long ring more strongly, shift its
+ * phase slightly, and put less energy into the short ring. */
+static const Tr66ToneDrive beguine_fill_bongo_drive[TR66_TONES] = {
+    {.real = -0.07401265f, .imag = 0.31185307f},
+    {.real = 0.18009000f},
+    {.real = -0.02290524f, .imag = 0.09651191f},
+};
+
 /* The reduced kick shifts the phase of the two rings and softens the
  * attack. The fundamental has half the amplitude of the full drive. */
 static const Tr66ToneDrive reduced_kick_drive[TR66_TONES] = {
@@ -414,6 +422,9 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         else
             voice_trigger(bongo, -1.0f);
         voices &= ~(1u << TR66_LOW_BONGO);
+    } else if (voices & TR66_BEGUINE_FILL_LOW_BONGO) {
+        trigger_tones(&machine->voices[TR66_LOW_BONGO], beguine_fill_bongo_drive);
+        voices &= ~(1u << TR66_LOW_BONGO);
     }
     if (voices & TR66_MAMBO_FILL_HIGH_BONGO) {
         /* The extra Mambo B hits mostly excite the long ring. */
@@ -446,7 +457,9 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
             voice_trigger(&machine->voices[TR66_KICK], 0.21f);
     }
     if (!(voices & (1u << TR66_CONGA))) {
-        if (voices & TR66_CHA_CHA_CONGA)
+        if (voices & TR66_BEGUINE_FILL_CONGA)
+            voice_trigger(&machine->voices[TR66_CONGA], 0.88f);
+        else if (voices & TR66_CHA_CHA_CONGA)
             voice_trigger(&machine->voices[TR66_CONGA], 0.71f);
         else if (voices & TR66_REDUCED_CONGA)
             voice_trigger(&machine->voices[TR66_CONGA], 0.66f);

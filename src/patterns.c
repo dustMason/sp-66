@@ -111,8 +111,10 @@ static const Tr66Event beguine_a2[] = {
     {48, M | V | L}, {60, M | QUIET_U}, {72, M | L | C}, {84, M | QUIET_U | C},
 };
 static const Tr66Event beguine_b2[] = {
-    {0, M | L}, {12, M | Y | U | L | C}, {18, M}, {24, M | V}, {36, M | QUIET_U},
-    {48, M | V | L | C}, {60, M | QUIET_U}, {72, M | L | C}, {84, M | QUIET_U | L | C},
+    {0, M | L}, {12, M | Y | U | TR66_BEGUINE_FILL_LOW_BONGO | TR66_BEGUINE_FILL_CONGA},
+    {18, M}, {24, M | V}, {36, M | QUIET_U},
+    {48, M | V | L | C}, {60, M | QUIET_U}, {72, M | L | C},
+    {84, M | QUIET_U | TR66_BEGUINE_FILL_LOW_BONGO | C},
 };
 
 /* Both recordings have three high-bongo ring levels in the same steps. */

@@ -121,7 +121,8 @@ static void test_shared_and_reduced_triggers(void)
         Tr66TriggerMask mask;
         float drive;
     } conga_routes[] = {
-        {MASK(CONGA) | cha_cha_layered, 1.0f},
+        {MASK(CONGA) | TR66_BEGUINE_FILL_CONGA | cha_cha_layered, 1.0f},
+        {TR66_BEGUINE_FILL_CONGA | cha_cha_layered, 0.88f},
         {cha_cha_layered, 0.71f},
         {TR66_REDUCED_CONGA, 0.66f},
     };
@@ -819,6 +820,28 @@ static void test_mambo_fill(void)
     assert(fill->events[4].tick == 48 && (fill->events[4].voices & MASK(HIGH_BONGO)));
 }
 
+static void test_beguine_fill_drives(void)
+{
+    const Tr66Bar *fill = &tr66_patterns[TR66_BEGUINE].bars[3];
+    assert(fill->count == 9);
+    assert(fill->events[1].tick == 12);
+    assert(fill->events[1].voices == (MASK(MARACAS) | MASK(CYMBAL) | MASK(HIGH_BONGO) |
+                                     TR66_BEGUINE_FILL_LOW_BONGO | TR66_BEGUINE_FILL_CONGA));
+    assert(fill->events[8].tick == 84);
+    assert(fill->events[8].voices == (MASK(MARACAS) | TR66_QUIET_HIGH_BONGO |
+                                     TR66_BEGUINE_FILL_LOW_BONGO | MASK(CONGA)));
+
+    Tr66 plain, accent;
+    tr66_init(&plain, RATE, 5);
+    accent = plain;
+    tr66_hit(&plain, MASK(LOW_BONGO));
+    tr66_hit(&accent, TR66_BEGUINE_FILL_LOW_BONGO | MASK(LOW_BONGO));
+    const Tr66Resonator *a = plain.voices[TR66_LOW_BONGO].resonator;
+    const Tr66Resonator *b = accent.voices[TR66_LOW_BONGO].resonator;
+    assert(fabsf(hypotf(b[0].real, b[0].imag) - 1.10f * hypotf(a[0].real, a[0].imag)) < 1e-6f);
+    assert(fabsf(hypotf(b[2].real, b[2].imag) - 0.48f * hypotf(a[2].real, a[2].imag)) < 1e-6f);
+}
+
 static void test_slow_rock_fill(void)
 {
     const Tr66Bar *fill = &tr66_patterns[TR66_SLOW_ROCK].bars[3];
@@ -1064,6 +1087,7 @@ int main(void)
     test_samba_bell_and_bongo();
     test_samba_bongo_accents();
     test_mambo_fill();
+    test_beguine_fill_drives();
     test_slow_rock_fill();
     test_waltz_fill();
     test_controls();

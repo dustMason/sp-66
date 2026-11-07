@@ -283,6 +283,16 @@ After one Arrange cycle at fitted Balance, the loop error falls from
 3.67 to 3.53 dB for Reverb Beguine B and from 2.82 to 2.77 dB for the
 Drumbase Beguine.
 
+The two extra low-bongo hits in Beguine B use 110% long-ring drive and
+48% short-ring drive with a small phase shift. Across the four captured
+hits, RMS ring-level error relative to the regular hits falls from
+0.89 to 0.34 dB. Error in the 9–17 ms attack relative to the ring falls
+from 0.89 to 0.28 dB. The high conga on the first fill hit rings at
+86–91% of the regular conga level in both captures, and the model uses
+88% drive. Reverb B fill-window error falls from 3.32 to 2.94 dB and
+full-loop error from 3.35 to 3.31 dB. The clean Drumbase fill-window
+error rises from 2.37 to 2.45 dB, with a 0.005 dB rise across the loop.
+
 The quiet kick and low-bongo hit in the Rhumba B fill drives the bongo
 with the opposite polarity from Beguine's direct hit. With the recordings
 aligned by the kick, the 347–469 Hz waveform correlation from 10 to 54 ms
