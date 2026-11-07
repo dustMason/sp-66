@@ -63,12 +63,12 @@
     [TR66_COWBELL] = { .tone = {{895.0f, 13.4f, 0.36217f, 0.44472f},
                                 {0.0f, 0.174f, -0.50558f, 0.0f},
                                 {895.0f, 2.32f, 0.14341f, -0.12216f}} },
-    /* The short fundamental reinforces the attack. The second harmonic
-     * decays at twice the rate of the main ring. The pulse offsets its
-     * initial amplitude. */
+    /* The shorter fundamental starts with a phase shift from the body
+     * and shapes the first cycles. The second harmonic decays at twice the
+     * rate of the main ring. */
     [TR66_CONGA] = { .tone = {{200.0f, 58.0f, -0.48076f, -0.65717f},
-                              {0.0f, 2.08f, 0.38688360f, 0.0f},
-                              {200.0f, 11.93f, -0.04524f, -0.06183f},
+                              {0.0f, 2.39f, 0.4500f, 0.0f},
+                              {200.0f, 8.15f, -0.05188714f, -0.10126618f},
                               {400.0f, 29.0f, -0.00419360f, -0.00249562f}} },
     /* The main modes use Roland's 600 Hz nominal tuning. The longest
      * mode carries the body. The last mode is driven only in Samba. */

@@ -901,7 +901,7 @@ static void test_mambo_conga_attack(void)
     const Tr66Resonator *bell_modes = with_bell.voices[TR66_CONGA].resonator;
     const Tr66Resonator *fill_modes = fill.voices[TR66_CONGA].resonator;
     const float short_ring = hypotf(direct[2].real, direct[2].imag);
-    assert(hypotf(bell_modes[2].real, bell_modes[2].imag) > 1.5f * short_ring);
+    assert(hypotf(bell_modes[2].real, bell_modes[2].imag) > 1.2f * short_ring);
     assert(hypotf(fill_modes[2].real, fill_modes[2].imag) < 0.5f * short_ring);
     assert(fabsf(bell_modes[0].real - 1.025f * direct[0].real) < 1e-6f);
     assert(fill_modes[0].real == direct[0].real && fill_modes[0].imag == direct[0].imag);

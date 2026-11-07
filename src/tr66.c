@@ -144,8 +144,8 @@ static void add_coincident_conga_drive(Tr66VoiceState *conga, bool with_full_hig
     /* Mambo's cowbell/conga hit strengthens the attack. At the B fill's
      * three-voice hit the short conga ring is weaker. */
     const float extra_body = with_full_high_bongo ? 0.0f : 0.025f;
-    const float extra_short = with_full_high_bongo ? -0.90f : 0.55f;
-    const float extra_quadrature = with_full_high_bongo ? -0.40f : 0.28f;
+    const float extra_short = with_full_high_bongo ? -1.06f : 0.22f;
+    const float extra_quadrature = with_full_high_bongo ? -0.24f : 0.145f;
     const float real = conga->trigger_real[short_ring];
     const float imag = conga->trigger_imag[short_ring];
     const float extra_real = extra_short * real + extra_quadrature * imag;

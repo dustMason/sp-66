@@ -453,6 +453,24 @@ low-bongo hit. Immediately before that hit the Reverb tail is about
 10 dB above the model and the Drumbase tail about 6.5 dB below it,
 relative to each source's conga drive.
 
+Roland's service procedure in section 10-3-2-2 sets the high conga's
+pitch with VR305 and its decay with VR306. The measured time constants
+stay near 46 ms on Drumbase, 79–82 ms on Reverb, and 29.7 ms on the
+Goldbaby loop through the usable tail. Drum Abuse's dry tom rings at
+about 50 ms. The three Goldbaby isolated files taper 1.7–5.5 dB beyond
+the loop's exponential by 70 ms. The attack comparison uses the loop to
+set the time constant and uses the one-shots before their taper.
+
+The shared C attack uses an 8.15 ms short ring with a small phase shift
+relative to the body and a 2.39 ms onset pulse. At matched pitch, decay,
+and body level, 106–320 Hz attack error on single conga hits falls from
+2.80% to 0.71% in the Goldbaby Mambo loop and from 1.79% to 1.00% in
+Reverb. In isolated Goldbaby and Drumbase takes, broadband attack error
+falls from 5.49% to 4.26% and from 5.13% to 3.94%. The re-fitted Mambo
+coincident attacks also improve in both the Goldbaby and Reverb captures.
+Across 51 settled loops at fixed clocks and Balance, the largest change
+in full-loop spectral error is a 0.012 dB rise on Reverb's Beguine B.
+
 Both recording sets have a brief low-frequency pulse under cymbal and
 hi-hat hits. The hi-hat uses two decays of opposite sign. The cymbal uses
 three to model the slower negative undershoot seen in both packs.
