@@ -369,21 +369,25 @@ Drumbase median rises from 2.82 to 2.84 dB.
 
 Both packs shift cymbal energy upward as the hit decays. Across 113 cymbal
 hits, the mean spectrum peaks near 7.8–7.9 kHz at 5–25 ms and 8.1–8.3 kHz
-at 45–95 ms. On cymbal-only triggers, the C engine holds the fast part of
-the envelope for 22 ms, then moves the first noise filter from 7.84 to
-8.17 kHz as the fast part decays. At 70–100 ms the model has 2.7 dB more
-cymbal energy than the Reverb recording and 0.6 dB less than Drumbase,
-relative to the early part of the hit.
+at 45–95 ms. The first noise band now glides continuously toward 8.17 kHz
+with a 19 ms time constant and narrows as the attack settles. The
+amplitude envelope keeps its 22 ms fast hold. Relative to the 60–87 ms
+body of the hit, RMS pitch error over the first four windows (4–58 ms)
+falls from 88 to 41 Hz in Drumbase and from 125 to 68 Hz in Reverb.
+Reverb's settled loop median falls from 2.69 to 2.64 dB, with 19 of 25
+loops improving. Drumbase's median stays at 2.32 dB and its largest
+increase is 0.02 dB.
 
 Figure 10 of the service notes shows the hi-hat and cymbal trigger circuits
 feeding one resonator. In six Bossa Nova, Samba, and Beguine captures, the
 median combined attack was 0.32 dB quieter than hi-hat alone in the
 6.2–11.8 kHz band. When both inputs fire on the same tick, the C engine
-uses one cymbal hit with a 44 ms fast hold. The latest fit starts nearer
-the resting resonance and puts more drive into the slow decay. The
-median combined attack moves from −1.36 to −0.90 dB relative to a single
-hat attack. At 40–65 ms the model moves from −4.12 to −3.39 dB, compared
-with −2.14 dB in the recordings.
+uses one cymbal hit with a 44 ms fast hold and puts more drive into the
+slow decay. With a 34 ms glide, RMS pitch error relative to the 60–87 ms
+body falls from 70 to 39 Hz in Drumbase and from 138 to 57 Hz in Reverb.
+In the earlier gate-level fit, the median combined attack moved from
+−1.36 to −0.90 dB relative to a single hat attack. At 40–65 ms that fit
+moved from −4.12 to −3.39 dB, compared with −2.14 dB in the recordings.
 
 Reverb's Bossa Nova A recording has all five rim hits at the steps in
 Roland's chart. Drumbase has rim-like transients at different steps,

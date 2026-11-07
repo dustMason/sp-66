@@ -52,6 +52,9 @@ typedef struct {
     float noise_threshold; /* envelope level below which the gate closes */
     float noise_sweep_hz; /* initial downward offset of the first noise band */
     float noise_fast_hold_ms;
+    float noise_sweep_ms;
+    float noise_start_q;
+    float noise_damping_ms;
 } Tr66Patch;
 
 typedef struct {
@@ -70,12 +73,18 @@ typedef struct {
 } Tr66NoiseGate;
 
 typedef struct {
+    float bend, bend_start, bend_decay;
+    float damping, damping_start, damping_decay;
+    float phase_per_damping, gain_per_damping;
+} Tr66NoiseSweep;
+
+typedef struct {
     Tr66Resonator resonator[TR66_TONES];
     Tr66Filter filter[TR66_NOISE_BANDS], highpass;
     float trigger_real[TR66_TONES], trigger_imag[TR66_TONES];
     Tr66NoiseGate gate;
     float noise, fast_noise, attack, fast_coeff, fast_mix;
-    float first_band_sweep;
+    Tr66NoiseSweep sweep;
     unsigned frames_left;
     uint8_t tone_count, band_count;
 } Tr66VoiceState;
@@ -86,7 +95,7 @@ typedef struct {
 
 typedef struct {
     Tr66VoiceState voices[TR66_VOICE_COUNT];
-    float cymbal_first_band_sweep;
+    float cymbal_sweep_decay, coincident_cymbal_sweep_decay;
     unsigned cymbal_extra_hold_frames;
     uint32_t cymbal_age;
     uint32_t random;

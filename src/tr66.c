@@ -60,11 +60,25 @@ static void voice_init(Tr66VoiceState *state, const Tr66Patch *patch, float rate
             .a1 = -2.0f * cosf(phase) * normalize,
             .a2 = (1.0f - alpha) * normalize,
         };
-        if (j == 0 && patch->noise_sweep_hz > 0.0f && patch->noise_fast_mix > 0.0f) {
-            const Tr66Filter *filter = &state->filter[j];
+        if (j == 0 && (patch->noise_sweep_hz > 0.0f || patch->noise_start_q > 0.0f)) {
+            const Tr66Filter *filter = &state->filter[0];
+            Tr66NoiseSweep *sweep = &state->sweep;
             const float start_phase = TAU * (band->hz - patch->noise_sweep_hz) / rate;
             const float start_a1 = -(1.0f + filter->a2) * cosf(start_phase);
-            state->first_band_sweep = (start_a1 - filter->a1) / patch->noise_fast_mix;
+            sweep->bend_decay = decay(rate, patch->noise_sweep_ms);
+            if (sweep->bend_decay > 0.0f)
+                sweep->bend_start = start_a1 - filter->a1;
+            else if (patch->noise_sweep_hz > 0.0f && patch->noise_fast_mix > 0.0f)
+                sweep->bend_start = (start_a1 - filter->a1) / patch->noise_fast_mix;
+
+            if (patch->noise_start_q > 0.0f && patch->noise_damping_ms > 0.0f) {
+                const float start_alpha = sinf(start_phase) / (2.0f * patch->noise_start_q);
+                sweep->damping_start = filter->a2 - (1.0f - start_alpha) / (1.0f + start_alpha);
+                sweep->damping_decay = decay(rate, patch->noise_damping_ms);
+                sweep->phase_per_damping = 1.0f / (1.0f + filter->a2);
+                /* Partially compensate for the extra power of a wider band. */
+                sweep->gain_per_damping = 0.31f * band->gain;
+            }
         }
     }
     if (patch->noise_highpass_hz > 0.0f) {
@@ -97,6 +111,8 @@ static void voice_trigger(Tr66VoiceState *state, float strength)
 {
     for (unsigned i = 0; i < state->tone_count; ++i)
         add_mode_drive(state, i, strength);
+    state->sweep.bend = state->sweep.bend_start;
+    state->sweep.damping = state->sweep.damping_start;
     state->noise = 1.0f - state->fast_mix;
     state->fast_noise = state->fast_mix;
     state->attack = state->gate.attack_coeff != 0.0f ? 1.0f : 0.0f;
@@ -121,6 +137,30 @@ static float filter_sample(Tr66Filter *filter, float input, float a1)
     return out;
 }
 
+static float first_band_sample(Tr66VoiceState *state, float input)
+{
+    Tr66Filter *band = &state->filter[0];
+    Tr66NoiseSweep *sweep = &state->sweep;
+    const float bend = sweep->bend_decay > 0.0f
+        ? sweep->bend : sweep->bend_start * state->fast_noise;
+    sweep->bend *= sweep->bend_decay;
+    if (sweep->damping == 0.0f)
+        return filter_sample(band, input, band->a1 + bend);
+
+    /* The transient broadens the band while its center glides upward.
+     * Scale a1 with the new a2 to keep damping from shifting the center. */
+    const float damping = sweep->damping;
+    const float a2 = band->a2 - damping;
+    const float a1 = (band->a1 + bend) * (1.0f - sweep->phase_per_damping * damping);
+    const float b0 = band->b0 + sweep->gain_per_damping * damping;
+    const float feed = b0 * input;
+    const float out = feed + band->z1;
+    band->z1 = band->z2 - a1 * out;
+    band->z2 = -feed - a2 * out;
+    sweep->damping *= sweep->damping_decay;
+    return out;
+}
+
 static float voice_sample(Tr66VoiceState *state, float noise)
 {
     if (state->frames_left == 0)
@@ -139,10 +179,7 @@ static float voice_sample(Tr66VoiceState *state, float noise)
     if (state->band_count != 0) {
         if (state->highpass.b0 != 0.0f)
             noise = filter_sample(&state->highpass, noise, state->highpass.a1);
-        Tr66Filter *first = &state->filter[0];
-        /* The cymbal resonance rises as the fast part of its gate decays. */
-        const float first_a1 = first->a1 + state->first_band_sweep * state->fast_noise;
-        float filtered = filter_sample(first, noise, first_a1);
+        float filtered = first_band_sample(state, noise);
         for (unsigned i = 1; i < state->band_count; ++i) {
             Tr66Filter *band = &state->filter[i];
             filtered += filter_sample(band, noise, band->a1);
@@ -181,7 +218,8 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         voice_init(&machine->voices[i], &tr66_factory_voices[i], sample_rate);
 
-    machine->cymbal_first_band_sweep = machine->voices[TR66_CYMBAL].first_band_sweep;
+    machine->cymbal_sweep_decay = machine->voices[TR66_CYMBAL].sweep.bend_decay;
+    machine->coincident_cymbal_sweep_decay = decay(sample_rate, 34.0f);
     const float extra_hold_ms = coincident_cymbal_hold_ms - tr66_factory_voices[TR66_CYMBAL].noise_fast_hold_ms;
     machine->cymbal_extra_hold_frames = (unsigned)ceilf(0.001f * fmaxf(0.0f, extra_hold_ms) * sample_rate);
 }
@@ -261,7 +299,8 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
     if (voices & (1u << TR66_CYMBAL)) {
         machine->cymbal_age = 0;
-        cymbal->first_band_sweep = machine->cymbal_first_band_sweep;
+        cymbal->sweep.bend_decay = shared_hit
+            ? machine->coincident_cymbal_sweep_decay : machine->cymbal_sweep_decay;
     }
     if (voices & TR66_RHUMBA_BONGO) {
         trigger_rhumba_bongo(&machine->voices[TR66_LOW_BONGO]);
@@ -276,7 +315,8 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         cymbal->frames_left += machine->cymbal_extra_hold_frames;
         cymbal->noise = 0.75075f;
         cymbal->fast_noise = 0.29925f;
-        cymbal->first_band_sweep *= 0.82f * cymbal->fast_mix / cymbal->fast_noise;
+        cymbal->sweep.bend *= 0.82f;
+        cymbal->sweep.damping *= 1.25f;
     }
     /* Measured against full hits in the recordings. The louder route wins
      * if layered rhythms trigger the same voice on the same clock pulse. */

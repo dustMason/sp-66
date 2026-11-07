@@ -31,8 +31,11 @@
         .noise_fast_ms = 7.5f,
         .noise_fast_mix = 0.335f,
         .noise_threshold = 0.155f,
-        .noise_sweep_hz = 333.804f,
-        .noise_fast_hold_ms = 22.0f },
+        .noise_sweep_hz = 540.0f,
+        .noise_fast_hold_ms = 22.0f,
+        .noise_sweep_ms = 19.0f,
+        .noise_start_q = 5.56815f,
+        .noise_damping_ms = 8.0f },
     /* The claves and rim shot are passive resonators with a short trigger pulse. */
     [TR66_CLAVES] = { .tone = {{2350.0f, 4.75f, 0.63888f, 0.10258f},
                               {0.0f, 0.09f, -0.97832f, 0.0f}} },
