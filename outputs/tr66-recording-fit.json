@@ -4783,5 +4783,67 @@
     },
     "host_benchmark": "Median of nine paired passes. Habanera A at 200 BPM, 48 kHz, 200000 blocks per pass.",
     "limitation": "The level change does not reproduce the stronger cancellation in the original around 195–240 Hz. The drive fit establishes an output difference without identifying the circuit mechanism."
+  },
+  "high_bongo_envelope_refinement": {
+    "pitch_hz_before_and_revised": [
+      597,
+      600
+    ],
+    "slow_decay_ms_before_and_revised": [
+      34,
+      32
+    ],
+    "slow_mode_amplitude_ratio": 1.25,
+    "isolated_hit_reference": {
+      "source": "https://www.vintagesynth.com/roland/tr-66",
+      "clip": "Audio Clip 2",
+      "hit_onsets_seconds": [
+        13.624,
+        16.908,
+        22.346
+      ],
+      "mean_absolute_envelope_error_db_before_and_revised": [
+        0.39,
+        0.11
+      ],
+      "method": "Measure 530–680 Hz power in 4–14, 14–32, 32–60 and 60–103 ms windows, relative to the first window. Compare median envelope levels and report mean absolute error across the four windows."
+    },
+    "groove_error_measure": "Level-matched weighted RMS log-band error in 43 ms windows.",
+    "settled_balance_position": -0.2882,
+    "settled_warm_up_arrange_cycles": 1,
+    "center": {
+      "loops_compared": 23,
+      "changed_loop_error_db_before_and_revised": {
+        "BEGUINE": [
+          3.13,
+          3.12
+        ],
+        "MAMBO": [
+          2.81,
+          2.8
+        ],
+        "SAMBA": [
+          4.05,
+          4.06
+        ]
+      }
+    },
+    "settled": {
+      "loops_compared": 23,
+      "changed_loop_error_db_before_and_revised": {
+        "MAMBO": [
+          2.56,
+          2.57
+        ],
+        "RHUMBA": [
+          2.53,
+          2.52
+        ],
+        "SAMBA": [
+          2.53,
+          2.56
+        ]
+      }
+    }
   }
 }

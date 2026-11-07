@@ -4469,5 +4469,91 @@
     },
     "host_benchmark": "Median of nine paired passes. Habanera A at 200 BPM, 48 kHz, 200000 blocks per pass.",
     "limitation": "The level change does not reproduce the stronger cancellation in the original around 195–240 Hz. The drive fit establishes an output difference without identifying the circuit mechanism."
+  },
+  "high_bongo_envelope_refinement": {
+    "pitch_hz_before_and_revised": [
+      597,
+      600
+    ],
+    "slow_decay_ms_before_and_revised": [
+      34,
+      32
+    ],
+    "slow_mode_amplitude_ratio": 1.25,
+    "isolated_hit_reference": {
+      "source": "https://www.vintagesynth.com/roland/tr-66",
+      "clip": "Audio Clip 2",
+      "hit_onsets_seconds": [
+        13.624,
+        16.908,
+        22.346
+      ],
+      "mean_absolute_envelope_error_db_before_and_revised": [
+        0.39,
+        0.11
+      ],
+      "method": "Measure 530–680 Hz power in 4–14, 14–32, 32–60 and 60–103 ms windows, relative to the first window. Compare median envelope levels and report mean absolute error across the four windows."
+    },
+    "groove_error_measure": "Level-matched weighted RMS log-band error in 43 ms windows.",
+    "settled_balance_position": 0.4551,
+    "settled_warm_up_arrange_cycles": 1,
+    "center": {
+      "loops_compared": 25,
+      "changed_loop_error_db_before_and_revised": {
+        "Loop17.wav": [
+          3.58,
+          3.62
+        ],
+        "Loop18.wav": [
+          3.55,
+          3.54
+        ],
+        "Loop20.wav": [
+          5.09,
+          5.05
+        ],
+        "Loop21.wav": [
+          4.59,
+          4.55
+        ],
+        "Loop22.wav": [
+          4.39,
+          4.38
+        ],
+        "Loop23.wav": [
+          3.87,
+          3.84
+        ]
+      }
+    },
+    "settled": {
+      "loops_compared": 25,
+      "changed_loop_error_db_before_and_revised": {
+        "Loop17.wav": [
+          2.63,
+          2.65
+        ],
+        "Loop18.wav": [
+          3.03,
+          3.01
+        ],
+        "Loop20.wav": [
+          3.78,
+          3.76
+        ],
+        "Loop21.wav": [
+          3.82,
+          3.79
+        ],
+        "Loop22.wav": [
+          3.93,
+          3.91
+        ],
+        "Loop23.wav": [
+          3.42,
+          3.37
+        ]
+      }
+    }
   }
 }

@@ -39,9 +39,10 @@
     [TR66_CONGA] = { .tone = {{200.0f, 58.0f, -0.48076f, -0.65717f},
                               {0.0f, 2.08f, 0.38269f, 0.0f},
                               {200.0f, 11.93f, -0.04524f, -0.06183f}} },
-    /* Both captures have a fast initial decay and a longer ring at the same pitch. */
-    [TR66_HIGH_BONGO] = { .tone = {{597.0f, 34.0f, -0.028f, -0.187f},
-                                   {597.0f, 5.3f, -0.195f, -0.430f}, {0.0f, 2.4f, 0.089f, 0.0f}} },
+    /* Both modes use Roland's 600 Hz nominal tuning. The longer mode
+     * carries more of the body of the hit as the fast mode decays. */
+    [TR66_HIGH_BONGO] = { .tone = {{600.0f, 32.0f, -0.035f, -0.23375f},
+                                   {600.0f, 5.3f, -0.188f, -0.38325f}, {0.0f, 2.4f, 0.089f, 0.0f}} },
     /* Both recordings have a faster initial decay than the free ring. */
     [TR66_LOW_BONGO] = { .tone = {{400.0f, 32.0f, 0.101331f, 0.292946f},
                                   {0.0f, 2.16f, -0.180090f, 0.0f},

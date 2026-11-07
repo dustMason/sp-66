@@ -241,13 +241,19 @@ from 4.18 to 4.09 dB and Drumbase Beguine from 2.82 to 2.77 dB.
 
 The snare has a weaker low-bongo resonance, as described in Roland's
 service notes, and its attack has a short pulse followed by a slower,
-opposite-polarity recovery. The high bongo uses a fast and a slow decay
-at 597 Hz, based on separated Mambo hits from both packs. Cowbell hits
-from Mambo and Cha-Cha measure about
+opposite-polarity recovery. Cowbell hits from Mambo and Cha-Cha measure about
 893 Hz in Reverb and 897 Hz on the CD. The model uses 895 Hz.
 The snare attack and tone changes improved several groove scores. In that
 pass, isolated 35–540 Hz waveform correlation fell from 0.95 to 0.94 on
 Drumbase and from 0.92 to 0.86 on Reverb.
+
+The high bongo uses Roland's 600 Hz service setting and two decays at that
+frequency. The 32 ms mode carries more of the body of the hit. On three
+isolated hits from the [Vintage Synth Explorer demo](https://www.vintagesynth.com/roland/tr-66),
+the envelope error fell from 0.39 to 0.11 dB. With one Arrange cycle of
+warm-up at the fitted Balance, Reverb Mambo B fell from 3.42 to 3.37 dB.
+Drumbase Samba rose from 2.53 to 2.56 dB. The two loop packs still differ
+in how long the bongos ring.
 
 The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
