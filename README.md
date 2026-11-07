@@ -368,6 +368,15 @@ Reverb. After one Arrange cycle at the fitted Balance, Drumbase Cha-Cha
 improves from 2.78 to 2.63 dB and Reverb Beguine B from 4.27 to 4.12 dB.
 At center Balance, Drumbase Beguine rises from 3.03 to 3.11 dB.
 
+The high conga also has a faint second harmonic. At 12 ms it is about
+47 dB below the fundamental in a clean Drumbase Mambo hit and 46 dB below
+in Reverb. Goldbaby's direct `CongaLo_aOrig` takes measure 50–51 dB below
+and show a similar relative phase after correcting recording polarity.
+The C render measures 46.6 dB below. The harmonic decays twice as fast as
+the fundamental and scales with the square of the hit drive. Across all
+48 Drumbase and Reverb loops, the spectral score shifts by less than
+0.006 dB.
+
 After matching cowbell levels, the high-conga ring in Cha-Cha is
 2.8–3.1 dB below the same hit in Mambo across Drumbase, Reverb, and
 Goldbaby. Cha-Cha uses 71% conga drive in both phrases. The relative

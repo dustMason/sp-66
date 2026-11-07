@@ -129,12 +129,21 @@ static void test_shared_and_reduced_triggers(void)
     tr66_init(&first, RATE, 31);
     tr66_hit(&first, MASK(CONGA));
     tr66_render(&first, a, BLOCK);
+    const Tr66Patch *conga = &tr66_factory_voices[TR66_CONGA];
+    Tr66Patch harmonic = { .tone = {conga->tone[3], conga->tone[1]} };
+    harmonic.tone[1].cosine = -harmonic.tone[0].cosine;
+    float harmonic_samples[BLOCK];
+    tr66_render_hit(&harmonic, RATE, 31, harmonic_samples, BLOCK);
     for (unsigned i = 0; i < sizeof(conga_routes) / sizeof(conga_routes[0]); ++i) {
         tr66_init(&second, RATE, 31);
         tr66_hit(&second, conga_routes[i].mask);
         tr66_render(&second, b, BLOCK);
-        for (unsigned frame = 0; frame < BLOCK; ++frame)
-            assert(fabsf(b[frame] - conga_routes[i].drive * a[frame]) < 1e-6f);
+        const float drive = conga_routes[i].drive;
+        for (unsigned frame = 0; frame < BLOCK; ++frame) {
+            const float expected = drive * a[frame] +
+                (drive * drive - drive) * harmonic_samples[frame];
+            assert(fabsf(b[frame] - expected) < 1e-6f);
+        }
     }
 
     tr66_init(&first, RATE, 31);

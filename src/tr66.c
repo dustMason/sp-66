@@ -122,6 +122,17 @@ static void voice_trigger(Tr66VoiceState *state, float strength)
     state->frames_left = state->gate.tail_frames;
 }
 
+static void trigger_reduced_conga(Tr66VoiceState *conga, float strength)
+{
+    enum { pulse = 1, second_harmonic = 3 };
+    voice_trigger(conga, strength);
+    /* Scale the second harmonic and its onset correction with the
+     * square of the drive. The fundamental still scales linearly. */
+    const float extra_drive = strength * (strength - 1.0f);
+    add_mode_drive(conga, second_harmonic, extra_drive);
+    conga->resonator[pulse].real -= extra_drive * conga->trigger_real[second_harmonic];
+}
+
 static float white_noise(uint32_t *seed)
 {
     uint32_t bits = *seed;
@@ -503,11 +514,11 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     }
     if (!(voices & (1u << TR66_CONGA))) {
         if (voices & TR66_BEGUINE_FILL_CONGA)
-            voice_trigger(&machine->voices[TR66_CONGA], 0.88f);
+            trigger_reduced_conga(&machine->voices[TR66_CONGA], 0.88f);
         else if (voices & TR66_CHA_CHA_CONGA)
-            voice_trigger(&machine->voices[TR66_CONGA], 0.71f);
+            trigger_reduced_conga(&machine->voices[TR66_CONGA], 0.71f);
         else if (voices & TR66_REDUCED_CONGA)
-            voice_trigger(&machine->voices[TR66_CONGA], 0.66f);
+            trigger_reduced_conga(&machine->voices[TR66_CONGA], 0.66f);
     }
     if (!(voices & ((1u << TR66_HIGH_BONGO) | TR66_MAMBO_FILL_HIGH_BONGO))) {
         Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];

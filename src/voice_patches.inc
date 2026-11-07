@@ -55,10 +55,13 @@
     [TR66_RIM] = { .tone = {{1525.0f, 2.10f, -1.00154f, -0.93159f},
                            {0.0f, 0.18f, 0.70f, 0.0f}} },
     [TR66_COWBELL] = { .tone = {{895.0f, 13.4f, -0.53993481f, 0.19342791f}, {0.00000000f, 0.10489128f, 0.56115299f, 0.00000000f}} },
-    /* A short decay reinforces the first cycles of the high conga. */
+    /* The short fundamental reinforces the attack. The second harmonic
+     * decays at twice the rate of the main ring. The pulse offsets its
+     * initial amplitude. */
     [TR66_CONGA] = { .tone = {{200.0f, 58.0f, -0.48076f, -0.65717f},
-                              {0.0f, 2.08f, 0.38269f, 0.0f},
-                              {200.0f, 11.93f, -0.04524f, -0.06183f}} },
+                              {0.0f, 2.08f, 0.38688360f, 0.0f},
+                              {200.0f, 11.93f, -0.04524f, -0.06183f},
+                              {400.0f, 29.0f, -0.00419360f, -0.00249562f}} },
     /* The main modes use Roland's 600 Hz nominal tuning. The longest
      * mode carries the body. The last mode is driven only in Samba. */
     [TR66_HIGH_BONGO] = { .tone = {{600.0f, 32.0f, -0.035f, -0.23375f},
