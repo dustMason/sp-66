@@ -6,15 +6,18 @@
                              {0.0f, 5.8f, 2.29042f, 0.0f},
                              {0.0f, 10.87739f, -1.49877f, 0.0f},
                              {130.29934f, 20.075f, -0.03650f, 0.00850f}} },
-    /* A fast edge shapes the initial pulse before the slower recovery and held noise burst. */
+    /* The short counter-pulse softens the initial edge. Figure 10 shows two
+     * capacitor paths into the snare gate, modeled as held and free decays. */
     [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.3f, 1.12938f, 0.0f},
-                              {0.0f, 7.0f, -0.66442f, 0.0f}, {1100.0f, 0.33f, 0.24771f, 0.39665f}},
-        .band = {{5625.6526f, 2.0f, 0.16959526f}, {9784.1089f, 0.7326f, 0.45332608f}},
-        .noise_attack_ms = 1.7f,
-        .noise_fast_ms = 110.0f,
-        .noise_fast_mix = 1.0f,
-        .noise_fast_hold_ms = 29.0f,
-        .noise_threshold = 0.53f },
+                              {0.0f, 7.0f, -0.66442f, 0.0f}, {1100.0f, 0.33f, 0.24771f, 0.39665f},
+                              {0.0f, 0.065f, 0.105f, 0.0f}},
+        .band = {{5625.6526f, 2.0f, 0.62936240f}, {9784.1089f, 0.7326f, 1.68227809f}},
+        .noise_attack_ms = 0.8117643f,
+        .noise_decay_ms = 124.660310f,
+        .noise_fast_ms = 554.858109f,
+        .noise_fast_mix = 0.89912584f,
+        .noise_fast_hold_ms = 42.3951202f,
+        .noise_threshold = 0.86513498f },
     /* Two decays form the small pulse under each recorded hi-hat hit. */
     [TR66_HAT] = { .tone = {{0.0f, 0.46f, 0.014f, 0.0f}, {0.0f, 3.5f, -0.014f, 0.0f}},
         .band = {{8350.0f, 13.5f, 6.8f}, {8330.25390625f, 0.45656088f, 0.1635f}},

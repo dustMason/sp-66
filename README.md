@@ -144,7 +144,7 @@ Treat replacing the factory firmware as one-way. See the
 
 The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
-ends. The loudest sample was 0.528 of digital full scale, with zero clipped samples.
+ends. The loudest sample was 0.531 of digital full scale, with zero clipped samples.
 
 ## USB MIDI clock
 
@@ -324,13 +324,21 @@ voice. On cymbal-only steps in Reverb Slow Rock B, the 130–220 Hz band
 measures −40.4 dB relative to 6–10.5 kHz. The C render moves from −70.3 to
 −40.6 dB at the same Balance setting.
 
-The snare uses a 1.7 ms noise rise time constant and a 29 ms hold, then
-closes as the decay crosses a threshold. In 36 snare-only hits across
-both loop packs, the 3–6 ms noise measures about +0.6 dB relative to the
-6–40 ms body. The C model moves from about −8.3 dB to −1.2 dB on those hits.
-The model also uses less upper treble. Reverb's snare has about 8 dB more
-noise relative to its tonal ring than Drumbase's, so the firmware uses a
-shared setting between those recordings. The
+The snare uses a held decay and a free decay to approximate the two
+capacitor paths into the noise gate in Figure 10. The gate rises with a
+0.81 ms time constant, holds its main branch for about 42 ms, and closes
+near 95 ms. A short counter-pulse softens the initial broadband edge.
+Across 13 Drumbase and 23 Reverb snare-only hits, the median 2.2–14.5 kHz
+level from 2 to 4 ms is now within 0.6 dB of each recording relative to
+the 7–30 ms body. The previous error was 2.9–3.1 dB. In the first 2 ms,
+the errors fall from 6.3 to 2.0 dB in Drumbase and from 3.9 to 0.2 dB in
+Reverb. The 2–4 ms level also comes within 1.2 dB of Goldbaby's five
+direct hits.
+
+Reverb's snare has about 8 dB more noise relative to its tonal ring than
+Drumbase's. The firmware uses a shared setting between the two. At fitted
+Balance after one Arrange cycle, the Habanera A spectral error falls from
+2.88 to 2.83 dB in Reverb and rises from 2.85 to 2.91 dB in Drumbase. The
 [Drum Abuse one-shots](https://github.com/smpldsnds/drum-abuse-vol1/tree/58a9b6246d232d862fad15e06c97a4a030655017/samples/roland-tr-66)
 show a similarly quick rise. Two snare noise waveforms match hits in
 [Vintage Synth Explorer's demo](https://www.vintagesynth.com/roland/tr-66)
