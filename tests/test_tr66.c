@@ -308,9 +308,11 @@ static void test_snare_drives_low_bongo(void)
     const Tr66VoiceState *both = &combined.voices[TR66_LOW_BONGO];
     assert(weak->frames_left > 0);
     assert(weak->resonator[0].real != 0.0f);
-    assert(weak->resonator[1].real == 0.0f && weak->resonator[2].real == 0.0f);
-    assert(both->resonator[0].real == weak->resonator[0].real + direct->resonator[0].real);
-    assert(both->resonator[0].imag == weak->resonator[0].imag + direct->resonator[0].imag);
+    assert(weak->resonator[1].real < 0.0f && weak->resonator[2].real > 0.0f);
+    for (unsigned i = 0; i < weak->tone_count; ++i) {
+        assert(both->resonator[i].real == weak->resonator[i].real + direct->resonator[i].real);
+        assert(both->resonator[i].imag == weak->resonator[i].imag + direct->resonator[i].imag);
+    }
 
     float s[BLOCK], b[BLOCK], c[BLOCK];
     for (unsigned frame = 0; frame < RATE / 5; frame += BLOCK) {

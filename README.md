@@ -261,10 +261,15 @@ constant on the CD, and 405 Hz and 51 ms in Reverb. Roland provides a
 separate decay trim for this voice in section 10-3-2-3 of the service notes.
 The C model uses a fast 7.5 ms mode and a 36 ms free ring at 400 Hz.
 Figure 1 and section 10-3-3-3 show the snare feeding the same low-bongo
-circuit through a diode and resistor. The snare drives the free ring
-with a weaker, phase-shifted pulse. The C model adds the two pulses
-when snare and low bongo coincide. A recording of that combination
-would verify the combined drive.
+circuit through a diode and resistor. In the C model the snare drives
+the free ring and a short opposing ring, with a pulse that preserves
+the initial level. Median normalized waveform error in the 335–478 Hz
+band from 1.8 to 27 ms into isolated snare hits drops from 29.8% to
+28.4% in Drumbase, from 46.1% to 44.0% in Reverb, and from 60.4% to
+58.5% on three direct Goldbaby takes. Median settled loop error moves
+from 2.212 to 2.196 dB in Drumbase and from 2.332 to 2.293 dB in Reverb.
+The C model sums the drives when snare and low bongo coincide. A
+recording of that combination would verify the combined drive.
 
 Rhumba's full bass drum and low bongo share a trigger row in Figure 13.
 That row drives the bongo's existing resonators with a fitted pulse.

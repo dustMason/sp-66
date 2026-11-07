@@ -449,17 +449,16 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     const bool bare_kick_snare = voices == ((1u << TR66_KICK) | (1u << TR66_SNARE));
     if (voices & (1u << TR66_SNARE)) {
         /* The SD trigger also reaches LB through a diode and resistor
-         * (Service Notes Figure 1). It weakly drives the same bongo ring. */
+         * (Service Notes Figure 1). A short opposing ring shapes the
+         * attack. The pulse preserves the initial level. */
         Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];
-        Tr66Resonator *ring = &bongo->resonator[0];
+        Tr66Resonator *mode = bongo->resonator;
         const float strength = bare_kick_snare ? 0.85f : 1.0f;
-        const float real = bongo->trigger_real[0];
-        const float imag = bongo->trigger_imag[0];
-        /* Attenuation and phase shift relative to the direct bongo drive. */
-        const float coupling_real = 0.4696063f;
-        const float coupling_imag = -0.06587713f;
-        ring->real += strength * (coupling_real * real - coupling_imag * imag);
-        ring->imag += strength * (coupling_imag * real + coupling_real * imag);
+        mode[0].real -= 0.05059f * strength;
+        mode[0].imag += 0.12559f * strength;
+        mode[1].real -= 0.046f * strength;
+        mode[2].real += 0.070f * strength;
+        mode[2].imag -= 0.028f * strength;
         bongo->frames_left = bongo->gate.tail_frames;
     }
     if (bare_kick_snare) {
