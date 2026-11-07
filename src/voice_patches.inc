@@ -76,7 +76,8 @@
                                    {600.0f, 5.3f, -0.188f, -0.38325f},
                                    {0.0f, 2.4f, 0.089f, 0.0f}, {600.0f, 7.73f, 0.0f, 0.0f}} },
     /* The first mode is the free ring also excited by the snare trigger.
-     * The direct drive polarity is measured relative to the conga. */
+     * On direct hits the short ring is weaker and lags the free ring
+     * by about 11 degrees. */
     [TR66_LOW_BONGO] = { .tone = {{400.0f, 36.0f, -0.09525114f, -0.27536924f},
                                   {0.0f, 2.16f, 0.180090f, 0.0f},
-                                  {400.0f, 7.5f, -0.067554f, -0.195298f}} },
+                                  {400.0f, 7.5f, -0.02315386f, -0.17389799f}} },

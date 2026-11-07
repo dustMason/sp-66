@@ -146,7 +146,7 @@ Treat replacing the factory firmware as one-way. See the
 
 The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
-ends. The loudest sample was 0.531 of digital full scale, with zero clipped samples.
+ends. The loudest sample was 0.557 of digital full scale, with zero clipped samples.
 
 ## USB MIDI clock
 
@@ -296,6 +296,15 @@ On five clean Reverb Beguine B hits with high conga and low bongo, the
 After one Arrange cycle at fitted Balance, the loop error falls from
 3.67 to 3.53 dB for Reverb Beguine B and from 2.82 to 2.77 dB for the
 Drumbase Beguine.
+
+The direct low bongo drives its 7.5 ms ring at 60% of the free ring's
+amplitude, with an 11.5° phase lag. With pitch, late decay, and level
+matched per take, median 260–558 Hz waveform error falls from 3.00% to
+1.90% across six Drumbase Beguine hits and from 4.05% to 2.73% across
+two Reverb Beguine B hits. The isolated Drum Abuse hit falls from 4.13%
+to 2.62%. The fitted body decays differ across the recordings. At the
+same playback clocks and Balance, settled Beguine error moves from
+2.51 to 2.53 dB in Drumbase and from 3.38 to 3.36 dB in Reverb.
 
 The two extra low-bongo hits in Beguine B use 110% long-ring drive and
 48% short-ring drive with a small phase shift. Across the four captured

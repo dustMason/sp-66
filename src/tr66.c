@@ -368,7 +368,7 @@ static const Tr66ToneDrive rhumba_bongo_drive[TR66_TONES] = {
 static const Tr66ToneDrive beguine_fill_bongo_drive[TR66_TONES] = {
     {.real = -0.07401265f, .imag = 0.31185307f},
     {.real = 0.18009000f},
-    {.real = -0.02290524f, .imag = 0.09651191f},
+    {.real = -0.01944494f, .imag = 0.08193184f},
 };
 
 /* The reduced kick shifts the phase of the two rings and softens the
