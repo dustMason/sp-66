@@ -32,10 +32,10 @@
         .noise_damping_ms = 25.5f },
     /* The corresponding cymbal pulse has the opposite polarity. */
     [TR66_CYMBAL] = { .tone = {{0.0f, 1.4f, -0.080f, 0.0f}, {0.0f, 3.0f, 0.080f, 0.0f}},
-        .band = {{8172.25f, 11.18972f, 2.6670002f}, {13097.84f, 0.68986f, 0.0577989f}},
+        .band = {{8172.25f, 11.18972f, 2.514f}, {13097.84f, 0.68986f, 0.047f}},
         .noise_attack_ms = 0.85f,
         .noise_decay_ms = 312.0f,
-        .noise_highpass_hz = 10100.0f,
+        .noise_highpass_hz = 9700.0f,
         .noise_fast_ms = 7.5f,
         .noise_fast_mix = 0.335f,
         .noise_threshold = 0.155f,

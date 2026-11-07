@@ -414,6 +414,14 @@ Reverb's settled loop median falls from 2.69 to 2.64 dB, with 19 of 25
 loops improving. Drumbase's median stays at 2.32 dB and its largest
 increase is 0.02 dB.
 
+The cymbal's upper hiss is softer after comparing the loop packs with
+Goldbaby's direct cymbal. Relative to the 7.2–9.6 kHz body, RMS color
+error in the 12–15.8 kHz band over 8–175 ms falls from 2.57 to 1.88 dB
+using the median band levels from 48 C renders.
+Reverb's settled loop median falls from 2.63 to 2.60 dB and Drumbase's
+moves from 2.27 to 2.28 dB. The direct hit sustains longer than the
+pattern hits, which still determine the envelope.
+
 Figure 10 of the service notes shows the hi-hat and cymbal trigger circuits
 feeding one resonator. In six Bossa Nova, Samba, and Beguine captures, the
 median combined attack was 0.32 dB quieter than hi-hat alone in the
