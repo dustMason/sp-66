@@ -17,7 +17,7 @@ the A and B phrases at 120 BPM, with one second for the final hits to ring out.[
 
 ## SP-1 controls
 
-[![SP-1 control map for SP-66, with annotated faders, track buttons, and edge controls](docs/sp1-controls.svg)](docs/sp1-controls.svg)
+[![Annotated SP-1 line drawing showing the SP-66 rhythm, variation, transport, and MIDI controls](docs/sp1-controls.svg)](docs/sp1-controls.svg)
 
 | Control | Action |
 | --- | --- |

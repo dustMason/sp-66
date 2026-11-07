@@ -7,9 +7,10 @@
     50 to 200 BPM, bass-to-treble balance, base rhythm, and one of six presets in
     the selected variation bank. Track buttons 1, 2 and 3 select Rock, 2 Beat and
     4 Beat. Track 4 toggles the variation. Hold Function and tap Track 4 to pin
-    or unpin the current base rhythm. The top buttons lower and raise volume.
-    The left rocker steps through A, Auto and B. Press up toward B or down
-    toward A. Auto plays A then B. On the right edge, Play starts or stops
+    or unpin the current base rhythm. Track LEDs show the selected bank and
+    whether the variation is enabled. The round buttons on the top edge lower
+    and raise volume. The left rocker steps through A, Auto and B. Press up
+    toward B or down toward A. Auto plays A then B. On the right edge, Play starts or stops
     playback. Four LEDs show the Arrange setting and bar. Tap Function while
     playing to fill on the next bar or hold it to shut down. On the bottom edge,
     USB-C receives MIDI clock and transport. The headphone jack is beside it.</desc>
@@ -23,8 +24,8 @@
     .outline { stroke-width: 1.5; }
     .slot, .key, .port { stroke-width: 1.15; }
     .slot { fill: #333834; }
-    .key { fill: #e5e6df; }
-    .key.shadow { fill: #aeb4ac; }
+    .key { fill: #e9eae6; }
+    .key.shadow { fill: #a9b0ad; }
     .port { fill: #303430; }
     .ink, .edge, .highlight, .leader {
       fill: none;
@@ -46,6 +47,11 @@
     }
     .id { fill: #9a3329; }
     .view { fill: #566056; letter-spacing: 1.3px; }
+    .position {
+      fill: #303430;
+      font: 600 16px "IBM Plex Mono", "Courier New", monospace;
+    }
+    .position.auto { fill: #9a3329; }
   </style>
 
   <defs>
@@ -56,12 +62,13 @@
     <clipPath id="case-clip"><use xlink:href="#case"/></clipPath>
 
     <g id="fader">
-      <rect class="slot" x="-5.6" y="148" width="11.2" height="74" rx="5.6"/>
-      <path class="edge" d="M3 154v62"/>
-      <path class="highlight" d="M-6.9 155v60q0 8 6.9 8"/>
+      <rect class="slot" x="-5.8" y="148" width="11.6" height="74" rx="5.8"/>
+      <path class="edge" d="M3.3 154v62"/>
+      <path class="highlight" d="M-7 155v60q0 8 7 8"/>
     </g>
     <g id="fader-pin">
-      <path class="outline" fill="#a9afa8" d="M-6 0v6q0 4 6 4t6-4V0Z"/>
+      <path fill="#171a18" opacity=".25" d="M-5 5h11l2 7q-1 4-6 4h-3q-4-1-4-4Z"/>
+      <path class="key shadow" d="M-6 0v7q0 4 6 4t6-4V0Z"/>
       <ellipse class="key" rx="6" ry="4.3"/>
       <path class="highlight" d="M-3.4-1.5q3.4-2.1 6.8 0"/>
     </g>
@@ -72,7 +79,7 @@
     </g>
   </defs>
 
-  <rect x=".5" y=".5" width="899" height="671" rx="7" fill="#f7f7f3" stroke="#dedfd7"/>
+  <rect x=".5" y=".5" width="899" height="671" rx="7" fill="#f8f7f3" stroke="#dedfd7"/>
 
   <!-- Top edge with the two volume buttons. -->
   <g>
@@ -81,17 +88,19 @@
     <rect class="outline" x="232" y="29" width="264" height="29" rx="5" fill="none"/>
     <path class="ink" d="M452 29v29"/>
     <path class="highlight" d="M238 32h209m10 0h32"/>
-    <rect class="key" x="257" y="37" width="25" height="13" rx="3"/>
-    <rect class="key" x="304" y="37" width="25" height="13" rx="3"/>
+    <circle class="key shadow" cx="269.5" cy="44.5" r="7.3"/>
+    <circle class="key shadow" cx="316.5" cy="44.5" r="7.3"/>
+    <circle class="key" cx="269.5" cy="43.5" r="7.3"/>
+    <circle class="key" cx="316.5" cy="43.5" r="7.3"/>
     <path class="ink" d="M266 43.5h7m40 0h7m-3.5-3.5v7"/>
     <text class="view" x="510" y="48">TOP EDGE</text>
   </g>
 
   <!-- The front, left and bottom share one projection. -->
   <g transform="matrix(1 -.23 .43 .91 235 146)">
-    <use xlink:href="#case" fill="#bac0b9"/>
+    <use xlink:href="#case" fill="#b9c0be"/>
     <path d="M0 361q0 9 9 9h255v23H-26v-9Z"
-          fill="#cdd2ca" clip-path="url(#case-clip)"/>
+          fill="#cdd2d0" clip-path="url(#case-clip)"/>
     <path d="M220 370h44v23h-70Z" fill="#dfd7c3" clip-path="url(#case-clip)"/>
     <path class="ink" d="M220 370l-26 23"/>
     <path class="edge" d="M-22 116v263q0 10 9 10h203m9 0h27"/>
@@ -110,16 +119,17 @@
       <path class="edge" d="M54 11.5h30"/>
       <ellipse class="port" cx="159" cy="11.5" rx="8.5" ry="5.25"/>
       <ellipse class="port" cx="207" cy="11.5" rx="8.5" ry="5.25"/>
+      <path class="edge" d="M153 13.2q6 3 12 0m36 0q6 3 12 0"/>
     </g>
 
-    <use xlink:href="#face" fill="#e1e4de"/>
+    <use xlink:href="#face" fill="#e0e4e2"/>
     <path d="M220 0h44v370h-44Z" fill="#ede7d7" clip-path="url(#face-clip)"/>
     <use xlink:href="#face" class="outline" fill="none"/>
     <path class="ink" d="M220 0v370"/>
     <path class="highlight" d="M3.5 359V10q0-6.5 6.5-6.5h206m8 0h30q6.5 0 6.5 6.5v349"/>
     <path class="edge" d="M10 366h206m8 0h30"/>
 
-    <path class="accent" d="M243 59l6.2 10.7h-12.4Z"/>
+    <path class="accent" d="M238 58.6l10.7 6.2-10.7 6.2Z"/>
     <circle class="dark" cx="243" cy="296" r="2"/>
     <circle class="dark" cx="243" cy="307" r="2"/>
 
@@ -172,9 +182,12 @@
   <text class="label" x="32" y="47">Volume − / +</text>
   <text class="hint" x="32" y="70">Master output</text>
   <text class="label" x="32" y="193">Arrange rocker</text>
-  <text class="hint" x="32" y="217">Up steps toward B</text>
-  <text class="hint" x="32" y="239">Down steps toward A</text>
-  <text class="hint" x="32" y="261">Auto plays A then B</text>
+  <text class="hint" x="32" y="217">↓ toward A · ↑ toward B</text>
+  <text class="position" x="32" y="243">A</text>
+  <path class="leader" d="M49 238h16m57 0h16"/>
+  <text class="position auto" x="74" y="243">AUTO</text>
+  <text class="position" x="147" y="243">B</text>
+  <text class="hint" x="32" y="265">Auto plays A then B</text>
 
   <g>
     <text class="id" x="32" y="297">F1</text>
@@ -188,7 +201,7 @@
     <text class="hint" x="64" y="429">Off or one of 9 rhythms</text>
     <text class="id" x="32" y="462">F4</text>
     <text class="label" x="64" y="462">Variation preset</text>
-    <text class="hint" x="64" y="484">Six per bank</text>
+    <text class="hint" x="64" y="484">Six per selected bank</text>
   </g>
 
   <text class="label" x="729" y="197">Play</text>
@@ -218,6 +231,6 @@
     <text class="label" x="420" y="638">4 Beat bank</text>
     <text class="id" x="566" y="638">T4</text>
     <text class="label" x="598" y="638">Toggle variation</text>
-    <text class="hint" x="598" y="660">Hold Function + T4 to pin / unpin</text>
+    <text class="hint" x="598" y="660">Hold Function, tap T4 to pin / unpin</text>
   </g>
 </svg>
