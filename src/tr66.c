@@ -138,6 +138,24 @@ static void trigger_reduced_conga(Tr66VoiceState *conga, float strength)
     conga->resonator[pulse].real -= extra_drive * conga->trigger_real[second_harmonic];
 }
 
+static void add_coincident_conga_drive(Tr66VoiceState *conga, bool with_full_high_bongo)
+{
+    enum { body = 0, pulse = 1, short_ring = 2 };
+    /* Mambo's cowbell/conga hit strengthens the attack. At the B fill's
+     * three-voice hit the short conga ring is weaker. */
+    const float extra_body = with_full_high_bongo ? 0.0f : 0.025f;
+    const float extra_short = with_full_high_bongo ? -0.90f : 0.55f;
+    const float extra_quadrature = with_full_high_bongo ? -0.40f : 0.28f;
+    const float real = conga->trigger_real[short_ring];
+    const float imag = conga->trigger_imag[short_ring];
+    const float extra_real = extra_short * real + extra_quadrature * imag;
+    add_mode_drive(conga, body, extra_body);
+    conga->resonator[short_ring].real += extra_real;
+    conga->resonator[short_ring].imag += extra_short * imag - extra_quadrature * real;
+    /* Preserve the instantaneous output at the trigger. */
+    conga->resonator[pulse].real -= extra_real + extra_body * conga->trigger_real[body];
+}
+
 static float white_noise(uint32_t *seed)
 {
     uint32_t bits = *seed;
@@ -524,6 +542,9 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
             add_mode_drive(bongo, short_ring, extra_drive);
             bongo->resonator[pulse].real -= extra_drive * bongo->trigger_real[short_ring];
         }
+        if (voices & (1u << TR66_CONGA))
+            add_coincident_conga_drive(&machine->voices[TR66_CONGA],
+                                       (voices & (1u << TR66_HIGH_BONGO)) != 0);
         voices &= ~(1u << TR66_COWBELL);
     }
     if (voices & (1u << TR66_KICK)) {

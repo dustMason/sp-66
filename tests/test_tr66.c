@@ -886,6 +886,33 @@ static void test_mambo_fill(void)
     assert(fill->events[4].tick == 48 && (fill->events[4].voices & MASK(HIGH_BONGO)));
 }
 
+static void test_mambo_conga_attack(void)
+{
+    const Tr66Pattern *mambo = &tr66_patterns[TR66_MAMBO];
+    Tr66 plain, with_bell, fill;
+    tr66_init(&plain, RATE, 31);
+    with_bell = plain;
+    fill = plain;
+    tr66_hit(&plain, MASK(CONGA));
+    tr66_hit(&with_bell, mambo->bars[0].events[6].voices);
+    tr66_hit(&fill, mambo->bars[3].events[4].voices);
+
+    const Tr66Resonator *direct = plain.voices[TR66_CONGA].resonator;
+    const Tr66Resonator *bell_modes = with_bell.voices[TR66_CONGA].resonator;
+    const Tr66Resonator *fill_modes = fill.voices[TR66_CONGA].resonator;
+    const float short_ring = hypotf(direct[2].real, direct[2].imag);
+    assert(hypotf(bell_modes[2].real, bell_modes[2].imag) > 1.5f * short_ring);
+    assert(hypotf(fill_modes[2].real, fill_modes[2].imag) < 0.5f * short_ring);
+    assert(fabsf(bell_modes[0].real - 1.025f * direct[0].real) < 1e-6f);
+    assert(fill_modes[0].real == direct[0].real && fill_modes[0].imag == direct[0].imag);
+
+    const float direct_onset = direct[0].real + direct[1].real + direct[2].real;
+    const float bell_onset = bell_modes[0].real + bell_modes[1].real + bell_modes[2].real;
+    const float fill_onset = fill_modes[0].real + fill_modes[1].real + fill_modes[2].real;
+    assert(fabsf(bell_onset - direct_onset) < 1e-6f);
+    assert(fabsf(fill_onset - direct_onset) < 1e-6f);
+}
+
 static void test_beguine_fill_drives(void)
 {
     const Tr66Bar *fill = &tr66_patterns[TR66_BEGUINE].bars[3];
@@ -1166,6 +1193,7 @@ int main(void)
     test_samba_bell_and_bongo();
     test_samba_bongo_accents();
     test_mambo_fill();
+    test_mambo_conga_attack();
     test_beguine_fill_drives();
     test_slow_rock_fill();
     test_waltz_fill();

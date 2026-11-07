@@ -405,6 +405,17 @@ Goldbaby, the median error in the 7–17 ms ring relative to the 24–44 ms
 body falls from 0.66 to 0.28 dB. Full-loop error changes by at most
 0.014 dB across the four Mambo captures.
 
+Mambo's conga rings about 2.5% louder with the cowbell in Drumbase,
+Reverb, and Goldbaby. The C model also reinforces the short ring on that
+hit and softens it when high bongo joins the B-fill hit. With the pitch,
+long decay, and body level matched to each recording, the 106–320 Hz
+attack waveform error on the ordinary coincident hit falls from 4.20% to
+2.15% in Goldbaby and from 2.77–3.13% to 1.17–1.37% in Reverb. At the
+B-fill hit, it falls from 6.79% to 3.67% in Goldbaby and from 6.22% to
+3.10% in Reverb. The Drumbase attacks clip, so they contribute only to
+the body-level measurement. Full-loop error falls by 0.013 dB in Drumbase
+and rises by 0.007–0.041 dB in the other three captures.
+
 The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
 trough to the first crest from 0.577 to 0.674. In 14 separated loop hits,
