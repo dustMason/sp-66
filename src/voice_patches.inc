@@ -1,8 +1,8 @@
 /* Voice models from calibrate.py, with levels fitted to two TR-66 recordings. */
     [TR66_KICK] = { .tone = {{65.000000f, 39.000000f, -1.540000f, -0.015000f}, {0.0f, 1.22f, 1.510000f, 0.0f}} },
     /* A short pulse and an opposite-polarity recovery sit under the held noise burst. */
-    [TR66_SNARE] = { .tone = {{291.0f, 12.25f, -1.038f, 0.145f}, {0.0f, 1.5f, 0.90f, 0.0f},
-                              {400.0f, 36.0f, -0.050f, -0.112f}, {0.0f, 8.5f, -0.22f, 0.0f}},
+    [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.3f, 1.12938f, 0.0f},
+                              {401.0f, 36.0f, -0.02659f, -0.13559f}, {0.0f, 7.0f, -0.66442f, 0.0f}},
         .band = {{5625.6526f, 2.0f, 0.16959526f}, {9784.1089f, 0.7326f, 0.45332608f}},
         .noise_attack_ms = 1.7f,
         .noise_fast_ms = 110.0f,

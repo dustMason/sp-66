@@ -116,7 +116,7 @@ Treat replacing the factory firmware as one-way. See the
 
 The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
-ends. The loudest sample was 0.735 of digital full scale, with zero clipped samples.
+ends. The loudest sample was 0.570 of digital full scale, with zero clipped samples.
 
 ## USB MIDI clock
 
@@ -421,8 +421,18 @@ Reverb Samba A from 2.94 to 2.82 dB. Drumbase Tango B rises from 3.24 to
 medians remain 2.37 dB for Drumbase and 3.12 dB for Reverb after one
 Arrange cycle.
 
-With the revised snare, those medians fall to 2.30 dB and 3.09 dB.
+With the revised snare noise gate, those medians fall to 2.30 dB and 3.09 dB.
 Reverb Habanera A and Waltz A improve by 0.19 dB and 0.16 dB respectively.
+
+The snare pulse fit adjusts the two attack decays and the 292.5 Hz and
+401 Hz ringing modes against isolated hits in both packs. At the current
+Balance settings, the settled loop medians move from 2.29 to 2.27 dB for
+Drumbase and 3.02 to 2.85 dB for Reverb. Reverb Habanera A moves from 3.50
+to 3.13 dB. On six combined kick and snare hits that passed the clipping
+screen, median normalized waveform agreement improves from 0.889 to 0.917.
+The originals still cancel more energy between 110 and 240 Hz on these
+hits. The isolated Drumbase snare waveform agreement falls slightly,
+and the held-out Drumbase loop median rises by 0.02 dB.
 
 Figures 2 and 13 of the service notes show a shared counter and the 3/4
 shunt. It plays counts 0–5 and 8–13 of each 16-count bar in triple time.

@@ -150,7 +150,7 @@
       "before_unclipped_db": 6.9,
       "pre_ringdown_unclipped_db": 3.71,
       "pre_transient_pass_unclipped_db": 3.3,
-      "fitted_balance_error_db": 2.32,
+      "fitted_balance_error_db": 2.36,
       "pre_noise_pulse_error_db": 3.27,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 3.12,
@@ -271,7 +271,7 @@
       "before_unclipped_db": 17.42,
       "pre_ringdown_unclipped_db": 3.35,
       "pre_transient_pass_unclipped_db": 3.19,
-      "fitted_balance_error_db": 2.0,
+      "fitted_balance_error_db": 2.02,
       "pre_noise_pulse_error_db": 3.68,
       "pre_noise_pulse_fitted_balance_error_db": 3.06,
       "pre_noise_envelope_error_db": 3.48,
@@ -349,7 +349,7 @@
       "before_unclipped_db": 7.07,
       "pre_ringdown_unclipped_db": 5.06,
       "pre_transient_pass_unclipped_db": 4.38,
-      "fitted_balance_error_db": 2.76,
+      "fitted_balance_error_db": 2.82,
       "pre_noise_pulse_error_db": 4.36,
       "pre_noise_pulse_fitted_balance_error_db": 5.11,
       "pre_noise_envelope_error_db": 4.36,
@@ -390,7 +390,7 @@
       "before_unclipped_db": 17.49,
       "pre_ringdown_unclipped_db": 4.62,
       "pre_transient_pass_unclipped_db": 4.37,
-      "fitted_balance_error_db": 2.98,
+      "fitted_balance_error_db": 2.99,
       "pre_noise_pulse_error_db": 3.55,
       "pre_noise_pulse_fitted_balance_error_db": 3.6,
       "pre_noise_envelope_error_db": 3.55,
@@ -429,7 +429,7 @@
       "before_unclipped_db": 5.08,
       "pre_ringdown_unclipped_db": 4.25,
       "pre_transient_pass_unclipped_db": 4.07,
-      "fitted_balance_error_db": 2.61,
+      "fitted_balance_error_db": 2.58,
       "pre_noise_pulse_error_db": 3.66,
       "pre_noise_pulse_fitted_balance_error_db": 2.95,
       "pre_noise_envelope_error_db": 3.67,
@@ -468,7 +468,7 @@
       "before_unclipped_db": 8.33,
       "pre_ringdown_unclipped_db": 3.79,
       "pre_transient_pass_unclipped_db": 3.59,
-      "fitted_balance_error_db": 2.13,
+      "fitted_balance_error_db": 2.09,
       "pre_noise_pulse_error_db": 3.2,
       "pre_noise_pulse_fitted_balance_error_db": 2.55,
       "pre_noise_envelope_error_db": 3.18,
@@ -507,7 +507,7 @@
       "before_unclipped_db": 6.14,
       "pre_ringdown_unclipped_db": 3.45,
       "pre_transient_pass_unclipped_db": 3.42,
-      "fitted_balance_error_db": 2.06,
+      "fitted_balance_error_db": 2.0,
       "pre_noise_pulse_error_db": 3.06,
       "pre_noise_pulse_fitted_balance_error_db": 2.83,
       "pre_noise_envelope_error_db": 2.98,
@@ -546,7 +546,7 @@
       "before_unclipped_db": 6.46,
       "pre_ringdown_unclipped_db": 3.51,
       "pre_transient_pass_unclipped_db": 3.46,
-      "fitted_balance_error_db": 2.01,
+      "fitted_balance_error_db": 1.93,
       "pre_noise_pulse_error_db": 3.15,
       "pre_noise_pulse_fitted_balance_error_db": 2.74,
       "pre_noise_envelope_error_db": 3.14,
@@ -585,7 +585,7 @@
       "before_unclipped_db": 6.38,
       "pre_ringdown_unclipped_db": 3.59,
       "pre_transient_pass_unclipped_db": 3.57,
-      "fitted_balance_error_db": 1.97,
+      "fitted_balance_error_db": 1.92,
       "pre_noise_pulse_error_db": 3.27,
       "pre_noise_pulse_fitted_balance_error_db": 2.77,
       "pre_noise_envelope_error_db": 3.23,
@@ -624,7 +624,7 @@
       "before_unclipped_db": 5.58,
       "pre_ringdown_unclipped_db": 3.54,
       "pre_transient_pass_unclipped_db": 3.47,
-      "fitted_balance_error_db": 2.06,
+      "fitted_balance_error_db": 1.98,
       "pre_noise_pulse_error_db": 3.07,
       "pre_noise_pulse_fitted_balance_error_db": 2.57,
       "pre_noise_envelope_error_db": 3.04,
@@ -663,7 +663,7 @@
       "before_unclipped_db": 5.19,
       "pre_ringdown_unclipped_db": 3.43,
       "pre_transient_pass_unclipped_db": 3.13,
-      "fitted_balance_error_db": 2.23,
+      "fitted_balance_error_db": 2.2,
       "pre_noise_pulse_error_db": 2.91,
       "pre_noise_pulse_fitted_balance_error_db": 2.69,
       "pre_noise_envelope_error_db": 2.9,
@@ -702,7 +702,7 @@
       "before_unclipped_db": 5.72,
       "pre_ringdown_unclipped_db": 3.52,
       "pre_transient_pass_unclipped_db": 3.57,
-      "fitted_balance_error_db": 2.02,
+      "fitted_balance_error_db": 1.97,
       "pre_noise_pulse_error_db": 3.19,
       "pre_noise_pulse_fitted_balance_error_db": 2.81,
       "pre_noise_envelope_error_db": 3.1,
@@ -741,7 +741,7 @@
       "before_unclipped_db": 5.7,
       "pre_ringdown_unclipped_db": 3.74,
       "pre_transient_pass_unclipped_db": 3.74,
-      "fitted_balance_error_db": 2.25,
+      "fitted_balance_error_db": 2.24,
       "pre_noise_pulse_error_db": 3.11,
       "pre_noise_pulse_fitted_balance_error_db": 2.71,
       "pre_noise_envelope_error_db": 3.08,
@@ -897,7 +897,7 @@
       "before_unclipped_db": 5.73,
       "pre_ringdown_unclipped_db": 4.8,
       "pre_transient_pass_unclipped_db": 4.94,
-      "fitted_balance_error_db": 3.37,
+      "fitted_balance_error_db": 3.4,
       "pre_noise_pulse_error_db": 4.64,
       "pre_noise_pulse_fitted_balance_error_db": 3.78,
       "pre_noise_envelope_error_db": 4.64,
@@ -1201,7 +1201,7 @@
       "mix fit": {
         "count": 11,
         "center_db": 2.81,
-        "fitted_balance_db": 2.23,
+        "fitted_balance_db": 2.2,
         "pre_noise_pulse_fitted_balance_db": 2.81,
         "pre_noise_envelope_fitted_balance_db": 2.73,
         "pre_cymbal_sweep_center_db": 3.06,
@@ -1219,8 +1219,8 @@
       },
       "held out": {
         "count": 12,
-        "center_db": 2.88,
-        "fitted_balance_db": 2.48,
+        "center_db": 2.905,
+        "fitted_balance_db": 2.5,
         "pre_noise_pulse_fitted_balance_db": 3.315,
         "pre_noise_envelope_fitted_balance_db": 3.305,
         "pre_cymbal_sweep_center_db": 3.275,
@@ -4374,5 +4374,289 @@
       ]
     },
     "limitation": "The recordings contain no documented knob sweeps. The model represents gain at the dominant frequencies, and it needs a hardware sweep to verify frequency-dependent loading."
+  },
+  "snare_pulse_refinement": {
+    "scope": "Fit the two pulse decays and the two ringing modes jointly to clean isolated hits. Regularize for the shape of the recorded attack. Evaluate coincident hits separately.",
+    "training_grooves": [
+      "MARCH",
+      "PARADE",
+      "SHUFFLE",
+      "Loop9",
+      "Loop11",
+      "Loop13"
+    ],
+    "isolated_holdout_grooves": [
+      "HABANERA",
+      "ROCK4A",
+      "Loop10",
+      "Loop4"
+    ],
+    "minimum_time_since_previous_snare_ms": 140,
+    "held_out_attack_measure": {
+      "window_ms": [
+        8,
+        21
+      ],
+      "bands_hz": [
+        [
+          44,
+          110
+        ],
+        [
+          110,
+          190
+        ],
+        [
+          195,
+          240
+        ],
+        [
+          365,
+          445
+        ]
+      ],
+      "relative_to_hz": [
+        245,
+        345
+      ],
+      "waveform_method": "Peak normalized agreement, either polarity, with up to 3 ms alignment offset. Bandpass 72–700 Hz, first 50 ms.",
+      "isolated_in_this_pack": {
+        "count": 4,
+        "hardware_relative_db": [
+          -14.206,
+          -19.463,
+          -25.352,
+          -12.944
+        ],
+        "before": {
+          "relative_db": [
+            -20.886,
+            -24.103,
+            -16.888,
+            -12.903
+          ],
+          "mean_abs_median_band_error_db": 4.952,
+          "median_normalized_waveform_agreement": 0.955
+        },
+        "revised": {
+          "relative_db": [
+            -18.488,
+            -25.244,
+            -18.096,
+            -10.802
+          ],
+          "mean_abs_median_band_error_db": 4.862,
+          "median_normalized_waveform_agreement": 0.9394
+        }
+      },
+      "kick_plus_snare_across_both_packs": {
+        "count": 6,
+        "hardware_relative_db": [
+          7.307,
+          -26.48,
+          -32.543,
+          -8.265
+        ],
+        "before": {
+          "relative_db": [
+            4.107,
+            -19.611,
+            -17.332,
+            -12.941
+          ],
+          "mean_abs_median_band_error_db": 7.482,
+          "median_normalized_waveform_agreement": 0.8892
+        },
+        "revised": {
+          "relative_db": [
+            5.238,
+            -17.473,
+            -18.178,
+            -10.825
+          ],
+          "mean_abs_median_band_error_db": 6.994,
+          "median_normalized_waveform_agreement": 0.9171
+        }
+      },
+      "cymbal_plus_snare_across_both_packs": {
+        "count": 41,
+        "hardware_relative_db": [
+          -14.883,
+          -20.531,
+          -21.401,
+          -9.28
+        ],
+        "before": {
+          "relative_db": [
+            -20.376,
+            -23.99,
+            -16.873,
+            -12.924
+          ],
+          "mean_abs_median_band_error_db": 4.282,
+          "median_normalized_waveform_agreement": 0.9186
+        },
+        "revised": {
+          "relative_db": [
+            -18.999,
+            -25.384,
+            -18.087,
+            -10.826
+          ],
+          "mean_abs_median_band_error_db": 3.462,
+          "median_normalized_waveform_agreement": 0.9269
+        }
+      }
+    },
+    "loop_measure": "unclipped_error_db",
+    "balance_position": -0.2882,
+    "median_loop_errors_db": {
+      "center": {
+        "all": {
+          "before": 2.84,
+          "revised": 2.84
+        },
+        "mix fit": {
+          "before": 2.81,
+          "revised": 2.81
+        },
+        "held out": {
+          "before": 2.88,
+          "revised": 2.905
+        }
+      },
+      "balanced": {
+        "all": {
+          "before": 2.29,
+          "revised": 2.29
+        },
+        "mix fit": {
+          "before": 2.23,
+          "revised": 2.2
+        },
+        "held out": {
+          "before": 2.48,
+          "revised": 2.5
+        }
+      },
+      "settled": {
+        "all": {
+          "before": 2.29,
+          "revised": 2.27
+        },
+        "mix fit": {
+          "before": 2.23,
+          "revised": 2.21
+        },
+        "held out": {
+          "before": 2.415,
+          "revised": 2.435
+        }
+      }
+    },
+    "settled_loop_errors_db": {
+      "BEGUINE": {
+        "before": 2.73,
+        "revised": 2.73
+      },
+      "BOSSANOVA": {
+        "before": 3.43,
+        "revised": 3.43
+      },
+      "CHA-CHA": {
+        "before": 2.65,
+        "revised": 2.65
+      },
+      "J-WALTZ": {
+        "before": 2.3,
+        "revised": 2.34
+      },
+      "MAMBO": {
+        "before": 2.56,
+        "revised": 2.56
+      },
+      "RHUMBA": {
+        "before": 2.55,
+        "revised": 2.55
+      },
+      "S-ROCK": {
+        "before": 2.02,
+        "revised": 2.04
+      },
+      "SAMBA": {
+        "before": 2.53,
+        "revised": 2.53
+      },
+      "WALTZ": {
+        "before": 2.8,
+        "revised": 2.86
+      },
+      "HABANERA": {
+        "before": 2.98,
+        "revised": 3.0
+      },
+      "MARCH": {
+        "before": 2.7,
+        "revised": 2.67
+      },
+      "PARADE": {
+        "before": 2.16,
+        "revised": 2.12
+      },
+      "ROCK1A": {
+        "before": 2.04,
+        "revised": 1.99
+      },
+      "ROCK2A": {
+        "before": 2.0,
+        "revised": 1.92
+      },
+      "ROCK3A": {
+        "before": 1.98,
+        "revised": 1.93
+      },
+      "ROCK4A": {
+        "before": 2.07,
+        "revised": 1.99
+      },
+      "ROCK5A": {
+        "before": 2.23,
+        "revised": 2.21
+      },
+      "ROCK6": {
+        "before": 2.04,
+        "revised": 2.0
+      },
+      "SHUFFLE": {
+        "before": 2.29,
+        "revised": 2.27
+      },
+      "SWING1": {
+        "before": 2.27,
+        "revised": 2.27
+      },
+      "SWING2": {
+        "before": 1.8,
+        "revised": 1.8
+      },
+      "SWING3": {
+        "before": 1.67,
+        "revised": 1.67
+      },
+      "TANGO": {
+        "before": 3.41,
+        "revised": 3.44
+      }
+    },
+    "host_benchmark": {
+      "selection": "Habanera, Arrange A, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": {
+        "before": 0.76826,
+        "revised": 0.76708
+      }
+    },
+    "limitation": "The 110–240 Hz cancellation in coincident kick and snare hits remains stronger in the recordings. Drumbase isolated attack agreement decreases slightly."
   }
 }

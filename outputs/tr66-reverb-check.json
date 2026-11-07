@@ -64,7 +64,7 @@
       "before_db": 4.42,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.73,
-      "fitted_balance_error_db": 2.92,
+      "fitted_balance_error_db": 2.78,
       "pre_noise_pulse_error_db": 4.33,
       "pre_noise_pulse_fitted_balance_error_db": 3.32,
       "pre_noise_envelope_error_db": 4.29,
@@ -96,7 +96,7 @@
       "before_db": 4.63,
       "fit_role": "mix fit",
       "pre_ringdown_db": 5.45,
-      "fitted_balance_error_db": 2.61,
+      "fitted_balance_error_db": 2.49,
       "pre_noise_pulse_error_db": 4.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.13,
       "pre_noise_envelope_error_db": 4.58,
@@ -128,7 +128,7 @@
       "before_db": 4.0,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.04,
-      "fitted_balance_error_db": 2.83,
+      "fitted_balance_error_db": 2.73,
       "pre_noise_pulse_error_db": 3.95,
       "pre_noise_pulse_fitted_balance_error_db": 3.18,
       "pre_noise_envelope_error_db": 3.92,
@@ -160,7 +160,7 @@
       "before_db": 4.23,
       "fit_role": "held out",
       "pre_ringdown_db": 5.68,
-      "fitted_balance_error_db": 2.93,
+      "fitted_balance_error_db": 2.78,
       "pre_noise_pulse_error_db": 4.14,
       "pre_noise_pulse_fitted_balance_error_db": 3.24,
       "pre_noise_envelope_error_db": 4.11,
@@ -192,7 +192,7 @@
       "before_db": 4.69,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.66,
-      "fitted_balance_error_db": 2.9,
+      "fitted_balance_error_db": 2.79,
       "pre_noise_pulse_error_db": 4.62,
       "pre_noise_pulse_fitted_balance_error_db": 3.19,
       "pre_noise_envelope_error_db": 4.6,
@@ -224,7 +224,7 @@
       "before_db": 4.2,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.27,
-      "fitted_balance_error_db": 2.72,
+      "fitted_balance_error_db": 2.59,
       "pre_noise_pulse_error_db": 4.15,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 4.12,
@@ -256,7 +256,7 @@
       "before_db": 4.39,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.95,
-      "fitted_balance_error_db": 3.08,
+      "fitted_balance_error_db": 2.91,
       "pre_noise_pulse_error_db": 4.24,
       "pre_noise_pulse_fitted_balance_error_db": 3.74,
       "pre_noise_envelope_error_db": 4.25,
@@ -320,7 +320,7 @@
       "before_db": 4.44,
       "fit_role": "new validation",
       "pre_ringdown_db": 6.29,
-      "fitted_balance_error_db": 3.15,
+      "fitted_balance_error_db": 2.97,
       "pre_noise_pulse_error_db": 4.31,
       "pre_noise_pulse_fitted_balance_error_db": 3.86,
       "pre_noise_envelope_error_db": 4.31,
@@ -352,7 +352,7 @@
       "before_db": 4.99,
       "fit_role": "new validation",
       "pre_ringdown_db": 7.85,
-      "fitted_balance_error_db": 3.54,
+      "fitted_balance_error_db": 3.17,
       "pre_noise_pulse_error_db": 4.78,
       "pre_noise_pulse_fitted_balance_error_db": 4.11,
       "pre_noise_envelope_error_db": 4.78,
@@ -384,7 +384,7 @@
       "before_db": 4.49,
       "fit_role": "new validation",
       "pre_ringdown_db": 6.91,
-      "fitted_balance_error_db": 3.35,
+      "fitted_balance_error_db": 3.1,
       "pre_noise_pulse_error_db": 4.34,
       "pre_noise_pulse_fitted_balance_error_db": 3.72,
       "pre_noise_envelope_error_db": 4.34,
@@ -416,7 +416,7 @@
       "before_db": 4.62,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.31,
-      "fitted_balance_error_db": 3.74,
+      "fitted_balance_error_db": 3.66,
       "pre_noise_pulse_error_db": 4.56,
       "pre_noise_pulse_fitted_balance_error_db": 3.91,
       "pre_noise_envelope_error_db": 4.57,
@@ -448,7 +448,7 @@
       "before_db": 4.44,
       "fit_role": "mix fit",
       "pre_ringdown_db": 6.84,
-      "fitted_balance_error_db": 3.26,
+      "fitted_balance_error_db": 2.95,
       "pre_noise_pulse_error_db": 4.29,
       "pre_noise_pulse_fitted_balance_error_db": 3.9,
       "pre_noise_envelope_error_db": 4.29,
@@ -480,7 +480,7 @@
       "before_db": 3.86,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.54,
-      "fitted_balance_error_db": 3.05,
+      "fitted_balance_error_db": 2.89,
       "pre_noise_pulse_error_db": 3.74,
       "pre_noise_pulse_fitted_balance_error_db": 3.54,
       "pre_noise_envelope_error_db": 3.7,
@@ -512,7 +512,7 @@
       "before_db": 4.38,
       "fit_role": "mix fit",
       "pre_ringdown_db": 5.03,
-      "fitted_balance_error_db": 2.52,
+      "fitted_balance_error_db": 2.44,
       "pre_noise_pulse_error_db": 4.35,
       "pre_noise_pulse_fitted_balance_error_db": 3.15,
       "pre_noise_envelope_error_db": 4.3,
@@ -806,7 +806,7 @@
       "before_db": 5.17,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.7,
-      "fitted_balance_error_db": 2.6,
+      "fitted_balance_error_db": 2.52,
       "pre_noise_pulse_error_db": 4.6,
       "pre_noise_pulse_fitted_balance_error_db": 3.29,
       "pre_noise_envelope_error_db": 4.55,
@@ -838,7 +838,7 @@
       "before_db": 4.13,
       "fit_role": "new validation",
       "pre_ringdown_db": 5.96,
-      "fitted_balance_error_db": 2.96,
+      "fitted_balance_error_db": 2.69,
       "pre_noise_pulse_error_db": 4.05,
       "pre_noise_pulse_fitted_balance_error_db": 3.39,
       "pre_noise_envelope_error_db": 4.03,
@@ -990,8 +990,8 @@
     "median_errors_db": {
       "all": {
         "count": 25,
-        "center_db": 4.16,
-        "fitted_balance_db": 3.1,
+        "center_db": 3.94,
+        "fitted_balance_db": 2.95,
         "pre_noise_pulse_fitted_balance_db": 3.74,
         "pre_noise_envelope_fitted_balance_db": 3.74,
         "pre_cymbal_sweep_center_db": 4.41,
@@ -1009,8 +1009,8 @@
       },
       "mix fit": {
         "count": 6,
-        "center_db": 4.135,
-        "fitted_balance_db": 3.18,
+        "center_db": 4.025,
+        "fitted_balance_db": 3.025,
         "pre_noise_pulse_fitted_balance_db": 3.905,
         "pre_noise_envelope_fitted_balance_db": 3.905,
         "pre_cymbal_sweep_center_db": 4.475,
@@ -1047,8 +1047,8 @@
       },
       "new validation": {
         "count": 14,
-        "center_db": 4.065,
-        "fitted_balance_db": 3.065,
+        "center_db": 3.905,
+        "fitted_balance_db": 2.9,
         "pre_noise_pulse_fitted_balance_db": 3.63,
         "pre_noise_envelope_fitted_balance_db": 3.61,
         "pre_cymbal_sweep_center_db": 4.3,
@@ -3998,5 +3998,309 @@
       ]
     },
     "limitation": "The recordings contain no documented knob sweeps. The model represents gain at the dominant frequencies, and it needs a hardware sweep to verify frequency-dependent loading."
+  },
+  "snare_pulse_refinement": {
+    "scope": "Fit the two pulse decays and the two ringing modes jointly to clean isolated hits. Regularize for the shape of the recorded attack. Evaluate coincident hits separately.",
+    "training_grooves": [
+      "MARCH",
+      "PARADE",
+      "SHUFFLE",
+      "Loop9",
+      "Loop11",
+      "Loop13"
+    ],
+    "isolated_holdout_grooves": [
+      "HABANERA",
+      "ROCK4A",
+      "Loop10",
+      "Loop4"
+    ],
+    "minimum_time_since_previous_snare_ms": 140,
+    "held_out_attack_measure": {
+      "window_ms": [
+        8,
+        21
+      ],
+      "bands_hz": [
+        [
+          44,
+          110
+        ],
+        [
+          110,
+          190
+        ],
+        [
+          195,
+          240
+        ],
+        [
+          365,
+          445
+        ]
+      ],
+      "relative_to_hz": [
+        245,
+        345
+      ],
+      "waveform_method": "Peak normalized agreement, either polarity, with up to 3 ms alignment offset. Bandpass 72–700 Hz, first 50 ms.",
+      "isolated_in_this_pack": {
+        "count": 6,
+        "hardware_relative_db": [
+          -15.487,
+          -20.95,
+          -20.912,
+          -9.459
+        ],
+        "before": {
+          "relative_db": [
+            -20.85,
+            -24.096,
+            -16.885,
+            -12.929
+          ],
+          "mean_abs_median_band_error_db": 4.002,
+          "median_normalized_waveform_agreement": 0.9089
+        },
+        "revised": {
+          "relative_db": [
+            -18.437,
+            -25.264,
+            -18.093,
+            -10.831
+          ],
+          "mean_abs_median_band_error_db": 2.864,
+          "median_normalized_waveform_agreement": 0.9182
+        }
+      },
+      "kick_plus_snare_across_both_packs": {
+        "count": 6,
+        "hardware_relative_db": [
+          7.307,
+          -26.48,
+          -32.543,
+          -8.265
+        ],
+        "before": {
+          "relative_db": [
+            4.107,
+            -19.611,
+            -17.332,
+            -12.941
+          ],
+          "mean_abs_median_band_error_db": 7.482,
+          "median_normalized_waveform_agreement": 0.8892
+        },
+        "revised": {
+          "relative_db": [
+            5.238,
+            -17.473,
+            -18.178,
+            -10.825
+          ],
+          "mean_abs_median_band_error_db": 6.994,
+          "median_normalized_waveform_agreement": 0.9171
+        }
+      },
+      "cymbal_plus_snare_across_both_packs": {
+        "count": 41,
+        "hardware_relative_db": [
+          -14.883,
+          -20.531,
+          -21.401,
+          -9.28
+        ],
+        "before": {
+          "relative_db": [
+            -20.376,
+            -23.99,
+            -16.873,
+            -12.924
+          ],
+          "mean_abs_median_band_error_db": 4.282,
+          "median_normalized_waveform_agreement": 0.9186
+        },
+        "revised": {
+          "relative_db": [
+            -18.999,
+            -25.384,
+            -18.087,
+            -10.826
+          ],
+          "mean_abs_median_band_error_db": 3.462,
+          "median_normalized_waveform_agreement": 0.9269
+        }
+      }
+    },
+    "loop_measure": "spectral_error_db",
+    "balance_position": 0.4551,
+    "median_loop_errors_db": {
+      "center": {
+        "all": {
+          "before": 4.16,
+          "revised": 3.94
+        },
+        "mix fit": {
+          "before": 4.135,
+          "revised": 4.025
+        },
+        "held out": {
+          "before": 4.19,
+          "revised": 4.19
+        },
+        "new validation": {
+          "before": 4.065,
+          "revised": 3.905
+        }
+      },
+      "balanced": {
+        "all": {
+          "before": 3.1,
+          "revised": 2.95
+        },
+        "mix fit": {
+          "before": 3.18,
+          "revised": 3.025
+        },
+        "held out": {
+          "before": 3.11,
+          "revised": 3.11
+        },
+        "new validation": {
+          "before": 3.065,
+          "revised": 2.9
+        }
+      },
+      "settled": {
+        "all": {
+          "before": 3.02,
+          "revised": 2.85
+        },
+        "mix fit": {
+          "before": 3.135,
+          "revised": 2.975
+        },
+        "held out": {
+          "before": 2.87,
+          "revised": 2.72
+        },
+        "new validation": {
+          "before": 2.995,
+          "revised": 2.825
+        }
+      }
+    },
+    "settled_loop_errors_db": {
+      "Loop1.wav": {
+        "before": 2.9,
+        "revised": 2.76
+      },
+      "Loop2.wav": {
+        "before": 2.57,
+        "revised": 2.44
+      },
+      "Loop3.wav": {
+        "before": 2.78,
+        "revised": 2.68
+      },
+      "Loop4.wav": {
+        "before": 2.87,
+        "revised": 2.72
+      },
+      "Loop5.wav": {
+        "before": 2.86,
+        "revised": 2.75
+      },
+      "Loop6.wav": {
+        "before": 2.68,
+        "revised": 2.56
+      },
+      "Loop7.wav": {
+        "before": 3.02,
+        "revised": 2.85
+      },
+      "Loop8.wav": {
+        "before": 3.5,
+        "revised": 3.5
+      },
+      "Loop9.wav": {
+        "before": 3.1,
+        "revised": 2.92
+      },
+      "Loop10.wav": {
+        "before": 3.5,
+        "revised": 3.13
+      },
+      "Loop11.wav": {
+        "before": 3.34,
+        "revised": 3.1
+      },
+      "Loop12.wav": {
+        "before": 3.42,
+        "revised": 3.34
+      },
+      "Loop13.wav": {
+        "before": 3.24,
+        "revised": 2.92
+      },
+      "Loop14.wav": {
+        "before": 2.97,
+        "revised": 2.8
+      },
+      "Loop15.wav": {
+        "before": 2.49,
+        "revised": 2.42
+      },
+      "Loop16.wav": {
+        "before": 2.31,
+        "revised": 2.31
+      },
+      "Loop17.wav": {
+        "before": 2.63,
+        "revised": 2.63
+      },
+      "Loop18.wav": {
+        "before": 3.03,
+        "revised": 3.03
+      },
+      "Loop19.wav": {
+        "before": 3.1,
+        "revised": 3.1
+      },
+      "Loop20.wav": {
+        "before": 3.86,
+        "revised": 3.86
+      },
+      "Loop21.wav": {
+        "before": 3.91,
+        "revised": 3.91
+      },
+      "Loop22.wav": {
+        "before": 3.93,
+        "revised": 3.93
+      },
+      "Loop23.wav": {
+        "before": 3.42,
+        "revised": 3.42
+      },
+      "Loop24.wav": {
+        "before": 2.57,
+        "revised": 2.49
+      },
+      "Loop25.wav": {
+        "before": 2.89,
+        "revised": 2.61
+      }
+    },
+    "host_benchmark": {
+      "selection": "Habanera, Arrange A, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": {
+        "before": 0.76826,
+        "revised": 0.76708
+      }
+    },
+    "limitation": "The 110–240 Hz cancellation in coincident kick and snare hits remains stronger in the recordings. Drumbase isolated attack agreement decreases slightly."
   }
 }
