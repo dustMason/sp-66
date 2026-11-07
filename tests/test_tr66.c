@@ -118,12 +118,34 @@ static void test_shared_and_reduced_triggers(void)
 
     tr66_init(&first, RATE, 31);
     second = first;
-    tr66_hit(&first, MASK(HIGH_BONGO) | TR66_REDUCED_HIGH_BONGO | TR66_QUIET_HIGH_BONGO);
-    tr66_hit(&second, TR66_REDUCED_HIGH_BONGO | TR66_QUIET_HIGH_BONGO);
+    const Tr66TriggerMask light = TR66_LIGHT_HIGH_BONGO | TR66_QUIET_HIGH_BONGO;
+    const Tr66TriggerMask reduced = TR66_REDUCED_HIGH_BONGO | light;
+    const Tr66TriggerMask accented = TR66_ACCENT_HIGH_BONGO | reduced;
+    tr66_hit(&first, MASK(HIGH_BONGO) | accented);
+    tr66_hit(&second, MASK(HIGH_BONGO));
     tr66_render(&first, a, BLOCK);
     tr66_render(&second, b, BLOCK);
-    for (unsigned i = 0; i < BLOCK; ++i)
-        assert(fabsf(b[i] - 0.53f * a[i]) < 1e-6f);
+    assert(memcmp(a, b, sizeof(a)) == 0);
+
+    const struct {
+        Tr66TriggerMask mask;
+        float drive[2];
+    } bongo_routes[] = {
+        {light, {0.45f, 0.62f}}, {reduced, {0.53f, 0.53f}}, {accented, {0.66f, 0.25f}},
+    };
+    tr66_init(&first, RATE, 31);
+    tr66_hit(&first, MASK(HIGH_BONGO));
+    for (unsigned i = 0; i < sizeof(bongo_routes) / sizeof(bongo_routes[0]); ++i) {
+        tr66_init(&second, RATE, 31);
+        tr66_hit(&second, bongo_routes[i].mask);
+        for (unsigned mode = 0; mode < 2; ++mode) {
+            const Tr66Resonator full = first.voices[TR66_HIGH_BONGO].resonator[mode];
+            const Tr66Resonator hit = second.voices[TR66_HIGH_BONGO].resonator[mode];
+            const float drive = bongo_routes[i].drive[mode];
+            assert(fabsf(hit.real - drive * full.real) < 1e-6f);
+            assert(fabsf(hit.imag - drive * full.imag) < 1e-6f);
+        }
+    }
 
     tr66_init(&first, RATE, 31);
     second = first;
@@ -503,10 +525,21 @@ static void test_rhumba_bongo_route(void)
 
     const Tr66TriggerMask full = MASK(KICK) | MASK(LOW_BONGO);
     unsigned combined_hits = 0, quiet_hits = 0;
+    unsigned light_bongos = 0, accented_bongos = 0;
     for (unsigned i = 0; i < trace.count; ++i) {
         const Tr66TriggerMask hit = trace.mask[i];
         assert(((hit & full) == full) == ((hit & TR66_RHUMBA_BONGO) != 0));
         assert(((hit & TR66_QUIET_KICK) != 0) == ((hit & TR66_RHUMBA_FILL_BONGO) != 0));
+        if (hit & TR66_LIGHT_HIGH_BONGO) {
+            const unsigned tick = (trace.frame[i] / 1000) % 96;
+            assert(tick == 12 || tick == 60);
+            ++light_bongos;
+        }
+        if (hit & TR66_ACCENT_HIGH_BONGO) {
+            const unsigned tick = (trace.frame[i] / 1000) % 96;
+            assert(tick == 84 || trace.frame[i] == 114000);
+            ++accented_bongos;
+        }
         if (hit & TR66_RHUMBA_BONGO)
             ++combined_hits;
         if (hit & TR66_QUIET_KICK) {
@@ -516,6 +549,7 @@ static void test_rhumba_bongo_route(void)
         }
     }
     assert(combined_hits == 6 && quiet_hits == 1);
+    assert(light_bongos == 4 && accented_bongos == 3);
 
     Tr66 direct, fill;
     tr66_init(&direct, RATE, 5);

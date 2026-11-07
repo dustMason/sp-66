@@ -12,11 +12,11 @@ from calibrate import FILES, NAMES, RATE, ROOT, read, rms
 
 # Match Tr66TriggerMask in src/tr66.h. The two Rhumba flags change
 # the drive of a low bongo already present in the trace.
-TRIGGER_MASK_LIMIT = 1 << 18
+TRIGGER_MASK_LIMIT = 1 << 20
 ALTERNATE_HITS = {
     "kick": ((1 << 10, 0.50), (1 << 14, 0.43), (1 << 15, 0.21)),
     "conga": ((1 << 11, 0.66),),
-    "high-bongo": ((1 << 12, 0.53), (1 << 13, 0.20)),
+    "high-bongo": ((1 << 19, 0.66), (1 << 12, 0.53), (1 << 18, 0.45), (1 << 13, 0.20)),
 }
 
 

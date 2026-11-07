@@ -25,6 +25,8 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define U  (1u << TR66_HIGH_BONGO)
 #define SOFT_U  TR66_REDUCED_HIGH_BONGO
 #define QUIET_U  TR66_QUIET_HIGH_BONGO
+#define LIGHT_U  TR66_LIGHT_HIGH_BONGO
+#define ACCENT_U  TR66_ACCENT_HIGH_BONGO
 #define L  (1u << TR66_LOW_BONGO)
 #define RHUMBA_KL  (K | L | TR66_RHUMBA_BONGO)
 #define BAR(events) {events, sizeof(events) / sizeof((events)[0])}
@@ -107,21 +109,22 @@ static const Tr66Event beguine_b2[] = {
     {48, M | V | L | C}, {60, M | QUIET_U}, {72, M | L | C}, {84, M | QUIET_U | L | C},
 };
 
+/* Both recordings have three high-bongo ring levels in the same steps. */
 static const Tr66Event rhumba_a1[] = {
-    {0, M | V | RHUMBA_KL}, {12, M | SOFT_U}, {24, M | SOFT_U}, {36, M | V | RHUMBA_KL},
-    {48, M | SOFT_U}, {60, M | SOFT_U},
-    {72, M | V | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
+    {0, M | V | RHUMBA_KL}, {12, M | LIGHT_U}, {24, M | SOFT_U}, {36, M | V | RHUMBA_KL},
+    {48, M | SOFT_U}, {60, M | LIGHT_U},
+    {72, M | V | SOFT_C | RHUMBA_KL}, {84, M | ACCENT_U | SOFT_C},
 };
 static const Tr66Event rhumba_a2[] = {
-    {0, M | RHUMBA_KL}, {12, M | SOFT_U}, {24, M | V | SOFT_U}, {36, M | RHUMBA_KL},
-    {48, M | V | SOFT_U}, {60, M | SOFT_U},
-    {72, M | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
+    {0, M | RHUMBA_KL}, {12, M | LIGHT_U}, {24, M | V | SOFT_U}, {36, M | RHUMBA_KL},
+    {48, M | V | SOFT_U}, {60, M | LIGHT_U},
+    {72, M | SOFT_C | RHUMBA_KL}, {84, M | ACCENT_U | SOFT_C},
 };
 static const Tr66Event rhumba_b2[] = {
-    {0, M | RHUMBA_KL}, {12, M | SOFT_U | SOFT_C}, {18, M | SOFT_U}, {24, M | V | SOFT_U},
+    {0, M | RHUMBA_KL}, {12, M | LIGHT_U | SOFT_C}, {18, M | ACCENT_U}, {24, M | V | SOFT_U},
     {36, M | RHUMBA_KL}, {48, M | V | SOFT_U | SOFT_C},
-    {60, M | SOFT_U | L | QUIET_K | TR66_RHUMBA_FILL_BONGO},
-    {72, M | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
+    {60, M | LIGHT_U | L | QUIET_K | TR66_RHUMBA_FILL_BONGO},
+    {72, M | SOFT_C | RHUMBA_KL}, {84, M | ACCENT_U | SOFT_C},
 };
 
 static const Tr66Event rock1_a[] = {

@@ -318,6 +318,14 @@ In the 530–680 Hz band from 4 to 14 ms, the quiet hit moves from 14.0 to
 15.6 and 15.1 dB below the full hit. From 32 to 60 ms, both recordings
 and the revised render are about 14 dB below.
 
+Drumbase and Reverb Rhumba have the same three high-bongo ring levels.
+The C model drives the short and long 600 Hz modes independently at the
+corresponding steps.
+Across 40 clean hits, RMS error in relative ring levels from 24 to 75 ms
+falls from 1.23 to 0.34 dB. Error in the 7–19 ms attack relative to the
+ring falls from 1.08 to 0.51 dB. The Goldbaby Mambo and Rumba REX files
+yielded noise-level estimates for the high-bongo ring.
+
 The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
 trough to the first crest from 0.577 to 0.674. In 14 separated loop hits,

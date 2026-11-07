@@ -323,6 +323,14 @@ static void trigger_tones(Tr66VoiceState *voice, const Tr66ToneDrive drive[TR66_
     voice->frames_left = voice->gate.tail_frames;
 }
 
+static void trigger_high_bongo(Tr66VoiceState *bongo, float ring, float attack)
+{
+    voice_trigger(bongo, ring);
+    /* The alternate triggers drive the short 600 Hz mode separately. */
+    if (bongo->tone_count > 1)
+        add_mode_drive(bongo, 1, attack - ring);
+}
+
 void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
 {
     const bool bare_kick_snare = voices == ((1u << TR66_KICK) | (1u << TR66_SNARE));
@@ -386,17 +394,15 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     if ((voices & TR66_REDUCED_CONGA) && !(voices & (1u << TR66_CONGA)))
         voice_trigger(&machine->voices[TR66_CONGA], 0.66f);
     if (!(voices & (1u << TR66_HIGH_BONGO))) {
-        if (voices & TR66_REDUCED_HIGH_BONGO)
-            voice_trigger(&machine->voices[TR66_HIGH_BONGO], 0.53f);
-        else if (voices & TR66_QUIET_HIGH_BONGO) {
-            Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
-            const float ring_drive = 0.204f;
-            const float attack_drive = 0.11f;
-            voice_trigger(bongo, ring_drive);
-            /* Beguine's quiet path excites the short 600 Hz mode less. */
-            if (bongo->tone_count > 1)
-                add_mode_drive(bongo, 1, attack_drive - ring_drive);
-        }
+        Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
+        if (voices & TR66_ACCENT_HIGH_BONGO)
+            trigger_high_bongo(bongo, 0.66f, 0.25f);
+        else if (voices & TR66_REDUCED_HIGH_BONGO)
+            voice_trigger(bongo, 0.53f);
+        else if (voices & TR66_LIGHT_HIGH_BONGO)
+            trigger_high_bongo(bongo, 0.45f, 0.62f);
+        else if (voices & TR66_QUIET_HIGH_BONGO)
+            trigger_high_bongo(bongo, 0.204f, 0.11f);
     }
 }
 
