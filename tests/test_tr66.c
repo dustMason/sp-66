@@ -144,6 +144,37 @@ static void test_shared_and_reduced_triggers(void)
     assert(memcmp(a, b, sizeof(a)) == 0);
 }
 
+static void test_quiet_high_bongo(void)
+{
+    Tr66 full, quiet;
+    tr66_init(&full, RATE, 31);
+    quiet = full;
+    tr66_hit(&full, MASK(HIGH_BONGO));
+    tr66_hit(&quiet, TR66_QUIET_HIGH_BONGO);
+
+    /* Beguine's quiet route lowers the attack relative to the ring. */
+    const unsigned ms = RATE / 1000;
+    float full_attack = 0.0f, quiet_attack = 0.0f;
+    float full_ring = 0.0f, quiet_ring = 0.0f;
+    for (unsigned frame = 0; frame < 60 * ms; ++frame) {
+        float a, b;
+        tr66_render(&full, &a, 1);
+        tr66_render(&quiet, &b, 1);
+        if (frame >= 4 * ms && frame < 14 * ms) {
+            full_attack += a * a;
+            quiet_attack += b * b;
+        }
+        if (frame >= 32 * ms) {
+            full_ring += a * a;
+            quiet_ring += b * b;
+        }
+    }
+    const float attack_ratio = sqrtf(quiet_attack / full_attack);
+    const float ring_ratio = sqrtf(quiet_ring / full_ring);
+    assert(attack_ratio > 0.16f && attack_ratio < 0.18f);
+    assert(ring_ratio > 0.195f && ring_ratio < 0.21f);
+}
+
 static void test_kick_snare_pair(void)
 {
     Tr66 kick, snare, noise, pair;
@@ -769,6 +800,7 @@ int main(void)
     test_all_voices();
     test_snare_noise_envelope();
     test_shared_and_reduced_triggers();
+    test_quiet_high_bongo();
     test_kick_snare_pair();
     test_snare_drives_low_bongo();
     test_cymbal_extends_hat();

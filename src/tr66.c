@@ -87,12 +87,16 @@ static void voice_init(Tr66VoiceState *state, const Tr66Patch *patch, float rate
     state->gate.fast_release_frame = state->gate.tail_frames - (unsigned)ceilf(0.001f * hold_ms * rate);
 }
 
+static void add_mode_drive(Tr66VoiceState *state, unsigned mode, float strength)
+{
+    state->resonator[mode].real += strength * state->trigger_real[mode];
+    state->resonator[mode].imag += strength * state->trigger_imag[mode];
+}
+
 static void voice_trigger(Tr66VoiceState *state, float strength)
 {
-    for (unsigned i = 0; i < state->tone_count; ++i) {
-        state->resonator[i].real += strength * state->trigger_real[i];
-        state->resonator[i].imag += strength * state->trigger_imag[i];
-    }
+    for (unsigned i = 0; i < state->tone_count; ++i)
+        add_mode_drive(state, i, strength);
     state->noise = 1.0f - state->fast_mix;
     state->fast_noise = state->fast_mix;
     state->attack = state->gate.attack_coeff != 0.0f ? 1.0f : 0.0f;
@@ -268,8 +272,15 @@ void tr66_hit(Tr66 *machine, uint16_t voices)
     if (!(voices & (1u << TR66_HIGH_BONGO))) {
         if (voices & TR66_REDUCED_HIGH_BONGO)
             voice_trigger(&machine->voices[TR66_HIGH_BONGO], 0.53f);
-        else if (voices & TR66_QUIET_HIGH_BONGO)
-            voice_trigger(&machine->voices[TR66_HIGH_BONGO], 0.20f);
+        else if (voices & TR66_QUIET_HIGH_BONGO) {
+            Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
+            const float ring_drive = 0.204f;
+            const float attack_drive = 0.11f;
+            voice_trigger(bongo, ring_drive);
+            /* Beguine's quiet path excites the short 600 Hz mode less. */
+            if (bongo->tone_count > 1)
+                add_mode_drive(bongo, 1, attack_drive - ring_drive);
+        }
     }
 }
 

@@ -53,6 +53,10 @@ shared triple-time counter. See the
 work/build/tr66-render work/waltz-mambo.wav waltz+mambo off a 120 4
 ```
 
+For Roland's Beguine example on the same page, set Fader 3 to Beguine,
+turn the variation off with T4, and set Arrange to B. Beguine supplies
+the extra bongo hits in every second bar.
+
 ## Build and reproduce
 
 Host tests and renders use a C11 compiler. The capture and comparison scripts
@@ -268,6 +272,13 @@ the envelope error fell from 0.39 to 0.11 dB. With one Arrange cycle of
 warm-up at the fitted Balance, Reverb Mambo B fell from 3.42 to 3.37 dB.
 Drumbase Samba rose from 2.53 to 2.56 dB. The two loop packs still differ
 in how long the bongos ring.
+
+Beguine's quiet high-bongo trigger has its own resistor path in Figure 13.
+The C model drives the short 600 Hz mode more softly relative to the ring.
+In the 530–680 Hz band from 4 to 14 ms, the quiet hit moves from 14.0 to
+15.5 dB below the full hit. The Drumbase and Reverb measurements are
+15.6 and 15.1 dB below the full hit. From 32 to 60 ms, both recordings
+and the revised render are about 14 dB below.
 
 The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
