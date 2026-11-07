@@ -315,8 +315,12 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         cymbal->sweep.bend_decay = shared_hit
             ? machine->coincident_cymbal_sweep_decay : machine->cymbal_sweep_decay;
     }
-    if (voices & TR66_RHUMBA_BONGO) {
-        trigger_rhumba_bongo(&machine->voices[TR66_LOW_BONGO]);
+    if (voices & (TR66_RHUMBA_BONGO | TR66_RHUMBA_FILL_BONGO)) {
+        Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];
+        if (voices & TR66_RHUMBA_BONGO)
+            trigger_rhumba_bongo(bongo);
+        else
+            voice_trigger(bongo, -1.0f);
         voices &= ~(1u << TR66_LOW_BONGO);
     }
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)

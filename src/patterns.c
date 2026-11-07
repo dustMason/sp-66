@@ -119,7 +119,8 @@ static const Tr66Event rhumba_a2[] = {
 };
 static const Tr66Event rhumba_b2[] = {
     {0, M | RHUMBA_KL}, {12, M | SOFT_U | SOFT_C}, {18, M | SOFT_U}, {24, M | V | SOFT_U},
-    {36, M | RHUMBA_KL}, {48, M | V | SOFT_U | SOFT_C}, {60, M | SOFT_U | L | QUIET_K},
+    {36, M | RHUMBA_KL}, {48, M | V | SOFT_U | SOFT_C},
+    {60, M | SOFT_U | L | QUIET_K | TR66_RHUMBA_FILL_BONGO},
     {72, M | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
 };
 

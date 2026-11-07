@@ -281,6 +281,13 @@ After one Arrange cycle at fitted Balance, the loop error falls from
 3.67 to 3.53 dB for Reverb Beguine B and from 2.82 to 2.77 dB for the
 Drumbase Beguine.
 
+The quiet kick and low-bongo hit in the Rhumba B fill drives the bongo
+with the opposite polarity from Beguine's direct hit. With the recordings
+aligned by the kick, the 347–469 Hz waveform correlation from 10 to 54 ms
+after the hit rises from −0.93 to 0.92 on Reverb and from −0.91 to
+0.92 on Drumbase. The full-loop spectral error rises by 0.01 dB and 0.02 dB
+respectively.
+
 The snare attack has a short pulse followed by a slower, opposite-polarity
 recovery. Cowbell hits from Mambo and Cha-Cha measure about 893 Hz in Reverb
 and 897 Hz on the CD. The model uses 895 Hz.

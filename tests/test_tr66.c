@@ -455,6 +455,7 @@ static void test_rhumba_bongo_route(void)
     for (unsigned i = 0; i < trace.count; ++i) {
         const Tr66TriggerMask hit = trace.mask[i];
         assert(((hit & full) == full) == ((hit & TR66_RHUMBA_BONGO) != 0));
+        assert(((hit & TR66_QUIET_KICK) != 0) == ((hit & TR66_RHUMBA_FILL_BONGO) != 0));
         if (hit & TR66_RHUMBA_BONGO)
             ++combined_hits;
         if (hit & TR66_QUIET_KICK) {
@@ -464,6 +465,18 @@ static void test_rhumba_bongo_route(void)
         }
     }
     assert(combined_hits == 6 && quiet_hits == 1);
+
+    Tr66 direct, fill;
+    tr66_init(&direct, RATE, 5);
+    fill = direct;
+    tr66_hit(&direct, MASK(LOW_BONGO));
+    tr66_hit(&fill, MASK(LOW_BONGO) | TR66_RHUMBA_FILL_BONGO);
+    float inverted[BLOCK];
+    tr66_render(&direct, buffer, BLOCK);
+    tr66_render(&fill, inverted, BLOCK);
+    assert(buffer[0] != 0.0f);
+    for (unsigned i = 0; i < BLOCK; ++i)
+        assert(inverted[i] == -buffer[i]);
 }
 
 static void test_rim_cowbell_shunt(void)
