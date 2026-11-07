@@ -20,14 +20,14 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-    .case { stroke: #3b3c38; stroke-width: 1.45; }
-    .key { stroke: #666760; stroke-width: 1; }
-    .socket { fill: #292a27; stroke: #696a63; stroke-width: .95; }
+    .case { stroke: #303231; stroke-width: 1.5; }
+    .key { stroke: #676b67; stroke-width: 1; }
+    .socket { fill: #242625; stroke: #606460; stroke-width: .9; }
     .detail, .highlight, .leader, .guide { fill: none; }
-    .detail { stroke: #74766d; stroke-width: 1; }
-    .highlight { stroke: #f7f6f0; stroke-width: 1; }
-    .leader { stroke: #85837b; stroke-width: 1.15; }
-    .guide { stroke: #ad4938; stroke-width: 1.2; }
+    .detail { stroke: #777b76; stroke-width: .85; }
+    .highlight { stroke: #f8f8f5; stroke-width: .85; }
+    .leader { stroke: #787a71; stroke-width: 1.1; }
+    .guide { stroke: #aa3b2b; stroke-width: 1.15; }
     .label, .note { font-family: "Instrument Sans", "Helvetica Neue", Arial, sans-serif; }
     .label { fill: #252623; font-size: 24px; font-weight: 700; }
     .note { fill: #504f48; font-size: 20px; }
@@ -45,39 +45,41 @@
     <clipPath id="shell-clip"><use xlink:href="#shell"/></clipPath>
 
     <g id="fader">
-      <rect class="socket" x="-6.3" y="146" width="12.6" height="73" rx="6.3"/>
-      <path class="detail" d="M3 153v59"/>
-      <path class="highlight" d="M-7.5 155v57q0 8.2 7.3 8.2"/>
+      <rect class="socket" x="-6.5" y="146" width="13" height="73" rx="6.5"/>
+      <path d="M0 151v63" stroke="#777b75" stroke-width="2"/>
+      <path d="M.8 151v63" stroke="#b0b3ac" stroke-width=".6"/>
+      <path class="highlight" d="M-7.6 154v58a7.6 7.6 0 0 0 7.6 7.6"/>
     </g>
     <g id="fader-cap">
-      <path class="key" fill="#a5a69f" d="M-6.5 0v6.7q0 4.4 6.5 4.4t6.5-4.4V0Z"/>
-      <ellipse class="key" rx="6.5" ry="4.7" fill="#e5e5e0"/>
-      <path class="highlight" d="M-3.5-1.5q3.5-2.2 7 0"/>
+      <!-- The cap sits above the rail, along the enclosure's depth axis. -->
+      <path class="key" fill="#9ea29e" d="M-6.6 0l-3.5 7.4
+            c-1.2 2.7 1.5 5 5.2 5.2c4 .2 7.3-1.6 8-3.9L6.6 0Z"/>
+      <ellipse class="key" rx="6.6" ry="4.9" fill="#e8eae6"/>
+      <path class="highlight" d="M-4.2-1.3q3.6-2.5 7.7-.5"/>
     </g>
     <g id="track-key">
-      <rect class="key" x="-8.5" y="285.8" width="17" height="35.8" rx="2.2" fill="#a1a29b"/>
-      <rect class="key" x="-8.5" y="282.8" width="17" height="35.8" rx="2.2" fill="#e5e5e0"/>
-      <path class="highlight" d="M-6.5 315.3v-28.7q0-1.8 1.8-1.8H6"/>
+      <rect class="key" x="-9.8" y="285.8" width="17" height="35.8" rx="2.2" fill="#9fa49f"/>
+      <rect class="key" x="-8.5" y="282.8" width="17" height="35.8" rx="2.2" fill="#eef0eb"/>
+      <path class="highlight" d="M-6.6 315.3v-28.7q0-1.8 1.8-1.8H6"/>
     </g>
-    <circle id="led-off" r="2.5" fill="#41413a"/>
-    <circle id="led-on" r="2.75" fill="#fff6dc" stroke="#5f5e55" stroke-width=".9"/>
-    <circle id="leader-dot" r="2.4" fill="#76746b"/>
+    <circle id="led-off" r="2.35" fill="#383a36"/>
+    <circle id="led-on" r="2.65" fill="#fffcf1" stroke="#6d6d63" stroke-width=".9"/>
+    <circle id="leader-dot" r="2.25" fill="#666b62"/>
   </defs>
 
-  <rect x=".5" y=".5" width="943" height="709" rx="12" fill="#faf9f5" stroke="#d9d6cd"/>
+  <rect x=".5" y=".5" width="943" height="709" rx="12" fill="#faf9f6" stroke="#deddd6"/>
 
   <!-- Edge controls checked against learn.adafruit.com/hacking-the-teenage-engineering-sp-1/pinout. -->
   <text class="label" x="30" y="48">Volume</text>
   <text class="note" x="30" y="74">Master output</text>
-  <path class="leader" d="M139 40h160"/>
-  <use xlink:href="#leader-dot" x="299" y="40"/>
+  <path class="leader" d="M139 40h171"/>
   <g transform="translate(310 24)">
-    <rect width="260" height="32" rx="6" fill="#d6d7d1"/>
-    <path d="M217 0h37a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6h-37Z" fill="#eee6d6"/>
+    <rect width="260" height="32" rx="6" fill="#d8dad5"/>
+    <path d="M217 0h37a6 6 0 0 1 6 6v20a6 6 0 0 1-6 6h-37Z" fill="#ebe5d8"/>
     <path class="detail" d="M217 0v32"/>
     <path class="highlight" d="M6 2.5h208m6 0h34"/>
-    <circle class="key" cx="39.5" cy="16" r="9.5" fill="#c1c2bb"/>
-    <circle class="key" cx="85.5" cy="16" r="9.5" fill="#c1c2bb"/>
+    <circle class="key" cx="39.5" cy="16" r="9.5" fill="#c6cac4"/>
+    <circle class="key" cx="85.5" cy="16" r="9.5" fill="#c6cac4"/>
     <path class="highlight" d="M33 16a6.5 6.5 0 0 1 6.5-6.5M79 16a6.5 6.5 0 0 1 6.5-6.5"/>
     <rect class="case" width="260" height="32" rx="6" fill="none"/>
   </g>
@@ -86,10 +88,10 @@
 
   <!-- Front, left and bottom of the same enclosure -->
   <g transform="matrix(1.02 -.29 .55 .94 231 157)">
-    <use xlink:href="#shell" fill="#b7b8b1"/>
+    <use xlink:href="#shell" fill="#c6c9c3"/>
     <g clip-path="url(#shell-clip)">
-      <path fill="#a8aaa3" d="M8 356h252v38H-16l8-9Z"/>
-      <path fill="#cfc4af" d="M217 356h43v38h-59v-1Z"/>
+      <path fill="#b8bcb6" d="M8 356h252v38H-16l8-9Z"/>
+      <path fill="#d5cdbd" d="M217 356h43v38h-59v-1Z"/>
       <path class="detail" d="M217 364l-16 29M8 364l-16 29"/>
       <path class="highlight" d="M-13 42v339m11 8h200m6 0h31"/>
     </g>
@@ -97,39 +99,39 @@
 
     <g transform="matrix(-.551724 1 0 1 0 0)">
       <rect class="socket" x="4" y="47" width="19" height="41" rx="4.2"/>
-      <rect class="key" x="7" y="49" width="18" height="37" rx="3.5" fill="#e6e0d2"/>
+      <rect class="key" x="7" y="49" width="18" height="37" rx="3.5" fill="#eee8db"/>
       <path class="highlight" d="M9.5 83V54q0-2.5 2.5-2.5h9"/>
-      <path class="detail" d="M10.5 67.5h11"/>
-      <circle cx="15" cy="113" r="1.6" fill="#41413a"/>
+      <circle cx="15" cy="113" r="1.6" fill="#383a36"/>
     </g>
 
     <!-- The two TRS sockets have identical outer dimensions. -->
     <g transform="matrix(1 0 -.551724 1 0 364)">
       <rect class="socket" x="44" y="9" width="41" height="10" rx="4.8"/>
-      <path class="detail" d="M49 14h31"/>
+      <rect x="50" y="13.2" width="29" height="1.6" rx=".8" fill="#959992"/>
       <ellipse class="socket" cx="162" cy="14" rx="8.5" ry="5.6"/>
       <ellipse class="socket" cx="209" cy="14" rx="8.5" ry="5.6"/>
-      <path class="detail" d="M157 16.6q5 2.7 10 0m37 0q5 2.7 10 0"/>
+      <path class="detail" d="M46.5 17.6q1.5 1.8 4.5 1.8h27
+                             M157 16.6q5 2.7 10 0m37 0q5 2.7 10 0"/>
     </g>
 
-    <use xlink:href="#deck" fill="#e1e1dd"/>
-    <path d="M217 0h43v364h-43Z" clip-path="url(#deck-clip)" fill="#eee6d6"/>
+    <use xlink:href="#deck" fill="#e4e6e1"/>
+    <path d="M217 0h43v364h-43Z" clip-path="url(#deck-clip)" fill="#ebe5d8"/>
     <path class="detail" d="M217 0v364"/>
     <path class="highlight" d="M3 354V9q0-6 6-6h204m7 0h31q6 0 6 6v345M9 361h204m7 0h31"/>
     <use xlink:href="#deck" class="case" fill="none"/>
 
-    <path d="M238.5 57l6.5 11h-13Z" fill="#bd3c2e"/>
-    <circle cx="238.5" cy="292" r="2.05" fill="#41413a"/>
-    <circle cx="238.5" cy="302" r="2.05" fill="#41413a"/>
+    <path d="M238.5 56.5l6.5 11.5h-13Z" fill="#c63e2e"/>
+    <circle cx="238.5" cy="292" r="2.05" fill="#383a36"/>
+    <circle cx="238.5" cy="302" r="2.05" fill="#383a36"/>
 
     <use xlink:href="#fader" x="31"/>
     <use xlink:href="#fader" x="83"/>
     <use xlink:href="#fader" x="135"/>
     <use xlink:href="#fader" x="187"/>
-    <use xlink:href="#fader-cap" x="31" y="162"/>
-    <use xlink:href="#fader-cap" x="83" y="179"/>
-    <use xlink:href="#fader-cap" x="135" y="164"/>
-    <use xlink:href="#fader-cap" x="187" y="192"/>
+    <use xlink:href="#fader-cap" x="34.5" y="160"/>
+    <use xlink:href="#fader-cap" x="86.5" y="176"/>
+    <use xlink:href="#fader-cap" x="138.5" y="163"/>
+    <use xlink:href="#fader-cap" x="190.5" y="188"/>
 
     <use xlink:href="#led-on" x="31" y="250"/>
     <use xlink:href="#led-off" x="83" y="250"/>
@@ -156,10 +158,10 @@
     <text x="611" y="426">T4</text>
   </g>
 
-  <path class="leader" d="M215 168h17l30 69h6"/>
-  <use xlink:href="#leader-dot" x="268" y="237"/>
+  <path class="leader" d="M215 167h11v70h40"/>
+  <use xlink:href="#leader-dot" x="266" y="237"/>
   <text class="label" x="30" y="175">Arrange rocker</text>
-  <text class="note" x="30" y="202">↑ to B · ↓ to A</text>
+  <text class="note" x="30" y="202">Up to B · Down to A</text>
   <text class="note" x="30" y="228">A ↔ Auto ↔ B</text>
   <text class="note" x="30" y="254">Auto plays A then B</text>
 
@@ -185,10 +187,10 @@
   <!-- Right edge -->
   <text class="caption" x="717" y="105">RIGHT EDGE</text>
   <g transform="translate(717 120) scale(1 .94)">
-    <rect class="case" width="30" height="364" rx="6" fill="#eee6d6"/>
+    <rect class="case" width="30" height="364" rx="6" fill="#ebe5d8"/>
     <path class="highlight" d="M3 356V7q0-4 4-4h16"/>
-    <rect class="key" x="6" y="33" width="18" height="64" rx="2.4" fill="#e3ddcf"/>
-    <rect class="key" x="6" y="265" width="18" height="64" rx="2.4" fill="#e3ddcf"/>
+    <rect class="key" x="6" y="33" width="18" height="64" rx="2.4" fill="#e1dbce"/>
+    <rect class="key" x="6" y="265" width="18" height="64" rx="2.4" fill="#e1dbce"/>
     <path class="highlight" d="M8.5 94V37q0-1.5 1.5-1.5h12m-13.5 291v-57q0-1.5 1.5-1.5h12"/>
     <use xlink:href="#led-on" x="15" y="140"/>
     <use xlink:href="#led-off" x="15" y="155"/>
