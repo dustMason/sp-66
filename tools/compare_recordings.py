@@ -58,8 +58,7 @@ GROOVES = [
     Groove("HABANERA", "off", "habanera", "a", 1),
     Groove("MARCH", "off", "march", "a", 1),
     Groove("PARADE", "off", "parade", "b", 2),
-    # The CD names this A, but its kick on 2-and matches Roland's B chart.
-    Groove("ROCK1A", "off", "rock-1", "b", 1),
+    Groove("ROCK1A", "off", "rock-1", "a", 1),
     Groove("ROCK2A", "off", "rock-2", "a", 1),
     Groove("ROCK3A", "off", "rock-3", "a", 1),
     Groove("ROCK4A", "off", "rock-4", "a", 2),
@@ -176,7 +175,8 @@ def stem_balance_gains(position):
     return function(position)
 
 
-def match_capture(path, directory, groove, comparison, baseline, fit_gains):
+def match_capture(path, directory, groove, comparison, baseline, fit_gains,
+                  baseline_slow_rock_scale=0.75):
     samples, rate = sf.read(path)
     start, end = sampler_loop(path)
     nominal = 60 * rate * groove.beats * groove.bars / (end + 1 - start)
@@ -217,8 +217,8 @@ def match_capture(path, directory, groove, comparison, baseline, fit_gains):
         "unclipped_error_db": spectral_error(target[clean], modeled[clean]),
     }
     if baseline:
-        old, _, _ = render(baseline, directory, groove,
-                           tempo * (0.75 if groove.rhythm == "slow-rock" else 1.0))
+        old_tempo = tempo * (baseline_slow_rock_scale if groove.rhythm == "slow-rock" else 1.0)
+        old, _, _ = render(baseline, directory, groove, old_tempo)
         length = min(len(model), len(old) - skip)
         if interior.stop <= length:
             old_power = band_power(old[skip:skip + length][interior])
@@ -304,6 +304,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--references", type=Path, default=REFS)
     parser.add_argument("--baseline", type=Path, help="Optional previous C renderer with decimal BPM")
+    parser.add_argument("--baseline-slow-rock-scale", type=float, default=0.75,
+                        help="Pass 1 when the baseline already uses quarter-note tempo")
     parser.add_argument("--report", type=Path, required=True)
     parser.add_argument("--audition", type=Path)
     parser.add_argument("--fit-gains", type=Path, help="Write candidate C patches with new mix gains")
@@ -314,7 +316,8 @@ def main():
         for groove in GROOVES:
             path, = args.references.rglob(f"66 {groove.file}.wav")
             metrics, target, powers = match_capture(
-                path, directory, groove, comparisons, args.baseline, args.fit_gains)
+                path, directory, groove, comparisons, args.baseline, args.fit_gains,
+                args.baseline_slow_rock_scale)
             report[groove.file] = metrics
             print(groove.file, metrics, flush=True)
             if powers is not None:

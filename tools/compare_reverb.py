@@ -18,13 +18,13 @@ REFS = ROOT / "work/references/complete/reverb"
 HOLDOUT = {4, 16, 17, 19, 20}
 MIX_FIT = {2, 13, 15, 18, 21, 22}
 AUDITION = ("Loop24.wav", "Loop18.wav", "Loop7.wav", "Loop20.wav", "Loop21.wav", "Loop23.wav")
-# Loop1 is two repeats of Rock 1 B's first bar, without the second-bar fill.
+# Loop1 is two repeats of the bar shared by Rock 1 A and the first bar of B.
 CAPTURE_REPEATS = {"Loop1": 2}
 # File names in the pack are sequential. The labels come from matching
 # voice onsets and fills on a circular beat grid. A or B describes the
 # captured phrase, even if that phrase also occurs in Auto.
 SELECTIONS = (
-    (1, Groove("Loop1", "off", "rock-1", "b", 1), 6),
+    (1, Groove("Loop1", "off", "rock-1", "a", 1), 6),
     (2, Groove("Loop2", "off", "rock-2", "a", 2), 0),
     (3, Groove("Loop3", "off", "rock-3", "a", 1), 0),
     (4, Groove("Loop4", "off", "rock-4", "a", 2), 0),

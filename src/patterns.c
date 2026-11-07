@@ -124,10 +124,6 @@ static const Tr66Event rhumba_b2[] = {
 };
 
 static const Tr66Event rock1_a[] = {
-    {0, K | Y}, {12, Y}, {24, S | H | Y}, {36, S | Y},
-    {48, K | Y}, {60, Y}, {72, S | H | Y}, {84, Y},
-};
-static const Tr66Event rock1_b1[] = {
     {0, K | Y}, {12, Y}, {24, S | H | Y}, {36, K | S | Y},
     {48, K | Y}, {60, Y}, {72, S | H | Y}, {84, Y},
 };
@@ -307,7 +303,7 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
         .ticks = 96,
     },
     [TR66_ROCK_1] = {
-        .bars = {BAR(rock1_a), BAR(rock1_a), BAR(rock1_b1), BAR(rock1_b2)},
+        .bars = {BAR(rock1_a), BAR(rock1_a), BAR(rock1_a), BAR(rock1_b2)},
         .ticks = 96,
     },
     [TR66_ROCK_2] = {

@@ -576,6 +576,17 @@ static void test_samba_conga(void)
     }
 }
 
+static void test_rock1_offbeat(void)
+{
+    const Tr66Pattern *rock = &tr66_patterns[TR66_ROCK_1];
+    for (unsigned bar = 0; bar < TR66_SCORE_BARS; ++bar) {
+        assert(rock->bars[bar].count > 3);
+        const Tr66Event offbeat = rock->bars[bar].events[3];
+        assert(offbeat.tick == 36);
+        assert(offbeat.voices == (MASK(KICK) | MASK(SNARE) | MASK(CYMBAL)));
+    }
+}
+
 static void test_slow_rock_fill(void)
 {
     const Tr66Bar *fill = &tr66_patterns[TR66_SLOW_ROCK].bars[3];
@@ -814,6 +825,7 @@ int main(void)
     test_balance();
     test_layered_headroom();
     test_score_table();
+    test_rock1_offbeat();
     test_samba_conga();
     test_slow_rock_fill();
     test_waltz_fill();

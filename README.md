@@ -104,6 +104,10 @@ Extract that pack to `work/references/complete/reverb` and run the comparison.
 python3 tools/compare_reverb.py --report work/reverb.json --audition work/reverb-ab.wav
 ```
 
+Both comparisons accept `--baseline` with an earlier renderer. Add
+`--baseline-slow-rock-scale 1` when that renderer already takes Slow Rock
+tempo in quarter notes per minute.
+
 The host renderer defaults to centered Balance. Set `TR66_RENDER_BALANCE`
 between −1 (bass) and +1 (treble) to compare at a fixed position.
 
@@ -394,6 +398,13 @@ pickups and two B fills. The Foxtrot pickups follow the service charts
 where they differ from the printed player scores. The Drumbase Jazz Waltz
 Auto recording confirms a snare pickup on the first downbeat of the four-bar
 cycle.
+
+All 18 Rock-bank A, B and Auto traces match Figures 15 and 17 of the
+service notes. Rock 1 plays kick, snare and cymbal together on the
+offbeat after beat 2 in every bar. The two Rock 1 recordings have
+an offbeat kick within 0.8 dB of beat 3. Against the Arrange A render,
+settled spectral error falls from 8.28 to 2.03 dB in Drumbase and from
+7.12 to 2.67 dB in Reverb.
 
 In Waltz Auto, the last bar adds three quieter kicks at ticks 24, 42 and 48
 on the 24-tick beat grid. The Drumbase recording's kick ring measures about
