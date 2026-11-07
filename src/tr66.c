@@ -251,6 +251,10 @@ static void trigger_hat(Tr66 *machine)
     hat->gate.fast_release_frame = hat->gate.tail_frames;
     voice_trigger(hat, 1.0f);
     hat->noise *= drive;
+    /* Cymbal bias deepens and slows the hat's return to the resting resonance. */
+    const float sweep_ms = patch->noise_sweep_ms * (1.0f + 0.4f * bias);
+    hat->sweep.bend_decay = decay(machine->sample_rate, sweep_ms);
+    hat->sweep.bend *= 1.0f + 0.02f * bias;
 }
 
 static void trigger_rhumba_bongo(Tr66VoiceState *bongo)

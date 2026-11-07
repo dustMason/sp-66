@@ -353,7 +353,7 @@ cymbal is under 300 ms old. Across 90 hats after a cymbal, median timing
 error falls from 18.2 to 5.5 ms. The fit estimates the effect of shared
 trigger circuitry from the audio.
 
-The hi-hat and maracas noise filter now has a broader resonance at
+An earlier hi-hat and maracas fit used a broader resonance at
 8.06 kHz. Across 130 usable hits, the RMS error of the relative spectrum
 over 12 bands falls from 1.82 to 1.42 dB in Drumbase and from 4.13 to
 2.33 dB in Reverb. After one Arrange cycle at the fitted Balance,
@@ -383,6 +383,17 @@ preceding 650 ms. On the eight direct Goldbaby hats, the body is roughly
 5.4 to 4.0 dB below and still closes sooner than those takes.
 At fixed Balance after one Arrange cycle, the Drumbase median moves from
 2.32 to 2.27 dB and the Reverb median from 2.64 to 2.63 dB.
+
+The hi-hat resonance starts near 7.81 kHz and narrows as it approaches
+8.35 kHz. A recent cymbal slows the glide. Across 223 scored hi-hat hits,
+the RMS error of the seven-band spectrum's change relative to 9–17 ms
+falls from 1.25 to 0.90 dB. This measures the 3–46 ms part of the hit,
+grouped by time since the previous cymbal. With no scored cymbal in the
+preceding 1.1 seconds, the 7.1–9.6 kHz spectral centroid rises 178 Hz in
+Drumbase and 126 Hz in Reverb between 9–17 and 36–46 ms. The C renders rise
+117 and 163 Hz.
+At the same fixed Balance after one Arrange cycle, the Drumbase median is
+2.27 dB and the Reverb median falls from 2.63 to 2.62 dB.
 
 Both packs shift cymbal energy upward as the hit decays. Across 113 cymbal
 hits, the mean spectrum peaks near 7.8–7.9 kHz at 5–25 ms and 8.1–8.3 kHz
