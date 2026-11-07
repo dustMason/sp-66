@@ -6,7 +6,9 @@ target_include_directories(app PRIVATE ../src)
 target_sources(app PRIVATE
     src/main.c
     src/codecs.c
+    src/usb_midi.c
     ../src/controls.c
+    ../src/midi.c
     ../src/patterns.c
     ../src/sequencer.c
     ../src/tr66.c

@@ -118,6 +118,20 @@ The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
 ends. The loudest sample was 0.735 of digital full scale, with zero clipped samples.
 
+## USB MIDI clock
+
+Connect the SP-1 over USB-C to a DAW or a USB MIDI host. Enable MIDI Clock
+and transport send to the **SP-66** MIDI port, then start the host. SP-66
+follows the host at 24 pulses per quarter note. MIDI Start plays the first
+step on the next clock, Stop holds the current place, and Continue resumes
+on the next clock. A Song Position Pointer sent while stopped seeks to that
+sixteenth-note position in the selected rhythm on Continue.
+
+For a host that sends only clock, press Play while clocks are arriving to
+start at the next pulse. Play can also stop the rhythm locally. The tempo
+fader sets the tempo for standalone play. If the clock is silent for half a
+second, the rhythm stops and Play can start standalone again.
+
 ## Hardware status and diagnostics
 
 The first hardware test of commit `8c8792a` completed the bootloader's write
@@ -142,14 +156,16 @@ were recorded. Sound, buttons, faders and Function shutdown were checked on
 the device. Shutdown reached stage 9 and extinguished the LEDs with USB
 connected. This is a short functional test, not an extended stability run.
 
-The firmware now enumerates as **SP-66 diagnostics**. Open its serial port at
-115200 baud with DTR asserted to receive one status line per second. It
-starts independently of the host connection. Each line reports the startup
-stage, stage at failure (`failed`), status code, control-scan attempts, last
-ADC result, audio blocks queued for I2S, peak render cycles, over-budget
-blocks, I2S write errors, Function state, the nRF reset flags observed on
-app entry, scan phase, six raw ADC values, and cumulative ADC timeouts. `saadc` holds
-ENABLE, END, STARTED and RESULT.AMOUNT captured at the most recent timeout.
+The development firmware presents MIDI and a diagnostic serial interface
+under **SP-66**. Open its serial port at 115200 baud with DTR asserted for
+one status line per second. The device starts independently of the host
+connection. Each line reports startup and failure stages, status code,
+control-scan attempts, last ADC result, audio blocks queued for I2S, peak
+render cycles, over-budget blocks, I2S write errors, Function state, and
+the nRF reset flags observed on app entry. The `usb` value reports the
+composite device initialization result. The line also shows the scan
+phase, six raw ADC values, and cumulative ADC timeouts. The `saadc` field
+holds ENABLE, END, STARTED and RESULT.AMOUNT from the most recent timeout.
 Observed stalls had `saadc=1,0,0,0`. Sending lowercase `r` on the diagnostic
 console restarts the device. A fatal error records its reason and program
 counter in uninitialized RAM before resetting. Retention of that record

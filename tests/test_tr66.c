@@ -485,6 +485,106 @@ static void test_controls(void)
     assert(tr66_controls_scan(&controls, &seq, input));
 }
 
+static void test_usb_midi_packets(void)
+{
+    const uint8_t realtime[] = {
+        TR66_MIDI_CLOCK, TR66_MIDI_START, TR66_MIDI_CONTINUE, TR66_MIDI_STOP,
+    };
+    for (unsigned i = 0; i < sizeof(realtime); ++i)
+        assert(tr66_midi_usb_event((uint8_t[]){0x0f, realtime[i], 0, 0}).status == realtime[i]);
+    Tr66MidiEvent seek = tr66_midi_usb_event((uint8_t[]){0x03, 0xf2, 3, 4});
+    assert(seek.status == TR66_MIDI_POSITION && seek.position == 515);
+    assert(tr66_midi_usb_event((uint8_t[]){0x03, 0xf2, 0x80, 0}).status == TR66_MIDI_NONE);
+    assert(tr66_midi_usb_event((uint8_t[]){0x1f, 0xf8, 0, 0}).status == TR66_MIDI_NONE);
+    assert(tr66_midi_usb_event((uint8_t[]){0x0f, 0xfe, 0, 0}).status == TR66_MIDI_NONE);
+    assert(tr66_midi_usb_event((uint8_t[]){0x09, 0x90, 36, 127}).status == TR66_MIDI_NONE);
+}
+
+static void test_midi_pattern_clock(void)
+{
+    enum { FRAMES_PER_PULSE = RATE / 2 / TR66_PPQN };
+    Tr66Sequencer internal, external;
+    tr66_seq_init(&internal, RATE, 43);
+    assert(tr66_seq_select(&internal, (Tr66Selection){TR66_WALTZ, TR66_ROCK_6, TR66_ARRANGE_B}));
+    external = internal;
+    tr66_seq_start(&internal);
+    tr66_seq_midi_event(&external, (Tr66MidiEvent){.status = TR66_MIDI_START}, 100);
+    assert(!external.running && external.midi_armed);
+    /* At exactly 120 BPM, feed one clock every 1000 samples. The voice
+     * triggers, 3/4 counter skips, fill and new selection must match. */
+    float a[FRAMES_PER_PULSE], b[FRAMES_PER_PULSE];
+    for (unsigned pulse = 0; pulse < 400; ++pulse) {
+        if (pulse == 220) {
+            tr66_seq_fill(&internal);
+            tr66_seq_fill(&external);
+            Tr66Selection next = {TR66_MAMBO, TR66_HABANERA, TR66_ARRANGE_AUTO};
+            assert(tr66_seq_select(&internal, next));
+            assert(tr66_seq_select(&external, next));
+        }
+        tr66_seq_midi_event(&external, (Tr66MidiEvent){.status = TR66_MIDI_CLOCK},
+                           103 + pulse * 21 + (pulse % 5 == 0 ? 2 : 0));
+        /* Fader scans can still update the standalone tempo while following. */
+        tr66_seq_tempo(&external, 200000);
+        tr66_seq_render(&internal, a, FRAMES_PER_PULSE);
+        tr66_seq_render(&external, b, FRAMES_PER_PULSE);
+        assert(external.tick == internal.tick && external.bar == internal.bar);
+        assert(memcmp(a, b, sizeof(a)) == 0);
+    }
+}
+
+static void test_midi_transport(void)
+{
+    const Tr66MidiEvent clock = {.status = TR66_MIDI_CLOCK};
+    const Tr66MidiEvent start = {.status = TR66_MIDI_START};
+    const Tr66MidiEvent resume = {.status = TR66_MIDI_CONTINUE};
+    const Tr66MidiEvent stop = {.status = TR66_MIDI_STOP};
+    const Tr66MidiEvent seek = {.status = TR66_MIDI_POSITION, .position = 17};
+    Tr66Sequencer seq;
+    tr66_seq_init(&seq, RATE, 43);
+    assert(tr66_seq_select(&seq, (Tr66Selection){TR66_WALTZ, TR66_OFF, TR66_ARRANGE_AUTO}));
+    tr66_seq_midi_event(&seq, clock, 10);
+    assert(!seq.running && !seq.midi_armed);
+    tr66_seq_toggle_play(&seq);
+    assert(seq.midi_armed && !seq.running);
+    tr66_seq_toggle_play(&seq);
+    tr66_seq_midi_event(&seq, clock, 30);
+    assert(!seq.running);
+
+    tr66_seq_midi_event(&seq, seek, 31);
+    tr66_seq_midi_event(&seq, resume, 32);
+    assert(seq.midi_armed && !seq.running);
+    tr66_seq_midi_event(&seq, clock, 50);
+    assert(seq.running && seq.bar == 1 && seq.tick == 30);
+    tr66_seq_midi_event(&seq, seek, 51);
+    tr66_seq_midi_event(&seq, clock, 70);
+    assert(seq.bar == 1 && seq.tick == 31);
+
+    tr66_seq_midi_event(&seq, stop, 71);
+    tr66_seq_midi_poll(&seq, 10000);
+    assert(!seq.running && seq.tick == 31);
+    tr66_seq_midi_event(&seq, resume, 10001);
+    tr66_seq_midi_event(&seq, clock, 10020);
+    assert(seq.running && seq.bar == 1 && seq.tick == 32);
+
+    tr66_seq_midi_event(&seq, start, UINT32_MAX - 15);
+    tr66_seq_midi_event(&seq, clock, UINT32_MAX - 9);
+    assert(seq.running && seq.bar == 0 && seq.tick == 0);
+    tr66_seq_midi_poll(&seq, 489);
+    assert(seq.running);
+    tr66_seq_midi_poll(&seq, 490);
+    assert(!seq.running && !seq.midi_clock_seen);
+    tr66_seq_toggle_play(&seq);
+    assert(seq.running && !seq.midi_follow);
+
+    tr66_seq_midi_event(&seq, start, 500);
+    tr66_seq_midi_event(&seq, clock, 520);
+    tr66_seq_midi_disconnect(&seq);
+    assert(!seq.running && !seq.midi_follow && !seq.midi_clock_seen);
+    tr66_seq_toggle_play(&seq);
+    tr66_seq_midi_disconnect(&seq);
+    assert(seq.running);
+}
+
 int main(void)
 {
     test_all_voices();
@@ -503,5 +603,8 @@ int main(void)
     test_slow_rock_fill();
     test_waltz_fill();
     test_controls();
-    puts("TR-66 voice, score, timing, Arrange, block and control tests passed.");
+    test_usb_midi_packets();
+    test_midi_pattern_clock();
+    test_midi_transport();
+    puts("TR-66 voice, score, timing, Arrange, block, control and MIDI tests passed.");
 }

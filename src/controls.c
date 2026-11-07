@@ -89,12 +89,8 @@ bool tr66_controls_scan(Tr66Controls *controls, Tr66Sequencer *seq, Tr66Input in
     if (!variation_ready)
         playable.variation = TR66_OFF;
     tr66_seq_select(seq, playable);
-    if (track == TR66_KEY_PLAY) {
-        if (seq->running)
-            tr66_seq_stop(seq);
-        else
-            tr66_seq_start(seq);
-    }
+    if (track == TR66_KEY_PLAY)
+        tr66_seq_toggle_play(seq);
 
     if (input.fn)
         return ++controls->fn_scans >= POWER_SCANS;

@@ -53,7 +53,7 @@ static void play_tick(Tr66Sequencer *seq)
     }
 }
 
-static void begin_bar(Tr66Sequencer *seq)
+static void prepare_bar(Tr66Sequencer *seq)
 {
     seq->tick = 0;
     seq->event_index[0] = 0;
@@ -66,6 +66,14 @@ static void begin_bar(Tr66Sequencer *seq)
     seq->bar_ticks = rhythm_ticks != 0 ? rhythm_ticks : variation_ticks;
     if (seq->bar_ticks == 0)
         seq->bar_ticks = 4 * TR66_PPQN;
+}
+
+static void advance_tick(Tr66Sequencer *seq)
+{
+    if (++seq->tick == seq->bar_ticks) {
+        seq->bar = (seq->bar + 1) % TR66_SCORE_BARS;
+        prepare_bar(seq);
+    }
     play_tick(seq);
 }
 
@@ -100,20 +108,122 @@ void tr66_seq_tempo(Tr66Sequencer *seq, unsigned bpm_milli)
     seq->increment = bpm_milli * TR66_PPQN;
 }
 
-void tr66_seq_start(Tr66Sequencer *seq)
+static void start_at(Tr66Sequencer *seq, unsigned tick)
 {
     seq->running = true;
     seq->phase = 0;
     seq->frame = 0;
-    seq->bar = 0;
     seq->fill_pending = false;
-    begin_bar(seq);
+    prepare_bar(seq);
+    seq->bar = (tick / seq->bar_ticks) % TR66_SCORE_BARS;
+    seq->tick = tick % seq->bar_ticks;
+    play_tick(seq);
+}
+
+void tr66_seq_start(Tr66Sequencer *seq)
+{
+    seq->midi_follow = false;
+    seq->midi_armed = false;
+    seq->midi_seek = false;
+    start_at(seq, 0);
 }
 
 void tr66_seq_stop(Tr66Sequencer *seq)
 {
     seq->running = false;
     seq->fill_pending = false;
+    seq->midi_armed = false;
+}
+
+static void midi_arm(Tr66Sequencer *seq)
+{
+    tr66_seq_stop(seq);
+    seq->midi_follow = true;
+    seq->midi_armed = true;
+}
+
+void tr66_seq_toggle_play(Tr66Sequencer *seq)
+{
+    if (seq->running || seq->midi_armed) {
+        tr66_seq_stop(seq);
+    } else if (seq->midi_clock_seen) {
+        /* Allow a clock source that sends pulses without transport. */
+        seq->midi_seek = true;
+        seq->midi_position = 0;
+        midi_arm(seq);
+    } else {
+        tr66_seq_start(seq);
+    }
+}
+
+void tr66_seq_midi_disconnect(Tr66Sequencer *seq)
+{
+    if (seq->midi_follow)
+        tr66_seq_stop(seq);
+    seq->midi_follow = false;
+    seq->midi_clock_seen = false;
+    seq->midi_seek = false;
+}
+
+void tr66_seq_midi_poll(Tr66Sequencer *seq, uint32_t now_ms)
+{
+    /* Unsigned subtraction keeps this valid across uptime wraparound. */
+    if ((seq->midi_armed || seq->midi_clock_seen) &&
+        now_ms - seq->midi_activity_ms >= 500) {
+        seq->midi_clock_seen = false;
+        if (seq->midi_follow)
+            tr66_seq_stop(seq);
+    }
+}
+
+void tr66_seq_midi_event(Tr66Sequencer *seq, Tr66MidiEvent event, uint32_t now_ms)
+{
+    _Static_assert(TR66_PPQN == 24, "The score uses one tick per MIDI clock");
+    tr66_seq_midi_poll(seq, now_ms);
+    switch (event.status) {
+    case TR66_MIDI_CLOCK:
+        seq->midi_activity_ms = now_ms;
+        seq->midi_clock_seen = true;
+        if (!seq->midi_follow || (!seq->running && !seq->midi_armed))
+            break;
+        seq->running = true;
+        seq->midi_armed = false;
+        if (seq->midi_seek) {
+            seq->midi_seek = false;
+            start_at(seq, seq->midi_position * (TR66_PPQN / 4));
+        } else {
+            advance_tick(seq);
+        }
+        break;
+    case TR66_MIDI_START:
+        seq->midi_seek = true;
+        seq->midi_position = 0;
+        seq->midi_activity_ms = now_ms;
+        midi_arm(seq);
+        break;
+    case TR66_MIDI_CONTINUE:
+        if (seq->midi_follow && (seq->running || seq->midi_armed))
+            break;
+        if (!seq->midi_follow && !seq->midi_seek) {
+            seq->midi_seek = true;
+            seq->midi_position = 0;
+        }
+        seq->midi_activity_ms = now_ms;
+        midi_arm(seq);
+        break;
+    case TR66_MIDI_STOP:
+        if (seq->midi_follow) {
+            tr66_seq_stop(seq);
+            seq->midi_activity_ms = now_ms;
+        }
+        break;
+    case TR66_MIDI_POSITION:
+        if (!seq->midi_follow || (!seq->running && !seq->midi_armed)) {
+            seq->midi_position = event.position;
+            seq->midi_seek = true;
+        }
+        break;
+    }
 }
 
 void tr66_seq_fill(Tr66Sequencer *seq)
@@ -128,15 +238,15 @@ void tr66_seq_render(Tr66Sequencer *seq, float *output, size_t frames)
         tr66_render(&seq->synth, output, frames);
         return;
     }
+    if (seq->midi_follow) {
+        tr66_render(&seq->synth, output, frames);
+        seq->frame += frames;
+        return;
+    }
     while (frames > 0) {
         if (seq->phase >= seq->period) {
             seq->phase -= seq->period;
-            if (++seq->tick == seq->bar_ticks) {
-                seq->bar = (seq->bar + 1) % TR66_SCORE_BARS;
-                begin_bar(seq);
-            } else {
-                play_tick(seq);
-            }
+            advance_tick(seq);
         }
         const uint64_t distance = seq->period - seq->phase;
         size_t span = (size_t)((distance + seq->increment - 1) / seq->increment);

@@ -1,5 +1,6 @@
 #include "codecs.h"
 #include "controls.h"
+#include "usb_midi.h"
 
 #include <soc.h>
 #include <nrfx_saadc.h>
@@ -63,11 +64,12 @@ volatile struct {
     int status;
     unsigned stage, failed_stage, scans, blocks, scan_phase;
     int adc_status;
+    int usb_status;
     uint32_t reset_reason;
     unsigned raw[6];
     unsigned adc_timeouts;
     uint32_t adc_enable, adc_end, adc_started, adc_amount;
-} tr66_sp1_diagnostics;
+} tr66_sp1_diagnostics = {.usb_status = -EINPROGRESS};
 
 static __noinit uint32_t fault_key, fault_reason, fault_pc;
 
@@ -107,6 +109,13 @@ static void power_monitor(void *a, void *b, void *c)
 }
 K_THREAD_DEFINE(power_thread, 1024, power_monitor, NULL, NULL, NULL, -1, 0, 0);
 
+static void start_usb(void *a, void *b, void *c)
+{
+    ARG_UNUSED(a); ARG_UNUSED(b); ARG_UNUSED(c);
+    tr66_sp1_diagnostics.usb_status = sp1_usb_start();
+}
+K_THREAD_DEFINE(usb_init_thread, 1536, start_usb, NULL, NULL, NULL, 1, 0, 0);
+
 static void diagnostic_console(void *a, void *b, void *c)
 {
     ARG_UNUSED(a); ARG_UNUSED(b); ARG_UNUSED(c);
@@ -119,7 +128,7 @@ static void diagnostic_console(void *a, void *b, void *c)
             if (uart_poll_in(console, &command) == 0 && command == 'r')
                 sys_reboot(SYS_REBOOT_COLD);
             printk("SP66 t=%u stage=%u failed=%u status=%d scans=%u adc=%d blocks=%u "
-                   "peak=%u over=%u errors=%u fn=%d reset=%x fault=%u pc=%x "
+                   "peak=%u over=%u errors=%u fn=%d reset=%x fault=%u pc=%x usb=%d "
                    "phase=%u raw=%u,%u,%u,%u,%u,%u timeouts=%u "
                    "saadc=%u,%u,%u,%u\n",
                    k_uptime_get_32(), tr66_sp1_diagnostics.stage,
@@ -132,6 +141,7 @@ static void diagnostic_console(void *a, void *b, void *c)
                    tr66_sp1_diagnostics.reset_reason,
                    fault_key == 0x6631fa17 ? fault_reason : 0,
                    fault_key == 0x6631fa17 ? fault_pc : 0,
+                   tr66_sp1_diagnostics.usb_status,
                    tr66_sp1_diagnostics.scan_phase,
                    tr66_sp1_diagnostics.raw[0], tr66_sp1_diagnostics.raw[1],
                    tr66_sp1_diagnostics.raw[2], tr66_sp1_diagnostics.raw[3],
@@ -403,6 +413,8 @@ static int run_audio(void)
         }
 
         bool shutdown = false;
+        /* Expire a disconnected clock before Play chooses its clock source. */
+        sp1_midi_poll(&seq, controls.initialized);
         Tr66Input input;
         while (k_msgq_get(&input_scans, &input, K_NO_WAIT) == 0)
             shutdown |= tr66_controls_scan(&controls, &seq, input);

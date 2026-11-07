@@ -11,4 +11,9 @@ https://github.com/timknapen/SP-1-dev
 The underlying SP-1 Zephyr board originated in sp1-midi.
 https://github.com/ericlewis/sp1-midi
 
+The USB MIDI 1.0 function follows the feldd descriptors and the Wakes
+composite MIDI/serial configuration for the SP-1.
+https://github.com/bnjreece/feldd-sp1-firmware
+https://github.com/Worldwave/Wakes
+
 The corresponding MIT notices are in licenses/.

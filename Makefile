@@ -1,8 +1,8 @@
 CC ?= cc
 CFLAGS ?= -O3 -g -std=c11 -Wall -Wextra -Wpedantic -Werror
 BUILD := work/build
-CORE := src/tr66.c src/patterns.c src/sequencer.c src/controls.c
-HEADERS := src/tr66.h src/patterns.h src/sequencer.h src/controls.h src/voice_patches.inc
+CORE := src/tr66.c src/patterns.c src/sequencer.c src/controls.c src/midi.c
+HEADERS := src/tr66.h src/patterns.h src/sequencer.h src/controls.h src/midi.h src/voice_patches.inc
 
 .PHONY: all test
 all: $(BUILD)/libtr66.so
