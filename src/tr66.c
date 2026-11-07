@@ -335,11 +335,12 @@ static void trigger_cymbal(Tr66 *machine, bool shared_hit, Tr66TriggerMask route
 typedef struct { float real, imag; } Tr66ToneDrive;
 
 /* Figure 13 scores a combined bass-drum and low-bongo trigger.
- * Drives follow the long ring, pulse and short ring in the voice patch. */
+ * The short ring reinforces the measured attack. The pulse offsets its
+ * initial amplitude. Drives follow the order in the voice patch. */
 static const Tr66ToneDrive rhumba_bongo_drive[TR66_TONES] = {
     {.real = -0.199725f, .imag = 0.188981f},
-    {.real = 0.165581f},
-    {.real = -0.026078f, .imag = 0.079157f},
+    {.real = 0.189548f},
+    {.real = -0.050045f, .imag = 0.10183472f},
 };
 
 /* The extra Beguine B hits drive the long ring more strongly, shift its

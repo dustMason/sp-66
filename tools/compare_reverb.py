@@ -20,6 +20,10 @@ MIX_FIT = {2, 13, 15, 18, 21, 22}
 AUDITION = ("Loop24.wav", "Loop18.wav", "Loop7.wav", "Loop20.wav", "Loop21.wav", "Loop23.wav")
 # Loop1 is two repeats of the bar shared by Rock 1 A and the first bar of B.
 CAPTURE_REPEATS = {"Loop1": 2}
+# Six repeated full kicks in each Rhumba capture verify the loop-length
+# tempo. The phases are in 48 kHz frames after the four-quarter rotation,
+# measured against the settled kick ring and fixed across render versions.
+RHUMBA_PHASE = {("Loop20", 185124): -12.3, ("Loop21", 185124): -10.9}
 # File names in the pack are sequential. The labels come from matching
 # voice onsets and fills on a circular beat grid. A or B describes the
 # captured phrase, even if that phrase also occurs in Auto.
@@ -52,6 +56,14 @@ SELECTIONS = (
 )
 
 
+def align_loop(capture, phase):
+    # The recording is already a circular loop. A phase shift preserves
+    # the measured spectrum when the onset falls between samples.
+    spectrum = np.fft.rfft(capture)
+    spectrum *= np.exp(2j * np.pi * phase * np.fft.rfftfreq(len(capture)))
+    return np.fft.irfft(spectrum, n=len(capture))
+
+
 def evaluate(path, groove, rotation, workdir, baseline,
              baseline_slow_rock_scale=0.75, comparisons=None):
     capture, rate = sf.read(path, always_2d=True)
@@ -62,13 +74,17 @@ def evaluate(path, groove, rotation, workdir, baseline,
     quarters = capture_bars * groove.beats
     nominal = RATE * 60 * quarters / len(capture)
     capture = np.roll(capture, round(len(capture) * rotation / quarters))
-    _, events, _ = render(RENDERER, workdir, groove, 120)
-    phase, tempo = estimate_clock(capture, rate, nominal, 0, events[1:] / 1000)
+    phase = RHUMBA_PHASE.get((groove.file, len(capture)))
+    if phase is None:
+        _, events, _ = render(RENDERER, workdir, groove, 120)
+        phase, tempo = estimate_clock(capture, rate, nominal, 0, events[1:] / 1000)
+    else:
+        tempo = round(nominal, 3)
     model, _, _ = render(RENDERER, workdir, groove, tempo)
     length = min(len(model), len(capture))
     # Discard the first and last attacks around the edited loop boundary.
     interior = slice(RATE // 12, length - RATE // 12)
-    source = np.interp(phase + np.arange(length), np.arange(len(capture)), capture)
+    source = align_loop(capture, phase)[:length]
     target = band_power(source[interior])
     result = {
         "selection": [groove.rhythm, groove.variation, groove.arrange],
@@ -76,6 +92,7 @@ def evaluate(path, groove, rotation, workdir, baseline,
         "bars_compared": groove.bars,
         "rotation_quarters": rotation,
         "tempo": tempo,
+        "aligned_frame_in_capture": round(phase, 2),
         "spectral_error_db": spectral_error(target, band_power(model[interior])),
     }
     if baseline:

@@ -275,6 +275,15 @@ correlation went from −0.89 to 0.96. With one Arrange cycle of warm-up,
 Reverb Rhumba A and B loop errors fell from 3.56 to 3.21 dB and
 from 3.54 to 3.26 dB respectively.
 
+Six repeated kick waveforms in each Reverb Rhumba loop confirm the
+124.457 BPM loop-length clock. The measured alignment brings RMS kick
+lag below 0.17 ms in both phrases. The Reverb comparison applies the
+fractional offset in the frequency domain to retain the recorded treble.
+The C model's 5–14 ms bongo attack is 1.07 dB above the extrapolated free
+ring in the 285–538 Hz band, up from 0.77 dB. The Reverb median is 1.14 dB
+and the Goldbaby Rumba median is 2.37 dB. The model increases the drive to
+the existing 7.5 ms ring and offsets its onset with the short pulse.
+
 The direct low bongo's polarity follows the recorded Beguine attacks.
 On five clean Reverb Beguine B hits with high conga and low bongo, the
 255–342 Hz attack was 10.9 dB above the recording relative to the
