@@ -358,6 +358,17 @@ static void trigger_tones(Tr66VoiceState *voice, const Tr66ToneDrive drive[TR66_
     voice->frames_left = voice->gate.tail_frames;
 }
 
+static void trigger_paired_kick(Tr66VoiceState *kick, float strength)
+{
+    voice_trigger(kick, strength);
+    /* On paired hits the 65 Hz ring leads its usual phase by about 0.7 ms.
+     * Offset the change in the shortest pulse to preserve the onset level. */
+    const float real_delta = 0.03531f * strength;
+    kick->resonator[0].real += real_delta;
+    kick->resonator[0].imag -= 0.427686f * strength;
+    kick->resonator[1].real -= real_delta;
+}
+
 static void trigger_high_bongo(Tr66VoiceState *bongo, float ring, float attack)
 {
     voice_trigger(bongo, ring);
@@ -413,7 +424,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     if (bare_kick_snare) {
         /* The two main rings are quieter on bare kick/snare hits in both
          * recording sets. Keep the snare noise gate at its normal drive. */
-        voice_trigger(&machine->voices[TR66_KICK], 0.85f);
+        trigger_paired_kick(&machine->voices[TR66_KICK], 0.85f);
         voice_trigger(&machine->voices[TR66_SNARE], 0.85f);
         return;
     }
@@ -461,7 +472,14 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
             bell->frames_left = machine->samba_cowbell_tail_frames;
         voices &= ~(1u << TR66_COWBELL);
     }
-    for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
+    if (voices & (1u << TR66_KICK)) {
+        Tr66VoiceState *kick = &machine->voices[TR66_KICK];
+        if (voices & (1u << TR66_SNARE))
+            trigger_paired_kick(kick, 1.0f);
+        else
+            voice_trigger(kick, 1.0f);
+    }
+    for (unsigned i = TR66_SNARE; i < TR66_VOICE_COUNT; ++i)
         if (voices & (1u << i))
             voice_trigger(&machine->voices[i], 1.0f);
     /* Measured against full hits in the recordings. The louder route wins

@@ -685,6 +685,16 @@ fundamental in Reverb Bossa Nova A and Drumbase Rock 6. The C model moves
 from 67 dB below to 38 dB below, with the harmonic's phase fitted to both
 packs.
 
+When a full kick and snare share a trigger, the C model advances the kick
+ring's phase by the equivalent of 0.70 ms. The shortest pulse compensates
+for the change in onset level. In Reverb Habanera and Shuffle, median
+36–105 Hz waveform correlation moves from 0.963 to 0.998 on three bare
+pairs and from 0.956 to 0.998 on seven pairs with cymbal. Reverb Habanera
+A loop error drops from 2.658 to 2.634 dB, and Drumbase Habanera A drops from
+2.753 to 2.739 dB. The C attack still has about 13 dB too much energy
+from 195 to 240 Hz on the bare Reverb Habanera hits after matching the
+snare ring.
+
 The reduced kick in Bossa Nova and Rock 2/3 uses a softer attack and shifts
 the ring phase by the equivalent of 0.65 ms at the same sequencer tick.
 Across 19 clean hits aligned by the full kicks, median waveform correlation

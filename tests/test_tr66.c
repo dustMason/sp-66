@@ -231,6 +231,19 @@ static void test_quiet_high_bongo(void)
     assert(ring_ratio > 0.195f && ring_ratio < 0.21f);
 }
 
+static void assert_paired_kick(const Tr66 *single, const Tr66 *pair, float strength)
+{
+    const Tr66Resonator *a = single->voices[TR66_KICK].resonator;
+    const Tr66Resonator *b = pair->voices[TR66_KICK].resonator;
+    const float magnitude = hypotf(b[0].real, b[0].imag);
+    assert(fabsf(magnitude - strength * hypotf(a[0].real, a[0].imag)) < 1e-6f);
+    const float cross = a[0].real * b[0].imag - a[0].imag * b[0].real;
+    const float dot = a[0].real * b[0].real + a[0].imag * b[0].imag;
+    const float phase = atan2f(cross, dot);
+    assert(phase > 0.28f && phase < 0.29f);
+    assert(fabsf((b[0].real + b[1].real) - strength * (a[0].real + a[1].real)) < 1e-6f);
+}
+
 static void test_kick_snare_pair(void)
 {
     Tr66 kick, snare, noise, pair;
@@ -242,14 +255,15 @@ static void test_kick_snare_pair(void)
     tr66_hit(&snare, MASK(SNARE));
     tr66_hit(&noise, MASK(SNARE));
     tr66_hit(&pair, MASK(KICK) | MASK(SNARE));
+    assert_paired_kick(&kick, &pair, 0.85f);
+    pair.voices[TR66_KICK].tone_count = 0;
     float k[BLOCK], s[BLOCK], n[BLOCK], p[BLOCK];
     for (unsigned frame = 0; frame < RATE / 10; frame += BLOCK) {
-        tr66_render(&kick, k, BLOCK);
         tr66_render(&snare, s, BLOCK);
         tr66_render(&noise, n, BLOCK);
         tr66_render(&pair, p, BLOCK);
         for (unsigned i = 0; i < BLOCK; ++i)
-            assert(fabsf(p[i] - (0.85f * (k[i] + s[i] - n[i]) + n[i])) < 1e-5f);
+            assert(fabsf(p[i] - (0.85f * (s[i] - n[i]) + n[i])) < 1e-5f);
     }
 
     tr66_init(&pair, RATE, 31);
@@ -257,6 +271,9 @@ static void test_kick_snare_pair(void)
     tr66_hit(&pair, MASK(KICK) | MASK(SNARE) | MASK(CYMBAL));
     tr66_hit(&kick, MASK(KICK) | MASK(CYMBAL));
     tr66_hit(&kick, MASK(SNARE));
+    assert_paired_kick(&kick, &pair, 1.0f);
+    pair.voices[TR66_KICK].tone_count = 0;
+    kick.voices[TR66_KICK].tone_count = 0;
     tr66_render(&pair, p, BLOCK);
     tr66_render(&kick, k, BLOCK);
     assert(memcmp(p, k, sizeof(p)) == 0);
