@@ -57,7 +57,9 @@ python3 tools/compare_groove.py work/sp-66-demo.wav work/bossa-rock6-auto.csv wo
 python3 tools/calibrate.py --output work/fitted-patches.inc --report work/fit.json --audition work/isolated-ab.wav
 ```
 
-The calibration script calls the same C hit renderer used by the engine.
+The calibration script renders each patch in isolation with the engine's C
+voice renderer. The full groove renderer also applies cross-trigger effects,
+such as the low-bongo ring excited by the snare.
 Its proposed coefficient table goes in `work/` for review before it replaces
 `src/voice_patches.inc`. The firmware build needs only the coefficients.
 
@@ -232,17 +234,20 @@ Its one-shots supplied most of the voice fits. On separated Beguine hits,
 the low bongo's 30–95 ms ring measures about 394 Hz and a 19 ms decay
 constant on the CD, and 405 Hz and 51 ms in Reverb. Roland provides a
 separate decay trim for this voice in section 10-3-2-3 of the service notes.
-The C model combines 7.5 ms and 32 ms decays at 400 Hz. Its first 3 ms
-measure 1.61 times the 6–16 ms envelope, up from 1.32 and between the
-two recordings' 1.49 and 1.76. The 32 ms mode gives a tail between the
-two captures. After one Arrange cycle at the fitted Balance, all eight
-loops with low bongo improve by 0.01–0.09 dB, including Reverb Rhumba A
-from 4.18 to 4.09 dB and Drumbase Beguine from 2.82 to 2.77 dB.
+The C model uses a fast 7.5 ms mode and a 36 ms free ring at 400 Hz.
+Figure 1 and section 10-3-3-3 show the snare feeding the same low-bongo
+circuit through a diode and resistor. The snare drives the free ring
+with a weaker, phase-shifted pulse. The C model adds the two pulses
+when snare and low bongo coincide. A recording of that combination
+would verify the combined drive.
 
-The snare has a weaker low-bongo resonance, as described in Roland's
-service notes, and its attack has a short pulse followed by a slower,
-opposite-polarity recovery. Cowbell hits from Mambo and Cha-Cha measure about
-893 Hz in Reverb and 897 Hz on the CD. The model uses 895 Hz.
+After one Arrange cycle at the fitted Balance, Beguine B in Reverb moves
+from 3.91 to 3.68 dB and the Drumbase Beguine moves from 2.73 to 2.84 dB.
+The full-pack medians are 2.32 dB for Drumbase and 2.72 dB for Reverb.
+
+The snare attack has a short pulse followed by a slower, opposite-polarity
+recovery. Cowbell hits from Mambo and Cha-Cha measure about 893 Hz in Reverb
+and 897 Hz on the CD. The model uses 895 Hz.
 The snare attack and tone changes improved several groove scores. In that
 pass, isolated 35–540 Hz waveform correlation fell from 0.95 to 0.94 on
 Drumbase and from 0.92 to 0.86 on Reverb.
@@ -433,8 +438,8 @@ Arrange cycle.
 With the revised snare noise gate, those medians fall to 2.30 dB and 3.09 dB.
 Reverb Habanera A and Waltz A improve by 0.19 dB and 0.16 dB respectively.
 
-The snare pulse fit adjusts the two attack decays and the 292.5 Hz and
-401 Hz ringing modes against isolated hits in both packs. At the current
+The earlier snare pulse fit adjusted the two attack decays and the 292.5 Hz
+and 401 Hz ringing modes against isolated hits in both packs. At the current
 Balance settings, the settled loop medians move from 2.29 to 2.27 dB for
 Drumbase and 3.02 to 2.85 dB for Reverb. Reverb Habanera A moves from 3.50
 to 3.13 dB. On six combined kick and snare hits that passed the clipping

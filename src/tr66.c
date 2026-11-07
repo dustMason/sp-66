@@ -204,7 +204,23 @@ static void trigger_hat(Tr66 *machine)
 
 void tr66_hit(Tr66 *machine, uint16_t voices)
 {
-    if (voices == ((1u << TR66_KICK) | (1u << TR66_SNARE))) {
+    const bool bare_kick_snare = voices == ((1u << TR66_KICK) | (1u << TR66_SNARE));
+    if (voices & (1u << TR66_SNARE)) {
+        /* The SD trigger also reaches LB through a diode and resistor
+         * (Service Notes Figure 1). It weakly drives the same bongo ring. */
+        Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];
+        Tr66Resonator *ring = &bongo->resonator[0];
+        const float strength = bare_kick_snare ? 0.85f : 1.0f;
+        const float real = bongo->trigger_real[0];
+        const float imag = bongo->trigger_imag[0];
+        /* Attenuation and phase shift relative to the direct bongo drive. */
+        const float coupling_real = -0.4696063f;
+        const float coupling_imag = 0.06587713f;
+        ring->real += strength * (coupling_real * real - coupling_imag * imag);
+        ring->imag += strength * (coupling_imag * real + coupling_real * imag);
+        bongo->frames_left = bongo->gate.tail_frames;
+    }
+    if (bare_kick_snare) {
         /* The two main rings are quieter on bare kick/snare hits in both
          * recording sets. Keep the snare noise gate at its normal drive. */
         voice_trigger(&machine->voices[TR66_KICK], 0.85f);

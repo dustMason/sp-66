@@ -4,7 +4,7 @@
                              {0.0f, 5.8f, 2.29042f, 0.0f}, {0.0f, 10.87739f, -1.49877f, 0.0f}} },
     /* A short pulse and an opposite-polarity recovery sit under the held noise burst. */
     [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.3f, 1.12938f, 0.0f},
-                              {401.0f, 36.0f, -0.02659f, -0.13559f}, {0.0f, 7.0f, -0.66442f, 0.0f}},
+                              {0.0f, 7.0f, -0.66442f, 0.0f}},
         .band = {{5625.6526f, 2.0f, 0.16959526f}, {9784.1089f, 0.7326f, 0.45332608f}},
         .noise_attack_ms = 1.7f,
         .noise_fast_ms = 110.0f,
@@ -43,7 +43,8 @@
      * carries more of the body of the hit as the fast mode decays. */
     [TR66_HIGH_BONGO] = { .tone = {{600.0f, 32.0f, -0.035f, -0.23375f},
                                    {600.0f, 5.3f, -0.188f, -0.38325f}, {0.0f, 2.4f, 0.089f, 0.0f}} },
-    /* Both recordings have a faster initial decay than the free ring. */
-    [TR66_LOW_BONGO] = { .tone = {{400.0f, 32.0f, 0.101331f, 0.292946f},
+    /* The first mode is the free ring also excited by the snare trigger.
+     * The direct bongo hit has a faster initial decay. */
+    [TR66_LOW_BONGO] = { .tone = {{400.0f, 36.0f, 0.09525114f, 0.27536924f},
                                   {0.0f, 2.16f, -0.180090f, 0.0f},
                                   {400.0f, 7.5f, 0.067554f, 0.195298f}} },

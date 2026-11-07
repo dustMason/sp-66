@@ -150,6 +150,7 @@ static void test_kick_snare_pair(void)
     tr66_init(&kick, RATE, 31);
     pair = noise = snare = kick;
     noise.voices[TR66_SNARE].tone_count = 0;
+    noise.voices[TR66_LOW_BONGO].tone_count = 0;
     tr66_hit(&kick, MASK(KICK));
     tr66_hit(&snare, MASK(SNARE));
     tr66_hit(&noise, MASK(SNARE));
@@ -172,6 +173,34 @@ static void test_kick_snare_pair(void)
     tr66_render(&pair, p, BLOCK);
     tr66_render(&kick, k, BLOCK);
     assert(memcmp(p, k, sizeof(p)) == 0);
+}
+
+static void test_snare_drives_low_bongo(void)
+{
+    Tr66 snare, bongo, combined;
+    tr66_init(&snare, RATE, 31);
+    combined = bongo = snare;
+    tr66_hit(&snare, MASK(SNARE));
+    tr66_hit(&bongo, MASK(LOW_BONGO));
+    tr66_hit(&combined, MASK(SNARE) | MASK(LOW_BONGO));
+
+    const Tr66VoiceState *weak = &snare.voices[TR66_LOW_BONGO];
+    const Tr66VoiceState *direct = &bongo.voices[TR66_LOW_BONGO];
+    const Tr66VoiceState *both = &combined.voices[TR66_LOW_BONGO];
+    assert(weak->frames_left > 0);
+    assert(weak->resonator[0].real != 0.0f);
+    assert(weak->resonator[1].real == 0.0f && weak->resonator[2].real == 0.0f);
+    assert(both->resonator[0].real == weak->resonator[0].real + direct->resonator[0].real);
+    assert(both->resonator[0].imag == weak->resonator[0].imag + direct->resonator[0].imag);
+
+    float s[BLOCK], b[BLOCK], c[BLOCK];
+    for (unsigned frame = 0; frame < RATE / 5; frame += BLOCK) {
+        tr66_render(&snare, s, BLOCK);
+        tr66_render(&bongo, b, BLOCK);
+        tr66_render(&combined, c, BLOCK);
+        for (unsigned i = 0; i < BLOCK; ++i)
+            assert(fabsf(c[i] - (s[i] + b[i])) < 1e-5f);
+    }
 }
 
 static void test_cymbal_extends_hat(void)
@@ -621,6 +650,7 @@ int main(void)
     test_snare_noise_envelope();
     test_shared_and_reduced_triggers();
     test_kick_snare_pair();
+    test_snare_drives_low_bongo();
     test_cymbal_extends_hat();
     test_callbacks();
     test_arrange_and_downbeat();
