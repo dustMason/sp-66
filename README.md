@@ -611,6 +611,14 @@ Drumbase. At the corrected clock, the new rim lowers Reverb's score to
 1.880 dB and the 1050–1900 Hz contribution at rim hits from 0.135 to
 0.031 dB. Drumbase's settled score stays near 2.58 dB.
 
+Repeated claves and low-drum hits put the Drumbase Beguine and Rhumba
+starts 2.28 and 2.53 ms later than the onset-flux estimates. The measured
+tempos are 164.835 and 164.832 BPM. Reverb Beguine B starts 0.19 ms
+earlier than the flux estimate and runs at its 124.460 BPM loop-length
+tempo. With the same C build and Balance settings, settled spectral error
+falls from 2.73 to 2.51 dB for Drumbase Beguine, from 2.68 to 2.53 dB for
+Drumbase Rhumba, and from 3.40 to 3.38 dB for Reverb Beguine B.
+
 Both recordings play the high conga in Samba where the service chart
 calls for a low bongo. The firmware follows the recorded Samba.
 Both Habanera A captures support the score's simultaneous kick and snare.
