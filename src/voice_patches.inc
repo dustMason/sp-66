@@ -2,9 +2,9 @@
     /* A fast edge and two opposing decays shape the attack of the bass drum. */
     [TR66_KICK] = { .tone = {{65.14967f, 40.15f, -1.50000f, -0.09146f}, {0.0f, 0.25519f, 0.70835f, 0.0f},
                              {0.0f, 5.8f, 2.29042f, 0.0f}, {0.0f, 10.87739f, -1.49877f, 0.0f}} },
-    /* A short pulse and an opposite-polarity recovery sit under the held noise burst. */
+    /* A fast edge shapes the initial pulse before the slower recovery and held noise burst. */
     [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.3f, 1.12938f, 0.0f},
-                              {0.0f, 7.0f, -0.66442f, 0.0f}},
+                              {0.0f, 7.0f, -0.66442f, 0.0f}, {1100.0f, 0.33f, 0.24771f, 0.39665f}},
         .band = {{5625.6526f, 2.0f, 0.16959526f}, {9784.1089f, 0.7326f, 0.45332608f}},
         .noise_attack_ms = 1.7f,
         .noise_fast_ms = 110.0f,

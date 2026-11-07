@@ -269,6 +269,12 @@ The snare attack and tone changes improved several groove scores. In that
 pass, isolated 35–540 Hz waveform correlation fell from 0.95 to 0.94 on
 Drumbase and from 0.92 to 0.86 on Reverb.
 
+A 0.33 ms decay shapes the snare's leading edge. On nine isolated hits held
+out of that fit, with the snare body level matched, the median 1.12–2 kHz
+attack error fell from about 6 dB to within 0.9 dB in both recording sets.
+After one Arrange cycle, the Drumbase Habanera A loop error fell from
+2.98 to 2.85 dB and Reverb Habanera A fell from 2.96 to 2.89 dB.
+
 The high bongo uses Roland's 600 Hz service setting and two decays at that
 frequency. The 32 ms mode carries more of the body of the hit. On three
 isolated hits from the [Vintage Synth Explorer demo](https://www.vintagesynth.com/roland/tr-66),
