@@ -1,5 +1,4 @@
 #include "patterns.h"
-#include "tr66.h"
 
 const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
     "off", "waltz", "jazz-waltz", "slow-rock", "bossa-nova",
@@ -27,6 +26,7 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define SOFT_U  TR66_REDUCED_HIGH_BONGO
 #define QUIET_U  TR66_QUIET_HIGH_BONGO
 #define L  (1u << TR66_LOW_BONGO)
+#define RHUMBA_KL  (K | L | TR66_RHUMBA_BONGO)
 #define BAR(events) {events, sizeof(events) / sizeof((events)[0])}
 
 static const Tr66Event waltz_plain[] = {{0, K | Y}, {24, S}, {48, S}};
@@ -108,19 +108,19 @@ static const Tr66Event beguine_b2[] = {
 };
 
 static const Tr66Event rhumba_a1[] = {
-    {0, M | V | L | K}, {12, M | SOFT_U}, {24, M | SOFT_U}, {36, M | V | L | K},
+    {0, M | V | RHUMBA_KL}, {12, M | SOFT_U}, {24, M | SOFT_U}, {36, M | V | RHUMBA_KL},
     {48, M | SOFT_U}, {60, M | SOFT_U},
-    {72, M | V | L | SOFT_C | K}, {84, M | SOFT_U | SOFT_C},
+    {72, M | V | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
 };
 static const Tr66Event rhumba_a2[] = {
-    {0, M | L | K}, {12, M | SOFT_U}, {24, M | V | SOFT_U}, {36, M | L | K},
+    {0, M | RHUMBA_KL}, {12, M | SOFT_U}, {24, M | V | SOFT_U}, {36, M | RHUMBA_KL},
     {48, M | V | SOFT_U}, {60, M | SOFT_U},
-    {72, M | L | SOFT_C | K}, {84, M | SOFT_U | SOFT_C},
+    {72, M | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
 };
 static const Tr66Event rhumba_b2[] = {
-    {0, M | L | K}, {12, M | SOFT_U | SOFT_C}, {18, M | SOFT_U}, {24, M | V | SOFT_U},
-    {36, M | L | K}, {48, M | V | SOFT_U | SOFT_C}, {60, M | SOFT_U | L | QUIET_K},
-    {72, M | L | SOFT_C | K}, {84, M | SOFT_U | SOFT_C},
+    {0, M | RHUMBA_KL}, {12, M | SOFT_U | SOFT_C}, {18, M | SOFT_U}, {24, M | V | SOFT_U},
+    {36, M | RHUMBA_KL}, {48, M | V | SOFT_U | SOFT_C}, {60, M | SOFT_U | L | QUIET_K},
+    {72, M | SOFT_C | RHUMBA_KL}, {84, M | SOFT_U | SOFT_C},
 };
 
 static const Tr66Event rock1_a[] = {

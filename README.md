@@ -258,6 +258,15 @@ with a weaker, phase-shifted pulse. The C model adds the two pulses
 when snare and low bongo coincide. A recording of that combination
 would verify the combined drive.
 
+Rhumba's full bass drum and low bongo share a trigger row in Figure 13.
+That row drives the bongo's existing resonators with a fitted pulse.
+On three clean full hits in held-out Reverb Rhumba B, the 259–339 Hz
+energy moved from 19 dB above the original to within 0.2 dB. The Drumbase
+attacks clip. Across seven of their tails, the 348–467 Hz waveform
+correlation went from −0.89 to 0.96. With one Arrange cycle of warm-up,
+Reverb Rhumba A and B loop errors fell from 3.56 to 3.21 dB and
+from 3.54 to 3.26 dB respectively.
+
 After one Arrange cycle at the fitted Balance, Beguine B in Reverb moves
 from 3.91 to 3.68 dB and the Drumbase Beguine moves from 2.73 to 2.84 dB.
 The full-pack medians are 2.32 dB for Drumbase and 2.72 dB for Reverb.

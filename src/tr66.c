@@ -206,7 +206,24 @@ static void trigger_hat(Tr66 *machine)
     hat->noise *= drive;
 }
 
-void tr66_hit(Tr66 *machine, uint16_t voices)
+static void trigger_rhumba_bongo(Tr66VoiceState *bongo)
+{
+    /* Figure 13 scores a combined bass-drum and low-bongo trigger.
+     * The recorded bongo starts in a different phase on this path.
+     * Drives follow the long ring, pulse and short ring in the voice patch. */
+    static const struct { float real, imag; } drive[TR66_TONES] = {
+        {.real = -0.199725f, .imag = 0.188981f},
+        {.real = 0.165581f},
+        {.real = -0.026078f, .imag = 0.079157f},
+    };
+    for (unsigned i = 0; i < bongo->tone_count; ++i) {
+        bongo->resonator[i].real += drive[i].real;
+        bongo->resonator[i].imag += drive[i].imag;
+    }
+    bongo->frames_left = bongo->gate.tail_frames;
+}
+
+void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
 {
     const bool bare_kick_snare = voices == ((1u << TR66_KICK) | (1u << TR66_SNARE));
     if (voices & (1u << TR66_SNARE)) {
@@ -235,19 +252,23 @@ void tr66_hit(Tr66 *machine, uint16_t voices)
     /* The hat and cymbal triggers feed the same resonator. */
     const bool shared_hit = tr66_coincident_hat_cymbal(voices);
     if (shared_hit)
-        voices &= (uint16_t)~(1u << TR66_HAT);
+        voices &= ~(1u << TR66_HAT);
 
     if (voices & (1u << TR66_HAT)) {
         trigger_hat(machine);
-        voices &= (uint16_t)~(1u << TR66_HAT);
+        voices &= ~(1u << TR66_HAT);
     }
     Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
     if (voices & (1u << TR66_CYMBAL)) {
         machine->cymbal_age = 0;
         cymbal->first_band_sweep = machine->cymbal_first_band_sweep;
     }
+    if (voices & TR66_RHUMBA_BONGO) {
+        trigger_rhumba_bongo(&machine->voices[TR66_LOW_BONGO]);
+        voices &= ~(1u << TR66_LOW_BONGO);
+    }
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
-        if (voices & (UINT16_C(1) << i))
+        if (voices & (1u << i))
             voice_trigger(&machine->voices[i], 1.0f);
     if (shared_hit) {
         /* The coincident hit puts more of the gate drive into the slow

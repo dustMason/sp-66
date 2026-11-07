@@ -95,7 +95,7 @@ def render(exe, directory, groove, tempo):
     with trace.open(newline="") as events:
         rows = list(csv.DictReader(events))
     positions = np.array([int(row["frame"]) for row in rows], dtype=np.uint32)
-    masks = np.array([int(row["voices"]) for row in rows], dtype=np.uint16)
+    masks = np.array([int(row["voices"]) for row in rows], dtype=np.uint32)
     audio, rate = sf.read(wave)
     if rate != RATE or audio.ndim != 1:
         raise ValueError(f"{wave}: expected mono at {RATE} Hz")
@@ -157,7 +157,7 @@ def stem_renderer():
     function = lib.tr66_render_stem
     function.argtypes = [
         c.c_uint, np.ctypeslib.ndpointer(dtype=np.uint32, flags="C_CONTIGUOUS"),
-        np.ctypeslib.ndpointer(dtype=np.uint16, flags="C_CONTIGUOUS"), c.c_size_t,
+        np.ctypeslib.ndpointer(dtype=np.uint32, flags="C_CONTIGUOUS"), c.c_size_t,
         np.ctypeslib.ndpointer(dtype=np.float32, flags="C_CONTIGUOUS"), c.c_size_t,
     ]
     function.restype = None

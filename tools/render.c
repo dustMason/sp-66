@@ -78,9 +78,9 @@ static void wave_header(FILE *stream, uint32_t frames)
     le(stream, 2 * frames, 4);
 }
 
-static void record_hit(void *context, uint64_t frame, uint16_t voices)
+static void record_hit(void *context, uint64_t frame, Tr66TriggerMask voices)
 {
-    fprintf(context, "%" PRIu64 ",%" PRIu16 "\n", frame, voices);
+    fprintf(context, "%" PRIu64 ",%" PRIu32 "\n", frame, voices);
 }
 
 int main(int argc, char **argv)

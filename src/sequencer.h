@@ -14,7 +14,7 @@ typedef struct {
     enum Tr66Arrange arrange;
 } Tr66Selection;
 
-typedef void (*Tr66EventListener)(void *context, uint64_t frame, uint16_t voices);
+typedef void (*Tr66EventListener)(void *context, uint64_t frame, Tr66TriggerMask voices);
 
 typedef struct {
     enum Tr66PatternId pattern;

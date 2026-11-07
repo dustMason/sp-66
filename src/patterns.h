@@ -1,7 +1,7 @@
 #ifndef TR66_PATTERNS_H
 #define TR66_PATTERNS_H
 
-#include <stdint.h>
+#include "tr66.h"
 
 enum {
     TR66_PPQN = 24, TR66_SCORE_BARS = 4,
@@ -23,7 +23,7 @@ enum Tr66PatternId {
 
 typedef struct {
     uint8_t tick;
-    uint16_t voices;
+    Tr66TriggerMask voices;
 } Tr66Event;
 
 typedef struct {
@@ -33,8 +33,8 @@ typedef struct {
 
 typedef struct {
     Tr66Bar bars[TR66_SCORE_BARS];
-    uint16_t auto_pickup;
-    uint16_t b_pickup;
+    Tr66TriggerMask auto_pickup;
+    Tr66TriggerMask b_pickup;
     uint8_t ticks;
 } Tr66Pattern;
 

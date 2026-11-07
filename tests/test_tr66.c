@@ -10,11 +10,11 @@ enum { RATE = 48000, BLOCK = 64 };
 
 typedef struct {
     uint64_t frame[256];
-    uint16_t mask[256];
+    Tr66TriggerMask mask[256];
     unsigned count;
 } Trace;
 
-static void record(void *context, uint64_t frame, uint16_t mask)
+static void record(void *context, uint64_t frame, Tr66TriggerMask mask)
 {
     Trace *trace = context;
     assert(trace->count < sizeof(trace->frame) / sizeof(trace->frame[0]));
@@ -435,6 +435,37 @@ static void test_waltz_mambo_stack(void)
     assert(trace.frame[6] == 72000 && trace.mask[6] == (MASK(LOW_BONGO) | mw));
 }
 
+static void test_rhumba_bongo_route(void)
+{
+    Tr66Sequencer seq;
+    Trace trace = {0};
+    tr66_seq_init(&seq, RATE, 5);
+    seq.listener = record;
+    seq.listener_context = &trace;
+    assert(tr66_seq_select(&seq, (Tr66Selection){TR66_RHUMBA, TR66_OFF, TR66_ARRANGE_B}));
+    tr66_seq_tempo(&seq, 120000);
+    tr66_seq_start(&seq);
+
+    float buffer[BLOCK];
+    for (unsigned frame = 0; frame < 2 * 96000; frame += BLOCK)
+        tr66_seq_render(&seq, buffer, BLOCK);
+
+    const Tr66TriggerMask full = MASK(KICK) | MASK(LOW_BONGO);
+    unsigned combined_hits = 0, quiet_hits = 0;
+    for (unsigned i = 0; i < trace.count; ++i) {
+        const Tr66TriggerMask hit = trace.mask[i];
+        assert(((hit & full) == full) == ((hit & TR66_RHUMBA_BONGO) != 0));
+        if (hit & TR66_RHUMBA_BONGO)
+            ++combined_hits;
+        if (hit & TR66_QUIET_KICK) {
+            assert(trace.frame[i] == 156000);
+            assert(hit & MASK(LOW_BONGO));
+            ++quiet_hits;
+        }
+    }
+    assert(combined_hits == 6 && quiet_hits == 1);
+}
+
 static void test_rim_cowbell_shunt(void)
 {
     Tr66Sequencer seq;
@@ -820,6 +851,7 @@ int main(void)
     test_arrange_pickups();
     test_slow_rock_rock6_layer();
     test_waltz_mambo_stack();
+    test_rhumba_bongo_route();
     test_rim_cowbell_shunt();
     test_split_blocks();
     test_balance();

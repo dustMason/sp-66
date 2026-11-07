@@ -13,6 +13,8 @@ enum Tr66Voice {
 };
 
 enum { TR66_TONES = 4, TR66_NOISE_BANDS = 2 };
+typedef uint32_t Tr66TriggerMask;
+
 enum {
     TR66_REDUCED_KICK = 1u << TR66_VOICE_COUNT,
     TR66_REDUCED_CONGA = TR66_REDUCED_KICK << 1,
@@ -20,9 +22,10 @@ enum {
     TR66_QUIET_HIGH_BONGO = TR66_REDUCED_HIGH_BONGO << 1,
     TR66_QUIET_KICK = TR66_QUIET_HIGH_BONGO << 1,
     TR66_GHOST_KICK = TR66_QUIET_KICK << 1,
+    TR66_RHUMBA_BONGO = TR66_GHOST_KICK << 1,
 };
 
-static inline bool tr66_coincident_hat_cymbal(uint16_t voices)
+static inline bool tr66_coincident_hat_cymbal(Tr66TriggerMask voices)
 {
     return (voices & (1u << TR66_HAT)) && (voices & (1u << TR66_CYMBAL));
 }
@@ -97,7 +100,7 @@ extern const Tr66Patch tr66_factory_voices[TR66_VOICE_COUNT];
 extern const float tr66_line_gain;
 
 void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed);
-void tr66_hit(Tr66 *machine, uint16_t voices);
+void tr66_hit(Tr66 *machine, Tr66TriggerMask voices);
 Tr66Balance tr66_balance_gains(float position);
 void tr66_balance(Tr66 *machine, float position); /* -1 bass, 0 center, +1 treble */
 void tr66_render(Tr66 *machine, float *output, size_t frames);

@@ -12,7 +12,7 @@ static unsigned score_bar(const Tr66Sequencer *seq)
     return 0;
 }
 
-static uint16_t pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer, unsigned bar)
+static Tr66TriggerMask pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer, unsigned bar)
 {
     enum { TRIPLE_HALF = 3 * TR66_PPQN / 2, COMMON_HALF = 2 * TR66_PPQN };
     const Tr66Pattern *pattern = &tr66_patterns[layer->pattern];
@@ -26,7 +26,7 @@ static uint16_t pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer, unsig
 
     while (layer->event_index < part->count && part->events[layer->event_index].tick < tick)
         ++layer->event_index;
-    uint16_t voices = 0;
+    Tr66TriggerMask voices = 0;
     if (layer->event_index < part->count && part->events[layer->event_index].tick == tick)
         voices = part->events[layer->event_index++].voices;
     /* The pickup is on the first pulse of the selected cycle. */
@@ -43,11 +43,11 @@ static void play_tick(Tr66Sequencer *seq)
 {
     const unsigned bar = score_bar(seq);
     /* A coincident trigger fires each voice circuit once. */
-    uint16_t mask = 0;
+    Tr66TriggerMask mask = 0;
     for (unsigned i = 0; i < seq->layer_count; ++i)
         mask |= pattern_voices(seq, &seq->layers[i], bar);
     /* The RS input excites the same resonator in either shunt position. */
-    const uint16_t shared_rs = (1u << TR66_RIM) | (1u << TR66_COWBELL);
+    const Tr66TriggerMask shared_rs = (1u << TR66_RIM) | (1u << TR66_COWBELL);
     if (mask & shared_rs)
         mask = (mask & ~shared_rs) | (1u << (seq->rim_selected ? TR66_RIM : TR66_COWBELL));
     if (mask != 0) {

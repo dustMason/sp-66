@@ -1,7 +1,7 @@
 /* Host calibration only. Sum unity-gain stems to reproduce the C mono mix. */
 #include "tr66.h"
 
-void tr66_render_stem(unsigned voice, const uint32_t *positions, const uint16_t *masks,
+void tr66_render_stem(unsigned voice, const uint32_t *positions, const Tr66TriggerMask *masks,
                       size_t events, float *samples, size_t frames)
 {
     Tr66 synth;
