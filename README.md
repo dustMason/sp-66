@@ -267,9 +267,13 @@ correlation went from −0.89 to 0.96. With one Arrange cycle of warm-up,
 Reverb Rhumba A and B loop errors fell from 3.56 to 3.21 dB and
 from 3.54 to 3.26 dB respectively.
 
-After one Arrange cycle at the fitted Balance, Beguine B in Reverb moves
-from 3.91 to 3.68 dB and the Drumbase Beguine moves from 2.73 to 2.84 dB.
-The full-pack medians are 2.32 dB for Drumbase and 2.72 dB for Reverb.
+The direct low bongo's polarity follows the recorded Beguine attacks.
+On five clean Reverb Beguine B hits with high conga and low bongo, the
+255–342 Hz attack was 10.9 dB above the recording relative to the
+352–458 Hz body. The polarity correction brings that excess to 0.9 dB.
+After one Arrange cycle at fitted Balance, the loop error falls from
+3.67 to 3.53 dB for Reverb Beguine B and from 2.82 to 2.77 dB for the
+Drumbase Beguine.
 
 The snare attack has a short pulse followed by a slower, opposite-polarity
 recovery. Cowbell hits from Mambo and Cha-Cha measure about 893 Hz in Reverb

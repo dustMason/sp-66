@@ -44,7 +44,7 @@
     [TR66_HIGH_BONGO] = { .tone = {{600.0f, 32.0f, -0.035f, -0.23375f},
                                    {600.0f, 5.3f, -0.188f, -0.38325f}, {0.0f, 2.4f, 0.089f, 0.0f}} },
     /* The first mode is the free ring also excited by the snare trigger.
-     * The direct bongo hit has a faster initial decay. */
-    [TR66_LOW_BONGO] = { .tone = {{400.0f, 36.0f, 0.09525114f, 0.27536924f},
-                                  {0.0f, 2.16f, -0.180090f, 0.0f},
-                                  {400.0f, 7.5f, 0.067554f, 0.195298f}} },
+     * The direct drive polarity is measured relative to the conga. */
+    [TR66_LOW_BONGO] = { .tone = {{400.0f, 36.0f, -0.09525114f, -0.27536924f},
+                                  {0.0f, 2.16f, 0.180090f, 0.0f},
+                                  {400.0f, 7.5f, -0.067554f, -0.195298f}} },

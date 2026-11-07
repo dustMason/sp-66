@@ -235,8 +235,8 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         const float real = bongo->trigger_real[0];
         const float imag = bongo->trigger_imag[0];
         /* Attenuation and phase shift relative to the direct bongo drive. */
-        const float coupling_real = -0.4696063f;
-        const float coupling_imag = 0.06587713f;
+        const float coupling_real = 0.4696063f;
+        const float coupling_imag = -0.06587713f;
         ring->real += strength * (coupling_real * real - coupling_imag * imag);
         ring->imag += strength * (coupling_imag * real + coupling_real * imag);
         bongo->frames_left = bongo->gate.tail_frames;
