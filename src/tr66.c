@@ -9,7 +9,7 @@
 const float tr66_line_gain = 0.18f;
 static const float coincident_cymbal_hold_ms = 44.0f;
 static const float coincident_cymbal_hat_recovery_ms = 554.0f;
-static const float samba_cowbell_decay_ms = 16.9f;
+static const float samba_cowbell_decay_ms[TR66_TONES] = {16.9f, 0.23f, 5.8f};
 /* Approximate the impedances at VR602 in units of its 25 kΩ half travel. */
 static const float balance_kick_resistance = 36.5f / 25.0f;
 static const float balance_treble_resistance = 7.28f / 25.0f;
@@ -247,15 +247,18 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         voice_init(&machine->voices[i], &tr66_factory_voices[i], sample_rate);
 
-    const Tr66Resonator *bell = &machine->voices[TR66_COWBELL].resonator[0];
-    const float cowbell_ratio = decay(sample_rate, samba_cowbell_decay_ms) /
-        decay(sample_rate, tr66_factory_voices[TR66_COWBELL].tone[0].decay_ms);
-    machine->cowbell_rotation_real[0] = bell->rotation_real;
-    machine->cowbell_rotation_real[1] = bell->rotation_real * cowbell_ratio;
-    machine->cowbell_rotation_imag[0] = bell->rotation_imag;
-    machine->cowbell_rotation_imag[1] = bell->rotation_imag * cowbell_ratio;
+    const Tr66VoiceState *bell = &machine->voices[TR66_COWBELL];
+    for (unsigned i = 0; i < bell->tone_count; ++i) {
+        const Tr66Resonator *mode = &bell->resonator[i];
+        const float ratio = decay(sample_rate, samba_cowbell_decay_ms[i]) /
+            decay(sample_rate, tr66_factory_voices[TR66_COWBELL].tone[i].decay_ms);
+        machine->cowbell_rotation_real[0][i] = mode->rotation_real;
+        machine->cowbell_rotation_real[1][i] = mode->rotation_real * ratio;
+        machine->cowbell_rotation_imag[0][i] = mode->rotation_imag;
+        machine->cowbell_rotation_imag[1][i] = mode->rotation_imag * ratio;
+    }
     machine->samba_cowbell_tail_frames =
-        (unsigned)ceilf(0.009f * samba_cowbell_decay_ms * sample_rate);
+        (unsigned)ceilf(0.009f * samba_cowbell_decay_ms[0] * sample_rate);
 
     const Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
     machine->cymbal_fast_release_frame = cymbal->gate.fast_release_frame;
@@ -342,6 +345,14 @@ static void trigger_cymbal(Tr66 *machine, bool shared_hit, Tr66TriggerMask route
 }
 
 typedef struct { float real, imag; } Tr66ToneDrive;
+
+/* The shared trigger reinforces the short bell ring. The pulse offsets
+ * the initial voltage from both resonators. */
+static const Tr66ToneDrive samba_cowbell_drive[TR66_TONES] = {
+    {.real = -0.036807f, .imag = -0.526367f},
+    {.real = -0.374762f},
+    {.real = 0.411569f, .imag = 0.014405f},
+};
 
 /* Figure 13 scores a combined bass-drum and low-bongo trigger.
  * The short ring reinforces the measured attack. The pulse offsets its
@@ -490,16 +501,21 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         trigger_high_bongo(&machine->voices[TR66_HIGH_BONGO], 1.58f, 0.07f);
         voices &= ~(1u << TR66_HIGH_BONGO);
     }
-    /* Samba's shared bell and bongo pulse has a longer bell ring.
+    /* Samba's shared pulse changes the drive and decay of the bell.
      * The bell still follows the rim/cowbell shunt. */
     const bool samba_pulse = (voices & TR66_SAMBA_BELL_BONGO) != 0;
     if (voices & (1u << TR66_COWBELL)) {
         Tr66VoiceState *bell = &machine->voices[TR66_COWBELL];
-        bell->resonator[0].rotation_real = machine->cowbell_rotation_real[samba_pulse];
-        bell->resonator[0].rotation_imag = machine->cowbell_rotation_imag[samba_pulse];
-        voice_trigger(bell, samba_pulse ? 0.92f : 1.0f);
-        if (samba_pulse)
+        for (unsigned i = 0; i < bell->tone_count; ++i) {
+            bell->resonator[i].rotation_real = machine->cowbell_rotation_real[samba_pulse][i];
+            bell->resonator[i].rotation_imag = machine->cowbell_rotation_imag[samba_pulse][i];
+        }
+        if (samba_pulse) {
+            trigger_tones(bell, samba_cowbell_drive);
             bell->frames_left = machine->samba_cowbell_tail_frames;
+        } else {
+            voice_trigger(bell, 1.0f);
+        }
         if (voices & (1u << TR66_LOW_BONGO)) {
             /* Mambo's coincident hit reinforces the bongo attack. Offset
              * the extra short ring at the onset with the pulse mode. */

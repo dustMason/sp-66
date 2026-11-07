@@ -114,7 +114,8 @@ typedef struct {
 
 typedef struct {
     Tr66VoiceState voices[TR66_VOICE_COUNT];
-    float cowbell_rotation_real[2], cowbell_rotation_imag[2];
+    float cowbell_rotation_real[2][TR66_TONES];
+    float cowbell_rotation_imag[2][TR66_TONES];
     unsigned samba_cowbell_tail_frames;
     float cymbal_sweep_decay, coincident_cymbal_sweep_decay;
     float cymbal_decay, tango_cymbal_decay, tango_cymbal_hat_decay;

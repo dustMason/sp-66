@@ -345,6 +345,13 @@ The C engine uses a 16.9 ms bell decay and a softer bongo ring on the
 shared pulse. Settled Samba loop error falls from 2.50 to 2.13 dB in
 Drumbase B and from 2.49 to 2.42 dB in Reverb A.
 
+On that shared pulse, the short cowbell mode decays over 5.8 ms. Across
+four hits from each pack, the RMS level error in the first 19 ms relative
+to the 21–37 ms ring falls from 1.03 to 0.53 dB in Reverb and from 0.59 to
+0.26 dB in Drumbase. After the cowbell attack pass above, the settled
+Reverb Samba score improves from 2.51 to 2.48 dB and Drumbase stays at
+2.10 dB.
+
 The Samba bongo attacks are nearly level across the five steps. The
 two stronger hits ring about 1 dB above the two weaker ones after
 roughly 26 ms. The C engine uses two short decays to cancel the added
