@@ -20,10 +20,14 @@ MIX_FIT = {2, 13, 15, 18, 21, 22}
 AUDITION = ("Loop24.wav", "Loop18.wav", "Loop7.wav", "Loop20.wav", "Loop21.wav", "Loop23.wav")
 # Loop1 is two repeats of the bar shared by Rock 1 A and the first bar of B.
 CAPTURE_REPEATS = {"Loop1": 2}
-# Six repeated full kicks in each Rhumba capture verify the loop-length
-# tempo. The phases are in 48 kHz frames after the four-quarter rotation,
-# measured against the settled kick ring and fixed across render versions.
-RHUMBA_PHASE = {("Loop20", 185124): -12.3, ("Loop21", 185124): -10.9}
+# Repeated kick rings verify the loop-length tempo of Rhumba. The kick
+# and rim transients independently put Bossa Nova on its file boundary.
+# These phases are in 48 kHz frames after the rotations below.
+CAPTURE_PHASE = {
+    ("Loop16", 185104): 0.0,
+    ("Loop20", 185124): -12.3,
+    ("Loop21", 185124): -10.9,
+}
 # File names in the pack are sequential. The labels come from matching
 # voice onsets and fills on a circular beat grid. A or B describes the
 # captured phrase, even if that phrase also occurs in Auto.
@@ -74,7 +78,7 @@ def evaluate(path, groove, rotation, workdir, baseline,
     quarters = capture_bars * groove.beats
     nominal = RATE * 60 * quarters / len(capture)
     capture = np.roll(capture, round(len(capture) * rotation / quarters))
-    phase = RHUMBA_PHASE.get((groove.file, len(capture)))
+    phase = CAPTURE_PHASE.get((groove.file, len(capture)))
     if phase is None:
         _, events, _ = render(RENDERER, workdir, groove, 120)
         phase, tempo = estimate_clock(capture, rate, nominal, 0, events[1:] / 1000)

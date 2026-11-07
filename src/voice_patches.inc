@@ -52,8 +52,10 @@
     /* The claves and rim shot are passive resonators with a short trigger pulse. */
     [TR66_CLAVES] = { .tone = {{2350.0f, 4.75f, 0.63888f, 0.10258f},
                               {0.0f, 0.09f, -0.97832f, 0.0f}} },
-    [TR66_RIM] = { .tone = {{1525.0f, 2.10f, -1.00154f, -0.93159f},
-                           {0.0f, 0.18f, 0.70f, 0.0f}} },
+    /* The short ring shapes the first cycles of the measured rim attack. */
+    [TR66_RIM] = { .tone = {{1525.0f, 2.10f, -1.163728f, -1.118408f},
+                           {0.0f, 0.171f, 0.783758f, 0.0f},
+                           {1525.0f, 0.60f, -0.202367f, 0.503723f}} },
     /* The pulse offsets the initial voltage. The short mode shapes the
      * first cycles as the two phases settle into the main ring. */
     [TR66_COWBELL] = { .tone = {{895.0f, 13.4f, 0.36217f, 0.44472f},

@@ -473,6 +473,15 @@ Drumbase hits, rim waveform correlation rises from 0.975 to 0.988 and
 claves from 0.979 to 0.983. The full-pack settled medians remain 2.27 dB
 for Drumbase and 3.09 dB for Reverb with these two voice changes.
 
+The rim attack also uses a 0.60 ms ring at the same frequency and 18%
+more drive to the main ring. After matching each take's pitch, late
+decay and level, median attack waveform error falls from 18.6% to 12.3%
+on four Reverb Bossa Nova hits, from 12.1% to 5.7% on three Goldbaby
+one-shots, and from 6.9% to 3.6% on four Drum Abuse takes. Drumbase's
+clipped one-shot stays near 2.9% on the usable samples. The loop packs
+give opposite rim polarities relative to the kick. The model keeps the
+Drumbase polarity.
+
 The hi-hat and maracas use the same gate across all rhythms. Its threshold
 is lower following a cymbal hit. In the recordings, the hat falls 18 dB
 below its attack at about 46 ms without a preceding cymbal and 97 ms when
@@ -584,6 +593,14 @@ All ten of its strong rim transients line up with the same score once
 the render starts on that bar. Many of those transients clip. Correcting
 the comparison drops the clean-window error from 3.31 to 2.62 dB with
 the same C build and Balance setting after one Arrange cycle.
+Repeated kick and rim hits place the Bossa Nova capture clocks 2.19 ms
+later in Reverb and 2.50 ms later in Drumbase than the onset-flux
+estimate. With the same C build, the corrected clocks lower settled
+error from 1.981 to 1.889 dB in Reverb and from 2.675 to 2.581 dB in
+Drumbase. At the corrected clock, the new rim lowers Reverb's score to
+1.880 dB and the 1050–1900 Hz contribution at rim hits from 0.135 to
+0.031 dB. Drumbase's settled score stays near 2.58 dB.
+
 Both recordings play the high conga in Samba where the service chart
 calls for a low bongo. The firmware follows the recorded Samba.
 Both Habanera A captures support the score's simultaneous kick and snare.
