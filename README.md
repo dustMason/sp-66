@@ -443,6 +443,15 @@ from 2.75 to 2.57 dB. The Drumbase median rises from 2.27 to 2.32 dB
 while Rock 5 improves from 2.21 to 2.06 dB. The captures still cancel
 more energy around 195–240 Hz when both drums trigger together.
 
+On bare kick and snare hits in Rock 5, the recorded main rings are
+81–87% as strong as comparable hits with cymbal in the same groove.
+The engine uses 85% drive for both tonal responses on that pair and
+full drive for the snare noise gate. In held-out Reverb Habanera A, the
+snare ring is 83% as strong on the pair as on an isolated snare. The C
+render moves from 100% to 85%. At fitted Balance, Drumbase Rock 5 goes
+from 2.06 to 1.95 dB and Reverb Rock 5 goes from 2.57 to 2.52 dB.
+At center Balance, Drumbase Rock 5 rises from 2.26 to 2.36 dB.
+
 Figures 2 and 13 of the service notes show a shared counter and the 3/4
 shunt. It plays counts 0–5 and 8–13 of each 16-count bar in triple time.
 The C sequencer now reads variations from those positions and merges

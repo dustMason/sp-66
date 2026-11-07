@@ -4405,5 +4405,69 @@
       }
     },
     "limitation": "The hardware has stronger 195–240 Hz cancellation on the kick and snare chords. The revised patch preserves common trigger timing. Differences in machine trims, recording gain, and voice interaction remain unresolved."
+  },
+  "kick_snare_pair_drive": {
+    "scope": "Attenuate the tonal excitation to 85% when the only triggers are full kick and snare. Keep the snare noise gate at full drive.",
+    "training": "Rock 5 in both packs. Reverb Habanera A is a held-out comparison against isolated snare hits. Cymbal combinations serve as controls.",
+    "measure": "Reject clipped hits and require at least 187 ms since the preceding kick, 90 ms since the preceding snare, and 72 ms to the next event. Fit damped sinusoids for kick, snare and the higher snare resonance from 23–66 ms. Compare the magnitudes of the main rings within each recording.",
+    "ring_amplitude_ratios_to_controls": {
+      "Loop5": {
+        "paired_hits": 2,
+        "paired_mask": 3,
+        "control_masks_for_kick_and_snare": [9, 14],
+        "ref": [0.8058, 0.8544],
+        "before": [1.0002, 0.9989],
+        "after": [0.8501, 0.8493]
+      },
+      "Loop10": {
+        "paired_hits": 3,
+        "paired_mask": 3,
+        "control_masks_for_kick_and_snare": [null, 2],
+        "ref": [null, 0.8328],
+        "before": [null, 1.0034],
+        "after": [null, 0.8536]
+      },
+      "Loop1": {
+        "paired_hits": 1,
+        "paired_mask": 11,
+        "control_masks_for_kick_and_snare": [9, 14],
+        "ref": [0.9253, 1.0009],
+        "before": [1.0005, 0.9939],
+        "after": [1.0005, 0.9939]
+      },
+      "Loop4": {
+        "paired_hits": 1,
+        "paired_mask": 11,
+        "control_masks_for_kick_and_snare": [9, 14],
+        "ref": [1.0222, 0.9935],
+        "before": [0.9997, 1.0033],
+        "after": [0.9997, 1.0033]
+      },
+      "Loop11": {
+        "paired_hits": 7,
+        "paired_mask": 11,
+        "control_masks_for_kick_and_snare": [null, 2],
+        "ref": [null, 0.9802],
+        "before": [null, 0.998],
+        "after": [null, 0.998]
+      }
+    },
+    "loop_error_db_before_and_revised": {
+      "center": {
+        "Loop5.wav": [4.32, 4.14],
+        "Loop10.wav": [3.83, 3.37]
+      },
+      "settled": {
+        "Loop5.wav": [2.57, 2.52],
+        "Loop10.wav": [3.02, 2.96]
+      }
+    },
+    "settled_balance_position": 0.4551,
+    "host_render_us_per_64_frame_block": {
+      "before": 0.79887,
+      "after": 0.803945
+    },
+    "host_benchmark": "Median of nine paired passes. Habanera A at 200 BPM, 48 kHz, 200000 blocks per pass.",
+    "limitation": "The level change does not reproduce the stronger cancellation in the original around 195–240 Hz. The drive fit establishes an output difference without identifying the circuit mechanism."
   }
 }

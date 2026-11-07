@@ -4751,5 +4751,37 @@
       }
     },
     "limitation": "The hardware has stronger 195–240 Hz cancellation on the kick and snare chords. The revised patch preserves common trigger timing. Differences in machine trims, recording gain, and voice interaction remain unresolved."
+  },
+  "kick_snare_pair_drive": {
+    "scope": "Attenuate the tonal excitation to 85% when the only triggers are full kick and snare. Keep the snare noise gate at full drive.",
+    "training": "Rock 5 in both packs. Reverb Habanera A is a held-out comparison against isolated snare hits. Cymbal combinations serve as controls.",
+    "measure": "Reject clipped hits and require at least 187 ms since the preceding kick, 90 ms since the preceding snare, and 72 ms to the next event. Fit damped sinusoids for kick, snare and the higher snare resonance from 23–66 ms. Compare the magnitudes of the main rings within each recording.",
+    "ring_amplitude_ratios_to_controls": {
+      "ROCK5A": {
+        "paired_hits": 1,
+        "paired_mask": 3,
+        "control_masks_for_kick_and_snare": [9, 14],
+        "ref": [0.8731, 0.8573],
+        "before": [1.002, 0.9964],
+        "after": [0.8518, 0.8465]
+      }
+    },
+    "loop_error_db_before_and_revised": {
+      "center": {
+        "ROCK5A": [2.26, 2.36],
+        "HABANERA": [3.02, 2.99]
+      },
+      "settled": {
+        "ROCK5A": [2.06, 1.95],
+        "HABANERA": [3.07, 2.98]
+      }
+    },
+    "settled_balance_position": -0.2882,
+    "host_render_us_per_64_frame_block": {
+      "before": 0.79887,
+      "after": 0.803945
+    },
+    "host_benchmark": "Median of nine paired passes. Habanera A at 200 BPM, 48 kHz, 200000 blocks per pass.",
+    "limitation": "The level change does not reproduce the stronger cancellation in the original around 195–240 Hz. The drive fit establishes an output difference without identifying the circuit mechanism."
   }
 }

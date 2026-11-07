@@ -144,6 +144,36 @@ static void test_shared_and_reduced_triggers(void)
     assert(memcmp(a, b, sizeof(a)) == 0);
 }
 
+static void test_kick_snare_pair(void)
+{
+    Tr66 kick, snare, noise, pair;
+    tr66_init(&kick, RATE, 31);
+    pair = noise = snare = kick;
+    noise.voices[TR66_SNARE].tone_count = 0;
+    tr66_hit(&kick, MASK(KICK));
+    tr66_hit(&snare, MASK(SNARE));
+    tr66_hit(&noise, MASK(SNARE));
+    tr66_hit(&pair, MASK(KICK) | MASK(SNARE));
+    float k[BLOCK], s[BLOCK], n[BLOCK], p[BLOCK];
+    for (unsigned frame = 0; frame < RATE / 10; frame += BLOCK) {
+        tr66_render(&kick, k, BLOCK);
+        tr66_render(&snare, s, BLOCK);
+        tr66_render(&noise, n, BLOCK);
+        tr66_render(&pair, p, BLOCK);
+        for (unsigned i = 0; i < BLOCK; ++i)
+            assert(fabsf(p[i] - (0.85f * (k[i] + s[i] - n[i]) + n[i])) < 1e-5f);
+    }
+
+    tr66_init(&pair, RATE, 31);
+    kick = pair;
+    tr66_hit(&pair, MASK(KICK) | MASK(SNARE) | MASK(CYMBAL));
+    tr66_hit(&kick, MASK(KICK) | MASK(CYMBAL));
+    tr66_hit(&kick, MASK(SNARE));
+    tr66_render(&pair, p, BLOCK);
+    tr66_render(&kick, k, BLOCK);
+    assert(memcmp(p, k, sizeof(p)) == 0);
+}
+
 static void test_cymbal_extends_hat(void)
 {
     Tr66 rested, recent, earlier;
@@ -590,6 +620,7 @@ int main(void)
     test_all_voices();
     test_snare_noise_envelope();
     test_shared_and_reduced_triggers();
+    test_kick_snare_pair();
     test_cymbal_extends_hat();
     test_callbacks();
     test_arrange_and_downbeat();

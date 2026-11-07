@@ -204,6 +204,14 @@ static void trigger_hat(Tr66 *machine)
 
 void tr66_hit(Tr66 *machine, uint16_t voices)
 {
+    if (voices == ((1u << TR66_KICK) | (1u << TR66_SNARE))) {
+        /* The two main rings are quieter on bare kick/snare hits in both
+         * recording sets. Keep the snare noise gate at its normal drive. */
+        voice_trigger(&machine->voices[TR66_KICK], 0.85f);
+        voice_trigger(&machine->voices[TR66_SNARE], 0.85f);
+        return;
+    }
+
     /* The hat and cymbal triggers feed the same resonator. */
     const bool shared_hit = tr66_coincident_hat_cymbal(voices);
     if (shared_hit)
