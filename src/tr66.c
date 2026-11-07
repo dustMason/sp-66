@@ -396,8 +396,12 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         else if (voices & TR66_GHOST_KICK)
             voice_trigger(&machine->voices[TR66_KICK], 0.21f);
     }
-    if ((voices & TR66_REDUCED_CONGA) && !(voices & (1u << TR66_CONGA)))
-        voice_trigger(&machine->voices[TR66_CONGA], 0.66f);
+    if (!(voices & (1u << TR66_CONGA))) {
+        if (voices & TR66_CHA_CHA_CONGA)
+            voice_trigger(&machine->voices[TR66_CONGA], 0.71f);
+        else if (voices & TR66_REDUCED_CONGA)
+            voice_trigger(&machine->voices[TR66_CONGA], 0.66f);
+    }
     if (!(voices & ((1u << TR66_HIGH_BONGO) | TR66_MAMBO_FILL_HIGH_BONGO))) {
         Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
         if (voices & TR66_ACCENT_HIGH_BONGO)

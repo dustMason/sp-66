@@ -19,6 +19,7 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define R  (1u << TR66_RIM)
 #define C  (1u << TR66_CONGA)
 #define SOFT_C  TR66_REDUCED_CONGA
+#define CHA_CHA_C  TR66_CHA_CHA_CONGA
 #define M  (1u << TR66_MARACAS)
 #define V  (1u << TR66_CLAVES)
 #define W  (1u << TR66_COWBELL)
@@ -90,11 +91,12 @@ static const Tr66Event mambo_b2[] = {
 
 static const Tr66Event cha_cha_a[] = {
     {0, M | W | K}, {12, M}, {24, M | W}, {36, M | K},
-    {48, M | W | K}, {60, M}, {72, M | W | K | C}, {84, M | C},
+    {48, M | W | K}, {60, M}, {72, M | W | K | CHA_CHA_C}, {84, M | CHA_CHA_C},
 };
 static const Tr66Event cha_cha_b2[] = {
-    {0, M | W | K}, {12, M | K | C}, {24, M | W}, {36, M | K},
-    {48, M | W | K | C}, {60, M | W}, {72, M | W | K | C}, {84, M | K | C},
+    {0, M | W | K}, {12, M | K | CHA_CHA_C}, {24, M | W}, {36, M | K},
+    {48, M | W | K | CHA_CHA_C}, {60, M | W},
+    {72, M | W | K | CHA_CHA_C}, {84, M | K | CHA_CHA_C},
 };
 
 static const Tr66Event beguine_a1[] = {

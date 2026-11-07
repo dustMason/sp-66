@@ -116,6 +116,26 @@ static void test_shared_and_reduced_triggers(void)
     tr66_render(&second, b, BLOCK);
     assert(memcmp(a, b, sizeof(a)) == 0);
 
+    const Tr66TriggerMask cha_cha_layered = TR66_CHA_CHA_CONGA | TR66_REDUCED_CONGA;
+    const struct {
+        Tr66TriggerMask mask;
+        float drive;
+    } conga_routes[] = {
+        {MASK(CONGA) | cha_cha_layered, 1.0f},
+        {cha_cha_layered, 0.71f},
+        {TR66_REDUCED_CONGA, 0.66f},
+    };
+    tr66_init(&first, RATE, 31);
+    tr66_hit(&first, MASK(CONGA));
+    tr66_render(&first, a, BLOCK);
+    for (unsigned i = 0; i < sizeof(conga_routes) / sizeof(conga_routes[0]); ++i) {
+        tr66_init(&second, RATE, 31);
+        tr66_hit(&second, conga_routes[i].mask);
+        tr66_render(&second, b, BLOCK);
+        for (unsigned frame = 0; frame < BLOCK; ++frame)
+            assert(fabsf(b[frame] - conga_routes[i].drive * a[frame]) < 1e-6f);
+    }
+
     tr66_init(&first, RATE, 31);
     second = first;
     const Tr66TriggerMask light = TR66_LIGHT_HIGH_BONGO | TR66_QUIET_HIGH_BONGO;

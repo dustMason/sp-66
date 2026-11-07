@@ -343,6 +343,15 @@ Reverb. After one Arrange cycle at the fitted Balance, Drumbase Cha-Cha
 improves from 2.78 to 2.63 dB and Reverb Beguine B from 4.27 to 4.12 dB.
 At center Balance, Drumbase Beguine rises from 3.03 to 3.11 dB.
 
+After matching cowbell levels, the high-conga ring in Cha-Cha is
+2.8–3.1 dB below the same hit in Mambo across Drumbase, Reverb, and
+Goldbaby. Cha-Cha uses 71% conga drive in both phrases. The relative
+ring-level error falls from 2.96 to 0.11 dB RMS across the three sources.
+The settled Cha-Cha loop errors fall from 2.47 to 2.39 dB in Drumbase,
+2.58 to 2.23 dB in Reverb, and 5.68 to 5.30 dB in Goldbaby.
+In the clean 24–82 ms conga windows, Drumbase error in the 125–235 Hz
+band rises from 1.06 to 1.81 dB.
+
 Fitting the high conga ring 25–88 ms after the trigger gives about 30 ms
 in Goldbaby's loops, 46 ms in Drumbase and 79 ms in Reverb. Goldbaby's
 direct `CongaLo_aOrig` takes contain the 202 Hz conga. Its
