@@ -224,7 +224,9 @@ void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         voice_init(&machine->voices[i], &tr66_factory_voices[i], sample_rate);
 
-    machine->cymbal_sweep_decay = machine->voices[TR66_CYMBAL].sweep.bend_decay;
+    const Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
+    machine->cymbal_fast_release_frame = cymbal->gate.fast_release_frame;
+    machine->cymbal_sweep_decay = cymbal->sweep.bend_decay;
     machine->coincident_cymbal_sweep_decay = decay(sample_rate, 34.0f);
     const float extra_hold_ms = coincident_cymbal_hold_ms - tr66_factory_voices[TR66_CYMBAL].noise_fast_hold_ms;
     machine->cymbal_extra_hold_frames = (unsigned)ceilf(0.001f * fmaxf(0.0f, extra_hold_ms) * sample_rate);
@@ -255,6 +257,36 @@ static void trigger_hat(Tr66 *machine)
     const float sweep_ms = patch->noise_sweep_ms * (1.0f + 0.4f * bias);
     hat->sweep.bend_decay = decay(machine->sample_rate, sweep_ms);
     hat->sweep.bend *= 1.0f + 0.02f * bias;
+}
+
+static void trigger_cymbal(Tr66 *machine, bool shared_hit)
+{
+    Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
+    cymbal->gate.fast_release_frame = machine->cymbal_fast_release_frame;
+    cymbal->sweep.bend_decay = shared_hit
+        ? machine->coincident_cymbal_sweep_decay : machine->cymbal_sweep_decay;
+    voice_trigger(cymbal, 1.0f);
+
+    if (shared_hit) {
+        /* The coincident hit puts more of the gate drive into the slow
+         * decay and starts nearer the resting resonance. */
+        cymbal->frames_left += machine->cymbal_extra_hold_frames;
+        cymbal->noise = 0.75075f;
+        cymbal->fast_noise = 0.29925f;
+        cymbal->sweep.bend *= 0.82f;
+        cymbal->sweep.damping *= 1.25f;
+    } else {
+        /* In the recordings, a cymbal after a longer gap has a stronger
+         * attack relative to its body. Shift the gate drive toward the
+         * fast envelope and release it earlier as the gap grows. */
+        const float samples_per_ms = 0.001f * machine->sample_rate;
+        const float age_ms = (float)machine->cymbal_age / samples_per_ms;
+        const float recovered = fminf(1.0f, fmaxf(0.0f, (age_ms - 190.0f) / 480.0f));
+        cymbal->noise -= 0.025f * recovered;
+        cymbal->fast_noise += 0.08f * recovered;
+        cymbal->gate.fast_release_frame += (unsigned)(8.0f * samples_per_ms * recovered);
+    }
+    machine->cymbal_age = 0;
 }
 
 typedef struct { float real, imag; } Tr66ToneDrive;
@@ -321,11 +353,9 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
         trigger_hat(machine);
         voices &= ~(1u << TR66_HAT);
     }
-    Tr66VoiceState *cymbal = &machine->voices[TR66_CYMBAL];
     if (voices & (1u << TR66_CYMBAL)) {
-        machine->cymbal_age = 0;
-        cymbal->sweep.bend_decay = shared_hit
-            ? machine->coincident_cymbal_sweep_decay : machine->cymbal_sweep_decay;
+        trigger_cymbal(machine, shared_hit);
+        voices &= ~(1u << TR66_CYMBAL);
     }
     if (voices & (TR66_RHUMBA_BONGO | TR66_RHUMBA_FILL_BONGO)) {
         Tr66VoiceState *bongo = &machine->voices[TR66_LOW_BONGO];
@@ -338,15 +368,6 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         if (voices & (1u << i))
             voice_trigger(&machine->voices[i], 1.0f);
-    if (shared_hit) {
-        /* The coincident hit puts more of the gate drive into the slow
-         * decay and starts nearer the resting resonance. */
-        cymbal->frames_left += machine->cymbal_extra_hold_frames;
-        cymbal->noise = 0.75075f;
-        cymbal->fast_noise = 0.29925f;
-        cymbal->sweep.bend *= 0.82f;
-        cymbal->sweep.damping *= 1.25f;
-    }
     /* Measured against full hits in the recordings. The louder route wins
      * if layered rhythms trigger the same voice on the same clock pulse. */
     if (!(voices & (1u << TR66_KICK))) {

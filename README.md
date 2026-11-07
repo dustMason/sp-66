@@ -431,6 +431,16 @@ Reverb's settled loop median falls from 2.63 to 2.60 dB and Drumbase's
 moves from 2.27 to 2.28 dB. The direct hit sustains longer than the
 pattern hits, which still determine the envelope.
 
+After a longer gap, the cymbal has a stronger attack relative to its
+body in the loop recordings. From 190 to 670 ms since the previous
+cymbal, the C engine gradually increases the fast gate drive, lowers the
+slow drive and shortens the fast hold from 22 to 14 ms. After one Arrange
+cycle at the same fixed Balance per pack, Reverb's median error falls
+from 2.60 to 2.51 dB, including 3.20 to 3.02 dB on Swing 1 A and 3.14
+to 3.06 dB on Tango A. Drumbase's median moves from 2.28 to 2.27 dB.
+Drumbase Waltz increases from 2.70 to 2.77 dB. The direct Goldbaby
+cymbal still sustains longer than the C render.
+
 Figure 10 of the service notes shows the hi-hat and cymbal trigger circuits
 feeding one resonator. In six Bossa Nova, Samba, and Beguine captures, the
 median combined attack was 0.32 dB quieter than hi-hat alone in the

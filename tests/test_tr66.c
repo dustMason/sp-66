@@ -246,6 +246,39 @@ static void test_snare_drives_low_bongo(void)
     }
 }
 
+static void test_cymbal_attack_after_gap(void)
+{
+    Tr66 machine;
+    tr66_init(&machine, RATE, 31);
+    const Tr66VoiceState *cymbal = &machine.voices[TR66_CYMBAL];
+    const unsigned normal_release = cymbal->gate.fast_release_frame;
+
+    tr66_hit(&machine, MASK(CYMBAL));
+    const unsigned rested_release = cymbal->gate.fast_release_frame;
+    const float rested_fast = cymbal->fast_noise;
+    assert(rested_release > normal_release);
+    assert(cymbal->frames_left == cymbal->gate.tail_frames);
+
+    float out[BLOCK];
+    for (unsigned frame = 0; frame < RATE / 10; frame += BLOCK)
+        tr66_render(&machine, out, BLOCK);
+    tr66_hit(&machine, MASK(CYMBAL));
+    const float repeated_fast = cymbal->fast_noise;
+    assert(repeated_fast < rested_fast);
+    assert(cymbal->gate.fast_release_frame == normal_release);
+
+    for (unsigned frame = 0; frame < RATE * 4 / 10; frame += BLOCK)
+        tr66_render(&machine, out, BLOCK);
+    tr66_hit(&machine, MASK(CYMBAL));
+    assert(cymbal->fast_noise > repeated_fast && cymbal->fast_noise < rested_fast);
+    assert(cymbal->gate.fast_release_frame > normal_release);
+    assert(cymbal->gate.fast_release_frame < rested_release);
+
+    tr66_hit(&machine, MASK(HAT) | MASK(CYMBAL));
+    assert(cymbal->gate.fast_release_frame == normal_release);
+    assert(cymbal->frames_left > cymbal->gate.tail_frames);
+}
+
 static void test_cymbal_extends_hat(void)
 {
     Tr66 rested, recent, earlier;
@@ -870,6 +903,7 @@ int main(void)
     test_quiet_high_bongo();
     test_kick_snare_pair();
     test_snare_drives_low_bongo();
+    test_cymbal_attack_after_gap();
     test_cymbal_extends_hat();
     test_callbacks();
     test_arrange_and_downbeat();
