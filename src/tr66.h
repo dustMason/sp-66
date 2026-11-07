@@ -26,6 +26,7 @@ enum {
     TR66_RHUMBA_FILL_BONGO = TR66_RHUMBA_BONGO << 1,
     TR66_LIGHT_HIGH_BONGO = TR66_RHUMBA_FILL_BONGO << 1,
     TR66_ACCENT_HIGH_BONGO = TR66_LIGHT_HIGH_BONGO << 1,
+    TR66_MAMBO_FILL_HIGH_BONGO = TR66_ACCENT_HIGH_BONGO << 1,
 };
 
 static inline bool tr66_coincident_hat_cymbal(Tr66TriggerMask voices)

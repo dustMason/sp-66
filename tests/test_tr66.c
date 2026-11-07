@@ -132,6 +132,7 @@ static void test_shared_and_reduced_triggers(void)
         float drive[2];
     } bongo_routes[] = {
         {light, {0.45f, 0.62f}}, {reduced, {0.53f, 0.53f}}, {accented, {0.66f, 0.25f}},
+        {TR66_MAMBO_FILL_HIGH_BONGO | MASK(HIGH_BONGO) | accented, {1.58f, 0.07f}},
     };
     tr66_init(&first, RATE, 31);
     tr66_hit(&first, MASK(HIGH_BONGO));
@@ -716,6 +717,16 @@ static void test_rock1_offbeat(void)
     }
 }
 
+static void test_mambo_fill(void)
+{
+    const Tr66Bar *fill = &tr66_patterns[TR66_MAMBO].bars[3];
+    const Tr66TriggerMask extra = MASK(MARACAS) | MASK(CONGA) | TR66_MAMBO_FILL_HIGH_BONGO;
+    assert(fill->count == 8);
+    assert(fill->events[1].tick == 12 && fill->events[1].voices == extra);
+    assert(fill->events[7].tick == 84 && fill->events[7].voices == extra);
+    assert(fill->events[4].tick == 48 && (fill->events[4].voices & MASK(HIGH_BONGO)));
+}
+
 static void test_slow_rock_fill(void)
 {
     const Tr66Bar *fill = &tr66_patterns[TR66_SLOW_ROCK].bars[3];
@@ -958,6 +969,7 @@ int main(void)
     test_score_table();
     test_rock1_offbeat();
     test_samba_conga();
+    test_mambo_fill();
     test_slow_rock_fill();
     test_waltz_fill();
     test_controls();

@@ -378,6 +378,11 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
             voice_trigger(bongo, -1.0f);
         voices &= ~(1u << TR66_LOW_BONGO);
     }
+    if (voices & TR66_MAMBO_FILL_HIGH_BONGO) {
+        /* The extra Mambo B hits mostly excite the long ring. */
+        trigger_high_bongo(&machine->voices[TR66_HIGH_BONGO], 1.58f, 0.07f);
+        voices &= ~(1u << TR66_HIGH_BONGO);
+    }
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i)
         if (voices & (1u << i))
             voice_trigger(&machine->voices[i], 1.0f);
@@ -393,7 +398,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     }
     if ((voices & TR66_REDUCED_CONGA) && !(voices & (1u << TR66_CONGA)))
         voice_trigger(&machine->voices[TR66_CONGA], 0.66f);
-    if (!(voices & (1u << TR66_HIGH_BONGO))) {
+    if (!(voices & ((1u << TR66_HIGH_BONGO) | TR66_MAMBO_FILL_HIGH_BONGO))) {
         Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
         if (voices & TR66_ACCENT_HIGH_BONGO)
             trigger_high_bongo(bongo, 0.66f, 0.25f);

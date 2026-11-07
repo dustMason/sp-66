@@ -326,6 +326,15 @@ falls from 1.23 to 0.34 dB. Error in the 7–19 ms attack relative to the
 ring falls from 1.08 to 0.51 dB. The Goldbaby Mambo and Rumba REX files
 yielded noise-level estimates for the high-bongo ring.
 
+The two extra high-bongo hits in the Mambo B fill at ticks 12 and 84 ring
+3.6–4.1 dB above the regular hit in Drumbase and Reverb. The C model
+raises their long mode and reduces their short attack mode. Error in
+relative ring level falls from 3.94 to 0.20 dB RMS across the four hits.
+The attack fit uses the clean Reverb hits because the Drumbase attacks clip.
+After one Arrange cycle of warm-up, the loop error moves from 3.15 to
+3.01 dB in Reverb Mambo B and from 2.65 to 2.68 dB in the unclipped
+Drumbase windows.
+
 The high conga adds a short 200 Hz decay alongside its longer ring.
 This strengthens the initial cycles and brings the ratio of the first
 trough to the first crest from 0.577 to 0.674. In 14 separated loop hits,

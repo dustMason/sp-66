@@ -12,11 +12,12 @@ from calibrate import FILES, NAMES, RATE, ROOT, read, rms
 
 # Match Tr66TriggerMask in src/tr66.h. The two Rhumba flags change
 # the drive of a low bongo already present in the trace.
-TRIGGER_MASK_LIMIT = 1 << 20
+TRIGGER_MASK_LIMIT = 1 << 21
 ALTERNATE_HITS = {
     "kick": ((1 << 10, 0.50), (1 << 14, 0.43), (1 << 15, 0.21)),
     "conga": ((1 << 11, 0.66),),
-    "high-bongo": ((1 << 19, 0.66), (1 << 12, 0.53), (1 << 18, 0.45), (1 << 13, 0.20)),
+    "high-bongo": ((1 << 20, 1.58), (1 << 19, 0.66), (1 << 12, 0.53),
+                   (1 << 18, 0.45), (1 << 13, 0.20)),
 }
 
 
@@ -43,8 +44,9 @@ def main():
             if not (0 <= start < len(model) and 0 < mask < TRIGGER_MASK_LIMIT):
                 parser.error(f"invalid event {event}")
             for voice, name in enumerate(NAMES):
-                gain = 1.0 if mask & (1 << voice) else next(
+                alternate = next(
                     (level for bit, level in ALTERNATE_HITS.get(name, ()) if mask & bit), 0.0)
+                gain = max(1.0 if mask & (1 << voice) else 0.0, alternate)
                 if gain == 0.0:
                     continue
                 if name not in hits:

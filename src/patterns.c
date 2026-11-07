@@ -27,6 +27,7 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define QUIET_U  TR66_QUIET_HIGH_BONGO
 #define LIGHT_U  TR66_LIGHT_HIGH_BONGO
 #define ACCENT_U  TR66_ACCENT_HIGH_BONGO
+#define MAMBO_U  TR66_MAMBO_FILL_HIGH_BONGO
 #define L  (1u << TR66_LOW_BONGO)
 #define RHUMBA_KL  (K | L | TR66_RHUMBA_BONGO)
 #define BAR(events) {events, sizeof(events) / sizeof((events)[0])}
@@ -83,8 +84,8 @@ static const Tr66Event mambo_a[] = {
     {48, M | W | U}, {60, M}, {72, M | W | C}, {84, M | C},
 };
 static const Tr66Event mambo_b2[] = {
-    {0, M | W | L}, {12, M | U | C}, {24, M | W}, {36, M | U},
-    {48, M | W | U | C}, {60, M}, {72, M | W | C}, {84, M | U | C},
+    {0, M | W | L}, {12, M | MAMBO_U | C}, {24, M | W}, {36, M | U},
+    {48, M | W | U | C}, {60, M}, {72, M | W | C}, {84, M | MAMBO_U | C},
 };
 
 static const Tr66Event cha_cha_a[] = {
