@@ -69,15 +69,17 @@ static const Tr66Event bossa_b2[] = {
 };
 
 static const Tr66Event samba_a1[] = {
-    {0, M | SAMBA_WU}, {12, M}, {24, M | Y | SAMBA_WU}, {36, M},
-    {48, M | C}, {60, M}, {72, M | Y}, {84, M | SAMBA_WU},
+    {0, M | SAMBA_WU}, {12, M}, {24, M | Y | SAMBA_WU | TR66_SAMBA_ACCENT_BONGO}, {36, M},
+    {48, M | C}, {60, M}, {72, M | Y}, {84, M | SAMBA_WU | TR66_SAMBA_SOFT_BONGO},
 };
 static const Tr66Event samba_a2[] = {
-    {0, M}, {12, M | SAMBA_WU}, {24, M | Y}, {36, M | SAMBA_WU},
+    {0, M}, {12, M | SAMBA_WU | TR66_SAMBA_ACCENT_BONGO},
+    {24, M | Y}, {36, M | SAMBA_WU | TR66_SAMBA_LIGHT_BONGO},
     {48, M | C}, {60, M}, {72, M | Y}, {84, M},
 };
 static const Tr66Event samba_b2[] = {
-    {0, M}, {12, M | SAMBA_WU}, {24, M | Y}, {36, M | SAMBA_WU},
+    {0, M}, {12, M | SAMBA_WU | TR66_SAMBA_ACCENT_BONGO},
+    {24, M | Y}, {36, M | SAMBA_WU | TR66_SAMBA_LIGHT_BONGO},
     {48, M | C}, {60, M | C}, {72, M | Y}, {84, M | C},
 };
 

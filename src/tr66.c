@@ -342,6 +342,32 @@ static void trigger_high_bongo(Tr66VoiceState *bongo, float ring, float attack)
         add_mode_drive(bongo, 1, attack - ring);
 }
 
+static void trigger_samba_bongo(Tr66VoiceState *bongo, Tr66TriggerMask voices)
+{
+    trigger_high_bongo(bongo, 0.702f, 1.0f);
+    float ring_delta;
+    if (voices & TR66_SAMBA_ACCENT_BONGO)
+        ring_delta = 0.060f;
+    else if (voices & TR66_SAMBA_SOFT_BONGO)
+        ring_delta = -0.046f;
+    else if (voices & TR66_SAMBA_LIGHT_BONGO)
+        ring_delta = -0.018f;
+    else
+        return;
+
+    /* Two short modes cancel the extra long ring at onset. As they
+     * decay, the measured difference between Samba hits emerges. */
+    const float real = bongo->trigger_real[0] * ring_delta;
+    const float imag = bongo->trigger_imag[0] * ring_delta;
+    Tr66Resonator *mode = bongo->resonator;
+    mode[0].real += real;
+    mode[0].imag += imag;
+    mode[1].real += 3.69f * real;
+    mode[1].imag += 3.69f * imag;
+    mode[3].real -= 4.69f * real;
+    mode[3].imag -= 4.69f * imag;
+}
+
 void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
 {
     const bool bare_kick_snare = voices == ((1u << TR66_KICK) | (1u << TR66_SNARE));
@@ -428,7 +454,7 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     if (!(voices & ((1u << TR66_HIGH_BONGO) | TR66_MAMBO_FILL_HIGH_BONGO))) {
         Tr66VoiceState *bongo = &machine->voices[TR66_HIGH_BONGO];
         if (samba_pulse)
-            trigger_high_bongo(bongo, 0.72f, 1.0f);
+            trigger_samba_bongo(bongo, voices);
         else if (voices & TR66_ACCENT_HIGH_BONGO)
             trigger_high_bongo(bongo, 0.66f, 0.25f);
         else if (voices & TR66_REDUCED_HIGH_BONGO)

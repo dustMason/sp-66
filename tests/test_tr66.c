@@ -630,7 +630,7 @@ static void test_samba_bell_and_bongo(void)
 
     const Tr66Resonator *regular_bongo = regular.voices[TR66_HIGH_BONGO].resonator;
     const Tr66Resonator *samba_bongo = samba.voices[TR66_HIGH_BONGO].resonator;
-    assert(fabsf(samba_bongo[0].imag - 0.72f * regular_bongo[0].imag) < 1e-6f);
+    assert(fabsf(samba_bongo[0].imag - 0.702f * regular_bongo[0].imag) < 1e-6f);
     assert(fabsf(samba_bongo[1].imag - regular_bongo[1].imag) < 1e-6f);
 
     tr66_hit(&samba, MASK(COWBELL));
@@ -648,6 +648,40 @@ static void test_samba_bell_and_bongo(void)
     assert(seq.synth.voices[TR66_RIM].frames_left > 0);
     assert(seq.synth.voices[TR66_COWBELL].frames_left == 0);
     assert(seq.synth.voices[TR66_HIGH_BONGO].frames_left > 0);
+}
+
+static void test_samba_bongo_accents(void)
+{
+    const struct {
+        Tr66TriggerMask mask;
+        float ring_ratio;
+    } accents[] = {
+        {TR66_SAMBA_ACCENT_BONGO, 0.762f / 0.702f},
+        {TR66_SAMBA_SOFT_BONGO, 0.656f / 0.702f},
+        {TR66_SAMBA_LIGHT_BONGO, 0.684f / 0.702f},
+    };
+    for (unsigned i = 0; i < sizeof(accents) / sizeof(accents[0]); ++i) {
+        Tr66 plain, accent;
+        tr66_init(&plain, RATE, 5);
+        accent = plain;
+        tr66_hit(&plain, TR66_SAMBA_BELL_BONGO);
+        tr66_hit(&accent, TR66_SAMBA_BELL_BONGO | accents[i].mask);
+        float a, b;
+        tr66_render(&plain, &a, 1);
+        tr66_render(&accent, &b, 1);
+        assert(fabsf(a - b) < 1e-6f);
+
+        float tail_a = 0.0f, tail_b = 0.0f;
+        for (unsigned frame = 1; frame < RATE * 75 / 1000; ++frame) {
+            tr66_render(&plain, &a, 1);
+            tr66_render(&accent, &b, 1);
+            if (frame >= RATE * 55 / 1000) {
+                tail_a += a * a;
+                tail_b += b * b;
+            }
+        }
+        assert(fabsf(sqrtf(tail_b / tail_a) - accents[i].ring_ratio) < 0.002f);
+    }
 }
 
 static void test_split_blocks(void)
@@ -1028,6 +1062,7 @@ int main(void)
     test_rock1_offbeat();
     test_samba_conga();
     test_samba_bell_and_bongo();
+    test_samba_bongo_accents();
     test_mambo_fill();
     test_slow_rock_fill();
     test_waltz_fill();
