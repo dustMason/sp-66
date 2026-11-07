@@ -116,7 +116,7 @@ Treat replacing the factory firmware as one-way. See the
 
 The host engine rendered 5,103 passes across all supported selections and
 Arrange settings at 50, 120 and 200 BPM, with Balance centered and at both
-ends. The loudest sample was 0.570 of digital full scale, with zero clipped samples.
+ends. The loudest sample was 0.528 of digital full scale, with zero clipped samples.
 
 ## USB MIDI clock
 
@@ -433,6 +433,15 @@ screen, median normalized waveform agreement improves from 0.889 to 0.917.
 The originals still cancel more energy between 110 and 240 Hz on these
 hits. The isolated Drumbase snare waveform agreement falls slightly,
 and the held-out Drumbase loop median rises by 0.02 dB.
+
+The bass drum combines a 65.15 Hz ring with a fast edge and two opposing
+decays. The fit uses clean kick hits with cymbal or hi-hat accompaniment.
+On 15 kick and snare hits excluded from that fit, median normalized
+waveform agreement over 37–700 Hz improves from 0.943 to 0.947. The
+Reverb settled loop median falls from 2.85 to 2.72 dB, including Rock 5
+from 2.75 to 2.57 dB. The Drumbase median rises from 2.27 to 2.32 dB
+while Rock 5 improves from 2.21 to 2.06 dB. The captures still cancel
+more energy around 195–240 Hz when both drums trigger together.
 
 Figures 2 and 13 of the service notes show a shared counter and the 3/4
 shunt. It plays counts 0–5 and 8–13 of each 16-count bar in triple time.

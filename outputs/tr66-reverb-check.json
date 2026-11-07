@@ -4302,5 +4302,108 @@
       }
     },
     "limitation": "The 110–240 Hz cancellation in coincident kick and snare hits remains stronger in the recordings. Drumbase isolated attack agreement decreases slightly."
+  },
+  "bass_drum_pulse_refinement": {
+    "scope": "Bass drum ring and attack. Fit a shared continuous-start response to phase-aligned hits with only cymbal or hi-hat accompaniment. Give each capture equal weight within its pack.",
+    "training_grooves": [
+      "Loop1",
+      "Loop3",
+      "Loop7",
+      "Loop9",
+      "Loop12",
+      "Loop19",
+      "Loop24"
+    ],
+    "attack_measure": "Bandpass full aligned captures with third-order zero-phase Butterworth filters. Normalize correlation in 37–700 Hz from −4 to +61 ms with one gain and one lag of up to 5 ms per hit. Compute energy ratios on the fixed step grid, relative to the kick band for hits without snare and the snare ring for chords.",
+    "attack_analysis_bands_hz": [
+      [38, 105],
+      [108, 185],
+      [195, 240],
+      [245, 345],
+      [365, 445],
+      [510, 700]
+    ],
+    "attack_band_error_windows_ms": [
+      [3, 8],
+      [8, 21],
+      [21, 36]
+    ],
+    "kick_with_hat_or_cymbal": {
+      "hits": 48,
+      "normalized_waveform_correlation": {
+        "prior": 0.9952,
+        "final": 0.9969
+      },
+      "median_rms_relative_band_error_db": {
+        "prior": 7.039,
+        "final": 5.012
+      },
+      "relative_195_to_240_hz_8_to_21_ms_db": {
+        "ref": -30.815,
+        "prior": -31.976,
+        "final": -31.697
+      }
+    },
+    "combined_kick_and_snare_cross_pack_holdout": {
+      "hits": 15,
+      "normalized_waveform_correlation": {
+        "prior": 0.9433,
+        "final": 0.9474
+      },
+      "median_rms_relative_band_error_db": {
+        "prior": 6.24,
+        "final": 5.507
+      },
+      "relative_195_to_240_hz_8_to_21_ms_db": {
+        "ref": -26.038,
+        "prior": -18.197,
+        "final": -19.612
+      }
+    },
+    "loop_measure": "Same full C renderer and reference alignment as the preceding comparison. Settled runs play one Arrange cycle before the comparison interval.",
+    "balance_position": 0.4551,
+    "median_loop_errors_db": {
+      "center": {
+        "before": 3.94,
+        "revised": 3.87
+      },
+      "balanced": {
+        "before": 2.95,
+        "revised": 2.83
+      },
+      "settled": {
+        "before": 2.85,
+        "revised": 2.72
+      },
+      "settled_held_out": {
+        "before": 2.72,
+        "revised": 2.63
+      }
+    },
+    "settled_comparison_counts": {
+      "improved": 21,
+      "unchanged": 4
+    },
+    "settled_loop_examples_db_before_and_revised": {
+      "Loop5.wav": [2.75, 2.57],
+      "Loop10.wav": [3.13, 3.02],
+      "Loop12.wav": [3.34, 3.15]
+    },
+    "captured_template_summation": {
+      "method": "Sum a median Rock 5 kick plus cymbal template and a median Habanera isolated snare template. Fit each template lag and gain jointly per chord, with a separate lag for each template.",
+      "hits": 5,
+      "median_broadband_residual_fraction": 0.0845,
+      "interpretation": "The empirical sum improves cancellation over the C render in the 195–240 Hz band but leaves a residual. The fit also changes individual voice gains, so these data do not identify a circuit mechanism."
+    },
+    "host_benchmark": {
+      "selection": "Habanera, Arrange A, 200 BPM, 48 kHz, 64-frame blocks",
+      "blocks_per_pass": 200000,
+      "paired_passes": 9,
+      "median_mean_render_us_per_block": {
+        "before": 0.78556,
+        "revised": 0.7944
+      }
+    },
+    "limitation": "The hardware has stronger 195–240 Hz cancellation on the kick and snare chords. The revised patch preserves common trigger timing. Differences in machine trims, recording gain, and voice interaction remain unresolved."
   }
 }
