@@ -12,7 +12,7 @@ import soundfile as sf
 from scipy import fft, optimize, signal
 
 RATE = 48_000
-TONAL_MODES = 4  # Matches TR66_TONES in src/tr66.h.
+TONAL_MODES = 5  # Matches TR66_TONES in src/tr66.h.
 SEEDS = (319, 1223, 5897, 8831, 15091, 19073)
 ROOT = Path(__file__).resolve().parents[1]
 NAMES = (

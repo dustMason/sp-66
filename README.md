@@ -385,8 +385,9 @@ median combined attack moves from −1.36 to −0.90 dB relative to a single
 hat attack. At 40–65 ms the model moves from −4.12 to −3.39 dB, compared
 with −2.14 dB in the recordings.
 
-Reverb's Bossa Nova recording confirms Roland's rim timing. The Drumbase
-recording places some rim hits at different steps. Both recording sets
+Reverb's Bossa Nova A recording has all five rim hits at the steps in
+Roland's chart. Drumbase has rim-like transients at different steps,
+with clipping on many of them. Both recording sets
 play the high conga in Samba where the service chart calls for a low bongo.
 The firmware follows the recorded Samba and the documented Bossa Nova.
 Both Habanera A captures support the score's simultaneous kick and snare.
@@ -500,6 +501,11 @@ and the held-out Drumbase loop median rises by 0.02 dB.
 
 The bass drum combines a 65.15 Hz ring with a fast edge and two opposing
 decays. The fit uses clean kick hits with cymbal or hi-hat accompaniment.
+At 30 ms into the hit, the 130 Hz harmonic measures about 38 dB below the
+fundamental in Reverb Bossa Nova A and Drumbase Rock 6. The C model moves
+from 67 dB below to 38 dB below, with the harmonic's phase fitted to both
+packs. The reduced kick still has a sharper attack than the recordings.
+
 On 15 kick and snare hits excluded from that fit, median normalized
 waveform agreement over 37–700 Hz improves from 0.943 to 0.947. The
 Reverb settled loop median falls from 2.85 to 2.72 dB, including Rock 5
