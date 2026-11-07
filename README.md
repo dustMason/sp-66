@@ -473,6 +473,16 @@ Drumbase hits, rim waveform correlation rises from 0.975 to 0.988 and
 claves from 0.979 to 0.983. The full-pack settled medians remain 2.27 dB
 for Drumbase and 3.09 dB for Reverb with these two voice changes.
 
+The claves attack adds a 1.50 ms mode at the main ring frequency. As that
+mode decays, the fitted pitch rises by 2.4 Hz between the early and late
+windows, compared with about 4–5 Hz in the recordings. After matching
+pitch, late decay and level for comparison, median attack waveform error
+on held-out Rhumba hits falls from 26.7% to 3.8% in Drumbase and from
+27.2–27.5% to 6.1–6.6% in Reverb's two phrases. The isolated Drumbase and
+Drum Abuse hits move from 26.4% to 3.1% and from 24.0% to 5.8%. Four of
+the five settled Beguine and Rhumba loops improve at the same capture
+clocks. Reverb Rhumba B rises by 0.007 dB.
+
 The rim attack also uses a 0.60 ms ring at the same frequency and 18%
 more drive to the main ring. After matching each take's pitch, late
 decay and level, median attack waveform error falls from 18.6% to 12.3%
