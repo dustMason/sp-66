@@ -369,7 +369,8 @@ const Tr66Pattern tr66_patterns[TR66_PATTERN_COUNT + 1] = {
     },
     [TR66_FOXTROT_2] = {
         .bars = {BAR(foxtrot_2_a), BAR(foxtrot_2_a), BAR(foxtrot_2_a), BAR(foxtrot_2_b2)},
-        .auto_return_pickup = S | Y, .b_pickup = S | Y, .ticks = 96,
+        /* Both Foxtrots route matrix 17 and the Arrange-gated 10 to CY+SD. */
+        .auto_pickup = S | Y, .b_pickup = S | Y, .ticks = 96,
     },
     [TR66_SWING_2] = {
         .bars = {BAR(swing_2_a), BAR(swing_2_a), BAR(swing_2_a), BAR(swing_2_b2)},

@@ -470,15 +470,15 @@ static void test_arrange_pickups(void)
     const struct {
         enum Tr66PatternId rhythm, variation;
         unsigned beats;
-        Tr66TriggerMask downbeat, auto_pickup, b_pickup, auto_return_pickup;
+        Tr66TriggerMask downbeat, auto_pickup, b_pickup;
     } cases[] = {
-        {TR66_JAZZ_WALTZ, TR66_OFF, 3, MASK(KICK) | MASK(CYMBAL), MASK(SNARE), MASK(SNARE), 0},
-        {TR66_OFF, TR66_BASS_SNARE_2, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL), 0},
-        {TR66_OFF, TR66_FOXTROT_1, 4, kick_hat, snare_cymbal, snare_cymbal, 0},
-        {TR66_OFF, TR66_HABANERA, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL), 0},
-        {TR66_OFF, TR66_BASS_SNARE_4, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL), 0},
-        {TR66_OFF, TR66_FOXTROT_2, 4, kick_hat, 0, snare_cymbal, snare_cymbal},
-        {TR66_OFF, TR66_TANGO, 4, kick_hat, tango_snare_cymbal, tango_snare_cymbal, 0},
+        {TR66_JAZZ_WALTZ, TR66_OFF, 3, MASK(KICK) | MASK(CYMBAL), MASK(SNARE), MASK(SNARE)},
+        {TR66_OFF, TR66_BASS_SNARE_2, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
+        {TR66_OFF, TR66_FOXTROT_1, 4, kick_hat, snare_cymbal, snare_cymbal},
+        {TR66_OFF, TR66_HABANERA, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
+        {TR66_OFF, TR66_BASS_SNARE_4, 4, kick_snare, MASK(CYMBAL), MASK(CYMBAL)},
+        {TR66_OFF, TR66_FOXTROT_2, 4, kick_hat, snare_cymbal, snare_cymbal},
+        {TR66_OFF, TR66_TANGO, 4, kick_hat, tango_snare_cymbal, tango_snare_cymbal},
     };
     for (unsigned i = 0; i < sizeof(cases) / sizeof(cases[0]); ++i) {
         const unsigned bar_frames = cases[i].beats * RATE / 2;
@@ -501,11 +501,8 @@ static void test_arrange_pickups(void)
                     continue;
                 const unsigned bar = (unsigned)(trace.frame[j] / bar_frames);
                 Tr66TriggerMask expected = cases[i].downbeat;
-                if (mode == TR66_ARRANGE_AUTO && bar % 4 == 0) {
+                if (mode == TR66_ARRANGE_AUTO && bar % 4 == 0)
                     expected |= cases[i].auto_pickup;
-                    if (bar != 0)
-                        expected |= cases[i].auto_return_pickup;
-                }
                 if (mode == TR66_ARRANGE_B && bar % 2 == 0)
                     expected |= cases[i].b_pickup;
                 assert(bar == downbeats && trace.mask[j] == expected);
@@ -1168,8 +1165,8 @@ static void test_midi_transport(void)
     tr66_seq_midi_disconnect(&seq);
     assert(seq.running);
 
-    /* Seeking a full Auto cycle ahead reaches the return pickup even
-     * though the renderer's frame counter restarts at zero. */
+    /* Both MIDI Start and a seek to a full Auto cycle play its pickup. */
+    const Tr66TriggerMask foxtrot_pickup = MASK(KICK) | MASK(HAT) | MASK(SNARE) | MASK(CYMBAL);
     Trace trace = {0};
     tr66_seq_stop(&seq);
     seq.listener = record;
@@ -1179,10 +1176,10 @@ static void test_midi_transport(void)
     tr66_seq_midi_event(&seq, resume, 531);
     tr66_seq_midi_event(&seq, clock, 550);
     assert(trace.count == 1 && trace.frame[0] == 0);
-    assert(trace.mask[0] == (MASK(KICK) | MASK(HAT) | MASK(SNARE) | MASK(CYMBAL)));
+    assert(trace.mask[0] == foxtrot_pickup);
     tr66_seq_midi_event(&seq, start, 551);
     tr66_seq_midi_event(&seq, clock, 571);
-    assert(trace.count == 2 && trace.mask[1] == (MASK(KICK) | MASK(HAT)));
+    assert(trace.count == 2 && trace.mask[1] == foxtrot_pickup);
 }
 
 int main(void)

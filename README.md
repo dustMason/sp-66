@@ -695,9 +695,13 @@ evidence for the other three.
 | Foxtrot 2 | Kick on every beat, the extra snare hits in B, and a snare and cymbal pickup when Auto cycles back to A. | [1:32–1:35](https://www.youtube.com/watch?v=bieZUYUNEts&t=92s) and [4:37–4:41](https://www.youtube.com/watch?v=a_IEsDTpv4M&t=277s) |
 
 The Foxtrot 2 return's peak in the 300–560 Hz snare band is 10–12 dB
-above a nearby kick and hi-hat beat in both recordings. The C score
-adds the pickup on the repeat and follows Figure 18 on the first Auto
-downbeat. The original BeatBox Anthology and MOTU BPM list `T66-Bass&Sn8`,
+above a nearby kick and hi-hat beat in both recordings. Figures 14 and 18
+route matrix line 17 and Arrange-gated line 10 to the snare and cymbal
+for both Foxtrots. Figure 8 shows the shared Arrange gate. The C score
+uses that wiring for the first Auto downbeat, where Figure 18 omits the
+Foxtrot 2 pickup. The recordings verify the pickup when Auto repeats.
+
+The original BeatBox Anthology and MOTU BPM list `T66-Bass&Sn8`,
 `T66-Bass&Sn16` and `T66-FoxTrot2` as candidates for a separate WAV
 comparison. [BeatBox Anthology soundbank manual](https://usermanual.wiki/Uvi/BeatBoxAnthologyManual.1168487385.pdf)
 and [MOTU BPM user guide](https://www.klangfarbe.com/files/Shop/Artikel/36386/A-S36386_1.pdf).

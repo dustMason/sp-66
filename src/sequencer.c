@@ -12,8 +12,7 @@ static unsigned score_bar(const Tr66Sequencer *seq)
     return 0;
 }
 
-static Tr66TriggerMask pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer,
-                                      unsigned bar, bool after_start)
+static Tr66TriggerMask pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer, unsigned bar)
 {
     enum { TRIPLE_HALF = 3 * TR66_PPQN / 2, COMMON_HALF = 2 * TR66_PPQN };
     const Tr66Pattern *pattern = &tr66_patterns[layer->pattern];
@@ -32,24 +31,21 @@ static Tr66TriggerMask pattern_voices(const Tr66Sequencer *seq, Tr66Layer *layer
         voices = part->events[layer->event_index++].voices;
     /* The pickup is on the first pulse of the selected cycle. */
     if (seq->tick == 0) {
-        if (bar == 0 && seq->selection.arrange == TR66_ARRANGE_AUTO) {
+        if (bar == 0 && seq->selection.arrange == TR66_ARRANGE_AUTO)
             voices |= pattern->auto_pickup;
-            if (after_start)
-                voices |= pattern->auto_return_pickup;
-        }
         if (bar == 2 && seq->selection.arrange == TR66_ARRANGE_B)
             voices |= pattern->b_pickup;
     }
     return voices;
 }
 
-static void play_tick(Tr66Sequencer *seq, bool after_start)
+static void play_tick(Tr66Sequencer *seq)
 {
     const unsigned bar = score_bar(seq);
     /* A coincident trigger fires each voice circuit once. */
     Tr66TriggerMask mask = 0;
     for (unsigned i = 0; i < seq->layer_count; ++i)
-        mask |= pattern_voices(seq, &seq->layers[i], bar, after_start);
+        mask |= pattern_voices(seq, &seq->layers[i], bar);
     /* The RS input excites the same resonator in either shunt position. */
     const Tr66TriggerMask shared_rs = (1u << TR66_RIM) | (1u << TR66_COWBELL);
     if (mask & shared_rs)
@@ -92,7 +88,7 @@ static void advance_tick(Tr66Sequencer *seq)
         seq->bar = (seq->bar + 1) % TR66_SCORE_BARS;
         prepare_bar(seq);
     }
-    play_tick(seq, true);
+    play_tick(seq);
 }
 
 void tr66_seq_init(Tr66Sequencer *seq, unsigned rate, uint32_t seed)
@@ -147,7 +143,7 @@ static void start_at(Tr66Sequencer *seq, unsigned tick)
     prepare_bar(seq);
     seq->bar = (tick / seq->bar_ticks) % TR66_SCORE_BARS;
     seq->tick = tick % seq->bar_ticks;
-    play_tick(seq, tick != 0);
+    play_tick(seq);
 }
 
 void tr66_seq_start(Tr66Sequencer *seq)
