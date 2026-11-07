@@ -30,7 +30,7 @@ const char *const tr66_pattern_names[TR66_PATTERN_COUNT + 1] = {
 #define BAR(events) {events, sizeof(events) / sizeof((events)[0])}
 
 static const Tr66Event waltz_plain[] = {{0, K | Y}, {24, S}, {48, S}};
-/* The Drumbase capture has a full downbeat and three quieter fill kicks. */
+/* Drumbase and Goldbaby both have a full downbeat and three quieter fill kicks. */
 static const Tr66Event waltz_fill[] = {
     {0, K | Y}, {24, QUIET_K | S | Y}, {42, QUIET_K | Y},
     {48, TR66_GHOST_KICK | S | Y},

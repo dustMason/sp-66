@@ -979,6 +979,20 @@
         "beguine": [4.48, 2.35, 2.01]
       },
       "medians": [4.23, 2.255, 2.18]
+    },
+    "settled_with_bass_drum_decay": {
+      "method": "Same 41 hits and settings as settled_native_tempo, with a 42 ms bass drum fundamental and a 21 ms second harmonic.",
+      "matched_rhythms": {
+        "rock-2": [5.46, 2.12, 1.97],
+        "rock-4": [5.71, 2.2, 2.06],
+        "slow-rock": [3.12, 2.26, 2.31],
+        "samba": [2.82, 2.1, 2.69],
+        "mambo": [3.04, 2.1, 2.64],
+        "cha-cha": [5.25, 3.16, 2.11],
+        "rhumba": [3.98, 2.45, 2.38],
+        "beguine": [4.48, 2.35, 2.01]
+      },
+      "medians": [4.23, 2.23, 2.21]
     }
   },
   "rhythm_coverage_across_both_packs": {

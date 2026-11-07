@@ -106,7 +106,7 @@ static void test_shared_and_reduced_triggers(void)
     tr66_render(&first, a, BLOCK);
     tr66_render(&second, b, BLOCK);
     for (unsigned i = 0; i < BLOCK; ++i)
-        assert(fabsf(b[i] - 0.19f * a[i]) < 1e-6f);
+        assert(fabsf(b[i] - 0.21f * a[i]) < 1e-6f);
 
     tr66_init(&first, RATE, 31);
     second = first;

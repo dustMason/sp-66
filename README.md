@@ -473,7 +473,7 @@ Both recordings play the high conga in Samba where the service chart
 calls for a low bongo. The firmware follows the recorded Samba.
 Both Habanera A captures support the score's simultaneous kick and snare.
 
-| Level-matched spectral error | Before ring-down pass | After ring-down pass | Current |
+| Level-matched spectral error | Before ring-down pass | After ring-down pass | Later voice refinements |
 | --- | ---: | ---: | ---: |
 | Drumbase, all 23 loops with clipped windows excluded | 3.54 dB | 3.57 dB | 2.82 dB |
 | Drumbase, 12 loops omitted from the gain fit | 3.53 dB | 3.49 dB | 2.87 dB |
@@ -487,11 +487,15 @@ Both Habanera A captures support the score's simultaneous kick and snare.
 The original Drumbase held-out score was 6.69 dB with clipped windows
 excluded. Its Slow Rock score rose from 3.19 to 3.68 dB after the quieter
 fill kick and other voice changes, then fell to 3.44 dB after the cymbal
-pulse and noise envelope refinements. The latest cymbal fit brings it to
-2.71 dB with the current snare coefficients. The two packs cover 24 of
+pulse and noise envelope refinements. A subsequent cymbal fit brought it
+to 2.71 dB. The two packs cover 24 of
 the 27 factory rhythms between them and a subset of their A, Auto and B
 phrases. Bass & Snare in each beat bank and Foxtrot 2 still await a matching
-recording.
+recording. The original BeatBox Anthology and MOTU BPM list candidate loops
+under “The 66” as `T66-Bass&Sn8`, `T66-Bass&Sn16` and `T66-FoxTrot2`.
+Those audio files still need to be checked against the charts.
+[BeatBox Anthology soundbank manual](https://usermanual.wiki/Uvi/BeatBoxAnthologyManual.1168487385.pdf)
+and [MOTU BPM user guide](https://www.klangfarbe.com/files/Shop/Artikel/36386/A-S36386_1.pdf).
 
 All 36 A, B and Auto traces across the 2 Beat and 4 Beat banks match a
 transcription of the service pulse charts after correcting their cycle
@@ -514,19 +518,22 @@ third-beat claves in Beguine's second bar. This brings the timing audit to
 81 traces across all 27 factory rhythms.
 
 In Waltz Auto, the last bar adds three quieter kicks at ticks 24, 42 and 48
-on the 24-tick beat grid. The Drumbase recording's kick ring measures about
-35%, 37% and 19% of the downbeat at those hits. The revised C score uses the
-existing 43% kick trigger for the first two and a 19% trigger for the third.
-Of the two quieter renders tested, those levels give the closest loop match.
-At the fitted Balance, the clean-window error drops from 4.69 to 2.78 dB
-from silence and from 4.73 to 2.82 dB after one Arrange cycle. Reverb's
-Waltz clip contains the A phrase, so the fill fit has one recorded reference.
+on the 24-tick beat grid. Their kick rings measure about 35%, 37% and 19%
+of a downbeat in Drumbase and 36%, 39% and 26% in Goldbaby's Waltz REX loop.
+The C score uses the existing 43% trigger for the first two and a 21%
+trigger for the third. Reverb's Waltz clip contains the A phrase.
+
+The 42 ms bass drum decay is a compromise across the three sources.
+Goldbaby's direct one-shots measure roughly 48–59 ms. The center-Balance
+error on its Waltz loop drops from 5.02 to 4.86 dB. Across the settled loops
+at each pack's fitted Balance, the Reverb median falls from 2.50 to
+2.41 dB and the Drumbase clean-window median rises from 2.31 to 2.45 dB.
 
 In eight matched first-bar excerpts, the two recording packs differ by a
 median 4.23 dB. At each recording's native tempo, after one Arrange cycle
-and at the pack's fitted Balance, the C model is 2.18 dB from Drumbase and
-2.26 dB from Reverb. In Slow Rock, the recordings differ by 3.12 dB. The
-model measures 2.27 dB from each pack.
+and at the pack's fitted Balance, the C model is 2.21 dB from Drumbase and
+2.23 dB from Reverb. In Slow Rock, the recordings differ by 3.12 dB. The
+model measures 2.31 dB from Drumbase and 2.26 dB from Reverb.
 
 An earlier comparison fitted one fixed position per pack using the
 linear Balance model and only the gain-fit loops. The best positions were

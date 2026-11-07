@@ -1,11 +1,11 @@
 /* Voice models from calibrate.py, with levels fitted to two TR-66 recordings. */
     /* A fast edge and two opposing decays shape the attack. Model the
      * measured second harmonic with half the fundamental's decay constant. */
-    [TR66_KICK] = { .tone = {{65.14967f, 40.15f, -1.50000f, -0.09146f},
+    [TR66_KICK] = { .tone = {{65.14967f, 42.0f, -1.50000f, -0.09146f},
                              {0.0f, 0.25519f, 0.74485f, 0.0f},
                              {0.0f, 5.8f, 2.29042f, 0.0f},
                              {0.0f, 10.87739f, -1.49877f, 0.0f},
-                             {130.29934f, 20.075f, -0.03650f, 0.00850f}} },
+                             {130.29934f, 21.0f, -0.03650f, 0.00850f}} },
     /* The short counter-pulse softens the initial edge. Figure 10 shows two
      * capacitor paths into the snare gate, modeled as held and free decays. */
     [TR66_SNARE] = { .tone = {{292.5f, 12.25f, -0.93459f, 0.09599f}, {0.0f, 1.3f, 1.12938f, 0.0f},
