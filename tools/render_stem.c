@@ -1,11 +1,14 @@
-/* Host calibration only. Sum unity-gain stems to reproduce the C mono mix. */
+/* Host calibration only. Sum the stems to reproduce the C mono mix. */
 #include "tr66.h"
 
-void tr66_render_stem(unsigned voice, const uint32_t *positions, const Tr66TriggerMask *masks,
-                      size_t events, float *samples, size_t frames)
+void tr66_render_balanced_stem(float balance, unsigned voice, const uint32_t *positions,
+                               const Tr66TriggerMask *masks, size_t events,
+                               float *samples, size_t frames)
 {
     Tr66 synth;
     tr66_init(&synth, 48000, UINT32_C(14293));
+    tr66_balance(&synth, balance);
+    synth.balance = synth.balance_target;
     /* Keep the full trigger history when isolating the sound of one voice. */
     for (unsigned i = 0; i < TR66_VOICE_COUNT; ++i) {
         if (i != voice) {
@@ -21,4 +24,10 @@ void tr66_render_stem(unsigned voice, const uint32_t *positions, const Tr66Trigg
         cursor = next;
     }
     tr66_render(&synth, samples + cursor, frames - cursor);
+}
+
+void tr66_render_stem(unsigned voice, const uint32_t *positions, const Tr66TriggerMask *masks,
+                      size_t events, float *samples, size_t frames)
+{
+    tr66_render_balanced_stem(0.0f, voice, positions, masks, events, samples, frames);
 }

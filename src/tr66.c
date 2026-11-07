@@ -10,6 +10,11 @@ const float tr66_line_gain = 0.18f;
 static const float coincident_cymbal_hold_ms = 44.0f;
 static const float coincident_cymbal_hat_recovery_ms = 554.0f;
 static const float samba_cowbell_decay_ms = 16.9f;
+/* Approximate the impedances at VR602 in units of its 25 kΩ half travel. */
+static const float balance_kick_resistance = 36.5f / 25.0f;
+static const float balance_treble_resistance = 7.28f / 25.0f;
+static const float balance_treble_reactance = 39.86f / 25.0f;
+static const float balance_treble_hz = 8172.0f;
 
 const char *const tr66_voice_names[TR66_VOICE_COUNT] = {
     "kick", "snare", "hat", "cymbal", "claves", "rim",
@@ -229,9 +234,13 @@ static float voice_sample(Tr66VoiceState *state, float noise)
 void tr66_init(Tr66 *machine, float sample_rate, uint32_t seed)
 {
     machine->random = seed != 0 ? seed : 1;
-    machine->balance = (Tr66Balance){1.0f, 1.0f};
+    machine->balance = (Tr66BalanceCoefficients){.kick = 1.0f, .b0 = 1.0f};
     machine->balance_target = machine->balance;
     machine->balance_coeff = 1.0f - decay(sample_rate, 8.0f);
+    const float warp_hz = fminf(balance_treble_hz, 0.45f * sample_rate);
+    machine->treble_warp = warp_hz / (balance_treble_hz * balance_treble_reactance *
+        tanf(0.5f * TAU * warp_hz / sample_rate));
+    machine->treble_delay = 0.0f;
     machine->sample_rate = sample_rate;
     machine->cymbal_age = UINT32_MAX;
     machine->cymbal_hat_recovery_ms = coincident_cymbal_hat_recovery_ms;
@@ -536,49 +545,79 @@ void tr66_hit(Tr66 *machine, Tr66TriggerMask voices)
     }
 }
 
+static float balance_kick_gain(float position)
+{
+    const float kick_shunt = 1.0f - position;
+    return kick_shunt * (1.0f + balance_kick_resistance) / (kick_shunt + balance_kick_resistance);
+}
+
 Tr66Balance tr66_balance_gains(float position)
 {
     position = fmaxf(-1.0f, fminf(1.0f, position));
-    const float kick_shunt = 1.0f - position;
     const float treble_shunt = 1.0f + position;
-    /* The grounded wiper on VR602 (50 kΩ) shunts each path to ground.
-     * Estimate the Thevenin impedances near 65 Hz and 8.17 kHz from
-     * Figures 1 and 10, in units of 25 kΩ. Gains are unity at center. */
-    const float kick_resistance = 36.5f / 25.0f;
-    const float treble_resistance = 7.28f / 25.0f;
-    const float treble_reactance = 39.86f / 25.0f;
-    const float center = 1.0f + treble_resistance;
-    const float at_position = treble_shunt + treble_resistance;
+    const float center = 1.0f + balance_treble_resistance;
+    const float at_position = treble_shunt + balance_treble_resistance;
+    const float reactance_squared = balance_treble_reactance * balance_treble_reactance;
     return (Tr66Balance) {
-        .kick = kick_shunt * (1.0f + kick_resistance) / (kick_shunt + kick_resistance),
-        .treble = treble_shunt * sqrtf((center * center + treble_reactance * treble_reactance) /
-                                      (at_position * at_position + treble_reactance * treble_reactance)),
+        .kick = balance_kick_gain(position),
+        .treble = treble_shunt * sqrtf((center * center + reactance_squared) /
+                                      (at_position * at_position + reactance_squared)),
     };
 }
 
 void tr66_balance(Tr66 *machine, float position)
 {
-    machine->balance_target = tr66_balance_gains(position);
+    position = fmaxf(-1.0f, fminf(1.0f, position));
+    if (position == 0.0f) {
+        machine->balance_target = (Tr66BalanceCoefficients){.kick = 1.0f, .b0 = 1.0f};
+        return;
+    }
+
+    /* VR602 loads the cymbal and hat signal at the junction of two
+     * coupling capacitors (Service Notes Figures 1 and 10). Approximate
+     * the source by a series RC and normalize its response to center. */
+    const float shunt = 1.0f + position;
+    const float zero = machine->treble_warp * (1.0f + balance_treble_resistance);
+    const float pole = machine->treble_warp * (shunt + balance_treble_resistance);
+    const float normalize = 1.0f / (1.0f + pole);
+    machine->balance_target = (Tr66BalanceCoefficients) {
+        .kick = balance_kick_gain(position),
+        .b0 = shunt * (1.0f + zero) * normalize,
+        .b1 = shunt * (1.0f - zero) * normalize,
+        .a1 = (1.0f - pole) * normalize,
+    };
 }
 
 void tr66_render(Tr66 *machine, float *output, size_t frames)
 {
     const uint32_t age_remaining = UINT32_MAX - machine->cymbal_age;
     machine->cymbal_age += frames < age_remaining ? (uint32_t)frames : age_remaining;
+    Tr66BalanceCoefficients balance = machine->balance;
+    const Tr66BalanceCoefficients target = machine->balance_target;
+    const float smoothing = machine->balance_coeff;
+    float treble_delay = machine->treble_delay;
     for (size_t frame = 0; frame < frames; ++frame) {
-        machine->balance.kick += machine->balance_coeff *
-                                 (machine->balance_target.kick - machine->balance.kick);
-        machine->balance.treble += machine->balance_coeff *
-                                   (machine->balance_target.treble - machine->balance.treble);
+        balance.kick += smoothing * (target.kick - balance.kick);
+        balance.b0 += smoothing * (target.b0 - balance.b0);
+        balance.b1 += smoothing * (target.b1 - balance.b1);
+        balance.a1 += smoothing * (target.a1 - balance.a1);
         const float noise = white_noise(&machine->random);
-        float sample = machine->balance.kick * voice_sample(&machine->voices[TR66_KICK], noise);
+        float sample = balance.kick * voice_sample(&machine->voices[TR66_KICK], noise);
         sample += voice_sample(&machine->voices[TR66_SNARE], noise);
-        sample += machine->balance.treble * (voice_sample(&machine->voices[TR66_HAT], noise) +
-                            voice_sample(&machine->voices[TR66_CYMBAL], noise));
+        const float treble = voice_sample(&machine->voices[TR66_HAT], noise) +
+                             voice_sample(&machine->voices[TR66_CYMBAL], noise);
+        const float balanced_treble = balance.b0 * treble + treble_delay;
+        treble_delay = balance.b1 * treble - balance.a1 * balanced_treble;
+        /* Let the filter reach exact silence without a subnormal tail. */
+        if (fabsf(treble_delay) < 1.0e-20f)
+            treble_delay = 0.0f;
+        sample += balanced_treble;
         for (unsigned i = TR66_CLAVES; i < TR66_VOICE_COUNT; ++i)
             sample += voice_sample(&machine->voices[i], noise);
         output[frame] = sample;
     }
+    machine->balance = balance;
+    machine->treble_delay = treble_delay;
 }
 
 void tr66_render_hit(const Tr66Patch *patch, float sample_rate, uint32_t seed,

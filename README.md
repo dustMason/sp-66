@@ -645,16 +645,19 @@ rises from 5.67 to 5.72 dB.
 The original knob positions are unknown, and the fitted settings may also
 compensate for differences in the recording chains.
 
-The current Balance model follows the grounded wiper of the 50 kΩ
-potentiometer in Figures 1 and 10 of the service notes. It estimates each
-shunt's gain around 65 Hz for bass drum and 8.17 kHz for hi-hat, maracas,
-and cymbal. At either end, the retained path gains about 3.1–3.3 dB
-relative to center. All 48 center-Balance renders are sample-identical
-to the previous build. Refitting each law to the recordings gives
-settled medians of 2.28 → 2.29 dB for Drumbase and 3.00 → 3.02 dB for
-Reverb. The fitted positions for the current model are −0.2882 and
-+0.4551. A recorded knob sweep would verify the gain estimates and show
-any frequency-response changes through the control's travel.
+Balance follows the grounded wiper of the 50 kΩ potentiometer in
+Figures 1 and 10 of the service notes. The bass drum path uses the
+estimated shunt gain at 65 Hz. A first-order filter approximates the
+loading between the two 250 pF coupling capacitors on the hi-hat,
+maracas, and cymbal path, using the estimated impedance at 8.17 kHz.
+
+At the previous fitted Balance positions of −0.2882 for Drumbase and
++0.4551 for Reverb, the 3.4–12 kHz portion of median spectral error
+falls from 1.39 to 1.34 dB across 23 Drumbase loops and from 1.47 to
+1.43 dB across 25 Reverb loops. The full-band medians are 2.25 → 2.21
+and 2.33 → 2.33 dB, respectively. At center, all 81 renders of
+individual presets across the three Arrange settings are byte-identical
+to the preceding build. The hardware knob positions remain unknown.
 
 The main tables start the C engine from silence. The cymbal history check
 compares the archived hardware loops after both C builds have played a

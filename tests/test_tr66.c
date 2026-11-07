@@ -758,39 +758,52 @@ static void test_split_blocks(void)
 
 static void test_balance(void)
 {
-    const uint16_t masks[] = {MASK(KICK), MASK(HAT), MASK(CYMBAL), MASK(SNARE)};
-    const float expected[][4] = {
-        {1.422f, 0.0f, 0.0f, 1.0f},
-        {1.247f, 0.576f, 0.576f, 1.0f},
-        {1.0f, 1.0f, 1.0f, 1.0f},
-        {0.628f, 1.283f, 1.283f, 1.0f},
-        {0.0f, 1.470f, 1.470f, 1.0f},
-    };
-    float neutral[RATE / 40], adjusted[RATE / 40];
+    const unsigned voices[] = {TR66_KICK, TR66_HAT, TR66_CYMBAL, TR66_SNARE};
+    const float kick_gains[] = {1.422f, 1.247f, 1.0f, 0.628f, 0.0f};
+    const float frequencies[] = {1600.0f, 8160.0f, 14400.0f};
+    const float pi = 3.14159265358979323846f;
+    enum { frames = RATE / 40 };
+    float neutral[frames], adjusted[frames];
     for (unsigned step = 0; step < 5; ++step) {
         const float position = 0.5f * step - 1.0f;
-        for (unsigned voice = 0; voice < 4; ++voice) {
-            Tr66 reference, machine;
-            tr66_init(&reference, RATE, 91);
-            machine = reference;
-            tr66_balance(&machine, position);
-            /* Advance both noise generators while the fader settles. */
-            for (unsigned block = 0; block < 12; ++block) {
-                tr66_render(&reference, neutral, RATE / 40);
-                tr66_render(&machine, adjusted, RATE / 40);
+        Tr66 centered;
+        tr66_init(&centered, RATE, 91);
+        Tr66 settled = centered;
+        tr66_balance(&settled, position);
+        for (unsigned block = 0; block < 12; ++block)
+            tr66_render(&settled, adjusted, frames);
+
+        for (unsigned band = 0; band < 3; ++band) {
+            const float angle = pi * frequencies[band] / RATE;
+            /* Series RC impedance at this frequency, in kΩ. */
+            const float reactance = 39.86f * tanf(pi * 8172.0f / RATE) / tanf(angle);
+            const float shunt = 25.0f * (1.0f + position);
+            const float treble_gain = (shunt / 25.0f) *
+                hypotf(25.0f + 7.28f, reactance) / hypotf(shunt + 7.28f, reactance);
+            const float expected[] = {kick_gains[step], treble_gain, treble_gain, 1.0f};
+            const Tr66VoiceState tone = {
+                .resonator = {{.real = 1.0f, .rotation_real = cosf(2.0f * angle),
+                               .rotation_imag = sinf(2.0f * angle)}},
+                .tone_count = 1,
+                .frames_left = 2 * frames,
+            };
+            for (unsigned voice = 0; voice < 4; ++voice) {
+                Tr66 reference = centered, machine = settled;
+                reference.voices[voices[voice]] = tone;
+                machine.voices[voices[voice]] = tone;
+                tr66_render(&reference, neutral, frames);
+                tr66_render(&machine, adjusted, frames);
+                tr66_render(&reference, neutral, frames);
+                tr66_render(&machine, adjusted, frames);
+                float neutral_energy = 0.0f, adjusted_energy = 0.0f;
+                for (unsigned frame = 0; frame < frames; ++frame) {
+                    neutral_energy += neutral[frame] * neutral[frame];
+                    adjusted_energy += adjusted[frame] * adjusted[frame];
+                }
+                assert(neutral_energy > 0.0f);
+                const float ratio = sqrtf(adjusted_energy / neutral_energy);
+                assert(fabsf(ratio - expected[voice]) < 0.001f);
             }
-            tr66_hit(&reference, masks[voice]);
-            tr66_hit(&machine, masks[voice]);
-            tr66_render(&reference, neutral, RATE / 40);
-            tr66_render(&machine, adjusted, RATE / 40);
-            float neutral_energy = 0.0f, adjusted_energy = 0.0f;
-            for (unsigned frame = 0; frame < RATE / 40; ++frame) {
-                neutral_energy += neutral[frame] * neutral[frame];
-                adjusted_energy += adjusted[frame] * adjusted[frame];
-            }
-            assert(neutral_energy > 0.0f);
-            const float ratio = sqrtf(adjusted_energy / neutral_energy);
-            assert(fabsf(ratio - expected[step][voice]) < 0.001f);
         }
     }
 }

@@ -5,6 +5,7 @@ import argparse
 import ctypes as c
 import csv
 from dataclasses import dataclass
+from functools import partial
 import json
 from math import gcd
 import os
@@ -153,16 +154,23 @@ def spectral_error(target, model):
     return round(float(np.linalg.norm(spectral_residual(target, model))), 2)
 
 
-def stem_renderer():
+def stem_renderer(balance=None):
     lib = c.CDLL(str(LIBRARY))
-    function = lib.tr66_render_stem
-    function.argtypes = [
+    types = [
         c.c_uint, np.ctypeslib.ndpointer(dtype=np.uint32, flags="C_CONTIGUOUS"),
         np.ctypeslib.ndpointer(dtype=np.uint32, flags="C_CONTIGUOUS"), c.c_size_t,
         np.ctypeslib.ndpointer(dtype=np.float32, flags="C_CONTIGUOUS"), c.c_size_t,
     ]
-    function.restype = None
-    return function, c.c_float.in_dll(lib, "tr66_line_gain").value
+    if balance is None:
+        render = lib.tr66_render_stem
+        render.argtypes = types
+        render.restype = None
+    else:
+        function = lib.tr66_render_balanced_stem
+        function.argtypes = [c.c_float, *types]
+        function.restype = None
+        render = partial(function, balance)
+    return render, c.c_float.in_dll(lib, "tr66_line_gain").value
 
 
 class BalanceGains(c.Structure):
@@ -231,17 +239,13 @@ def match_capture(path, directory, groove, comparison, baseline, fit_gains,
 
     powers = None
     if fit_gains and groove.file not in HOLDOUT:
-        render_stem, line_gain = stem_renderer()
-        gains = stem_balance_gains(float(os.environ.get("TR66_RENDER_BALANCE", "0")))
-        scales = np.ones(len(NAMES), dtype=np.float32)
-        scales[NAMES.index("kick")] = gains.kick
-        scales[[NAMES.index("hat"), NAMES.index("cymbal")]] = gains.treble
+        render_stem, line_gain = stem_renderer(float(os.environ.get("TR66_RENDER_BALANCE", "0")))
         scratch = np.empty(skip + len(model), dtype=np.float32)
         mix = np.zeros_like(model)
         stems = []
-        for voice, scale in enumerate(scales):
+        for voice in range(len(NAMES)):
             render_stem(voice, positions, masks, len(positions), scratch, len(scratch))
-            stem = scratch[skip:] * scale
+            stem = scratch[skip:]
             mix += stem
             stems.append(band_power(stem[interior])[clean])
         expected = np.rint(32767 * np.clip(line_gain * mix, -1, 1)) / 32768
