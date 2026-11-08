@@ -137,6 +137,13 @@ scanning and audio rendering continued. The reason the peripheral sometimes
 fails to complete a conversion remains under investigation; this is a
 recovery workaround, not a claim that the underlying ADC fault is fixed.
 
+In a roughly three-minute SP-1 test on 2026-11-07, the recovery build completed
+14,327 control scans and rendered 129,030 audio blocks. Eleven ADC stalls
+recovered without a reboot; no render-budget overruns or I2S write errors
+were recorded. Sound, buttons, faders and Function shutdown were checked on
+the device. Shutdown reached stage 9 and extinguished the LEDs with USB
+connected. This is a short functional test, not an extended stability run.
+
 The firmware now enumerates as **SP-66 diagnostics**. Open its serial port at
 115200 baud with DTR asserted to receive one status line per second. It
 never waits for a computer to connect. Each line reports the startup stage,
