@@ -2,6 +2,7 @@
 #include "controls.h"
 
 #include <soc.h>
+#include <nrfx_saadc.h>
 #include <string.h>
 #include <zephyr/drivers/adc.h>
 #include <zephyr/drivers/gpio.h>
@@ -56,9 +57,11 @@ static float mono[FRAMES];
 volatile struct {
     uint32_t peak_render_cycles, over_budget, write_errors;
     int status;
-    unsigned stage, scans, blocks;
+    unsigned stage, scans, blocks, scan_phase;
     int adc_status;
     unsigned raw[6];
+    unsigned adc_timeouts;
+    uint32_t adc_enable, adc_end, adc_started, adc_amount;
 } tr66_sp1_diagnostics;
 
 static __noinit uint32_t fault_key, fault_reason, fault_pc;
@@ -107,8 +110,13 @@ static void diagnostic_console(void *a, void *b, void *c)
         uint32_t dtr = 0;
         if (device_is_ready(console) &&
             uart_line_ctrl_get(console, UART_LINE_CTRL_DTR, &dtr) == 0 && dtr) {
+            unsigned char command;
+            if (uart_poll_in(console, &command) == 0 && command == 'r')
+                sys_reboot(SYS_REBOOT_COLD);
             printk("SP66 t=%u stage=%u status=%d scans=%u adc=%d blocks=%u "
-                   "peak=%u over=%u errors=%u fn=%d fault=%u pc=%x\n",
+                   "peak=%u over=%u errors=%u fn=%d fault=%u pc=%x "
+                   "phase=%u raw=%u,%u,%u,%u,%u,%u timeouts=%u "
+                   "saadc=%u,%u,%u,%u\n",
                    k_uptime_get_32(), tr66_sp1_diagnostics.stage,
                    tr66_sp1_diagnostics.status, tr66_sp1_diagnostics.scans,
                    tr66_sp1_diagnostics.adc_status, tr66_sp1_diagnostics.blocks,
@@ -116,7 +124,14 @@ static void diagnostic_console(void *a, void *b, void *c)
                    tr66_sp1_diagnostics.over_budget, tr66_sp1_diagnostics.write_errors,
                    gpio_pin_get(gpio0, FN_PIN) == 0,
                    fault_key == 0x6631fa17 ? fault_reason : 0,
-                   fault_key == 0x6631fa17 ? fault_pc : 0);
+                   fault_key == 0x6631fa17 ? fault_pc : 0,
+                   tr66_sp1_diagnostics.scan_phase,
+                   tr66_sp1_diagnostics.raw[0], tr66_sp1_diagnostics.raw[1],
+                   tr66_sp1_diagnostics.raw[2], tr66_sp1_diagnostics.raw[3],
+                   tr66_sp1_diagnostics.raw[4], tr66_sp1_diagnostics.raw[5],
+                   tr66_sp1_diagnostics.adc_timeouts,
+                   tr66_sp1_diagnostics.adc_enable, tr66_sp1_diagnostics.adc_end,
+                   tr66_sp1_diagnostics.adc_started, tr66_sp1_diagnostics.adc_amount);
         }
         k_msleep(1000);
     }
@@ -140,22 +155,57 @@ static enum Tr66ControlKey decode_ladder(unsigned raw, const unsigned *centers,
     return TR66_KEY_INVALID;
 }
 
+static int read_analog(const struct adc_dt_spec *spec, int16_t *value)
+{
+    struct adc_sequence sample = {.buffer = value, .buffer_size = sizeof(*value)};
+    int rc = adc_sequence_init_dt(spec, &sample);
+    if (rc != 0)
+        return rc;
+    sample.oversampling = 1;
+    struct k_poll_signal done;
+    k_poll_signal_init(&done);
+    struct k_poll_event event = K_POLL_EVENT_INITIALIZER(
+        K_POLL_TYPE_SIGNAL, K_POLL_MODE_NOTIFY_ONLY, &done);
+    rc = adc_read_async(spec->dev, &sample, &done);
+    if (rc != 0)
+        return rc;
+    if (k_poll(&event, 1, K_MSEC(10)) == 0)
+        return done.result;
+
+    ++tr66_sp1_diagnostics.adc_timeouts;
+    /* A timed-out request still owns the sample buffer and the driver's lock.
+     * Stop it, then await its completion before either can be reused. */
+    unsigned key = irq_lock();
+    tr66_sp1_diagnostics.adc_enable = NRF_SAADC->ENABLE;
+    tr66_sp1_diagnostics.adc_end = NRF_SAADC->EVENTS_END;
+    tr66_sp1_diagnostics.adc_started = NRF_SAADC->EVENTS_STARTED;
+    tr66_sp1_diagnostics.adc_amount = NRF_SAADC->RESULT.AMOUNT;
+    if (!done.signaled)
+        nrfx_saadc_abort();
+    irq_unlock(key);
+    event.state = K_POLL_STATE_NOT_READY;
+    if (k_poll(&event, 1, K_MSEC(10)) != 0) {
+        /* Do not leave DMA pointing into a returned stack frame. */
+        sys_reboot(SYS_REBOOT_COLD);
+        CODE_UNREACHABLE;
+    }
+    return -ETIMEDOUT;
+}
+
 static bool read_input(Tr66Input *input)
 {
     unsigned raw[ARRAY_SIZE(inputs)];
     for (unsigned i = 0; i < ARRAY_SIZE(inputs); ++i) {
-        int16_t value;
-        struct adc_sequence sample = {.buffer = &value, .buffer_size = sizeof(value)};
-        int rc = adc_sequence_init_dt(&inputs[i], &sample);
-        sample.oversampling = 1;
-        if (rc == 0)
-            rc = adc_read_dt(&inputs[i], &sample);
+        tr66_sp1_diagnostics.scan_phase = 10 + i;
+        int16_t value = 0;
+        int rc = read_analog(&inputs[i], &value);
         tr66_sp1_diagnostics.adc_status = rc;
         if (rc != 0)
             return false;
         raw[i] = value > 0 ? value : 0;
         tr66_sp1_diagnostics.raw[i] = raw[i];
     }
+    tr66_sp1_diagnostics.scan_phase = 20;
     static const unsigned track[] = {210, 399, 728, 1215, 1813};
     static const unsigned side[] = {403, 1216, 729, 1817};
     input->track = decode_ladder(raw[0], track, ARRAY_SIZE(track), TR66_KEY_T1);
@@ -171,12 +221,14 @@ static void set_leds(unsigned mask)
     for (unsigned i = 0; i < ARRAY_SIZE(prior_leds); ++i) {
         uint8_t level = (mask >> (2 * i)) & 3u;
         if (level != prior_leds[i]) {
+            tr66_sp1_diagnostics.scan_phase = 30 + i;
             static const unsigned pulse[] = {0, LED_PERIOD / 100, LED_PERIOD / 18, LED_PERIOD / 4};
             unsigned channel = i < 4 ? i : 7 - i;
             pwm_set_cycles(leds[i / 4], channel, LED_PERIOD, pulse[level], 0);
             prior_leds[i] = level;
         }
     }
+    tr66_sp1_diagnostics.scan_phase = 40;
 }
 
 static void publish_leds(void)
@@ -214,6 +266,7 @@ static void publish_leds(void)
 static void scan_controls(struct k_work *work)
 {
     ++tr66_sp1_diagnostics.scans;
+    tr66_sp1_diagnostics.scan_phase = 1;
     static Tr66Input held;
     static unsigned ladder_idle;
     Tr66Input input = {0};
@@ -233,10 +286,13 @@ static void scan_controls(struct k_work *work)
     set_leds(atomic_get(&led_state));
     static unsigned jack_count;
     if (++jack_count == 4) {
+        tr66_sp1_diagnostics.scan_phase = 50;
         sp1_codecs_poll_jack();
         jack_count = 0;
     }
+    tr66_sp1_diagnostics.scan_phase = 60;
     k_work_schedule(k_work_delayable_from_work(work), K_MSEC(10));
+    tr66_sp1_diagnostics.scan_phase = 61;
 }
 K_WORK_DELAYABLE_DEFINE(scan_work, scan_controls);
 

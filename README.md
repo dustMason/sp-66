@@ -108,8 +108,7 @@ The development image is `work/sp1-build/zephyr/tr66-sp1.bin`, linked at
 `0x20000` for the SP-1 application slot. Board and codec sources are credited
 in [firmware/NOTICE](firmware/NOTICE). The build exposes startup and runtime
 diagnostics over USB serial and in a RAM struct for SWD inspection. See the
-hardware status below before flashing. On-device playback and the audio
-deadline still need testing.
+hardware status below before flashing.
 The community flashing path uses [Solderless](https://solderless.engineering/utility/).
 With the SP-1 off, hold Track 1 and Track 4 while connecting USB-C in Chrome
 or Edge, then release when the Track 1 light comes on. Connect in the
@@ -125,16 +124,28 @@ ends. The loudest sample was 0.731 of digital full scale, with zero clipped samp
 
 The first hardware test of commit `8c8792a` completed the bootloader's write
 and finalization steps, but left Track 1 lit with no response to Function.
-The cause of the startup failure has not yet been identified. The current
-diagnostic build compiles and the host engine tests pass; it has **not yet
-been flashed or verified on hardware**.
+Follow-up hardware diagnostics reached the running audio loop, then reproduced
+control scanning stuck inside an ADC read. Audio and USB continued running;
+the original Function handling depended on those stalled scans.
+
+Control reads now use the asynchronous ADC API with a 10 ms deadline. If a
+conversion stalls, the firmware aborts it, waits up to another 10 ms for the
+driver to release the request, discards that scan and continues. It resets
+if the abort cannot complete, rather than reusing a buffer still owned by
+DMA. Hardware testing has exercised this recovery repeatedly while control
+scanning and audio rendering continued. The reason the peripheral sometimes
+fails to complete a conversion remains under investigation; this is a
+recovery workaround, not a claim that the underlying ADC fault is fixed.
 
 The firmware now enumerates as **SP-66 diagnostics**. Open its serial port at
 115200 baud with DTR asserted to receive one status line per second. It
 never waits for a computer to connect. Each line reports the startup stage,
 status code, control-scan attempts, last ADC result, rendered audio blocks,
-peak render cycles, over-budget blocks, I2S write errors, and Function state.
-The RAM struct also holds the latest raw ADC values. A fatal error records
+peak render cycles, over-budget blocks, I2S write errors, Function state,
+scan phase, six raw ADC values, and cumulative ADC timeouts. `saadc` holds
+ENABLE, END, STARTED and RESULT.AMOUNT captured at the most recent timeout.
+Observed stalls had `saadc=1,0,0,0`. Sending lowercase `r` on the diagnostic
+console restarts the device. A fatal error records
 its reason and program counter in uninitialized RAM before resetting;
 retention of that record across the bootloader is not yet verified.
 
@@ -148,6 +159,10 @@ retention of that record across the bootloader is not yet verified.
 | 6 | Stopping background work |
 | 9 | Shutdown idle loop |
 
+Scan phases 10–15 identify the ADC input being read (track buttons, side
+buttons, then faders 1–4). Phase 20 is input decoding, 30–37 an LED update,
+40 LEDs updated, 50 jack detection, and 60–61 scheduling the next scan.
+
 A separate thread reads Function directly from its GPIO, independently of
 ADC scans and audio startup. After the button has been released once since
 boot, a roughly two-second hold requests shutdown; continuing to four
@@ -157,10 +172,11 @@ and a four-second watchdog where the bootloader has not already started one.
 ADC oversampling is applied after devicetree sequence initialization so it
 is no longer overwritten.
 
-These changes provide diagnostics and recovery paths for the next hardware
-test; they are not a confirmed fix for the original freeze. They cannot
-recover a device still running the old image without first regaining the
-bootloader through a power cycle.
+The independent Function reset and watchdog have been exercised on hardware.
+To re-enter the bootloader, shut down with Function, disconnect USB, then
+hold Track 1 and Track 4 while reconnecting USB. A reset with USB continuously
+connected may restart the application instead. Devices still running the
+original frozen image must first regain the bootloader through a power cycle.
 
 ## Fidelity work
 
