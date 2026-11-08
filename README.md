@@ -13,14 +13,7 @@ work/build/tr66-render work/sp-66-demo.wav bossa-nova rock-6 auto 120 4
 ```
 
 This renders four bars of Bossa Nova layered with Rock 6, alternating between
-the A and B phrases at 120 BPM, with one second for the final hits to ring out.
-
-The [Drumbase report](outputs/tr66-recording-fit.json) covers 23 hardware
-loops, including 12 held out of the gain fit. The
-[Reverb report](outputs/tr66-reverb-check.json) covers 25 loops from a second
-reference pack. The [voice report](outputs/tr66-voice-fit.json) covers
-isolated hits. See the comparison commands below to generate level-matched
-A/B audio using your local copies of the recordings.
+the A and B phrases at 120 BPM, with one second for the final hits to ring out.[^reports]
 
 ## SP-1 controls
 
@@ -185,7 +178,7 @@ hold Track 1 and Track 4 while reconnecting USB. A reset with USB continuously
 connected may restart the application instead. Devices still running the
 original frozen image must first regain the bootloader through a power cycle.
 
-## Fidelity work
+## Notes from Codex on Fidelity
 
 The [Roland player's manual](https://cdn.roland.com/assets/media/pdf/TR-66_OM.pdf)
 contains all 27 scores on PDF pages 6–8. Figures 10 and 13–18 of the
@@ -307,3 +300,10 @@ the recovery from a cymbal. Two-cycle results are in both reports.
 Trigger dynamics on dense percussion chords, 3/4 plus 4/4 layering, and the
 SP-1's physical output still need a direct hardware comparison. The current
 layering follows the base rhythm's meter and merges coincident hits.
+
+[^reports]: The [Drumbase report](outputs/tr66-recording-fit.json) covers 23 hardware
+    loops, including 12 held out of the gain fit. The
+    [Reverb report](outputs/tr66-reverb-check.json) covers 25 loops from a second
+    reference pack. The [voice report](outputs/tr66-voice-fit.json) covers
+    isolated hits. See the comparison commands above to generate level-matched
+    A/B audio using your local copies of the recordings.
